@@ -1,0 +1,131 @@
+@font-face {
+  font-family: BrandonGrotesque;
+  src: local('BrandonGrotesque'), url('../public/BrandonGrotesque-Regular.ttf');
+}
+
+@font-face {
+  font-family: BlenderPro-Bold;
+  src: local('BlenderPro-Bold'), url('../public/BlenderPro-Bold.ttf');
+}
+
+html {
+  display: flex;
+  box-sizing: border-box;
+  min-height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  font-family: BrandonGrotesque, BlenderPro-Medium, 'Roboto', 'Segoe UI',
+  'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  min-height: 100%;
+  width: 100%;
+}
+
+#root {
+  display: flex;
+  min-height: 100%;
+  width: 100%;
+}
+
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  color: #f1f1f1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  color: teal;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+  margin: 0;
+  font-family: BrandonGrotesque, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+  'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-size: 100%;
+  outline: none;
+  border: none;
+  font-weight: 400;
+  color: #000000;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+img,
+embed,
+iframe,
+object,
+audio,
+video {
+  height: auto;
+  max-width: 100%;
+}
+iframe {
+  border: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td,
+th {
+  padding: 0;
+  text-align: left;
+}
+
+a {
+  text-decoration: none;
+}
+.App {
+  min-width: 1680px;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+}
