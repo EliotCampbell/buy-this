@@ -1,0 +1,9 @@
+.specTable {
+  width: 100%;
+}
+
+.sT {
+  color: teal;
+  border: teal solid 1px;
+  padding: 5px;
+}

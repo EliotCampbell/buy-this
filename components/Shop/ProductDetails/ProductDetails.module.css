@@ -1,0 +1,149 @@
+.product {
+  width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.productMain {
+  display: flex;
+  flex-direction: row;
+  height: 440px;
+}
+
+.photoDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 700px;
+  border-right: 1px rgb(222, 225, 231) solid;
+  margin-right: 20px;
+}
+
+.photo {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.mainInfo {
+  height: 100%;
+  width: 720px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mainInfoTop {
+}
+
+.mainInfoBottom {
+}
+
+.productBrand {
+  color: teal;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 17px;
+  padding: 10px 0;
+}
+
+.productName {
+  color: teal;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 28px;
+  padding: 7px 0 3px;
+}
+
+.productPrice {
+  color: red;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 40px;
+  padding: 10px 0;
+}
+
+.inStock {
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 18px;
+  color: #2a962a;
+}
+
+.productRating {
+  color: teal;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 17px;
+  padding: 7px 0;
+}
+
+.toCart {
+  display: flex;
+  flex-direction: row;
+  margin: 13px 0;
+}
+
+.toCartSplitter {
+  width: 20px;
+  height: 60px;
+}
+
+.cartButton {
+  height: 60px;
+  width: 100%;
+  background-color: teal;
+  color: white;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.06em;
+}
+
+.productContentChangers {
+  display: flex;
+  padding-top: 40px;
+}
+
+.contentHeaderDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border-bottom: 4px #d3d3d3 solid;
+}
+
+.selectedContentHeaderDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border-bottom: 4px teal solid;
+}
+
+.splitter {
+  height: 40px;
+  width: 50px;
+  border-bottom: 4px #d3d3d3 solid;
+}
+
+.filler {
+  height: 40px;
+  flex-grow: 1;
+  border-bottom: 4px #d3d3d3 solid;
+}
+
+.contentHeaderText {
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  color: teal;
+}
+
+.contentHeaderText:hover {
+  cursor: pointer;
+}
+
+.content {
+  padding-top: 20px;
+}
+
+.contentText {
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 20px;
+  color: teal;
+}

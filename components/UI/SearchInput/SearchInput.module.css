@@ -1,0 +1,8 @@
+.input {
+  border-radius: 10px;
+  padding-left: 10px;
+  flex-grow: 1;
+  height: 37px;
+  background-color: #424242;
+  border-inline: none;
+}

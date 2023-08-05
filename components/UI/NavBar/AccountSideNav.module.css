@@ -1,0 +1,110 @@
+.sideNavBack {
+  background-color: rgba(51, 51, 51, 0.3);
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  animation-duration: 500ms;
+  animation-name: transition;
+}
+
+@keyframes transition {
+  from {
+    background-color: rgba(51, 51, 51, 0);
+  }
+
+  to {
+    background-color: rgba(51, 51, 51, 0.3);
+  }
+}
+
+.sideNav {
+  height: 100%;
+  width: 580px;
+  background-color: #ffffff;
+  animation-duration: 500ms;
+  animation-name: slideIn;
+  overflow: hidden;
+}
+
+@keyframes slideIn {
+  from {
+    margin-left: 100%;
+    width: 0;
+  }
+
+  to {
+    margin-left: 0;
+    width: 580px;
+  }
+}
+
+.exit {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+}
+
+.top {
+  padding-left: 30px;
+  background-color: teal;
+  height: 42px;
+  width: 100%;
+}
+
+.topTextWrapper {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  width: fit-content;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.topText {
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 17px;
+  padding-left: 15px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.topTextWrapper:hover {
+  cursor: pointer;
+}
+
+.contentWrapper {
+  padding: 15px 55px;
+  width: 580px;
+}
+
+.navEl {
+  display: flex;
+  align-items: center;
+  height: 48px;
+}
+
+.mainNavP:hover {
+  text-decoration: underline;
+}
+
+.navP {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  font-family: BlenderPro-Bold, sans-serif;
+  letter-spacing: 0.03em;
+  font-size: 20px;
+  border-bottom: 1px rgba(222, 225, 231, 0.41) solid;
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+}
+
+.navP:hover {
+  text-decoration: underline;
+}

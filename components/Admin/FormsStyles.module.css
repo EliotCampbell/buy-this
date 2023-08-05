@@ -1,0 +1,27 @@
+.formDiv {
+  width: 100%;
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.preview {
+  font-family: BlenderPro-Bold, sans-serif;
+  color: teal;
+  letter-spacing: 2px;
+  padding: 15px 0 0 10px;
+  font-size: 22px;
+}
+
+.productsCardWrapper {
+  padding-left: 10px;
+}

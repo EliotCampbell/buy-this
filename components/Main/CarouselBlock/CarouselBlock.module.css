@@ -1,0 +1,23 @@
+.carouselBlock {
+  display: flex;
+  flex-direction: row;
+  width: 1440px;
+  margin: 0 auto;
+  padding: 40px 0 0;
+}
+
+.carousel {
+  padding: 0 20px 0 0;
+}
+
+.platesBlock {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 520px;
+}
+
+.plate {
+  height: 155px;
+  width: 430px;
+}

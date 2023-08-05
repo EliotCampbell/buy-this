@@ -1,0 +1,19 @@
+.main {
+  margin: 0 auto;
+  width: 1440px;
+  color: teal;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 40px;
+}
+
+.img {
+  height: 300px;
+  margin: 50px;
+}
+
+.backLink:hover {
+  color: teal;
+  text-decoration: underline;
+}

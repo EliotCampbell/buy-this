@@ -1,0 +1,75 @@
+.lineWrapper {
+  width: 100%;
+  letter-spacing: 2px;
+  margin: 40px 0 0 0;
+  padding-top: 40px;
+  border-bottom: 1px solid rgb(222, 225, 231);
+  border-top: 1px solid rgb(222, 225, 231);
+  background-color: #f2fafa;
+}
+
+.line {
+  width: 1440px;
+  margin: 0 auto;
+}
+
+.title {
+  color: teal;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 21px;
+  margin-bottom: 10px;
+}
+.productsLineWrapper {
+  overflow: auto;
+  height: 100%;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.slideButtonL,
+.slideButtonR {
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 22px;
+  color: white;
+  position: absolute;
+  top: calc(50% - 25px);
+  background-color: teal;
+  height: 50px;
+  width: 50px;
+}
+
+.slideButtonR {
+  right: 0;
+}
+
+.slideButtonL {
+  left: 0;
+}
+
+.slideButtonR:hover,
+.slideButtonL:hover {
+  cursor: pointer;
+  background-color: #097171;
+}
+
+.slideButtonR:active,
+.slideButtonL:active {
+  background-color: #00a6a6;
+}
+
+.productsLineWrapper::-webkit-scrollbar {
+  width: 0;
+}
+
+.productsLine {
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  transition: transform 0.3s ease;
+}
+
+.productWrapper {
+  display: flex;
+  width: 360px;
+  padding: 20px 12px 0 12px;
+}

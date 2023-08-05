@@ -1,0 +1,42 @@
+.paginationWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.pagination {
+  display: flex;
+  width: 400px;
+  height: 90px;
+  padding: 40px 0 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  height: 50px;
+  width: 50px;
+  background-color: teal;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 22px;
+  color: white;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: #097171;
+}
+.button:active {
+  background-color: #00a6a6;
+}
+
+.page {
+  color: teal;
+  font-size: 20px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.page:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -1,0 +1,30 @@
+.shopNav {
+  color: teal;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 20px;
+}
+
+.categories {
+  color: teal;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  padding: 14px 0 12px 0;
+  border-bottom-color: rgb(222, 225, 231);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  margin-bottom: 5px;
+}
+
+.shopNavLink {
+  letter-spacing: 1px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.shopNavLink:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

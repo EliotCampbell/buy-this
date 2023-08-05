@@ -1,0 +1,17 @@
+.breadCrumbs {
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+
+.breadCrumbsP,
+.arrow {
+  padding-right: 10px;
+  color: #00a6a6;
+  font-size: 14px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.breadCrumbsP:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,32 @@
+.login {
+  align-items: center;
+  border-radius: 10px;
+}
+
+.h2 {
+  font-family: BlenderPro-Bold, sans-serif;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.buttonWrapper {
+  padding: 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.registerLink {
+  font-family: BlenderPro-Bold, sans-serif;
+  color: teal;
+}
+
+.registerLink:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
