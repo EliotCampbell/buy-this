@@ -1,4 +1,4 @@
-import Main from "../../../../../next-js-store/next-js/components/Main/Main";
+import Main from "../components/Main/Main";
 
 export default function Home() {
   return <Main />;

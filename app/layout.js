@@ -1,8 +1,8 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import TopBar from "../../../../../next-js-store/next-js/components/UI/TopBar/TopBar";
-import NavBar from "../../../../../next-js-store/next-js/components/UI/NavBar/NavBar";
-import Footer from "../../../../../next-js-store/next-js/components/UI/Footer/Footer";
+import TopBar from "../components/UI/TopBar/TopBar";
+import NavBar from "../components/UI/NavBar/NavBar";
+import Footer from "../components/UI/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 

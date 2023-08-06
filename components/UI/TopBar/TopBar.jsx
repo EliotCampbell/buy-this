@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./TopBar.module.css";
-import ReactCountryFlag from "react-country-flag";
 import { AiOutlineCheck } from "react-icons/ai";
+import ReactCountryFlag from "react-country-flag";
 
 const TopBar = () => {
   return (
