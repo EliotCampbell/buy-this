@@ -1,3 +1,7 @@
+const { Brand } = require('../../../models/models')
+
+
 export const GET = async (req) => {
-    return new Response ('fjgyjdfdf')
-}
+    const brands = await Brand.findAll()
+    return new Response (JSON.stringify(brands))
+    }
