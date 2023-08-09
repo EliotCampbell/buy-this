@@ -1,12 +1,12 @@
-import React, {useRef, useState } from 'react'
+'use client'
+import React, { useRef, useState } from 'react'
 import classes from './ItemsLine.module.css'
 import { observer } from 'mobx-react-lite'
 import ProductsStore from '../../../store/productsStore'
-import ProductPreviewCard from "@/components/Shop/ProductPreviewCard/ProductPreviewCard";
+import ProductPreviewCard from '@/components/Shop/ProductPreviewCard/ProductPreviewCard'
+import productsStore from '../../../store/productsStore'
 
 const ItemsLine = observer(({ title }) => {
-
-
   const scrollContainerRef = useRef(null)
   const [scrollPosition, setScrollPosition] = useState(0)
 
@@ -18,6 +18,8 @@ const ItemsLine = observer(({ title }) => {
     scrollPosition < (ProductsStore.products.length - 4) * 360 &&
       setScrollPosition(scrollPosition + 360) // Adjust the scroll distance as needed
   }
+
+  console.log(productsStore.products[0]?.id)
 
   return (
     <div className={classes.lineWrapper}>

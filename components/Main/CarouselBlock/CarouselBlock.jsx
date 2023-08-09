@@ -1,18 +1,18 @@
-import React from "react";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import classes from "./CarouselBlock.module.css";
-import Image from "next/image";
-import bigProm1 from "@/public/BigProm1.jpg";
-import bigProm2 from "@/public/BigProm2.jpg";
-import bigProm3 from "@/public/BigProm3.jpg";
-import picture2 from "@/public/Untitled - Copy.jpg";
+import React from 'react'
+/*import { Carousel } from 'react-responsive-carousel'*/
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import classes from './CarouselBlock.module.css'
+import Image from 'next/image'
+import bigProm1 from '@/public/BigProm1.jpg'
+import bigProm2 from '@/public/BigProm2.jpg'
+import bigProm3 from '@/public/BigProm3.jpg'
+import picture2 from '@/public/Untitled - Copy.jpg'
 
 const CarouselBlock = () => {
   return (
     <div className={classes.carouselBlock}>
       <div className={classes.carousel}>
-        <Carousel
+        {/*        <Carousel
           showArrows={true}
           autoPlay={true}
           showStatus={false}
@@ -30,15 +30,15 @@ const CarouselBlock = () => {
           <div>
             <Image src={bigProm3} alt={""} />
           </div>
-        </Carousel>
+        </Carousel>*/}
       </div>
       <div className={classes.platesBlock}>
-        <Image src={picture2} alt={""} />
-        <Image src={picture2} alt={""} />
-        <Image src={picture2} alt={""} />
+        <Image src={picture2} alt={''} />
+        <Image src={picture2} alt={''} />
+        <Image src={picture2} alt={''} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CarouselBlock;
+export default CarouselBlock
