@@ -1,12 +1,9 @@
 'use client'
 import React, { useRef, useState } from 'react'
 import classes from './ItemsLine.module.css'
-import { observer } from 'mobx-react-lite'
-import ProductsStore from '../../../store/productsStore'
-import ProductPreviewCard from '@/components/Shop/ProductPreviewCard/ProductPreviewCard'
-import productsStore from '../../../store/productsStore'
+import ProductPreviewCard from '../../../components/Shop/ProductPreviewCard/ProductPreviewCard'
 
-const ItemsLine = observer(({ title }) => {
+const ItemsLine = ({ title, products }) => {
   const scrollContainerRef = useRef(null)
   const [scrollPosition, setScrollPosition] = useState(0)
 
@@ -15,11 +12,9 @@ const ItemsLine = observer(({ title }) => {
   }
 
   const handleScrollRight = () => {
-    scrollPosition < (ProductsStore.products.length - 4) * 360 &&
-      setScrollPosition(scrollPosition + 360) // Adjust the scroll distance as needed
+    scrollPosition < (products.length - 4) * 360 &&
+      setScrollPosition(scrollPosition + 360) // Adjust the scroll distance as needed*/
   }
-
-  console.log(productsStore.products[0]?.id)
 
   return (
     <div className={classes.lineWrapper}>
@@ -31,7 +26,7 @@ const ItemsLine = observer(({ title }) => {
             ref={scrollContainerRef}
             style={{ transform: `translateX(-${scrollPosition}px)` }}
           >
-            {ProductsStore.products.map((el) => (
+            {products.map((el) => (
               <ProductPreviewCard
                 productId={el.id}
                 brandId={el.brandId}
@@ -52,6 +47,6 @@ const ItemsLine = observer(({ title }) => {
       </div>
     </div>
   )
-})
+}
 
 export default ItemsLine

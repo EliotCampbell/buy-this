@@ -1,8 +1,7 @@
-import React from "react";
-import Shop from "../../../../../../next-js-store/next-js/components/Shop/Shop";
+import Shop from '@/components/Shop/Shop'
 
 const StorePage = () => {
-  return <Shop />;
-};
+  return <Shop />
+}
 
-export default StorePage;
+export default StorePage

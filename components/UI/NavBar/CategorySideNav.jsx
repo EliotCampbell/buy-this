@@ -1,18 +1,17 @@
-import React from "react";
-import classes from "./CategorySideNav.module.css";
-import { RxCross1 } from "react-icons/rx";
-import { observer } from "mobx-react-lite";
-import Link from "next/link";
-import ProductsStore from "@/store/productsStore";
+import React from 'react'
+import classes from './CategorySideNav.module.css'
+import { RxCross1 } from 'react-icons/rx'
+import Link from 'next/link'
+import { useProductStore } from '@/store/productsStore'
 
-const CategorySideNav = observer(({ switcher: setSwitcher }) => {
+const CategorySideNav = ({ switcher: setSwitcher }) => {
   return (
     <div className={classes.sideNavBack}>
       <div className={classes.exit} onClick={() => setSwitcher(false)}>
         <div
           className={classes.sideNav}
           onClick={(event) => {
-            event.stopPropagation();
+            event.stopPropagation()
           }}
         >
           <div className={classes.top}>
@@ -26,13 +25,13 @@ const CategorySideNav = observer(({ switcher: setSwitcher }) => {
           </div>
           <div className={classes.contentWrapper}>
             <Link
-              href={"/store"}
+              href={'/store'}
               className={classes.navEl}
               onClick={() => setSwitcher(false)}
             >
               <p className={classes.navP}>SHOW ALL PRODUCTS</p>
             </Link>
-            {ProductsStore.categories.map((el) => (
+            {useProductStore.getState().categories.map((el) => (
               <Link
                 href={`/store?categoryId=${el.id}`}
                 className={classes.navEl}
@@ -46,7 +45,7 @@ const CategorySideNav = observer(({ switcher: setSwitcher }) => {
         </div>
       </div>
     </div>
-  );
-});
+  )
+}
 
-export default CategorySideNav;
+export default CategorySideNav

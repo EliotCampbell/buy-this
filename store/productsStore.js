@@ -1,3 +1,20 @@
+import { create } from 'zustand'
+
+export const useProductStore = create((set) => ({
+  categories: [],
+  brands: [],
+  products: [],
+  productsCount: 0,
+  specifications: [],
+  setCategories: (newCategories) =>
+    set(() => ({
+      categories: [
+        ...newCategories.sort((a, b) => a.name.localeCompare(b.name))
+      ]
+    }))
+}))
+
+/*
 import { makeAutoObservable } from 'mobx'
 
 class ProductsStore {
@@ -53,4 +70,4 @@ class ProductsStore {
   }
 }
 
-export default new ProductsStore()
+export default new ProductsStore()*/

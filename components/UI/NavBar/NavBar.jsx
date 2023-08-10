@@ -1,63 +1,65 @@
-"use client";
+'use client'
 
-import React, { useState } from "react";
-import classes from "./NavBar.module.css";
-import { observer } from "mobx-react-lite";
-import { HiOutlineMagnifyingGlass } from "react-icons/hi2";
-import { BsPerson } from "react-icons/bs";
-import IcoButton from "../IcoButton/IcoButton";
-import { SlBasket } from "react-icons/sl";
-import { RiAdminLine } from "react-icons/ri";
-import { PiList } from "react-icons/pi";
-import CategorySideNav from "./CategorySideNav";
-import { BiLogOut } from "react-icons/bi";
-import RightSideNav from "./AccountSideNav";
-import UserStore from "../../../store/userStore";
-import Link from "next/link";
+import React, { useState } from 'react'
+import classes from './NavBar.module.css'
+import { HiOutlineMagnifyingGlass } from 'react-icons/hi2'
+import { BsPerson } from 'react-icons/bs'
+import IcoButton from '../IcoButton/IcoButton'
+import { SlBasket } from 'react-icons/sl'
+import { RiAdminLine } from 'react-icons/ri'
+import { PiList } from 'react-icons/pi'
+import CategorySideNav from './CategorySideNav'
+import { BiLogOut } from 'react-icons/bi'
+import RightSideNav from './AccountSideNav'
+import UserStore from '../../../store/userStore'
+import Link from 'next/link'
+import { signOut, useSession } from 'next-auth/react'
 
-const NavBar = observer(() => {
-  const [searchQuery, setSearchQuery] = useState("");
+const NavBar = () => {
+  const [searchQuery, setSearchQuery] = useState('')
 
-  const [leftSwitcher, setLeftSwitcher] = useState(false);
-  const [rightSwitcher, setRightSwitcher] = useState(false);
+  const [leftSwitcher, setLeftSwitcher] = useState(false)
+  const [rightSwitcher, setRightSwitcher] = useState(false)
 
   const logout = () => {
-    UserStore.setUser({});
-    UserStore.setIsAuth(false);
-    localStorage.removeItem("role");
-    localStorage.removeItem("token");
-  };
+    signOut({ callbackUrl: '/' })
+    localStorage.removeItem('role')
+    localStorage.removeItem('token')
+  }
+
+  const session = useSession()
+  console.log(session)
 
   return (
     <div className={classes.navBarWrapper}>
       <div className={classes.navBar}>
         <div className={classes.rightDiv}>
           <div className={classes.brandWrapper}>
-            <Link className={classes.brand} href={"/"}>
+            <Link className={classes.brand} href={'/'}>
               BUY THIS!
             </Link>
           </div>
           <div className={classes.linksDiv}>
-            <Link href={"/"} className={classes.navLink}>
+            <Link href={'/'} className={classes.navLink}>
               SOME NAV
             </Link>
-            <Link href={"/"} className={classes.navLink}>
+            <Link href={'/'} className={classes.navLink}>
               SOME NAV
             </Link>
-            <Link href={"/"} className={classes.navLink}>
+            <Link href={'/'} className={classes.navLink}>
               SOME NAV
             </Link>
-            <Link href={"/"} className={classes.navLink}>
+            <Link href={'/'} className={classes.navLink}>
               SOME NAV
             </Link>
-            <Link href={"/"} className={classes.navLink}>
-              SOME NAV{" "}
+            <Link href={'/'} className={classes.navLink}>
+              SOME NAV{' '}
             </Link>
             <div className={classes.splitter}></div>
-            <Link href={"/"} className={classes.navLink}>
+            <Link href={'/'} className={classes.navLink}>
               BRANDS
             </Link>
-            <Link href={"/"} className={classes.navLink}>
+            <Link href={'/'} className={classes.navLink}>
               SALE %
             </Link>
           </div>
@@ -67,9 +69,9 @@ const NavBar = observer(() => {
           <form className={classes.searchBar}>
             <input
               className={classes.searchInput}
-              placeholder={"SEARCH FOR PRODUCTS"}
+              placeholder={'SEARCH FOR PRODUCTS'}
               onChange={(e) => {
-                setSearchQuery(e.target.value.toUpperCase());
+                setSearchQuery(e.target.value.toUpperCase())
               }}
               value={searchQuery}
             ></input>
@@ -77,28 +79,28 @@ const NavBar = observer(() => {
               <HiOutlineMagnifyingGlass className={classes.glass} />
             </div>
           </form>
-          {UserStore.isAuth && (
+          {session.data && (
             <>
               <IcoButton>
-                <Link href={"/admin"}>
+                <Link href={'/admin'}>
                   <RiAdminLine className={classes.ico} />
                 </Link>
               </IcoButton>
               <div className={classes.splitter}></div>
               <IcoButton>
-                <Link href={"/basket"}>
+                <Link href={'/basket'}>
                   <SlBasket className={classes.ico} />
                 </Link>
               </IcoButton>
               <div className={classes.splitter}></div>
               <IcoButton onClick={() => logout()}>
-                <Link href={"/"}>
+                <Link href={'/'}>
                   <BiLogOut className={classes.ico} />
                 </Link>
               </IcoButton>
             </>
           )}
-          {!UserStore.isAuth && (
+          {!session.data && (
             <IcoButton>
               <div onClick={() => setRightSwitcher(true)}>
                 <BsPerson className={classes.ico} />
@@ -116,19 +118,19 @@ const NavBar = observer(() => {
           <p className={classes.categoriesText}>ALL CATEGORIES</p>
         </div>
         <div className={classes.subBarContent}>
-          <Link href={"/"} className={classes.subBarCategory}>
+          <Link href={'/'} className={classes.subBarCategory}>
             CATEGORY
           </Link>
-          <Link href={"/"} className={classes.subBarCategory}>
+          <Link href={'/'} className={classes.subBarCategory}>
             CATEGORY
           </Link>
-          <Link href={"/"} className={classes.subBarCategory}>
+          <Link href={'/'} className={classes.subBarCategory}>
             CATEGORY
           </Link>
-          <Link href={"/"} className={classes.subBarCategory}>
+          <Link href={'/'} className={classes.subBarCategory}>
             CATEGORY
           </Link>
-          <Link href={"/"} className={classes.subBarCategory}>
+          <Link href={'/'} className={classes.subBarCategory}>
             CATEGORY
           </Link>
         </div>
@@ -136,7 +138,7 @@ const NavBar = observer(() => {
       {leftSwitcher && <CategorySideNav switcher={setLeftSwitcher} />}
       {rightSwitcher && <RightSideNav setSwitcher={setRightSwitcher} />}
     </div>
-  );
-});
+  )
+}
 
-export default NavBar;
+export default NavBar

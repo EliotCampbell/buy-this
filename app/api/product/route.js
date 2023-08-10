@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 const {
   Product,
   ProductsInfo,
@@ -10,16 +10,16 @@ const uuid = require('uuid')
 const path = require('path')
 const fs = require('fs')
 
-export const GET = async (req, params) => {
+export const GET = async (req) => {
+  console.log(req.nextUrl.search)
   try {
-    let {
-      brandId = null,
-      categoryId = null,
-      limit = null,
-      page = 1,
-      order = null,
-      offset = page * limit - limit
-    } = params
+    const nextSearchParams = new URLSearchParams(req.nextUrl.search)
+    const brandId = nextSearchParams.get('brandId') || null
+    const categoryId = nextSearchParams.get('categoryId') || null
+    const limit = nextSearchParams.get('limit') || null
+    const page = nextSearchParams.get('page') || 1
+    const order = nextSearchParams.get('order') || null
+    const offset = (page - 1) * (limit || 0)
 
     const whereHandler = () => {
       if (brandId && !categoryId) return { brandId }

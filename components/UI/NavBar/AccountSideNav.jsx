@@ -1,17 +1,16 @@
-import React from "react";
-import classes from "./AccountSideNav.module.css";
-import { RxCross1 } from "react-icons/rx";
-import { observer } from "mobx-react-lite";
-import Auth from "../../Auth/Auth";
+import React from 'react'
+import classes from './AccountSideNav.module.css'
+import { RxCross1 } from 'react-icons/rx'
+import Auth from '../../Auth/Auth'
 
-const LeftSideNav = observer(({ setSwitcher }) => {
+const LeftSideNav = ({ setSwitcher }) => {
   return (
     <div className={classes.sideNavBack}>
       <div className={classes.exit} onClick={() => setSwitcher(false)}>
         <div
           className={classes.sideNav}
           onClick={(event) => {
-            event.stopPropagation();
+            event.stopPropagation()
           }}
         >
           <div className={classes.top}>
@@ -29,7 +28,7 @@ const LeftSideNav = observer(({ setSwitcher }) => {
         </div>
       </div>
     </div>
-  );
-});
+  )
+}
 
-export default LeftSideNav;
+export default LeftSideNav

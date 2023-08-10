@@ -1,3 +1,4 @@
+/*
 import { makeAutoObservable } from "mobx";
 
 class UserStore {
@@ -22,3 +23,4 @@ class UserStore {
 }
 
 export default new UserStore();
+*/
