@@ -11,9 +11,7 @@ import { PiList } from 'react-icons/pi'
 import CategorySideNav from './CategorySideNav'
 import { BiLogOut } from 'react-icons/bi'
 import RightSideNav from './AccountSideNav'
-import UserStore from '../../../store/userStore'
 import Link from 'next/link'
-import { signOut, useSession } from 'next-auth/react'
 
 const NavBar = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -22,13 +20,9 @@ const NavBar = () => {
   const [rightSwitcher, setRightSwitcher] = useState(false)
 
   const logout = () => {
-    signOut({ callbackUrl: '/' })
     localStorage.removeItem('role')
     localStorage.removeItem('token')
   }
-
-  const session = useSession()
-  console.log(session)
 
   return (
     <div className={classes.navBarWrapper}>
@@ -79,7 +73,7 @@ const NavBar = () => {
               <HiOutlineMagnifyingGlass className={classes.glass} />
             </div>
           </form>
-          {session.data && (
+          {false && (
             <>
               <IcoButton>
                 <Link href={'/admin'}>
@@ -100,7 +94,7 @@ const NavBar = () => {
               </IcoButton>
             </>
           )}
-          {!session.data && (
+          {!false && (
             <IcoButton>
               <div onClick={() => setRightSwitcher(true)}>
                 <BsPerson className={classes.ico} />

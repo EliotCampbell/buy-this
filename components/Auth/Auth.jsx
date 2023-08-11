@@ -4,9 +4,7 @@ import React, { useState } from 'react'
 import classes from './Auth.module.css'
 import Button from '../UI/Button/Button'
 import Input from '../UI/Input/Input'
-import { signIn } from 'next-auth/react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { NextResponse } from 'next/server'
 
 const Auth = ({ sideMenuSwitcher }) => {
   const [input, setInput] = useState({ username: '', password: '' })
