@@ -16,11 +16,11 @@ const Main = async () => {
       <CarouselBlock />
       <ItemsLine
         title={'HIGHLIGHTS'}
-        products={highlights.dataObject.products.rows}
+        products={highlights?.dataObject?.products?.rows}
       />
       <ItemsLine
         title={'HOT DEALS'}
-        products={hotDeals.dataObject.products.rows}
+        products={hotDeals?.dataObject?.products?.rows}
       />
     </div>
   )

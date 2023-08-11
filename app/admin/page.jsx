@@ -1,10 +1,8 @@
 import { getServerSession } from 'next-auth'
+import { authConfig } from '@/configs/authConfig'
 
 const AdminPage = async () => {
-  const session = await getServerSession()
-
-  console.log(session)
-
+  const session = await getServerSession(authConfig)
   return session?.user.role === 'ADMIN' ? (
     <p>You are an admin, welcome!</p>
   ) : (

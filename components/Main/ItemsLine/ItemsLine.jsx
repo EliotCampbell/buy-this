@@ -26,7 +26,7 @@ const ItemsLine = ({ title, products }) => {
             ref={scrollContainerRef}
             style={{ transform: `translateX(-${scrollPosition}px)` }}
           >
-            {products.map((el) => (
+            {products?.map((el) => (
               <ProductPreviewCard
                 productId={el.id}
                 brandId={el.brandId}
