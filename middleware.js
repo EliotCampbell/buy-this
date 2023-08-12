@@ -1,25 +1,19 @@
-/*export { default } from 'next-auth/middleware'
-
-export const config = { matcher: ['/admin'] }*/
-
 import { NextResponse } from 'next/server'
+import { cookies } from 'next/headers'
 
-export function middleware(request) {
+const getCookies = () => {
+  const cookieStore = cookies()
+  return cookieStore.get('token')
+}
+
+export const middleware = async (request) => {
   if (request.nextUrl.pathname.startsWith('/api/auth/auth_check')) {
-    // Clone the request headers and set a new header `x-hello-from-middleware1`
-    const requestHeaders = new Headers(request.headers)
-    requestHeaders.set('x-hello-from-middleware1', 'hello')
-
-    // You can also set request headers in NextResponse.rewrite
-    const response = NextResponse.next({
-      request: {
-        // New request headers
-        headers: requestHeaders
-      }
-    })
-
-    // Set a new response header `x-hello-from-middleware2`
-    response.headers.set('x-hello-from-middleware2', 'hello')
-    return response
+    if (request.method !== 'OPTIONS') {
+      const token = getCookies()
+      console.log(token)
+      return NextResponse.next()
+    }
+    NextResponse.next()
   }
+  NextResponse.next()
 }

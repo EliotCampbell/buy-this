@@ -44,6 +44,7 @@
   width: 294px;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .img {

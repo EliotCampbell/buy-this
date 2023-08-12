@@ -1,5 +1,7 @@
 import React from 'react'
 import classes from './ProductPreviewCard.module.css'
+import Image from 'next/image'
+import Link from 'next/link'
 const ProductsStore = ''
 const ProductPreviewCard = ({
   productId,
@@ -10,7 +12,7 @@ const ProductPreviewCard = ({
 }) => {
   return (
     <div className={classes.productsCardWrapper}>
-      <div to={`/p/${productId}`} className={classes.productsCard}>
+      <Link href={`/p/${productId}`} className={classes.productsCard}>
         <div>
           <p className={classes.brand}>
             {brandId === ''
@@ -22,13 +24,20 @@ const ProductPreviewCard = ({
           <p className={classes.name}>{productName}</p>
         </div>
         <div className={classes.imgDiv}>
-          <img className={classes.img} src={productImg} alt="img" />
+          <Image
+            className={classes.img}
+            src={productImg}
+            alt="img"
+            width={294}
+            height={294}
+            layout="responsive"
+          />
         </div>
         <div className={classes.priceAvailabilityDiv}>
           <p className={classes.inStock}>In stock</p>
           <p className={classes.price}>{`${productPrice},00 €`}</p>
         </div>
-      </div>
+      </Link>
     </div>
   )
 }
