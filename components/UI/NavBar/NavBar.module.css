@@ -62,7 +62,7 @@
   font-size: 13px;
 }
 
-.subBarCategory:hover{
+.subBarCategory:hover {
   text-decoration: underline;
 }
 
@@ -108,7 +108,7 @@
   align-items: center;
 }
 
-.navLink:hover{
+.navLink:hover {
   color: #c5efef;
 }
 
@@ -144,6 +144,11 @@
 }
 .searchInput::placeholder {
   color: #b2b2b2;
+}
+
+.sideButtonsDiv {
+  display: flex;
+  flex-direction: row;
 }
 
 .glassWrapper {

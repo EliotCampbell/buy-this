@@ -1,29 +1,45 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import classes from './NavBar.module.css'
 import { HiOutlineMagnifyingGlass } from 'react-icons/hi2'
-import { BsPerson } from 'react-icons/bs'
 import IcoButton from '../IcoButton/IcoButton'
 import { SlBasket } from 'react-icons/sl'
-import { RiAdminLine } from 'react-icons/ri'
+import { RiAdminLine, RiUserLine } from 'react-icons/ri'
 import { PiList } from 'react-icons/pi'
 import CategorySideNav from './CategorySideNav'
 import { BiLogOut } from 'react-icons/bi'
 import RightSideNav from './AccountSideNav'
 import Link from 'next/link'
 import Cookies from 'js-cookie'
+import { useRouter } from 'next/navigation'
+import { useProductStore, useUserStore } from '@/store/store'
+import { BsPerson } from 'react-icons/bs'
 
 const NavBar = () => {
-  console.log(Cookies.get('token'))
+  console.log(`Token in cookies: ${Cookies.get('token')} (sent from NavBar)`)
+
+  useEffect(() => {
+    useProductStore.getState().fetchCategories()
+    useProductStore.getState().fetchBrands()
+  }, [])
+
+  const auth = localStorage.getItem('auth')
 
   const [searchQuery, setSearchQuery] = useState('')
   const [leftSwitcher, setLeftSwitcher] = useState(false)
   const [rightSwitcher, setRightSwitcher] = useState(false)
 
+  const isAuth = useUserStore.getState().isAuth
+
+  const router = useRouter()
+
   const logout = () => {
-    localStorage.removeItem('role')
-    localStorage.removeItem('token')
+    Cookies.remove('token')
+    Cookies.remove('userId')
+    Cookies.remove('userEmail')
+    Cookies.remove('userRole')
+    useUserStore.setState({ isAuth: false })
   }
 
   return (
@@ -75,8 +91,14 @@ const NavBar = () => {
               <HiOutlineMagnifyingGlass className={classes.glass} />
             </div>
           </form>
-          {false && (
-            <>
+          {!auth && (
+            <div className={classes.sideButtonsDiv}>
+              <IcoButton>
+                <Link href={'/admin'}>
+                  <RiUserLine className={classes.ico} />
+                </Link>
+              </IcoButton>
+              <div className={classes.splitter}></div>
               <IcoButton>
                 <Link href={'/admin'}>
                   <RiAdminLine className={classes.ico} />
@@ -94,14 +116,18 @@ const NavBar = () => {
                   <BiLogOut className={classes.ico} />
                 </Link>
               </IcoButton>
-            </>
+            </div>
           )}
-          {!false && (
-            <IcoButton>
-              <div onClick={() => setRightSwitcher(true)}>
-                <BsPerson className={classes.ico} />
+          {auth && (
+            <div className={classes.sideButtonsDiv}>
+              <div className={classes.sideButtonsDiv}>
+                <IcoButton>
+                  <div onClick={() => setRightSwitcher(true)}>
+                    <BsPerson className={classes.ico} />
+                  </div>
+                </IcoButton>
               </div>
-            </IcoButton>
+            </div>
           )}
         </div>
       </div>

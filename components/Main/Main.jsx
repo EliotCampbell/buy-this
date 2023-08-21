@@ -5,10 +5,10 @@ import ItemsLine from './ItemsLine/ItemsLine'
 
 const Main = async () => {
   const highlights = await fetch(
-    'http://localhost:3000/api/product?limit=1'
+    process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/product?limit=1'
   ).then((res) => res.json())
   const hotDeals = await fetch(
-    'http://localhost:3000/api/product?limit=3'
+    process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/product?limit=3'
   ).then((res) => res.json())
 
   return (

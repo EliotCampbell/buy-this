@@ -1,10 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import classes from './Admin.module.css'
 import AdminSidebar from '../AdminSidebar/AdminSidebar'
 import { useLocation } from 'react-router-dom'
 import { linksArr } from '../../../AdminMenuRoutes'
-import { Context } from '../../../index'
-import { observer } from 'mobx-react-lite'
 import {
   fetchBrands,
   fetchCategories,
@@ -12,9 +10,7 @@ import {
   fetchSpecificationsByPId
 } from '../../../http/productsAPI'
 
-const Admin = observer(() => {
-  const { products } = useContext(Context)
-
+const Admin = () => {
   const location = useLocation()
 
   const initialState = {
@@ -216,6 +212,6 @@ const Admin = observer(() => {
       </div>
     </div>
   )
-})
+}
 
 export default Admin

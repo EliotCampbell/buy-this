@@ -44,6 +44,6 @@ export const POST = async (request) => {
       }
     )
   } catch (e) {
-    console.log('Error in login api ' + e.message)
+    console.log('Internal error in login api ' + e.message)
   }
 }

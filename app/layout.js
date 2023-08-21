@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import TopBar from '../components/UI/TopBar/TopBar'
 import NavBar from '../components/UI/NavBar/NavBar'
 import Footer from '../components/UI/Footer/Footer'
+import { useProductStore } from '@/store/store'
 
 const inter = Inter({ subsets: ['latin'] })
 

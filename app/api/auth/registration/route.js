@@ -29,6 +29,6 @@ export const POST = async (request) => {
     const token = generateJwt(user.id, user.email, user.role)
     return NextResponse.json({ token })
   } catch (e) {
-    console.log('Error in registration api' + e.message)
+    console.log('Internal error in registration api' + e.message)
   }
 }

@@ -2,7 +2,8 @@ import React from 'react'
 import classes from './ProductPreviewCard.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
-const ProductsStore = ''
+import { useProductStore } from '@/store/store'
+
 const ProductPreviewCard = ({
   productId,
   brandId,
@@ -10,16 +11,16 @@ const ProductPreviewCard = ({
   productImg,
   productPrice
 }) => {
+  const brands = useProductStore((state) => state.brands)
   return (
     <div className={classes.productsCardWrapper}>
       <Link href={`/p/${productId}`} className={classes.productsCard}>
         <div>
           <p className={classes.brand}>
-            {brandId === ''
-              ? 'Brand'
-              : ProductsStore?.brands?.find(
-                  (el) => el.id.toString() === brandId.toString()
-                ).name}
+            {brandId === '' && brands !== []
+              ? brands.find((el) => el.id.toString() === brandId.toString())
+                  .name
+              : 'Brand'}
           </p>
           <p className={classes.name}>{productName}</p>
         </div>
@@ -28,9 +29,11 @@ const ProductPreviewCard = ({
             className={classes.img}
             src={productImg}
             alt="img"
-            width={294}
-            height={294}
-            layout="responsive"
+            // width={294}
+            // height={294}
+            // layout="responsive"
+            sizes={'max-width: 294px'}
+            fill
           />
         </div>
         <div className={classes.priceAvailabilityDiv}>

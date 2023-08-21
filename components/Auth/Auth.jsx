@@ -4,13 +4,12 @@ import React, { useState } from 'react'
 import classes from './Auth.module.css'
 import Button from '../UI/Button/Button'
 import Input from '../UI/Input/Input'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useUserStore } from '@/store/store'
 
 const Auth = ({ sideMenuSwitcher }) => {
   const [input, setInput] = useState({ email: '', password: '' })
   const [switcher, setSwitcher] = useState('auth')
-  const router = useRouter()
-  const callbackUrl = useSearchParams().get('callbackUrl') || '/'
+  const [authMessage, setAuthMessage] = useState('')
 
   const logFetch = async (credentials) =>
     await fetch('http://localhost:3000/api/auth/login', {
@@ -25,7 +24,13 @@ const Auth = ({ sideMenuSwitcher }) => {
         const res = await logFetch(input)
         if (res.ok === true) {
           sideMenuSwitcher(false)
-        } else console.log('login error')
+          useUserStore.setState({ isAuth: true })
+        }
+        if (res.ok === false) {
+          setAuthMessage(res.message)
+        } else {
+          console.log(`login error`)
+        }
       } else console.log('else from auth component')
     } catch (e) {
       alert(e.message)
@@ -63,7 +68,10 @@ const Auth = ({ sideMenuSwitcher }) => {
               value={input.password}
               onChange={(e) => setInput({ ...input, password: e.target.value })}
               type={'password'}
-            ></Input>{' '}
+            ></Input>
+            {authMessage !== '' && (
+              <div className={classes.authMessage}>{authMessage}</div>
+            )}
             <div className={classes.buttonWrapper}>
               <div
                 className={classes.registerLink}
@@ -109,6 +117,9 @@ const Auth = ({ sideMenuSwitcher }) => {
               onChange={(e) => setInput({ ...input, password: e.target.value })}
               type={'repeatPassword'}
             ></Input>
+            {authMessage !== '' && (
+              <div className={classes.authMessage}>{authMessage}</div>
+            )}
             <div className={classes.buttonWrapper}>
               <div
                 className={classes.registerLink}

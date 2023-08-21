@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './CategorySideNav.module.css'
 import { RxCross1 } from 'react-icons/rx'
 import Link from 'next/link'
-import { useProductStore } from '@/store/productsStore'
+import { useProductStore } from '@/store/store'
 
 const CategorySideNav = ({ switcher: setSwitcher }) => {
   return (

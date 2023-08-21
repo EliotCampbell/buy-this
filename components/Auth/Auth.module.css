@@ -30,3 +30,8 @@
   cursor: pointer;
   text-decoration: underline;
 }
+
+.authMessage {
+  align-self: start;
+  color: red;
+}

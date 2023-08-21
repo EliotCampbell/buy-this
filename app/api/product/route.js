@@ -11,7 +11,6 @@ const path = require('path')
 const fs = require('fs')
 
 export const GET = async (req) => {
-  console.log(req.nextUrl.search)
   try {
     const nextSearchParams = new URLSearchParams(req.nextUrl.search)
     const brandId = nextSearchParams.get('brandId') || null

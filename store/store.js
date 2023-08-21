@@ -1,4 +1,6 @@
 import { create } from 'zustand'
+import Cookies from 'js-cookie'
+import { persist } from 'zustand/middleware'
 
 export const useProductStore = create((set) => ({
   categories: [],
@@ -11,8 +13,42 @@ export const useProductStore = create((set) => ({
       categories: [
         ...newCategories.sort((a, b) => a.name.localeCompare(b.name))
       ]
-    }))
+    })),
+  fetchCategories: async () => {
+    try {
+      const res = await fetch(
+        process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/category'
+      )
+      const json = await res.json()
+      set({ categories: [...json.dataObject.categories] })
+    } catch (e) {
+      console.log(e.message)
+    }
+  },
+  fetchBrands: async () => {
+    try {
+      const res = await fetch(
+        process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/brand'
+      )
+      const json = await res.json()
+      set({ brands: [...json.dataObject.brands] })
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
 }))
+
+export const useUserStore = create(
+  persist(
+    (set) => ({
+      isAuth: false,
+      user: {},
+      setIsAuth: (bool) => set(() => ({ user: bool })),
+      setUser: (user) => set(() => ({ user: { ...user } }))
+    }),
+    { name: 'userStore', version: 1 }
+  )
+)
 
 /*
 import { makeAutoObservable } from 'mobx'

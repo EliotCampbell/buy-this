@@ -31,7 +31,7 @@ const CarouselBlock = () => {
             </div>
           </Carousel>*/}
         <div>
-          <Image src={bigProm1} alt={''} />
+          <Image src={bigProm1} alt={''} priority={false} />
         </div>
       </div>
       <div className={classes.platesBlock}>

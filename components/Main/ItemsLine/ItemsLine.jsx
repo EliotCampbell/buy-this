@@ -32,7 +32,6 @@ const ItemsLine = ({ title, products }) => {
                 brandId={el.brandId}
                 productName={el.name}
                 productImg={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.img}`}
-                // productImg={'http://localhost:3000/static/noImg.jpg'}
                 productPrice={el.price}
                 key={el.id}
               />
