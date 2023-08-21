@@ -25,8 +25,25 @@ export const POST = async (request) => {
       })
     }
     const token = generateJwt(user.id, user.email, user.role)
-    return NextResponse.json({ token })
+    return NextResponse.json(
+      {
+        ok: true,
+        message: 'Token updated successfully',
+        dataObject: { token, id: user.id, email: user.email, role: user.role }
+      },
+      {
+        status: 200,
+        headers: {
+          'Set-Cookie': [
+            `userId=${user.id};Path=/;Max-Age=${'86400'};HttpOnly;Secure`,
+            `userEmail=${user.email};Path=/;Max-Age=${'86400'};HttpOnly;Secure`,
+            `userRole=${user.role};Path=/;Max-Age=${'86400'};HttpOnly;Secure`,
+            `token=${token};Path=/;Max-Age=${'86400'};Secure`
+          ]
+        }
+      }
+    )
   } catch (e) {
-    console.log('Error in login api' + e.message)
+    console.log('Error in login api ' + e.message)
   }
 }

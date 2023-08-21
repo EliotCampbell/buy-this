@@ -7,23 +7,26 @@ import Input from '../UI/Input/Input'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 const Auth = ({ sideMenuSwitcher }) => {
-  const [input, setInput] = useState({ username: '', password: '' })
+  const [input, setInput] = useState({ email: '', password: '' })
   const [switcher, setSwitcher] = useState('auth')
   const router = useRouter()
   const callbackUrl = useSearchParams().get('callbackUrl') || '/'
 
-  const log = async (e) => {
+  const logFetch = async (credentials) =>
+    await fetch('http://localhost:3000/api/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(credentials)
+    }).then((res) => res.json())
+
+  const signIn = async (e) => {
     try {
       e.preventDefault()
       if (switcher === 'auth') {
-        await signIn('credentials', {
-          email: input.username,
-          password: input.password,
-          redirect: false
-        })
-        // sideMenuSwitcher(false)
-        // router.push('/')
-      } else await regisration(input.username, input.password)
+        const res = await logFetch(input)
+        if (res.ok === true) {
+          sideMenuSwitcher(false)
+        } else console.log('login error')
+      } else console.log('else from auth component')
     } catch (e) {
       alert(e.message)
     }
@@ -42,7 +45,7 @@ const Auth = ({ sideMenuSwitcher }) => {
         </>
       )}
 
-      <form onSubmit={log} className={classes.form} id={'login'}>
+      <form onSubmit={signIn} className={classes.form} id={'login'}>
         {switcher === 'auth' ? (
           <>
             <Input
@@ -50,8 +53,8 @@ const Auth = ({ sideMenuSwitcher }) => {
               name={'username'}
               label={'E-mail'}
               placeholder={'my-email@mail.com'}
-              value={input.username}
-              onChange={(e) => setInput({ ...input, username: e.target.value })}
+              value={input.email}
+              onChange={(e) => setInput({ ...input, email: e.target.value })}
             ></Input>
             <Input
               name={'password'}
@@ -69,9 +72,6 @@ const Auth = ({ sideMenuSwitcher }) => {
                 Crete account
               </div>
               <Button>{'Log In'}</Button>
-              <Button onClick={() => signIn('google', { callbackUrl })}>
-                {'Log In with Google'}
-              </Button>
             </div>
           </>
         ) : (
@@ -82,7 +82,7 @@ const Auth = ({ sideMenuSwitcher }) => {
               name={'login'}
               label={'E-mail'}
               placeholder={'my-email@mail.com'}
-              value={input.username}
+              value={input.email}
               onChange={(e) => setInput({ ...input, username: e.target.value })}
             ></Input>
             <Input
@@ -90,7 +90,7 @@ const Auth = ({ sideMenuSwitcher }) => {
               name={'username'}
               label={'Username'}
               placeholder={'My Username'}
-              value={input.username}
+              value={input.email}
               onChange={(e) => setInput({ ...input, username: e.target.value })}
             ></Input>
             <Input

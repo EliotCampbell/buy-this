@@ -23,7 +23,7 @@ export const GET = async () => {
     )
     return NextResponse.json(
       {
-        ok: false,
+        ok: true,
         message: 'Token updated successfully',
         dataObject: { newToken, decodedUser }
       },

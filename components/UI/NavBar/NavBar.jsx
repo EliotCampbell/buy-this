@@ -12,10 +12,12 @@ import CategorySideNav from './CategorySideNav'
 import { BiLogOut } from 'react-icons/bi'
 import RightSideNav from './AccountSideNav'
 import Link from 'next/link'
+import Cookies from 'js-cookie'
 
 const NavBar = () => {
-  const [searchQuery, setSearchQuery] = useState('')
+  console.log(Cookies.get('token'))
 
+  const [searchQuery, setSearchQuery] = useState('')
   const [leftSwitcher, setLeftSwitcher] = useState(false)
   const [rightSwitcher, setRightSwitcher] = useState(false)
 
