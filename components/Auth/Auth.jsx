@@ -12,7 +12,7 @@ const Auth = ({ sideMenuSwitcher }) => {
   const [authMessage, setAuthMessage] = useState('')
 
   const logFetch = async (credentials) =>
-    await fetch('http://localhost:3000/api/auth/login', {
+    await fetch('http://localhost:3000/api/user/login', {
       method: 'POST',
       body: JSON.stringify(credentials)
     }).then((res) => res.json())
@@ -31,7 +31,7 @@ const Auth = ({ sideMenuSwitcher }) => {
         } else {
           console.log(`login error`)
         }
-      } else console.log('else from auth component')
+      } else console.log('else from user component')
     } catch (e) {
       alert(e.message)
     }

@@ -38,17 +38,14 @@ export const useProductStore = create((set) => ({
   }
 }))
 
-export const useUserStore = create(
-  persist(
-    (set) => ({
-      isAuth: false,
-      user: {},
-      setIsAuth: (bool) => set(() => ({ user: bool })),
-      setUser: (user) => set(() => ({ user: { ...user } }))
-    }),
-    { name: 'userStore', version: 1 }
-  )
-)
+export const useUserStore = create((set) => ({
+  isLoading: true,
+  isAuth: false,
+  user: {},
+  setIsLoading: (bool) => set((state) => ({ isLoading: bool })),
+  setIsAuth: (bool) => set((state) => ({ isAuth: bool })),
+  setUser: (user) => set((state) => ({ user: { ...user } }))
+}))
 
 /*
 import { makeAutoObservable } from 'mobx'

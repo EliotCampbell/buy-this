@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import jwt from 'jsonwebtoken'
 import { User } from '@/models/models'
 import bcrypt from 'bcrypt'
@@ -30,7 +30,7 @@ export const POST = async (request) => {
         ok: true,
         message: 'Token updated successfully',
         dataObject: { token, id: user.id, email: user.email, role: user.role }
-      },
+      } /*,
       {
         status: 200,
         headers: {
@@ -38,10 +38,10 @@ export const POST = async (request) => {
             `userId=${user.id};Path=/;Max-Age=${'86400'};HttpOnly;Secure`,
             `userEmail=${user.email};Path=/;Max-Age=${'86400'};HttpOnly;Secure`,
             `userRole=${user.role};Path=/;Max-Age=${'86400'};HttpOnly;Secure`,
-            `token=${token};Path=/;Max-Age=${'86400'};Secure`
+            `token=${token};Path=/;Max-Age=${'86400'};HttpOnly;Secure`
           ]
         }
-      }
+      }*/
     )
   } catch (e) {
     console.log('Internal error in login api ' + e.message)
