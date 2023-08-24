@@ -1,3 +1,9 @@
+.userInfo {
+  font-family: BlenderPro-Bold, sans-serif;
+  color: teal;
+  padding-top: 10px;
+}
+
 .sideNavBack {
   background-color: rgba(51, 51, 51, 0.3);
   height: 100%;

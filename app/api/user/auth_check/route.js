@@ -26,8 +26,7 @@ export const POST = async (request) => {
       dataObject: { oldToken: token, newToken, decodedUser }
     })
   } catch (e) {
-    console.error(e)
-    NextResponse.json({
+    return NextResponse.json({
       ok: false,
       message: 'auth_check error',
       dataObject: {}

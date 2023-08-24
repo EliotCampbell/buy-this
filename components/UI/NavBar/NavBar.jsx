@@ -11,7 +11,7 @@ import CategorySideNav from './CategorySideNav'
 import { BiLogOut } from 'react-icons/bi'
 import RightSideNav from './AccountSideNav'
 import Link from 'next/link'
-import { useUserStore } from '@/store/store'
+import { useSessionStore, useUserStore } from '@/store/store'
 import { BsPerson } from 'react-icons/bs'
 
 const NavBar = () => {
@@ -20,159 +20,173 @@ const NavBar = () => {
   const [rightSwitcher, setRightSwitcher] = useState(false)
 
   const logout = () => {
-    useUserStore.setState({ isAuth: false })
+    useUserStore.setState({ user: {} })
+    useSessionStore.setState({ isAuth: false })
   }
-  const isLoading = useUserStore((state) => state.isLoading)
+  const { isLoading, setIsLoading, setUser } = useUserStore((state) => ({
+    isLoading: state.isLoading,
+    setUser: state.setUser,
+    setIsLoading: state.setIsLoading
+  }))
 
-  const { setIsLoading, isAuth } = useUserStore()
-
-  const fetchNewToken = async () => {
-    const res = await fetch('http://localhost:3000/api/user/auth_check', {
-      method: 'POST',
-      body: JSON.stringify({
-        token:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJnZXJhZG1pdHJ1a0BnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2OTI3OTEyNTIsImV4cCI6MTY5MjgzNDQ1Mn0.dh3SCyBbhqzRKBnkK2rmUknFfB6cg5Te6aIt7Nb-01g'
-      })
-    })
-    return await res.json()
-  }
+  const { token, setToken, setIsAuth, isAuth } = useSessionStore((state) => ({
+    token: state.token,
+    isAuth: state.isAuth,
+    setIsAuth: state.setIsAuth,
+    setToken: state.setToken
+  }))
 
   useEffect(() => {
-    const token = fetchNewToken()
-    useUserStore.setState({ user: token })
-    console.log(useUserStore.getState())
+    const checkAuth = async (token) => {
+      try {
+        const res = await fetch(
+          process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/user/auth_check',
+          {
+            method: 'POST',
+            body: JSON.stringify({
+              token
+            })
+          }
+        )
+        const data = await res.json()
+        if (data.dataObject.newToken) {
+          console.log(
+            'New token is ' + data.dataObject.newToken + ' sent from NavBar.jsx'
+          )
+          setUser(data.dataObject.decodedUser)
+          setIsAuth(true)
+          setToken(data.dataObject.newToken)
+        } else {
+          setUser({})
+          setIsAuth(false)
+          setToken('')
+        }
+      } catch (e) {
+        console.log(e)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    checkAuth(token)
   }, [])
+  return (
+    <div className={classes.navBarWrapper}>
+      <div className={classes.navBar}>
+        <div className={classes.rightDiv}>
+          <div className={classes.brandWrapper}>
+            <Link className={classes.brand} href={'/'}>
+              BUY THIS!
+            </Link>
+          </div>
+          <div className={classes.linksDiv}>
+            <Link href={'/'} className={classes.navLink}>
+              SOME NAV
+            </Link>
+            <Link href={'/'} className={classes.navLink}>
+              SOME NAV
+            </Link>
+            <Link href={'/'} className={classes.navLink}>
+              SOME NAV
+            </Link>
+            <Link href={'/'} className={classes.navLink}>
+              SOME NAV
+            </Link>
+            <Link href={'/'} className={classes.navLink}>
+              SOME NAV{' '}
+            </Link>
+            <div className={classes.splitter}></div>
+            <Link href={'/'} className={classes.navLink}>
+              BRANDS
+            </Link>
+            <Link href={'/'} className={classes.navLink}>
+              SALE %
+            </Link>
+          </div>
+        </div>
 
-  if (isLoading)
-    return (
-      <>
-        {' '}
-        <h1 style={{ color: 'red' }}>LOADING..</h1>
-        <button onClick={() => useUserStore.setState({ isLoading: false })}>
-          false
-        </button>
-      </>
-    )
-  else
-    return (
-      <div className={classes.navBarWrapper}>
-        <div className={classes.navBar}>
-          <div className={classes.rightDiv}>
-            <div className={classes.brandWrapper}>
-              <Link className={classes.brand} href={'/'}>
-                BUY THIS!
-              </Link>
+        <div className={classes.leftDiv}>
+          <form className={classes.searchBar}>
+            <input
+              className={classes.searchInput}
+              placeholder={'SEARCH FOR PRODUCTS'}
+              onChange={(e) => {
+                setSearchQuery(e.target.value.toUpperCase())
+              }}
+              value={searchQuery}
+            ></input>
+            <div className={classes.glassWrapper}>
+              <HiOutlineMagnifyingGlass className={classes.glass} />
             </div>
-            <div className={classes.linksDiv}>
-              <Link href={'/'} className={classes.navLink}>
-                SOME NAV
-              </Link>
-              <Link href={'/'} className={classes.navLink}>
-                SOME NAV
-              </Link>
-              <Link href={'/'} className={classes.navLink}>
-                SOME NAV
-              </Link>
-              <Link href={'/'} className={classes.navLink}>
-                SOME NAV
-              </Link>
-              <Link href={'/'} className={classes.navLink}>
-                SOME NAV{' '}
-              </Link>
+          </form>
+          {!isLoading && isAuth && (
+            <div className={classes.sideButtonsDiv}>
+              <IcoButton onClick={() => setRightSwitcher(true)}>
+                <RiUserLine className={classes.ico} />
+              </IcoButton>
               <div className={classes.splitter}></div>
-              <Link href={'/'} className={classes.navLink}>
-                BRANDS
-              </Link>
-              <Link href={'/'} className={classes.navLink}>
-                SALE %
-              </Link>
+              <IcoButton>
+                <Link href={'/admin'}>
+                  <RiAdminLine className={classes.ico} />
+                </Link>
+              </IcoButton>
+              <div className={classes.splitter}></div>
+              <IcoButton>
+                <Link href={'/basket'}>
+                  <SlBasket className={classes.ico} />
+                </Link>
+              </IcoButton>
+              <div className={classes.splitter}></div>
+              <IcoButton onClick={() => logout()}>
+                <Link href={'/'}>
+                  <BiLogOut className={classes.ico} />
+                </Link>
+              </IcoButton>
             </div>
-          </div>
-
-          <div className={classes.leftDiv}>
-            <form className={classes.searchBar}>
-              <input
-                className={classes.searchInput}
-                placeholder={'SEARCH FOR PRODUCTS'}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value.toUpperCase())
-                }}
-                value={searchQuery}
-              ></input>
-              <div className={classes.glassWrapper}>
-                <HiOutlineMagnifyingGlass className={classes.glass} />
-              </div>
-            </form>
-            {!isAuth && (
+          )}
+          {!isLoading && !isAuth && (
+            <div className={classes.sideButtonsDiv}>
               <div className={classes.sideButtonsDiv}>
                 <IcoButton>
-                  <Link href={'/admin'}>
-                    <RiUserLine className={classes.ico} />
-                  </Link>
-                </IcoButton>
-                <div className={classes.splitter}></div>
-                <IcoButton>
-                  <Link href={'/admin'}>
-                    <RiAdminLine className={classes.ico} />
-                  </Link>
-                </IcoButton>
-                <div className={classes.splitter}></div>
-                <IcoButton>
-                  <Link href={'/basket'}>
-                    <SlBasket className={classes.ico} />
-                  </Link>
-                </IcoButton>
-                <div className={classes.splitter}></div>
-                <IcoButton onClick={() => logout()}>
-                  <Link href={'/'}>
-                    <BiLogOut className={classes.ico} />
-                  </Link>
+                  <div onClick={() => setRightSwitcher(true)}>
+                    <BsPerson className={classes.ico} />
+                  </div>
                 </IcoButton>
               </div>
-            )}
-            {isAuth && (
-              <div className={classes.sideButtonsDiv}>
-                <div className={classes.sideButtonsDiv}>
-                  <IcoButton>
-                    <div onClick={() => setRightSwitcher(true)}>
-                      <BsPerson className={classes.ico} />
-                    </div>
-                  </IcoButton>
-                </div>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
-        <div className={classes.subBar}>
-          <div
-            className={classes.categories}
-            onClick={() => setLeftSwitcher(true)}
-          >
-            <PiList className={classes.ico} />
-            <p className={classes.categoriesText}>ALL CATEGORIES</p>
-          </div>
-          <div className={classes.subBarContent}>
-            <Link href={'/'} className={classes.subBarCategory}>
-              CATEGORY
-            </Link>
-            <Link href={'/'} className={classes.subBarCategory}>
-              CATEGORY
-            </Link>
-            <Link href={'/'} className={classes.subBarCategory}>
-              CATEGORY
-            </Link>
-            <Link href={'/'} className={classes.subBarCategory}>
-              CATEGORY
-            </Link>
-            <Link href={'/'} className={classes.subBarCategory}>
-              CATEGORY
-            </Link>
-          </div>
-        </div>
-        {leftSwitcher && <CategorySideNav switcher={setLeftSwitcher} />}
-        {rightSwitcher && <RightSideNav setSwitcher={setRightSwitcher} />}
       </div>
-    )
+      <div className={classes.subBar}>
+        <div
+          className={classes.categories}
+          onClick={() => setLeftSwitcher(true)}
+        >
+          <PiList className={classes.ico} />
+          <p className={classes.categoriesText}>ALL CATEGORIES</p>
+        </div>
+        <div className={classes.subBarContent}>
+          <Link href={'/'} className={classes.subBarCategory}>
+            CATEGORY
+          </Link>
+          <Link href={'/'} className={classes.subBarCategory}>
+            CATEGORY
+          </Link>
+          <Link href={'/'} className={classes.subBarCategory}>
+            CATEGORY
+          </Link>
+          <Link href={'/'} className={classes.subBarCategory}>
+            CATEGORY
+          </Link>
+          <Link href={'/'} className={classes.subBarCategory}>
+            CATEGORY
+          </Link>
+        </div>
+      </div>
+      {leftSwitcher && <CategorySideNav switcher={setLeftSwitcher} />}
+      {rightSwitcher && <RightSideNav setSwitcher={setRightSwitcher} />}
+    </div>
+  )
 }
 
 export default NavBar

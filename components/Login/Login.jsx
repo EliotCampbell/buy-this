@@ -1,12 +1,12 @@
 'use client'
 
 import React, { useState } from 'react'
-import classes from './Auth.module.css'
+import classes from './Login.module.css'
 import Button from '../UI/Button/Button'
 import Input from '../UI/Input/Input'
-import { useUserStore } from '@/store/store'
+import { useSessionStore, useUserStore } from '@/store/store'
 
-const Auth = ({ sideMenuSwitcher }) => {
+const Login = ({ sideMenuSwitcher }) => {
   const [input, setInput] = useState({ email: '', password: '' })
   const [switcher, setSwitcher] = useState('auth')
   const [authMessage, setAuthMessage] = useState('')
@@ -17,23 +17,50 @@ const Auth = ({ sideMenuSwitcher }) => {
       body: JSON.stringify(credentials)
     }).then((res) => res.json())
 
+  const registrationFetch = async (credentials) =>
+    await fetch('http://localhost:3000/api/user/registration', {
+      method: 'POST',
+      body: JSON.stringify(credentials)
+    }).then((res) => res.json())
+
   const signIn = async (e) => {
     try {
       e.preventDefault()
       if (switcher === 'auth') {
-        const res = await logFetch(input)
-        if (res.ok === true) {
+        const data = await logFetch(input)
+        if (data.ok === true) {
           sideMenuSwitcher(false)
-          useUserStore.setState({ isAuth: true })
-        }
-        if (res.ok === false) {
-          setAuthMessage(res.message)
+          useUserStore.setState({
+            user: {
+              id: data.dataObject.id,
+              email: data.dataObject.email,
+              role: data.dataObject.role
+            }
+          })
+          useSessionStore.setState({
+            token: data.dataObject.token,
+            isAuth: true
+          })
+          console.log(
+            'Login token is ' + data.dataObject.token + 'sent from Login.jsx'
+          )
+        } else if (data.ok === false) {
+          setAuthMessage(data.message)
         } else {
           console.log(`login error`)
         }
-      } else console.log('else from user component')
+      } else {
+        const data = await registrationFetch(input)
+        if (data.ok === true) {
+          setSwitcher('auth')
+        } else if (data.ok === false) {
+          setAuthMessage(data.message)
+        } else {
+          console.log(`Registration error`)
+        }
+      }
     } catch (e) {
-      alert(e.message)
+      console.log(e.message)
     }
   }
 
@@ -136,4 +163,4 @@ const Auth = ({ sideMenuSwitcher }) => {
   )
 }
 
-export default Auth
+export default Login
