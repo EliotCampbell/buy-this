@@ -19,6 +19,7 @@ export const GET = async (req) => {
     const page = nextSearchParams.get('page') || 1
     const order = nextSearchParams.get('order') || null
     const offset = (page - 1) * (limit || 0)
+    console.log(brandId)
 
     const whereHandler = () => {
       if (brandId && !categoryId) return { brandId }

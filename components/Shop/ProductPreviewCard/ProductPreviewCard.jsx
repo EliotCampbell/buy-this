@@ -14,12 +14,12 @@ const ProductPreviewCard = ({
   const brands = useProductStore((state) => state.brands)
   return (
     <div className={classes.productsCardWrapper}>
-      <Link href={`/p/${productId}`} className={classes.productsCard}>
+      <Link href={`/product/${productId}`} className={classes.productsCard}>
         <div>
           <p className={classes.brand}>
-            {brandId === '' && brands !== []
+            {brandId !== '' && brands !== []
               ? brands.find((el) => el.id.toString() === brandId.toString())
-                  .name
+                  ?.name
               : 'Brand'}
           </p>
           <p className={classes.name}>{productName}</p>

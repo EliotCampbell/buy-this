@@ -1,17 +1,31 @@
-"use client";
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import classes from "./ProductDetails.module.css";
-import Specifications from "./Specifications/Specifications";
-import Description from "./Description/Description";
-import RatingsComments from "./RatingsComments/RatingsComments";
-import { observer } from "mobx-react-lite";
-import ToCartCounter from "../../UI/ToCartCounter/ToCartCounter";
-import BreadCrumbs from "../../UI/BreadCrumbs/BreadCrumbs";
+'use client'
+import React, { useEffect, useState } from 'react'
+import classes from './ProductDetails.module.css'
+import Specifications from './Specifications/Specifications'
+import Description from './Description/Description'
+import RatingsComments from './RatingsComments/RatingsComments'
+import ToCartCounter from '../../UI/ToCartCounter/ToCartCounter'
+import BreadCrumbs from '../../UI/BreadCrumbs/BreadCrumbs'
+import Button from '@/components/UI/Button/Button'
 
-const ProductDetails = observer(() => {
-  const [product, setProduct] = useState([]);
-  const [selector, setSelector] = useState("description");
+const ProductDetails = ({ productId }) => {
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await fetch(
+          process.env.NEXT_PUBLIC_REACT_APP_API_URL + `api/product/${productId}`
+        )
+        const data = await res.json()
+        setProducts(data.dataObject.products.rows)
+        setProductsCount(data.dataObject.products.count)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    fetchProducts().finally(setIsLoaded(true))
+  }, [])
+  const [product, setProduct] = useState([])
+  const [selector, setSelector] = useState('description')
 
   return (
     <div className={classes.product}>
@@ -53,14 +67,14 @@ const ProductDetails = observer(() => {
       <div className={classes.productContentChangers}>
         <div
           className={
-            selector === "description"
+            selector === 'description'
               ? classes.selectedContentHeaderDiv
               : classes.contentHeaderDiv
           }
         >
           <p
             className={classes.contentHeaderText}
-            onClick={() => setSelector("description")}
+            onClick={() => setSelector('description')}
           >
             DESCRIPTION
           </p>
@@ -68,14 +82,14 @@ const ProductDetails = observer(() => {
         <div className={classes.splitter}></div>
         <div
           className={
-            selector === "specifications"
+            selector === 'specifications'
               ? classes.selectedContentHeaderDiv
               : classes.contentHeaderDiv
           }
         >
           <p
             className={classes.contentHeaderText}
-            onClick={() => setSelector("specifications")}
+            onClick={() => setSelector('specifications')}
           >
             SPECIFICATIONS
           </p>
@@ -83,14 +97,14 @@ const ProductDetails = observer(() => {
         <div className={classes.splitter}></div>
         <div
           className={
-            selector === "ratings & comments"
+            selector === 'ratings & comments'
               ? classes.selectedContentHeaderDiv
               : classes.contentHeaderDiv
           }
         >
           <p
             className={classes.contentHeaderText}
-            onClick={() => setSelector("ratings & comments")}
+            onClick={() => setSelector('ratings & comments')}
           >
             RATINGS & COMMENTS
           </p>
@@ -98,14 +112,14 @@ const ProductDetails = observer(() => {
         <div className={classes.filler}></div>
       </div>
       <div className={classes.content}>
-        {selector === "description" && (
+        {selector === 'description' && (
           <Description description={product.description} />
         )}
-        {selector === "specifications" && <Specifications />}
-        {selector === "ratings & comments" && <RatingsComments />}
+        {selector === 'specifications' && <Specifications />}
+        {selector === 'ratings & comments' && <RatingsComments />}
       </div>
     </div>
-  );
-});
+  )
+}
 
-export default ProductDetails;
+export default ProductDetails

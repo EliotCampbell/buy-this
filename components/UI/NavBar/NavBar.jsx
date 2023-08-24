@@ -11,7 +11,7 @@ import CategorySideNav from './CategorySideNav'
 import { BiLogOut } from 'react-icons/bi'
 import RightSideNav from './AccountSideNav'
 import Link from 'next/link'
-import { useSessionStore, useUserStore } from '@/store/store'
+import { useProductStore, useSessionStore, useUserStore } from '@/store/store'
 import { BsPerson } from 'react-icons/bs'
 
 const NavBar = () => {
@@ -36,6 +36,11 @@ const NavBar = () => {
     setToken: state.setToken
   }))
 
+  const { setBrands, setCategories } = useProductStore((state) => ({
+    setBrands: state.setBrands,
+    setCategories: state.setCategories
+  }))
+
   useEffect(() => {
     const checkAuth = async (token) => {
       try {
@@ -57,6 +62,7 @@ const NavBar = () => {
           setIsAuth(true)
           setToken(data.dataObject.newToken)
         } else {
+          console.log('No token or token in not valid' + 'Sent from NavBar.jsx')
           setUser({})
           setIsAuth(false)
           setToken('')
@@ -67,8 +73,31 @@ const NavBar = () => {
         setIsLoading(false)
       }
     }
-
+    const fetchBrands = async () => {
+      try {
+        const res = await fetch(
+          process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/brand'
+        )
+        const data = await res.json()
+        setBrands(data.dataObject.brands)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch(
+          process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/category'
+        )
+        const data = await res.json()
+        setCategories(data.dataObject.categories)
+      } catch (e) {
+        console.log(e)
+      }
+    }
     checkAuth(token)
+    fetchBrands()
+    fetchCategories()
   }, [])
   return (
     <div className={classes.navBarWrapper}>

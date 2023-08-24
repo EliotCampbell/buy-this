@@ -1,6 +1,7 @@
 .productsWrapper {
   width: 1056px;
   padding-top: 40px;
+  height: 100%;
 }
 
 .products {
@@ -24,7 +25,16 @@
   color: teal;
 }
 
-.selectWrapper {
+.selectsWrapper {
+  display: flex;
+}
+.countSelectWrapper {
+  margin-left: 15px;
+  width: 150px;
+}
+
+.orderSelectWrapper {
+  margin-left: 15px;
   width: 200px;
 }
 

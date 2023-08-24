@@ -1,64 +1,118 @@
-import React from 'react'
+'use client'
+
+import React, { useEffect, useState } from 'react'
 import classes from './Products.module.css'
 import ProductPreviewCard from '../ProductPreviewCard/ProductPreviewCard'
 import ReactSelect from '../../UI/ReactSelect/ReactSelect'
 import Pagination from '../../UI/Pagination/Pagination'
-import { useProductStore } from '@/store/store'
+import { useProductStore, useQueryStore } from '@/store/store'
+import { useSearchParams } from 'next/navigation'
+import { log } from 'next/dist/server/typescript/utils'
 
-const Products = ({ setSearchQueryState, searchQueryState }) => {
+const Products = ({ selectedCategory }) => {
+  const { products, setProducts, productsCount, setProductsCount, categories } =
+    useProductStore((state) => ({
+      products: state.products,
+      setProducts: state.setProducts,
+      productsCount: state.productsCount,
+      setProductsCount: state.setProductsCount,
+      categories: state.categories
+    }))
+
+  const { query, setQuery } = useQueryStore((state) => ({
+    query: state.query,
+    setQuery: state.setQuery
+  }))
+
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch(
+          process.env.NEXT_PUBLIC_REACT_APP_API_URL +
+            'api/product?' +
+            new URLSearchParams(query)
+        )
+        const data = await res.json()
+        setProducts(data.dataObject.products.rows)
+        setProductsCount(data.dataObject.products.count)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    fetchProducts().finally(setIsLoaded(true))
+  }, [query])
+
+  const [selectState, setSelectState] = useState({
+    countSelect: { label: query.limit.toString(), value: query.limit }
+  })
+
   return (
     <div className={classes.productsWrapper}>
       <h1>
-        {searchQueryState.queryParams.categoryId
-          ? useProductStore.getState().categories.length > 0 &&
-            useProductStore
-              .getState()
-              .categories.find(
-                (el) =>
-                  el.id.toString() ===
-                  searchQueryState?.queryParams?.categoryId.toString()
-              )
+        {query.categoryId
+          ? categories.length > 0 &&
+            categories
+              .find((el) => el.id.toString() === query.categoryId.toString())
               .name.toUpperCase()
           : 'ALL PRODUCTS'}
       </h1>
       <div className={classes.order}>
-        <p className={classes.offersCount}>
-          Offers count: {ProductsStore.productsCount}
-        </p>
-        <div className={classes.selectWrapper}>
-          <ReactSelect
-            label={'Order by'}
-            options={[
-              { label: 'Price ascending', value: '[["price", "ASC"]]' },
-              { label: 'Price descending', value: '[["price", "DESC"]]' },
-              { label: 'Name A-Z', value: '[["name", "ASC"]]' },
-              { label: 'Name Z-A', value: '[["name", "DESC"]]' }
-            ]}
-            onChange={(option) => {
-              setSearchQueryState({
-                ...searchQueryState,
-                queryParams: {
-                  ...searchQueryState.queryParams,
-                  order: option.value
-                }
-              })
-            }}
-          ></ReactSelect>
+        <p className={classes.offersCount}>Offers count: {productsCount}</p>
+        <div className={classes.selectsWrapper}>
+          <div className={classes.countSelectWrapper}>
+            <ReactSelect
+              label={'Count on page'}
+              options={[
+                { label: '6', value: 6 },
+                { label: '9', value: 9 },
+                { label: '12', value: 12 },
+                { label: '15', value: 15 }
+              ]}
+              value={selectState.countSelect}
+              onChange={(option) => {
+                setQuery({ ...query, limit: option.value })
+                setSelectState({ ...selectState, countSelect: option })
+              }}
+            ></ReactSelect>
+          </div>
+          <div className={classes.orderSelectWrapper}>
+            <ReactSelect
+              label={'Order by'}
+              options={[
+                { label: 'Price ascending', value: '[["price", "ASC"]]' },
+                { label: 'Price descending', value: '[["price", "DESC"]]' },
+                { label: 'Name A-Z', value: '[["name", "ASC"]]' },
+                { label: 'Name Z-A', value: '[["name", "DESC"]]' }
+              ]}
+              value={selectState.orderSelect}
+              onChange={(option) => {
+                setQuery({ ...query, order: option.value })
+                setSelectState({ ...selectState, orderSelect: option })
+              }}
+            ></ReactSelect>
+          </div>
         </div>
       </div>
       <div className={classes.splitter}></div>
-      <div className={classes.products}>
-        {useProductStore.getState().products.map((el) => (
-          <ProductPreviewCard
-            productId={el.id}
-            brandId={el.brandId}
-            productName={el.name}
-            productImg={process.env.REACT_APP_API_URL + el.img}
-            productPrice={el.price}
-            key={el.id}
-          />
-        ))}
-      </div>
+      {isLoaded ? (
+        <div className={classes.products}>
+          {products.map((el) => (
+            <ProductPreviewCard
+              productId={el.id}
+              brandId={el.brandId}
+              productName={el.name}
+              productImg={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.img}`}
+              productPrice={el.price}
+              key={el.id}
+            />
+          ))}
+        </div>
+      ) : (
+        <h1>LOADING...</h1>
+      )}
+
       <Pagination />
     </div>
   )

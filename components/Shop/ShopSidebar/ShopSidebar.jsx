@@ -1,40 +1,51 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import classes from './ShopSidebar.module.css'
 import ReactSelect from '../../UI/ReactSelect/ReactSelect'
-import { useProductStore } from '@/store/store'
+import { useProductStore, useQueryStore } from '@/store/store'
 
-const ShopSidebar = ({ searchQueryState, setSearchQueryState }) => {
+const ShopSidebar = ({ setSelectedCategory }) => {
+  const { categories, brands } = useProductStore((state) => ({
+    categories: state.categories,
+    brands: state.brands
+  }))
+
+  const { query, setQuery } = useQueryStore((state) => ({
+    query: state.query,
+    setQuery: state.setQuery
+  }))
+
+  const [selectedBrand, setSelectedBrand] = useState(null)
+
   return (
     <div className={classes.shopNav}>
       {
         <>
           <p
             className={classes.categories}
-            onClick={() =>
-              setSearchQueryState({
-                ...searchQueryState,
-                queryParams: {
-                  ...searchQueryState.queryParams,
-                  categoryId: ''
-                }
+            onClick={() => {
+              setQuery({
+                ...query,
+                categoryId: ''
               })
-            }
+              setSelectedCategory({
+                category: ''
+              })
+            }}
           >
             CATEGORIES
           </p>
-          {useProductStore.getState().categories.map((el) => (
+          {categories.map((el) => (
             <div
               className={classes.shopNavLink}
               key={el.id}
-              onClick={() =>
-                setSearchQueryState({
-                  ...searchQueryState,
-                  queryParams: {
-                    ...searchQueryState.queryParams,
-                    categoryId: el.id
-                  }
+              onClick={() => {
+                setQuery({
+                  ...query,
+                  categoryId: el.id
                 })
-              }
+              }}
             >
               {el.name}
             </div>
@@ -45,23 +56,18 @@ const ShopSidebar = ({ searchQueryState, setSearchQueryState }) => {
         <>
           <p className={classes.categories}>FILTER</p>
           <ReactSelect
-            isMulti={true}
-            label={'Select brands'}
-            options={useProductStore.getState().brands.map((el) => ({
+            label={'Select brand'}
+            options={brands.map((el) => ({
               value: el.id,
               label: el.name
             }))}
-            value={searchQueryState.select.brand}
-            closeMenuOnSelect={false}
+            value={selectedBrand}
             onChange={(option) => {
-              setSearchQueryState({
-                ...searchQueryState,
-                queryParams: {
-                  ...searchQueryState.queryParams,
-                  brandId: option.map((el) => el.value)
-                },
-                select: { ...searchQueryState.select, brand: option }
+              setQuery({
+                ...query,
+                brandId: option.value
               })
+              setSelectedBrand(option)
             }}
           />
         </>

@@ -2,9 +2,14 @@ import React from 'react'
 import classes from './CategorySideNav.module.css'
 import { RxCross1 } from 'react-icons/rx'
 import Link from 'next/link'
-import { useProductStore } from '@/store/store'
+import { useProductStore, useQueryStore } from '@/store/store'
 
 const CategorySideNav = ({ switcher: setSwitcher }) => {
+  const { query, setQuery } = useQueryStore((state) => ({
+    query: state.query,
+    setQuery: state.setQuery
+  }))
+
   return (
     <div className={classes.sideNavBack}>
       <div className={classes.exit} onClick={() => setSwitcher(false)}>
@@ -27,16 +32,22 @@ const CategorySideNav = ({ switcher: setSwitcher }) => {
             <Link
               href={'/store'}
               className={classes.navEl}
-              onClick={() => setSwitcher(false)}
+              onClick={() => {
+                setSwitcher(false)
+                setQuery({ ...query, categoryId: '' })
+              }}
             >
               <p className={classes.navP}>SHOW ALL PRODUCTS</p>
             </Link>
             {useProductStore.getState().categories.map((el) => (
               <Link
-                href={`/store?categoryId=${el.id}`}
+                href={`/store`}
                 className={classes.navEl}
                 key={el.id}
-                onClick={() => setSwitcher(false)}
+                onClick={() => {
+                  setSwitcher(false)
+                  setQuery({ ...query, categoryId: el.id })
+                }}
               >
                 <p className={classes.navP}>{el.name}</p>
               </Link>

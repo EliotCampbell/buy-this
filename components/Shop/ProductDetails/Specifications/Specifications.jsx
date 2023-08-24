@@ -1,11 +1,8 @@
 import React, { useContext } from 'react'
 import classes from './Specifications.module.css'
-import { Button } from 'react-bootstrap'
-import { observer } from 'mobx-react-lite'
-import { Context } from '../../../../index'
+import Button from '@/components/UI/Button/Button'
 
-const Specifications = observer(({ deleteSpecification }) => {
-  const { products, user } = useContext(Context)
+const Specifications = ({ deleteSpecification }) => {
   return (
     <div>
       <table className={classes.specTable}>
@@ -33,6 +30,5 @@ const Specifications = observer(({ deleteSpecification }) => {
       </table>
     </div>
   )
-})
-
+}
 export default Specifications
