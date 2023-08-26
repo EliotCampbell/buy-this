@@ -1,7 +1,7 @@
+'use client'
 import React, { useState } from 'react'
 import Button from '../../../UI/Button/Button'
 import ReactSelect from '../../../UI/ReactSelect/ReactSelect'
-import { deleteCategory } from '../../../../http/productsAPI'
 
 const CategoryDeleteForm = ({ state, setState, initialState }) => {
   const [select, setSelect] = useState({})

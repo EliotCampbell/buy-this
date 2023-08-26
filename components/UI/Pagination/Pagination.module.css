@@ -29,14 +29,3 @@
 .button:active {
   background-color: #00a6a6;
 }
-
-.page {
-  color: teal;
-  font-size: 20px;
-  font-family: BlenderPro-Bold, sans-serif;
-}
-
-.page:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}

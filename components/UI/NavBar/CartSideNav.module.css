@@ -9,39 +9,28 @@
   animation-name: transition;
 }
 
-@keyframes transition {
-  from {
-    background-color: rgba(51, 51, 51, 0);
-  }
-
-  to {
-    background-color: rgba(51, 51, 51, 0.3);
-  }
-}
-
 .sideNav {
   height: 100%;
   width: 580px;
-  background-color: white;
+  background-color: #ffffff;
   animation-duration: 500ms;
   animation-name: slideIn;
   overflow: hidden;
 }
-
 @keyframes slideIn {
   from {
-    margin-right: 100%;
+    margin-left: 100%;
     width: 0;
   }
 
   to {
-    margin-right: 0;
+    margin-left: 0;
     width: 580px;
   }
 }
-
 .exit {
   display: flex;
+  justify-content: flex-end;
   position: fixed;
   height: 100%;
   width: 100%;
@@ -73,39 +62,7 @@
   line-height: 0;
 }
 
-.topTextWrapper:hover {
-  cursor: pointer;
-}
-
 .contentWrapper {
   padding: 15px 55px;
   width: 580px;
-}
-
-.navEl {
-  display: flex;
-  align-items: center;
-  height: 48px;
-}
-
-.mainNavP:hover {
-  text-decoration: underline;
-}
-
-.navP {
-  color: teal;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  font-family: BlenderPro-Bold, sans-serif;
-  letter-spacing: 0.03em;
-  font-size: 20px;
-  border-bottom: 1px rgba(9, 113, 113, 0.41) solid;
-  width: 100%;
-  height: 100%;
-  padding-left: 10px;
-}
-
-.navP:hover {
-  text-decoration: underline;
 }

@@ -1,13 +1,13 @@
 import React from 'react'
-import { observer } from 'mobx-react-lite'
 import classes from './AdminSidebar.module.css'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
+import { linksArr } from '@/app/admin/linksArr'
 
-const AdminSidebar = observer(({ linksArr }) => {
+const AdminSidebar = () => {
   return (
     <div className={classes.adminNav}>
       <div className={classes.categories}>
-        {linksArr().map((el) => {
+        {linksArr.map((el) => {
           if (el.title) {
             return (
               <div key={el.title} className={classes.adminNavTitleLink}>
@@ -16,7 +16,11 @@ const AdminSidebar = observer(({ linksArr }) => {
             )
           } else {
             return (
-              <Link key={el.path} to={el.path} className={classes.adminNavLink}>
+              <Link
+                key={el.path}
+                href={'/admin/' + el.path}
+                className={classes.adminNavLink}
+              >
                 {el.linkName}
               </Link>
             )
@@ -25,6 +29,6 @@ const AdminSidebar = observer(({ linksArr }) => {
       </div>
     </div>
   )
-})
+}
 
 export default AdminSidebar

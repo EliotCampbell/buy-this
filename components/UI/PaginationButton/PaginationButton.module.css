@@ -1,0 +1,22 @@
+.Button {
+  padding: 13px 15px;
+  min-width: 50px;
+  border-radius: 2px;
+  background: none;
+  font-weight: 500;
+  color: teal;
+  text-transform: uppercase;
+  font-size: 20px;
+  letter-spacing: 0.05em;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.Button:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.Button:disabled {
+  color: #097171;
+  text-decoration: underline;
+}

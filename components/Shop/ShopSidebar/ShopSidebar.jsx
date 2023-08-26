@@ -5,7 +5,7 @@ import classes from './ShopSidebar.module.css'
 import ReactSelect from '../../UI/ReactSelect/ReactSelect'
 import { useProductStore, useQueryStore } from '@/store/store'
 
-const ShopSidebar = ({ setSelectedCategory }) => {
+const ShopSidebar = () => {
   const { categories, brands } = useProductStore((state) => ({
     categories: state.categories,
     brands: state.brands
@@ -28,9 +28,6 @@ const ShopSidebar = ({ setSelectedCategory }) => {
               setQuery({
                 ...query,
                 categoryId: ''
-              })
-              setSelectedCategory({
-                category: ''
               })
             }}
           >

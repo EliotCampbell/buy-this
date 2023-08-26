@@ -1,5 +1,5 @@
+'use client'
 import React from 'react'
-import { updateSpecificationById } from '../../../../http/productsAPI'
 import classes from '../SpecificationsForm.module.css'
 import Input from '../../../UI/Input/Input'
 import Button from '../../../UI/Button/Button'

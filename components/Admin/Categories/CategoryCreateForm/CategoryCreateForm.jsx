@@ -1,14 +1,21 @@
+'use client'
 import React from 'react'
 import Button from '../../../UI/Button/Button'
-import { createCategory } from '../../../../http/productsAPI'
 import Input from '../../../UI/Input/Input'
+import { useAdminStore } from '@/app/admin/adminStore/adminStore'
 
-const CategoryCreateForm = ({ state, setState, initialState }) => {
+const CategoryCreateForm = () => {
+  const { newCategory, reset, setNewCategory } = useAdminStore((state) => ({
+    newCategory: state.newCategory,
+    setNewCategory: state.setNewCategory,
+    reset: state.reset
+  }))
+
   const create = (e) => {
     e.preventDefault()
-    createCategory(state.newCategory).then((r) => {
+    createCategory(newCategory).then((r) => {
       if (r.ok) {
-        setState({ ...initialState, message: r.message })
+        reset()
       } else alert('Failed')
     })
   }
@@ -18,18 +25,13 @@ const CategoryCreateForm = ({ state, setState, initialState }) => {
       <h1>CREATE NEW CATEGORY</h1>
       <form onSubmit={create}>
         <Input
-          value={state.newCategory.name}
+          value={newCategory.name}
           label={'Input category:'}
           onChange={(e) =>
-            setState({
-              ...state,
-              newCategory: { ...state.newCategory, name: e.target.value }
-            })
+            setNewCategory({ ...newCategory, name: e.target.value })
           }
         />
-        <Button disabled={state.newCategory.name === ''}>
-          Create category
-        </Button>
+        <Button disabled={newCategory.name === ''}>Create category</Button>
       </form>
     </div>
   )

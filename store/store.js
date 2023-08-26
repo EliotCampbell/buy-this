@@ -21,7 +21,7 @@ export const useSessionStore = create(
     (set) => ({
       token: '',
       isAuth: false,
-      setIsAuth: (bool) => set((state) => ({ IsAuth: bool })),
+      setIsAuth: (bool) => set((state) => ({ isAuth: bool })),
       setToken: (token) => set((state) => ({ token: token }))
     }),
     { name: 'sessionStore', version: 1 }
@@ -36,6 +36,6 @@ export const useUserStore = create((set) => ({
 }))
 
 export const useQueryStore = create((set) => ({
-  query: { limit: 6 },
+  query: { limit: 6, page: 1 },
   setQuery: (query) => set((state) => ({ query }))
 }))

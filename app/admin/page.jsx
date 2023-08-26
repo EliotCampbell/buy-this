@@ -1,9 +1,5 @@
 const AdminPage = async () => {
-  return 'ADMIN' === 'ADMIN' ? (
-    <p>You are an admin, welcome!</p>
-  ) : (
-    <p>You are not authorized to view this page!</p>
-  )
+  return <h1>Choose anything</h1>
 }
 
 export default AdminPage

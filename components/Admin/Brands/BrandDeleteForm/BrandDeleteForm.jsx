@@ -1,5 +1,5 @@
+'use client'
 import React, { useState } from 'react'
-import { deleteBrand } from '../../../../http/productsAPI'
 import Button from '../../../UI/Button/Button'
 import ReactSelect from '../../../UI/ReactSelect/ReactSelect'
 

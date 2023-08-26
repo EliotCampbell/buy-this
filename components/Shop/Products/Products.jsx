@@ -6,10 +6,8 @@ import ProductPreviewCard from '../ProductPreviewCard/ProductPreviewCard'
 import ReactSelect from '../../UI/ReactSelect/ReactSelect'
 import Pagination from '../../UI/Pagination/Pagination'
 import { useProductStore, useQueryStore } from '@/store/store'
-import { useSearchParams } from 'next/navigation'
-import { log } from 'next/dist/server/typescript/utils'
 
-const Products = ({ selectedCategory }) => {
+const Products = () => {
   const { products, setProducts, productsCount, setProductsCount, categories } =
     useProductStore((state) => ({
       products: state.products,
@@ -37,11 +35,12 @@ const Products = ({ selectedCategory }) => {
         const data = await res.json()
         setProducts(data.dataObject.products.rows)
         setProductsCount(data.dataObject.products.count)
+        setIsLoaded(true)
       } catch (e) {
         console.log(e)
       }
     }
-    fetchProducts().finally(setIsLoaded(true))
+    fetchProducts().finally()
   }, [query])
 
   const [selectState, setSelectState] = useState({

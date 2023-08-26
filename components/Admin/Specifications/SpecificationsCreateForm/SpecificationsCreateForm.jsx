@@ -1,6 +1,6 @@
+'use client'
 import React from 'react'
 import Button from '../../../UI/Button/Button'
-import { createSpecificationByPId } from '../../../../http/productsAPI'
 import classes from '../SpecificationsForm.module.css'
 import Input from '../../../UI/Input/Input'
 import ReactSelect from '../../../UI/ReactSelect/ReactSelect'

@@ -1,5 +1,6 @@
+'use client'
+
 import React from 'react'
-import { createBrand } from '../../../../http/productsAPI'
 import Button from '../../../UI/Button/Button'
 import Input from '../../../UI/Input/Input'
 

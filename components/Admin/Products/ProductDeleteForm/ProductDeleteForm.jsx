@@ -1,5 +1,5 @@
+'use client'
 import React from 'react'
-import { deleteProduct } from '../../../../http/productsAPI'
 import Button from '../../../UI/Button/Button'
 import classes from '../../FormsStyles.module.css'
 

@@ -3,12 +3,19 @@ import classes from './AccountSideNav.module.css'
 import { RxCross1 } from 'react-icons/rx'
 import Login from '@/components/Login/Login'
 import { useSessionStore, useUserStore } from '@/store/store'
+import Link from 'next/link'
+import { BiLogOut } from 'react-icons/bi'
 
 const LeftSideNav = ({ setSwitcher }) => {
   const { user } = useUserStore((state) => ({
     user: state.user
   }))
   const { isAuth } = useSessionStore((state) => ({ isAuth: state.isAuth }))
+
+  const logout = () => {
+    useUserStore.setState({ user: {} })
+    useSessionStore.setState({ isAuth: false })
+  }
 
   return (
     <div className={classes.sideNavBack}>
@@ -31,11 +38,20 @@ const LeftSideNav = ({ setSwitcher }) => {
           <div className={classes.contentWrapper}>
             {isAuth ? (
               <>
-                <h2>User data</h2>
+                <div className={classes.userLogout}>
+                  <h2>{user?.email}</h2>
+                  <Link
+                    href={'/'}
+                    className={classes.logoutDiv}
+                    onClick={() => logout()}
+                  >
+                    <BiLogOut className={classes.ico} />
+                    <p className={classes.logoutP}>Logout</p>
+                  </Link>
+                </div>
                 {user.id ? (
                   <>
                     <p className={classes.userInfo}>Id: {user?.id}</p>
-                    <p className={classes.userInfo}>Email: {user?.email}</p>
                     <p className={classes.userInfo}>Role: {user?.role}</p>
                   </>
                 ) : (
