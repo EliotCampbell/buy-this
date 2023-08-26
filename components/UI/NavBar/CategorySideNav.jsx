@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './CategorySideNav.module.css'
 import { RxCross1 } from 'react-icons/rx'
 import Link from 'next/link'
-import { useProductStore, useQueryStore } from '@/store/store'
+import { useProductStore, useQueryStore } from '@/store/mainStore/store'
 
 const CategorySideNav = ({ switcher: setSwitcher }) => {
   const { query, setQuery } = useQueryStore((state) => ({

@@ -5,7 +5,7 @@ import classes from './Products.module.css'
 import ProductPreviewCard from '../ProductPreviewCard/ProductPreviewCard'
 import ReactSelect from '../../UI/ReactSelect/ReactSelect'
 import Pagination from '../../UI/Pagination/Pagination'
-import { useProductStore, useQueryStore } from '@/store/store'
+import { useProductStore, useQueryStore } from '@/store/mainStore/store'
 
 const Products = () => {
   const { products, setProducts, productsCount, setProductsCount, categories } =

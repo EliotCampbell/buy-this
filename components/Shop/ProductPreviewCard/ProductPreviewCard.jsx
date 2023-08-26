@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './ProductPreviewCard.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useProductStore } from '@/store/store'
+import { useProductStore } from '@/store/mainStore/store'
 
 const ProductPreviewCard = ({
   productId,

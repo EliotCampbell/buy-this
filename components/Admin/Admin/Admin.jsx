@@ -2,10 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import classes from './Admin.module.css'
 import AdminSidebar from '../AdminSidebar/AdminSidebar'
-import {
-  useAdminProductsStore,
-  useAdminStore
-} from '@/app/admin/adminStore/adminStore'
+import { useAdminStore } from '@/store/adminStore/adminStore'
+import { fetchCategories } from '@/http/fetchers/fetchers'
 
 const Admin = () => {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -34,20 +32,6 @@ const Admin = () => {
     setMessage: state.setMessage,
     newSpecification: state.newSpecification,
     setSpecifications: state.specifications
-  }))
-
-  const {
-    setAdminProducts,
-    setAdminProductsCount,
-    setAdminBrands,
-    setAdminCategories,
-    setAdminSpecifications
-  } = useAdminProductsStore((state) => ({
-    setAdminProducts: state.setAdminProductsCount,
-    setAdminProductsCount: state.setAdminProductsCount,
-    setAdminBrands: state.setAdminBrands,
-    setAdminCategories: state.setAdminCategories,
-    setAdminSpecifications: state.setAdminSpecifications
   }))
 
   //validator
@@ -79,11 +63,7 @@ const Admin = () => {
 
   useEffect(() => {
     if (message) {
-      Promise.all([
-        fetchCategories(),
-        fetchBrands(),
-        fetchProducts({ query: '?limit=8' })
-      ])
+      Promise.all([fetchCategories()])
         .then(([categoryData, brandData, productData]) => {
           setAdminCategories(categoryData.dataObject.categories)
           setAdminBrands(brandData.dataObject.brands)

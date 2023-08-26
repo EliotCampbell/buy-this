@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './BreadCrumbs.module.css'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useProductStore, useQueryStore } from '@/store/store'
+import { useProductStore, useQueryStore } from '@/store/mainStore/store'
 
 const BreadCrumbs = ({ product, productId }) => {
   const pathname = usePathname()

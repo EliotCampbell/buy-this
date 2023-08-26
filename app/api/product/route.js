@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
+import { writeFile } from 'fs/promises'
 const {
   Product,
   ProductsInfo,
@@ -7,8 +8,92 @@ const {
   Brand
 } = require('@/models/models')
 const uuid = require('uuid')
-const path = require('path')
-const fs = require('fs')
+
+export const POST = async (request) => {
+  try {
+    const formData = await request.formData()
+    let name = formData.get('name')
+    let price = formData.get('price')
+    let brandId = formData.get('brandId')
+    let categoryId = formData.get('categoryId')
+    let description = formData.get('description')
+    let info = formData.get('info')
+    const img = formData.get('img') || 'noImg.jpg'
+    const foundProduct = await Product.findOne({
+      where: { name: name }
+    })
+    const foundBrand = await Brand.findByPk(brandId)
+    const foundCategory = await Category.findByPk(categoryId)
+    if (foundProduct !== null) {
+      return NextResponse.json({
+        ok: false,
+        message: 'ProductDetails already exists',
+        dataObject: {
+          newDevice: { name, price, brandId, categoryId, description }
+        }
+      })
+    }
+    if (foundCategory === null) {
+      return NextResponse.json({
+        ok: false,
+        message: 'This category not found',
+        dataObject: {
+          newDevice: { name, price, brandId, categoryId, description }
+        }
+      })
+    }
+    if (foundBrand === null) {
+      return NextResponse.json({
+        ok: false,
+        message: 'This brand not found',
+        dataObject: {
+          newDevice: { name, price, brandId, categoryId, description }
+        }
+      })
+    }
+
+    let fileName = 'noImg.jpg'
+    if (img !== 'noImg.jpg' || img !== undefined || true) {
+      fileName = uuid.v4() + '.jpg'
+      await writeFile(
+        `public/static/${fileName}`,
+        Buffer.from(await img.arrayBuffer())
+      )
+    }
+
+    const newDevice = await Product.create({
+      name,
+      price,
+      brandId,
+      categoryId,
+      description,
+      img: fileName
+    })
+
+    if (info) {
+      info = JSON.parse(info)
+      info.forEach((i) => {
+        ProductsInfo.create({
+          title: i.title,
+          description: i.description,
+          deviceId: newDevice.id
+        })
+      })
+    }
+
+    return NextResponse.json({
+      ok: true,
+      message: 'Product created successfully',
+      dataObject: { newDevice }
+    })
+  } catch (e) {
+    return NextResponse.json({
+      ok: false,
+      message: 'Error',
+      dataObject: { error: e.message }
+    })
+  }
+}
 
 export const GET = async (req) => {
   try {

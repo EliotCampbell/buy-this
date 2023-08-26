@@ -1,42 +1,65 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../../../UI/Button/Button'
 import ReactSelect from '../../../UI/ReactSelect/ReactSelect'
+import { deleteCategory as deleteCat } from '@/http/Admin/categories'
+import { useAdminStore } from '@/store/adminStore/adminStore'
+import { fetchCategories } from '@/http/fetchers/fetchers'
+import MessageString from '@/components/UI/MessageString/MessageString'
 
-const CategoryDeleteForm = ({ state, setState, initialState }) => {
-  const [select, setSelect] = useState({})
+const CategoryDeleteForm = () => {
+  const [message, setMessage] = useState(null)
+  const [isLoaded, setIsLoaded] = useState(false)
 
-  const deleteC = (e) => {
+  const {
+    newCategory,
+    setNewCategory,
+    categoriesList,
+    setCategoriesList,
+    reset
+  } = useAdminStore((state) => ({
+    categoriesList: state.categoriesList,
+    setCategoriesList: state.setCategoriesList,
+    newCategory: state.newCategory,
+    setNewCategory: state.setNewCategory,
+    reset: state.reset
+  }))
+
+  useEffect(() => {
+    fetchCategories().then((r) => {
+      setCategoriesList(r.dataObject.categories)
+      setIsLoaded(true)
+    })
+  }, [])
+
+  const deleteCategory = (e) => {
     e.preventDefault()
-    deleteCategory(state.newCategory.categoryId).then((r) => {
-      if (r.ok) {
-        setState({ ...initialState, message: r.message })
-        setSelect({})
-      } else alert(r.message)
+    deleteCat(newCategory.categoryId.value).then((r) => {
+      setMessage(r)
+      r.ok && reset()
     })
   }
 
-  return (
+  return isLoaded ? (
     <div>
       <h1>DELETE CATEGORY</h1>
-      <form onSubmit={deleteC}>
+      <form onSubmit={deleteCategory}>
         <ReactSelect
-          value={select}
+          value={newCategory.categoryId}
           label={'Choose category'}
-          options={state.categoriesList}
+          options={categoriesList}
           onChange={(option) => {
-            setSelect(option)
-            setState({
-              ...state,
-              newCategory: { ...state.newCategory, categoryId: option.value }
-            })
+            setNewCategory({ ...newCategory, categoryId: option })
           }}
         />
+        {message && <MessageString message={message} />}
         <Button disabled={state.newCategory.categoryId === ''}>
           Delete category
         </Button>
       </form>
     </div>
+  ) : (
+    <h1>Loading...</h1>
   )
 }
 

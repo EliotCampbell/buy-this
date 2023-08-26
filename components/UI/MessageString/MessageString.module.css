@@ -1,0 +1,12 @@
+.messageString {
+  color: teal;
+  font-family: BlenderPro-Bold, 'sans-serif';
+  font-size: 15px;
+  padding: 10px 0;
+}
+.errorMessageString {
+  color: red;
+  font-family: BlenderPro-Bold, 'sans-serif';
+  font-size: 15px;
+  padding: 10px 0;
+}

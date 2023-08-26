@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './AccountSideNav.module.css'
 import { RxCross1 } from 'react-icons/rx'
 import Login from '@/components/Login/Login'
-import { useSessionStore, useUserStore } from '@/store/store'
+import { useSessionStore, useUserStore } from '@/store/mainStore/store'
 import Link from 'next/link'
 import { BiLogOut } from 'react-icons/bi'
 

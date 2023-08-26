@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import classes from './ShopSidebar.module.css'
 import ReactSelect from '../../UI/ReactSelect/ReactSelect'
-import { useProductStore, useQueryStore } from '@/store/store'
+import { useProductStore, useQueryStore } from '@/store/mainStore/store'
 
 const ShopSidebar = () => {
   const { categories, brands } = useProductStore((state) => ({

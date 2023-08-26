@@ -29,9 +29,8 @@ export const GET = async (request, { params }) => {
 export const PUT = async (request, { params }) => {
   try {
     const id = params.id
-    const name = await request.json
+    const name = await request.json()
     const oldCategory = await Category.findByPk(id)
-    console.log(oldCategory)
     if (oldCategory === null) {
       return NextResponse.json({
         ok: false,
@@ -56,6 +55,40 @@ export const PUT = async (request, { params }) => {
         ok: false,
         message: "Can't update category or category already updated",
         dataObject: { oldCategory }
+      })
+    }
+  } catch (e) {
+    return NextResponse.json({
+      ok: false,
+      message: 'Error',
+      dataObject: { error: e.message }
+    })
+  }
+}
+
+export const DELETE = async (request, { params }) => {
+  try {
+    const id = params.id
+    const category = await Category.findByPk(id)
+    if (category === null) {
+      return NextResponse.json({
+        ok: false,
+        message: 'Category not found',
+        dataObject: { id }
+      })
+    }
+    const deletedCategory = await Category.destroy({ where: { id: id } })
+    if (deletedCategory === 1) {
+      return NextResponse.json({
+        ok: true,
+        message: 'Category deleted successfully',
+        dataObject: { id }
+      })
+    } else {
+      return NextResponse.json({
+        ok: false,
+        message: "Can't delete category",
+        dataObject: { id }
       })
     }
   } catch (e) {

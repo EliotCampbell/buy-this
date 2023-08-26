@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import classes from './Specifications.module.css'
 import Button from '@/components/UI/Button/Button'
-import { useSessionStore, useUserStore } from '@/store/store'
+import { useSessionStore, useUserStore } from '@/store/mainStore/store'
 
 const Specifications = ({ deleteSpecification, specifications }) => {
   const { role } = useUserStore((state) => ({ role: state.user.role }))

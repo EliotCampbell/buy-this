@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './Pagination.module.css'
-import { useProductStore, useQueryStore } from '@/store/store'
+import { useProductStore, useQueryStore } from '@/store/mainStore/store'
 import PaginationButton from '@/components/UI/PaginationButton/PaginationButton'
 
 const Pagination = () => {

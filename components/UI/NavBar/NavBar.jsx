@@ -10,9 +10,14 @@ import { PiList } from 'react-icons/pi'
 import CategorySideNav from './CategorySideNav'
 import AccountSideNav from './AccountSideNav'
 import Link from 'next/link'
-import { useProductStore, useSessionStore, useUserStore } from '@/store/store'
+import {
+  useProductStore,
+  useSessionStore,
+  useUserStore
+} from '@/store/mainStore/store'
 import { BsPerson } from 'react-icons/bs'
 import CartSideNav from '@/components/UI/NavBar/CartSideNav'
+import { fetchCategories } from '@/http/fetchers/fetchers'
 
 const NavBar = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -81,20 +86,10 @@ const NavBar = () => {
         console.log(e)
       }
     }
-    const fetchCategories = async () => {
-      try {
-        const res = await fetch(
-          process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/category'
-        )
-        const data = await res.json()
-        setCategories(data.dataObject.categories)
-      } catch (e) {
-        console.log(e)
-      }
-    }
+
     checkAuth(token).finally()
     fetchBrands().finally()
-    fetchCategories().finally()
+    fetchCategories().then((r) => setCategories(r.dataObject.categories))
   }, [])
   return (
     <div className={classes.navBarWrapper}>

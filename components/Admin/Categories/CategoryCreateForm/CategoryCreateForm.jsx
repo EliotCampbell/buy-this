@@ -1,8 +1,10 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '../../../UI/Button/Button'
 import Input from '../../../UI/Input/Input'
-import { useAdminStore } from '@/app/admin/adminStore/adminStore'
+import { useAdminStore } from '@/store/adminStore/adminStore'
+import { createCategory } from '@/http/Admin/categories'
+import MessageString from '@/components/UI/MessageString/MessageString'
 
 const CategoryCreateForm = () => {
   const { newCategory, reset, setNewCategory } = useAdminStore((state) => ({
@@ -11,12 +13,13 @@ const CategoryCreateForm = () => {
     reset: state.reset
   }))
 
+  const [message, setMessage] = useState(null)
+
   const create = (e) => {
     e.preventDefault()
     createCategory(newCategory).then((r) => {
-      if (r.ok) {
-        reset()
-      } else alert('Failed')
+      setMessage(r)
+      r.ok && reset()
     })
   }
 
@@ -27,10 +30,12 @@ const CategoryCreateForm = () => {
         <Input
           value={newCategory.name}
           label={'Input category:'}
-          onChange={(e) =>
+          onChange={(e) => {
             setNewCategory({ ...newCategory, name: e.target.value })
-          }
+            setMessage(null)
+          }}
         />
+        {message && <MessageString message={message} />}
         <Button disabled={newCategory.name === ''}>Create category</Button>
       </form>
     </div>

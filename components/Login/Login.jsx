@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import classes from './Login.module.css'
 import Button from '../UI/Button/Button'
 import Input from '../UI/Input/Input'
-import { useSessionStore, useUserStore } from '@/store/store'
+import { useSessionStore, useUserStore } from '@/store/mainStore/store'
 
 const Login = ({ sideMenuSwitcher }) => {
   const [input, setInput] = useState({ email: '', password: '' })

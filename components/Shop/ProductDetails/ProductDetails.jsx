@@ -7,7 +7,7 @@ import RatingsComments from './RatingsComments/RatingsComments'
 import ToCartCounter from '../../UI/ToCartCounter/ToCartCounter'
 import BreadCrumbs from '../../UI/BreadCrumbs/BreadCrumbs'
 import Button from '@/components/UI/Button/Button'
-import { useProductStore } from '@/store/store'
+import { useProductStore } from '@/store/mainStore/store'
 
 const ProductDetails = ({ productId }) => {
   const { brands } = useProductStore((state) => ({ brands: state.brands }))
