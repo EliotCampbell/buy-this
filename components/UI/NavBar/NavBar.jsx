@@ -17,7 +17,7 @@ import {
 } from '@/store/mainStore/store'
 import { BsPerson } from 'react-icons/bs'
 import CartSideNav from '@/components/UI/NavBar/CartSideNav'
-import { fetchCategories } from '@/http/fetchers/fetchers'
+import { fetchAllCategories } from '@/http/fetchers/fetchers'
 
 const NavBar = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -89,7 +89,7 @@ const NavBar = () => {
 
     checkAuth(token).finally()
     fetchBrands().finally()
-    fetchCategories().then((r) => setCategories(r.dataObject.categories))
+    fetchAllCategories().then((r) => setCategories(r.dataObject.categories))
   }, [])
   return (
     <div className={classes.navBarWrapper}>

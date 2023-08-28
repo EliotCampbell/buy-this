@@ -5,9 +5,9 @@ import classes from '../../FormsStyles.module.css'
 import Input from '../../../UI/Input/Input'
 import ReactSelect from '../../../UI/ReactSelect/ReactSelect'
 import { useAdminStore } from '@/store/adminStore/adminStore'
-import { updateCategory } from '@/http/Admin/categories'
+import { updateCategory as updateCat } from '@/http/Admin/categories'
 import MessageString from '@/components/UI/MessageString/MessageString'
-import { fetchCategories } from '@/http/fetchers/fetchers'
+import { fetchAllCategories } from '@/http/fetchers/fetchers'
 
 const CategoryUpdateForm = () => {
   const [message, setMessage] = useState(null)
@@ -28,15 +28,15 @@ const CategoryUpdateForm = () => {
   }))
 
   useEffect(() => {
-    fetchCategories().then((r) => {
+    fetchAllCategories().then((r) => {
       setCategoriesList(r.dataObject.categories)
       setIsLoaded(true)
     })
   }, [])
 
-  const update = (e) => {
+  const updateCategory = (e) => {
     e.preventDefault()
-    updateCategory(newCategory.categoryId.value, newCategory.name).then((r) => {
+    updateCat(newCategory.categoryId.value, newCategory.name).then((r) => {
       setMessage(r)
       r.ok && reset()
     })
@@ -45,7 +45,7 @@ const CategoryUpdateForm = () => {
   return isLoaded ? (
     <div className={classes.form}>
       <h1>UPDATE CATEGORY</h1>
-      <form onSubmit={update}>
+      <form onSubmit={updateCategory}>
         <ReactSelect
           label={'Select category'}
           options={categoriesList}
