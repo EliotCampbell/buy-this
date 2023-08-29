@@ -1,16 +1,27 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '../../../UI/Button/Button'
 import Input from '../../../UI/Input/Input'
+import { createBrand } from '@/http/Admin/brands'
+import { useAdminStore } from '@/store/adminStore/adminStore'
+import { createCategory } from '@/http/Admin/categories'
+import MessageString from '@/components/UI/MessageString/MessageString'
 
-const BrandCreateForm = ({ setState, state, initialState }) => {
+const BrandCreateForm = () => {
+  const { newBrand, reset, setNewBrand } = useAdminStore((state) => ({
+    newBrand: state.newBrand,
+    setNewBrand: state.setNewBrand,
+    reset: state.reset
+  }))
+
+  const [message, setMessage] = useState(null)
+
   const create = (e) => {
     e.preventDefault()
-    createBrand(state.newBrand).then((r) => {
-      if (r.ok) {
-        setState({ ...initialState, message: r.message })
-      } else alert('Failed')
+    createBrand(newBrand).then((r) => {
+      setMessage(r)
+      r.ok && reset()
     })
   }
 
@@ -20,15 +31,14 @@ const BrandCreateForm = ({ setState, state, initialState }) => {
       <form onSubmit={create}>
         <Input
           label={'Input brand'}
-          value={state.newBrand.name}
-          onChange={(e) =>
-            setState({
-              ...state,
-              newBrand: { ...state.newBrand, name: e.target.value }
-            })
-          }
+          value={newBrand.name}
+          onChange={(e) => {
+            setNewBrand({ ...newBrand, name: e.target.value })
+            setMessage(null)
+          }}
         />
-        <Button disabled={state.newBrand.name === ''}>Create brand</Button>
+        {message && <MessageString message={message} />}
+        <Button disabled={newBrand.name === ''}>Create brand</Button>
       </form>
     </div>
   )

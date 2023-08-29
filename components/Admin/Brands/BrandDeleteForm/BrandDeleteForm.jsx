@@ -1,40 +1,62 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../../../UI/Button/Button'
 import ReactSelect from '../../../UI/ReactSelect/ReactSelect'
+import { useAdminStore } from '@/store/adminStore/adminStore'
+import { fetchAllBrands } from '@/http/fetchers/fetchers'
+import { deleteBrand as deleteBra } from '@/http/Admin/brands'
+import MessageString from '@/components/UI/MessageString/MessageString'
 
-const BrandDeleteForm = ({ state, setState, initialState }) => {
-  const [select, setSelect] = useState({})
+const BrandDeleteForm = () => {
+  const [message, setMessage] = useState(null)
+  const [isLoaded, setIsLoaded] = useState(false)
 
-  const deleteB = (e) => {
+  const { newBrand, setNewBrand, brandsList, setBrandsList, reset } =
+    useAdminStore((state) => ({
+      brandsList: state.brandsList,
+      setBrandsList: state.setBrandsList,
+      newBrand: state.newBrand,
+      setNewBrand: state.setNewBrand,
+      reset: state.reset
+    }))
+
+  useEffect(() => {
+    fetchAllBrands().then((r) => {
+      setBrandsList(r.dataObject.brands)
+      setIsLoaded(true)
+    })
+  }, [])
+
+  const deleteBrand = (e) => {
     e.preventDefault()
-    deleteBrand(state.newBrand.brandId).then((r) => {
-      if (r.ok) {
-        setState({ ...initialState, message: r.message })
-        setSelect({})
-      } else alert(r.message)
+    deleteBra(newBrand.brandId.value).then((r) => {
+      setMessage(r)
+      r.ok && reset()
+      fetchAllBrands().then((r) => {
+        setBrandsList(r.dataObject.brands)
+      })
     })
   }
 
-  return (
+  return isLoaded ? (
     <div>
       <h1>DELETE BRAND</h1>
-      <form onSubmit={deleteB}>
+      <form onSubmit={deleteBrand}>
         <ReactSelect
-          value={select}
-          label={'Choose brand name'}
-          options={state.brandsList}
+          value={newBrand.brandId}
+          label={'Choose brand'}
+          options={brandsList}
           onChange={(option) => {
-            setSelect(option)
-            setState({
-              ...state,
-              newBrand: { ...state.newBrand, brandId: option.value }
-            })
+            setNewBrand({ ...newBrand, brandId: option })
+            setMessage(null)
           }}
         ></ReactSelect>
-        <Button disabled={state.newBrand.brandId === ''}>Delete brand</Button>
+        {message && <MessageString message={message} />}
+        <Button disabled={newBrand.brandId === ''}>Delete brand</Button>
       </form>
     </div>
+  ) : (
+    <h1>Loading...</h1>
   )
 }
 

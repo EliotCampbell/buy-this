@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import fs from 'fs'
-import path from 'path'
 const uuid = require('uuid')
 import { writeFile } from 'fs/promises'
 
@@ -44,13 +43,13 @@ export const PUT = async (request, { params }) => {
   try {
     const id = params.id
     const formData = await request.formData()
-    let name = formData.get('name')
-    let price = formData.get('price')
-    let brandId = formData.get('brandId')
-    let categoryId = formData.get('categoryId')
-    let description = formData.get('description')
-    let info = formData.get('info')
-    const img = formData.get('img') || 'noImg.jpg'
+    const name = formData.get('name')
+    const price = formData.get('price')
+    const brandId = formData.get('brandId')
+    const categoryId = formData.get('categoryId')
+    const description = formData.get('description')
+    const info = formData.get('info')
+    const img = formData.get('img')
     const oldProduct = await Product.findByPk(id)
     const foundBrand = await Brand.findByPk(brandId)
     const foundCategory = await Category.findByPk(categoryId)
@@ -80,14 +79,19 @@ export const PUT = async (request, { params }) => {
       })
     }
 
-    if (oldProduct.img !== 'noImg.jpg') {
+    if (oldProduct.img !== 'noImg.jpg' && oldProduct.img !== img) {
       await fs.unlink(`public/static/` + oldProduct.img, (err) => {
         err && console.log(err)
       })
     }
 
     let fileName = 'noImg.jpg'
-    if (img !== 'noImg.jpg' || img !== undefined || true) {
+
+    if (oldProduct.img === img) {
+      fileName = oldProduct.img
+    }
+
+    if (oldProduct.img !== img && img !== 'noImg.jpg') {
       fileName = uuid.v4() + '.jpg'
       await writeFile(
         `public/static/${fileName}`,
@@ -142,7 +146,7 @@ export const DELETE = async (request, { params }) => {
       })
     }
     const dataProduct = await Product.destroy({ where: { id: id } })
-    await ProductInfo.destroy({ where: { productId: null } })
+    await ProductInfo.destroy({ where: { productId: { id: id } } })
 
     if (product.img !== 'noImg.jpg') {
       await fs.unlink(`public/static/` + product.img, (err) => {

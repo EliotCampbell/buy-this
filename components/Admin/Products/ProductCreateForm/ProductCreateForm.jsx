@@ -1,84 +1,117 @@
 'use client'
 
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Button from '../../../UI/Button/Button'
 import classes from '../../FormsStyles.module.css'
 import Input from '../../../UI/Input/Input'
 import ReactSelect from '../../../UI/ReactSelect/ReactSelect'
 import ProductPreviewCard from '../../../Shop/ProductPreviewCard/ProductPreviewCard'
+import { createProduct } from '@/http/Admin/products'
+import { useAdminStore } from '@/store/adminStore/adminStore'
+import { fetchAllBrands, fetchAllCategories } from '@/http/fetchers/fetchers'
+import MessageString from '@/components/UI/MessageString/MessageString'
 
-const ProductCreateForm = ({ state, setState, initialState, formData }) => {
-  const create = (e) => {
+const ProductCreateForm = () => {
+  const {
+    isValid,
+    reset,
+    newProduct,
+    brandsList,
+    categoriesList,
+    setNewProduct,
+    setCategoriesList,
+    setBrandsList,
+    preview,
+    setPreview
+  } = useAdminStore((state) => ({
+    preview: state.preview,
+    isValid: state.isValid,
+    categoriesList: state.categoriesList,
+    brandsList: state.brandsList,
+    newProduct: state.newProduct,
+    setNewProduct: state.setNewProduct,
+    setCategoriesList: state.setCategoriesList,
+    setBrandsList: state.setBrandsList,
+    reset: state.reset,
+    setPreview: state.setPreview
+  }))
+
+  const [message, setMessage] = useState(null)
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    Promise.all([fetchAllCategories(), fetchAllBrands()]).then(
+      ([categoriesData, brandsData]) => {
+        setCategoriesList(categoriesData.dataObject.categories)
+        setBrandsList(brandsData.dataObject.brands)
+        setIsLoaded(true)
+      }
+    )
+  }, [])
+
+  const createPro = (e) => {
     e.preventDefault()
+    const formData = new FormData(e.target)
+    formData.append('name', newProduct.name)
+    formData.append('price', newProduct.price.toString())
+    formData.append('img', newProduct.file)
+    formData.append('brandId', newProduct.brand.value)
+    formData.append('categoryId', newProduct.category.value)
+    formData.append('description', newProduct.description)
     createProduct(formData).then((r) => {
-      if (r.ok) {
-        setState({ ...initialState, message: r.message })
-        inputRef.current.value = ''
-      } else alert('fault')
+      setMessage(r)
+      r.ok && reset()
     })
   }
 
   const inputRef = useRef()
 
-  return (
+  return isLoaded ? (
     <div className={classes.formDiv}>
       <h1>CREATE NEW PRODUCT</h1>
       <div className={classes.formWrapper}>
-        <form onSubmit={create} className={classes.form}>
+        <form onSubmit={createPro} className={classes.form}>
           <ReactSelect
-            label={'Choose brand name'}
-            options={state.brandsList}
+            value={newProduct.brand}
+            label={'Choose brand'}
+            options={brandsList}
             onChange={(option) => {
-              setState({
-                ...state,
-                newProduct: { ...state.newProduct, brandId: option.value }
-              })
+              setNewProduct({ ...newProduct, brand: option })
             }}
           ></ReactSelect>
           <ReactSelect
+            value={newProduct.category}
             label={'Choose category'}
-            options={state.categoriesList}
+            options={categoriesList}
             onChange={(option) =>
-              setState({
-                ...state,
-                newProduct: { ...state.newProduct, categoryId: option.value }
-              })
+              setNewProduct({ ...newProduct, category: option })
             }
           ></ReactSelect>
           <Input
             placeholder={'Bicycle'}
             label={'Input product name'}
-            value={state.newProduct.name}
+            value={newProduct.name}
             onChange={(e) => {
-              setState({
-                ...state,
-                newProduct: { ...state.newProduct, name: e.target.value }
-              })
+              setNewProduct({ ...newProduct, name: e.target.value })
             }}
           />
           <Input
             placeholder={'47'}
             label={'Input product price'}
-            value={state.newProduct.price}
+            value={newProduct.price}
             type={'number'}
             onChange={(e) =>
-              setState({
-                ...state,
-                newProduct: { ...state.newProduct, price: e.target.value }
-              })
+              setNewProduct({ ...newProduct, price: e.target.value })
             }
           />
           <Input
             placeholder={'Many words about it'}
             label={'Input product description'}
-            value={state.newProduct.description}
+            value={newProduct.description}
             onChange={(e) =>
-              setState({
-                ...state,
-                newProduct: {
-                  ...state.newProduct,
-                  description: e.target.value
-                }
+              setNewProduct({
+                ...newProduct,
+                description: e.target.value
               })
             }
           />
@@ -86,30 +119,29 @@ const ProductCreateForm = ({ state, setState, initialState, formData }) => {
             ref={inputRef}
             type={'file'}
             accept={'.png,.jpg'}
-            onChange={(e) =>
-              setState({
-                ...state,
-                newProduct: { ...state.newProduct, file: e.target.files[0] }
-              })
-            }
+            onChange={(e) => {
+              setNewProduct({ ...newProduct, file: e.target.files[0] })
+              setPreview(URL.createObjectURL(e.target.files[0]))
+            }}
           />
-          <Button disabled={!state.isValid}>Create product</Button>
+          {message && <MessageString message={message} />}
+          <Button disabled={!isValid}>Create product</Button>
         </form>
 
         <div className={classes.productsCardWrapper}>
           <p className={classes.preview}>Preview</p>
           <ProductPreviewCard
-            productId={state.newProduct.id}
-            brandId={state.newProduct.brandId}
-            productName={
-              state.newProduct.name === '' ? 'Name' : state.newProduct.name
-            }
-            productImg={state.preview}
-            productPrice={state.newProduct.price}
+            productId={newProduct.id}
+            brandId={newProduct.brand.value}
+            productName={newProduct.name === '' ? 'Name' : newProduct.name}
+            productImg={preview}
+            productPrice={newProduct.price}
           />
         </div>
       </div>
     </div>
+  ) : (
+    <h1>Loading...</h1>
   )
 }
 

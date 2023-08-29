@@ -17,7 +17,7 @@ import {
 } from '@/store/mainStore/store'
 import { BsPerson } from 'react-icons/bs'
 import CartSideNav from '@/components/UI/NavBar/CartSideNav'
-import { fetchAllCategories } from '@/http/fetchers/fetchers'
+import { fetchAllBrands, fetchAllCategories } from '@/http/fetchers/fetchers'
 
 const NavBar = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -75,20 +75,9 @@ const NavBar = () => {
         setIsLoading(false)
       }
     }
-    const fetchBrands = async () => {
-      try {
-        const res = await fetch(
-          process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/brand'
-        )
-        const data = await res.json()
-        setBrands(data.dataObject.brands)
-      } catch (e) {
-        console.log(e)
-      }
-    }
 
     checkAuth(token).finally()
-    fetchBrands().finally()
+    fetchAllBrands().then((r) => setBrands(r.dataObject.brands))
     fetchAllCategories().then((r) => setCategories(r.dataObject.categories))
   }, [])
   return (

@@ -19,6 +19,7 @@ export const POST = async (request) => {
     let description = formData.get('description')
     let info = formData.get('info')
     const img = formData.get('img') || 'noImg.jpg'
+    console.log(name)
     const foundProduct = await Product.findOne({
       where: { name: name }
     })
@@ -104,7 +105,6 @@ export const GET = async (req) => {
     const page = nextSearchParams.get('page') || 1
     const order = nextSearchParams.get('order') || null
     const offset = (page - 1) * (limit || 0)
-    console.log(brandId)
 
     const whereHandler = () => {
       if (brandId && !categoryId) return { brandId }
