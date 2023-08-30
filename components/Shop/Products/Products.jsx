@@ -32,6 +32,7 @@ const Products = () => {
             'api/product?' +
             new URLSearchParams(query)
         )
+
         const data = await res.json()
         setProducts(data.dataObject.products.rows)
         setProductsCount(data.dataObject.products.count)

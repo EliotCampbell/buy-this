@@ -5,7 +5,6 @@ const { ProductInfo, Product } = require('@/models/models')
 export const POST = async (request) => {
   try {
     const formData = await request.formData()
-
     const title = formData.get('title')
     const description = formData.get('description')
     const productId = formData.get('productId')

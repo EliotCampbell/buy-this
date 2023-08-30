@@ -59,7 +59,14 @@ export const useAdminStore = create(
           }))
         })),
       setSpecificationsList: (list) =>
-        set((state) => ({ specificationsList: list })),
+        set((state) => ({
+          specificationsList: list.map((el) => ({
+            value: el,
+            label: el.title
+          }))
+        })),
+      setNewSpecification: (specification) =>
+        set((state) => ({ newSpecification: specification })),
       setNewCategory: (newCategory) =>
         set((state) => ({ newCategory: newCategory })),
       setNewBrand: (newBrand) => set((state) => ({ newBrand: newBrand })),

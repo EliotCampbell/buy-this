@@ -10,36 +10,20 @@ import {
   fetchAllCategories,
   fetchAllProducts
 } from '@/http/fetchers/fetchers'
+import { createSpecificationByProductId } from '@/http/Admin/specifications'
+import MessageString from '@/components/UI/MessageString/MessageString'
 
 const SpecificationsCreateForm = () => {
   const {
-    isValid,
     reset,
-    newProduct,
-    brandsList,
-    categoriesList,
     productsList,
-    setNewProduct,
-    setCategoriesList,
-    setBrandsList,
     setProductsList,
-    preview,
-    setPreview,
     newSpecification,
     setNewSpecification
   } = useAdminStore((state) => ({
     setNewSpecification: state.setNewSpecification,
     newSpecification: state.newSpecification,
-    setPreview: state.setPreview,
     productsList: state.productsList,
-    preview: state.preview,
-    isValid: state.isValid,
-    categoriesList: state.categoriesList,
-    brandsList: state.brandsList,
-    newProduct: state.newProduct,
-    setNewProduct: state.setNewProduct,
-    setCategoriesList: state.setCategoriesList,
-    setBrandsList: state.setBrandsList,
     setProductsList: state.setProductsList,
     reset: state.reset
   }))
@@ -54,38 +38,34 @@ const SpecificationsCreateForm = () => {
     })
   }, [])
 
-  const create = (e) => {
+  const createSpecification = (e) => {
     e.preventDefault()
-    const specification = {
-      title: newSpecification.title,
-      description: newSpecification.description,
-      productId: newSpecification.productId
-    }
-    createSpecificationByPId(specification).then((r) => {
-      if (r.ok) {
-        setState({ ...initialState, message: r.message })
-      } else {
-        alert('Failed')
-      }
+    const formData = new FormData(e.target)
+    formData.append('title', newSpecification.title)
+    formData.append('description', newSpecification.description)
+    formData.append('productId', newSpecification.productId)
+    createSpecificationByProductId(formData).then((r) => {
+      setMessage(r)
+      r.ok && reset()
+    })
+    fetchAllProducts().then((r) => {
+      setProductsList(r.dataObject.products.rows)
     })
   }
 
-  return (
+  return isLoaded ? (
     <div className={classes.specifications}>
       <div>
         <h1 className={classes.header}>CREATE NEW SPECIFICATION</h1>
 
-        <form onSubmit={create}>
+        <form onSubmit={createSpecification}>
           <ReactSelect
             label={'Select product'}
             options={productsList}
             onChange={(option) => {
               setNewSpecification({
-                ...state,
-                newSpecification: {
-                  ...state.newSpecification,
-                  productId: option.value.id
-                }
+                ...newSpecification,
+                productId: option.value.id
               })
             }}
           ></ReactSelect>
@@ -93,12 +73,9 @@ const SpecificationsCreateForm = () => {
             label={'title'}
             value={newSpecification.title}
             onChange={(e) =>
-              setState({
-                ...state,
-                newSpecification: {
-                  ...state.newSpecification,
-                  title: e.target.value
-                }
+              setNewSpecification({
+                ...newSpecification,
+                title: e.target.value
               })
             }
           />
@@ -106,15 +83,13 @@ const SpecificationsCreateForm = () => {
             label={'description'}
             value={newSpecification.description}
             onChange={(e) =>
-              setState({
-                ...state,
-                newSpecification: {
-                  ...state.newSpecification,
-                  description: e.target.value
-                }
+              setNewSpecification({
+                ...newSpecification,
+                description: e.target.value
               })
             }
           />
+          {message && <MessageString message={message} />}
           <Button
             disabled={
               newSpecification.productId === '' ||
@@ -127,6 +102,8 @@ const SpecificationsCreateForm = () => {
         </form>
       </div>
     </div>
+  ) : (
+    <h1>Loading...</h1>
   )
 }
 
