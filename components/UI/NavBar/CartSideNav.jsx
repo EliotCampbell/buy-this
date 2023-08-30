@@ -1,8 +1,9 @@
 import React from 'react'
 import classes from './CartSideNav.module.css'
 import { RxCross1 } from 'react-icons/rx'
+import ShoppingCart from '@/components/UI/ShoppingCart/ShoppingCart'
 
-const ShoppingCart = ({ setSwitcher }) => {
+const CartSideNav = ({ setSwitcher }) => {
   return (
     <div className={classes.sideNavBack}>
       <div className={classes.exit} onClick={() => setSwitcher(false)}>
@@ -18,11 +19,11 @@ const ShoppingCart = ({ setSwitcher }) => {
               onClick={() => setSwitcher(false)}
             >
               <RxCross1 />
-              <p className={classes.topText}>Basket</p>
+              <p className={classes.topText}>Cart</p>
             </div>
           </div>
           <div className={classes.contentWrapper}>
-            <h2>Your shopping cart is still empty.</h2>
+            <ShoppingCart />
           </div>
         </div>
       </div>
@@ -30,4 +31,4 @@ const ShoppingCart = ({ setSwitcher }) => {
   )
 }
 
-export default ShoppingCart
+export default CartSideNav

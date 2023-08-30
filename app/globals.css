@@ -18,8 +18,8 @@ html {
 body {
   display: flex;
   font-family: BrandonGrotesque, BlenderPro-Medium, 'Roboto', 'Segoe UI',
-  'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   min-height: 100%;
   width: 100%;
 }
@@ -81,7 +81,7 @@ select,
 textarea {
   margin: 0;
   font-family: BrandonGrotesque, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-  'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-size: 100%;
   outline: none;
   border: none;

@@ -11,6 +11,7 @@
 .img {
   height: 300px;
   margin: 50px;
+  object-fit: contain;
 }
 
 .backLink:hover {

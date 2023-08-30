@@ -8,13 +8,20 @@ import ToCartCounter from '../../UI/ToCartCounter/ToCartCounter'
 import BreadCrumbs from '../../UI/BreadCrumbs/BreadCrumbs'
 import Button from '@/components/UI/Button/Button'
 import { useProductStore } from '@/store/mainStore/store'
+import { useShoppingCartStore } from '@/store/shoppingCartStore/shoppingCartStore'
 
 const ProductDetails = ({ productId }) => {
+  const { toCart } = useShoppingCartStore((state) => ({
+    toCart: state.addProduct
+  }))
+
   const { brands } = useProductStore((state) => ({ brands: state.brands }))
 
   const [product, setProduct] = useState({})
   const [selector, setSelector] = useState('description')
   const [isLoaded, setIsLoaded] = useState(false)
+
+  const [counter, setCounter] = useState(0)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -61,9 +68,14 @@ const ProductDetails = ({ productId }) => {
               <p className={classes.productPrice}>{`${product.price},00 $`}</p>
               <p className={classes.inStock}>Still 4 in stock</p>
               <div className={classes.toCart}>
-                <ToCartCounter />
+                <ToCartCounter counter={counter} setCounter={setCounter} />
                 <div className={classes.toCartSplitter}></div>
-                <Button className={classes.cartButton}>ADD TO CART</Button>
+                <Button
+                  className={classes.cartButton}
+                  onClick={() => toCart(product.id, counter)}
+                >
+                  ADD TO CART
+                </Button>
               </div>
             </div>
           </div>

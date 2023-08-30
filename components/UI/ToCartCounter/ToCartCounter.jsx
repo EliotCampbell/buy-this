@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import classes from './ToCartCounter.module.css'
 
-const ToCartCounter = () => {
-  const [counter, setCounter] = useState(0)
-
+const ToCartCounter = ({ counter, setCounter }) => {
   const decrementor = () => {
     counter > 1 && setCounter(counter - 1)
   }

@@ -1,0 +1,63 @@
+.cartPositionWrapper {
+  padding: 20px 0;
+  border-bottom-color: rgb(222, 225, 231);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  height: 120px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.cartPositionDescription {
+  padding-left: 15px;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nameDiv {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.productName {
+  color: teal;
+  font-size: 18px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.productName:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.removeIco {
+  color: teal;
+}
+
+.removeIco:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.countPriceDiv {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: fit-content;
+}
+
+.productCount {
+  color: teal;
+  font-size: 18px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.price {
+  color: teal;
+  font-size: 20px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
