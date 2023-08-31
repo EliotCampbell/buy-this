@@ -1,12 +1,14 @@
 .button {
+  position: relative;
   padding: 6px;
-  margin: 0 5px;
   border-radius: 10px;
   background-color: transparent;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  height: 45px;
+  width: 45px;
 }
 
 .button:hover {

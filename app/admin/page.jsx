@@ -1,4 +1,4 @@
-const AdminPage = async () => {
+const AdminPage = () => {
   return <h1>Choose anything</h1>
 }
 

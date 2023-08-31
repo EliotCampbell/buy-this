@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './CartSideNav.module.css'
 import { RxCross1 } from 'react-icons/rx'
-import ShoppingCart from '@/components/UI/ShoppingCart/ShoppingCart'
+import ShoppingCart from '@/components/UI/NavBar/ShoppingCart/ShoppingCart'
 
 const CartSideNav = ({ setSwitcher }) => {
   return (

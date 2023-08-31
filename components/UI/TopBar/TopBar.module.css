@@ -3,11 +3,10 @@
   width: 100%;
   font-size: 14px;
   letter-spacing: 0.02em;
-  height: 42px;
 }
 
 .topBar {
-  height: 100%;
+  height: 42px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

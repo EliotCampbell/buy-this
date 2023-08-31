@@ -20,8 +20,7 @@ const ProductDetails = ({ productId }) => {
   const [product, setProduct] = useState({})
   const [selector, setSelector] = useState('description')
   const [isLoaded, setIsLoaded] = useState(false)
-
-  const [counter, setCounter] = useState(0)
+  const [counter, setCounter] = useState(1)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -72,7 +71,16 @@ const ProductDetails = ({ productId }) => {
                 <div className={classes.toCartSplitter}></div>
                 <Button
                   className={classes.cartButton}
-                  onClick={() => toCart(product.id, counter)}
+                  onClick={() =>
+                    toCart(
+                      product.id,
+                      product.name,
+                      counter,
+                      product.price,
+                      product.img
+                    )
+                  }
+                  disabled={counter <= 0}
                 >
                   ADD TO CART
                 </Button>

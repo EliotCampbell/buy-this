@@ -6,8 +6,8 @@ import { useProductStore, useQueryStore } from '@/store/mainStore/store'
 
 const BreadCrumbs = ({ product, productId }) => {
   const pathname = usePathname()
-  const { query, setQuery } = useQueryStore((state) => ({
-    setQuery: state.setQuery,
+  console.log(pathname)
+  const { query } = useQueryStore((state) => ({
     query: state.query
   }))
 
@@ -36,7 +36,7 @@ const BreadCrumbs = ({ product, productId }) => {
           </Link>
         </>
       )}
-      {pathname !== '/store/product/' + productId && (
+      {pathname === `/product/${productId}` && (
         <>
           <p className={classes.arrow}>{' > '}</p>
           <Link href={`/product/${product?.id}`}>

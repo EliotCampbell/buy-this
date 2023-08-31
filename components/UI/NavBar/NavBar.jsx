@@ -18,6 +18,7 @@ import {
 import { BsPerson } from 'react-icons/bs'
 import CartSideNav from '@/components/UI/NavBar/CartSideNav'
 import { fetchAllBrands, fetchAllCategories } from '@/http/fetchers/fetchers'
+import { useShoppingCartStore } from '@/store/shoppingCartStore/shoppingCartStore'
 
 const NavBar = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -42,6 +43,8 @@ const NavBar = () => {
     setBrands: state.setBrands,
     setCategories: state.setCategories
   }))
+
+  const { cart } = useShoppingCartStore((state) => ({ cart: state.cart }))
 
   useEffect(() => {
     const checkAuth = async (token) => {
@@ -143,6 +146,9 @@ const NavBar = () => {
               <div className={classes.splitter}></div>
               <IcoButton onClick={() => setCartSwitcher(true)}>
                 <SlBasket className={classes.ico} />
+                <p className={classes.cartCounter}>
+                  {cart.reduce((acc, el) => el.count + acc, 0)}
+                </p>
               </IcoButton>
             </div>
           )}

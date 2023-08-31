@@ -4,12 +4,36 @@ import { persist } from 'zustand/middleware'
 export const useShoppingCartStore = create(
   persist(
     (set) => ({
-      cart: [
-        { productId: 38, count: 4 },
-        { productId: 39, count: 2 }
-      ],
-      addProduct: (productId, count) =>
-        set((state) => ({ cart: [...state.cart, { productId, count }] })),
+      cart: [],
+      addProduct: (productId, name, count, price, img) => {
+        const candidate = { productId, name, count, price, img }
+        set((state) => {
+          const oldProduct = state.cart.find(
+            (el) => el.productId === candidate.productId
+          )
+          if (oldProduct) {
+            const filteredCart = state.cart.filter(
+              (el) => el.productId !== productId
+            )
+            return {
+              cart: [
+                ...filteredCart,
+                {
+                  productId: candidate.productId,
+                  name: candidate.name,
+                  price: candidate.price,
+                  img: candidate.img,
+                  count: candidate.count + oldProduct.count
+                }
+              ]
+            }
+          } else {
+            return {
+              cart: [...state.cart, { productId, name, count, price, img }]
+            }
+          }
+        })
+      },
       removeProduct: (productId) =>
         set((state) => ({
           cart: state.cart.filter((el) => el.productId !== productId)
