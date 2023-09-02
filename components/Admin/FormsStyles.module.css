@@ -1,5 +1,5 @@
 .formDiv {
-  width: 100%;
+  width: 630px;
 }
 
 .formWrapper {
@@ -11,7 +11,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  padding-top: 20px;
 }
 
 .preview {
@@ -24,4 +24,61 @@
 
 .productsCardWrapper {
   padding-left: 10px;
+}
+
+.listRow {
+  height: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  border-bottom: 1px rgb(222, 225, 231) solid;
+}
+
+.listRow:hover {
+  background-color: rgb(242, 250, 250);
+}
+
+.name {
+  font-family: BlenderPro-Bold, sans-serif;
+  color: teal;
+  font-size: 18px;
+}
+
+.name:hover {
+  text-decoration: underline;
+}
+
+.icoBlock {
+  display: flex;
+}
+
+.submitIco {
+  padding-left: 10px;
+  color: teal;
+}
+
+.submitIco:hover {
+  cursor: pointer;
+  color: green;
+}
+
+.removeIco {
+  padding-left: 10px;
+  color: teal;
+}
+
+.removeIco:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.editIco {
+  padding-left: 10px;
+  color: teal;
+}
+
+.editIco:hover {
+  cursor: pointer;
+  color: green;
 }

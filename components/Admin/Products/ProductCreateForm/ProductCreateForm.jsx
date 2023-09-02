@@ -67,7 +67,7 @@ const ProductCreateForm = () => {
   const inputRef = useRef()
 
   return isLoaded ? (
-    <div className={classes.formDiv}>
+    <div>
       <h1>CREATE NEW PRODUCT</h1>
       <div className={classes.formWrapper}>
         <form onSubmit={createPro} className={classes.form}>

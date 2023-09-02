@@ -2,12 +2,23 @@
 import React, { useEffect } from 'react'
 import AdminSidebar from '../AdminSidebar/AdminSidebar'
 import { useAdminStore } from '@/store/adminStore/adminStore'
+import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 
 const Admin = () => {
   const { newProduct, setIsValid } = useAdminStore((state) => ({
     newProduct: state.newProduct,
     setIsValid: state.setIsValid
   }))
+
+  const { fetchAll } = useAdminListsStore((state) => ({
+    fetchAll: state.fetchAll
+  }))
+
+  //fetch lists at first load
+
+  useEffect(() => {
+    fetchAll().then()
+  }, [])
 
   //validator
 
