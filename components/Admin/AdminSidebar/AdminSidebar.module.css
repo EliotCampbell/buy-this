@@ -29,3 +29,7 @@
   color: teal;
   font-family: BlenderPro-Bold, sans-serif;
 }
+
+.adminNavLink:hover {
+  text-decoration: underline;
+}

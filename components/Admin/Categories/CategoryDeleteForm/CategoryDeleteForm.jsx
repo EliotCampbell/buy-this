@@ -7,13 +7,16 @@ import {
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import classes from '@/components/Admin/FormsStyles.module.css'
-import { FiEdit2, FiPlus, FiTrash } from 'react-icons/fi'
+import { FiCheck, FiPlus, FiTrash } from 'react-icons/fi'
 import Link from 'next/link'
 import { useQueryStore } from '@/store/mainStore/store'
 import AdminInput from '@/components/UI/AdminInput/AdminInput'
 
 const CategoryDeleteForm = () => {
+  const myRefs = React.useRef([])
+
   const [message, setMessage] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState(null)
 
   const { query, setQuery } = useQueryStore((state) => ({
     query: state.query,
@@ -51,7 +54,7 @@ const CategoryDeleteForm = () => {
 
   return (
     <div className={classes.formDiv}>
-      <h1>DELETE CATEGORY</h1>
+      <h1>MANAGE CATEGORIES</h1>
       <div className={classes.form}>
         <AdminInput
           placeholder={'Add category...'}
@@ -73,25 +76,65 @@ const CategoryDeleteForm = () => {
         </AdminInput>
 
         {categoriesList.map((el) => (
-          <div className={classes.listRow} key={el.value}>
-            <Link
-              href={'/store'}
-              onClick={() => {
-                setQuery({ ...query, categoryId: el.value })
-              }}
-            >
-              <p className={classes.name}>
+          <div
+            className={classes.listRow}
+            key={el.value}
+            onClick={() => {
+              setSelectedCategory(el.value)
+              myRefs.current[el.value].focus()
+            }}
+          >
+            {selectedCategory !== el.value && (
+              <Link
+                href={'/store'}
+                onClick={() => {
+                  setQuery({ ...query, categoryId: el.value })
+                }}
+              >
+                <p className={classes.name}>
+                  {`${el.label} (${productsList.reduce((acc, product) => {
+                    if (product.value.categoryId === el.value) acc++
+                    return acc
+                  }, 0)})`}
+                </p>
+              </Link>
+            )}
+            {selectedCategory === el.value && (
+              <p
+                ref={(element) => (myRefs.current[el.value] = element)}
+                className={classes.name}
+                role={'textbox'}
+                contentEditable={true}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    event.preventDefault()
+                    console.log(event.target.textContent)
+                  }
+                }}
+                onClick={(event) => {
+                  event.stopPropagation()
+                }}
+                onBlur={() => setSelectedCategory(null)}
+              >
                 {`${el.label} (${productsList.reduce((acc, product) => {
                   if (product.value.categoryId === el.value) acc++
                   return acc
                 }, 0)})`}
               </p>
-            </Link>
+            )}
             <div className={classes.icoBlock}>
-              <p className={classes.editIco} onClick={() => {}}>
-                {' '}
-                <FiEdit2 />
-              </p>
+              {selectedCategory === el.value && (
+                <p
+                  className={classes.editIco}
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    setSelectedCategory(null)
+                  }}
+                >
+                  {' '}
+                  <FiCheck />
+                </p>
+              )}
               <p
                 className={classes.removeIco}
                 onClick={() => deleteCategoryById(el.value)}
