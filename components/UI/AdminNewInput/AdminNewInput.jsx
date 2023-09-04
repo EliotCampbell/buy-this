@@ -1,7 +1,7 @@
 import React from 'react'
-import classes from './AdminInput.module.css'
+import classes from './AdminNewInput.module.css'
 
-const AdminInput = ({ children, ...props }) => {
+const AdminNewInput = ({ children, ...props }) => {
   return (
     <div className={classes.inputDiv}>
       <input className={classes.input} {...props} />
@@ -10,4 +10,4 @@ const AdminInput = ({ children, ...props }) => {
   )
 }
 
-export default AdminInput
+export default AdminNewInput

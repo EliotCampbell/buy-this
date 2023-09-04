@@ -26,6 +26,11 @@
   padding-left: 10px;
 }
 
+.splitter {
+  height: 20px;
+  width: 100%;
+}
+
 .listRow {
   height: 35px;
   display: flex;
@@ -43,17 +48,10 @@
   font-family: BlenderPro-Bold, sans-serif;
   color: teal;
   font-size: 18px;
-  padding: 5px;
 }
 
 .name:hover {
   text-decoration: underline;
-}
-
-.name:focus {
-  outline: none;
-  background-color: #f3f3f3;
-  border-radius: 2px;
 }
 
 .icoBlock {
@@ -76,6 +74,7 @@
 }
 
 .removeIco:hover {
+  background-color: rgb(242, 250, 250);
   cursor: pointer;
   color: red;
 }
@@ -86,6 +85,7 @@
 }
 
 .editIco:hover {
+  background-color: rgb(242, 250, 250);
   cursor: pointer;
   color: green;
 }

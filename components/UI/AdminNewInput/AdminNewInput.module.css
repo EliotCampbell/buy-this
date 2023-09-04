@@ -1,0 +1,25 @@
+.inputDiv {
+  height: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  border-bottom: 1px rgb(222, 225, 231) solid;
+}
+
+.inputDiv:hover {
+  background-color: rgb(242, 250, 250);
+}
+
+.input {
+  background-color: transparent;
+  color: teal;
+  font-size: 18px;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-weight: 500;
+  width: 100%;
+  height: 100%;
+}
+.input::placeholder {
+  color: #b4b4b4;
+}
