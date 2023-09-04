@@ -1,6 +1,6 @@
 import CategoryCreateForm from '@/components/Admin/Categories/CategoryCreateForm/CategoryCreateForm'
 import CategoryUpdateForm from '@/components/Admin/Categories/CategoryUpdateForm/CategoryUpdateForm'
-import CategoryDeleteForm from '@/components/Admin/Categories/CategoryDeleteForm/CategoryDeleteForm'
+import CategoryDeleteForm from '@/components/Admin/Categories/ManageCategories/CategoryDeleteForm'
 import BrandCreateForm from '@/components/Admin/Brands/BrandCreateForm/BrandCreateForm'
 import BrandUpdateForm from '@/components/Admin/Brands/BrandUpdateForm/BrandUpdateForm'
 import BrandDeleteForm from '@/components/Admin/Brands/BrandDeleteForm/BrandDeleteForm'

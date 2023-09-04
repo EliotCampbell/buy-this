@@ -67,7 +67,7 @@ const CategoryDeleteForm = () => {
       <div className={classes.form}>
         <AdminNewInput
           placeholder={'Add category...'}
-          value={newCategory.name}
+          value={!selectedCategory ? newCategory.name : ''}
           onChange={(e) => {
             setNewCategory({ ...newCategory, name: e.target.value })
             setMessage(null)
@@ -90,18 +90,9 @@ const CategoryDeleteForm = () => {
         </AdminNewInput>
         <div className={classes.splitter}></div>
 
-        {categoriesList.map((el) =>
-          selectedCategory !== el.value ? (
-            <div
-              className={classes.listRow}
-              key={el.value}
-              onClick={(event) => {
-                event.stopPropagation()
-                setMessage(null)
-                setSelectedCategory(el.value)
-                setNewCategory({ ...newCategory, name: el.label })
-              }}
-            >
+        {categoriesList.map((el) => (
+          <div className={classes.listRow} key={el.value}>
+            {/*{selectedCategory !== el.value && (
               <Link
                 href={'/store'}
                 onClick={() => {
@@ -115,52 +106,56 @@ const CategoryDeleteForm = () => {
                   }, 0)})`}
                 </p>
               </Link>
-
-              <div className={classes.icoBlock}>
-                <p
-                  className={classes.removeIco}
-                  onClick={(event) => {
-                    event.stopPropagation()
-                    deleteCategoryById(el.value).then()
-                  }}
-                >
-                  <FiTrash />
-                </p>
-              </div>
-            </div>
-          ) : (
-            selectedCategory === el.value && (
-              <AdminEditInput
-                key={el.value}
-                onChange={(event) => {
-                  setMessage(null)
-                  setNewCategory({
-                    ...newCategory,
-                    name: event.target.value
-                  })
-                }}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter') {
-                    update(el.value, newCategory.name).then(() =>
-                      setSelectedCategory(null)
-                    )
-                  }
-                  if (event.key === 'Escape') {
+            )}*/}
+            <AdminEditInput
+              key={el.value}
+              onFocus={() => {
+                setMessage(null)
+                setSelectedCategory(el.value)
+                setNewCategory({ ...newCategory, name: el.label })
+              }}
+              onChange={(event) => {
+                setMessage(null)
+                setNewCategory({
+                  ...newCategory,
+                  name: event.target.value
+                })
+              }}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  update(el.value, newCategory.name).then(() =>
                     setSelectedCategory(null)
-                  }
-                }}
-                onBlur={() => {
+                  )
+                  event.target.blur()
+                }
+                if (event.key === 'Escape') {
+                  setNewCategory({ ...newCategory, name: '' })
                   setSelectedCategory(null)
-                }}
-                value={newCategory.name}
-                onClick={(event) => {
-                  event.stopPropagation()
-                  event.target.focus()
-                }}
-              >
+                }
+              }}
+              onBlur={() => {
+                setNewCategory({ ...newCategory, name: '' })
+                setSelectedCategory(null)
+              }}
+              value={
+                el.value === selectedCategory
+                  ? newCategory.name
+                  : `${el.label} (${productsList.reduce((acc, product) => {
+                      if (product.value.categoryId === el.value) acc++
+                      return acc
+                    }, 0)})`
+              }
+              placeholder={'Edit...'}
+              onClick={(event) => {
+                event.stopPropagation()
+              }}
+            ></AdminEditInput>
+
+            <div className={classes.icoBlock}>
+              {selectedCategory === el.value && (
                 <p
                   className={classes.editIco}
-                  onClick={(event) => {
+                  onMouseDown={(event) => {
                     event.stopPropagation()
                     update(el.value, newCategory.name).then()
                     setSelectedCategory(null)
@@ -168,10 +163,19 @@ const CategoryDeleteForm = () => {
                 >
                   <FiCheck />
                 </p>
-              </AdminEditInput>
-            )
-          )
-        )}
+              )}
+              <p
+                className={classes.removeIco}
+                onClick={(event) => {
+                  event.stopPropagation()
+                  deleteCategoryById(el.value).then()
+                }}
+              >
+                <FiTrash />
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
       {message && <MessageString message={message} />}
     </div>

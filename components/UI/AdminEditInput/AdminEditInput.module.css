@@ -1,17 +1,11 @@
 .input {
-  height: 35px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 5px;
   background-color: #ffffff;
   border-radius: 2px;
   color: teal;
   font-size: 18px;
   font-weight: 500;
-  flex-grow: 1;
-  border-bottom: 1px rgb(222, 225, 231) solid;
   font-family: BlenderPro-Bold, sans-serif;
+  width: 100%;
 }
 
 .input:hover {
@@ -23,5 +17,5 @@
 }
 
 .input:focus {
-  background-color: #b4b4b4;
+  background-color: rgb(231, 236, 239);
 }

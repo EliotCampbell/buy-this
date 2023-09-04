@@ -30,7 +30,10 @@ export const POST = async (request) => {
 
 export const GET = async () => {
   try {
-    const categories = await Category.findAll()
+    const categories = await Category.findAll({
+      where: {},
+      order: [['name', 'ASC']]
+    })
     if (categories.length)
       return NextResponse.json({
         ok: true,

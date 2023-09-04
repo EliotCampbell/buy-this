@@ -4,7 +4,10 @@ const { Brand } = require('../../../models/models')
 
 export const GET = async () => {
   try {
-    const brands = await Brand.findAll()
+    const brands = await Brand.findAll({
+      where: {},
+      order: [['name', 'ASC']]
+    })
     if (brands.length)
       return NextResponse.json({
         ok: true,
