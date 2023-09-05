@@ -4,59 +4,29 @@ import Button from '../../../UI/Button/Button'
 import classes from '../../FormsStyles.module.css'
 import ReactSelect from '../../../UI/ReactSelect/ReactSelect'
 import { useAdminStore } from '@/store/adminStore/adminStore'
-import {
-  fetchAllBrands,
-  fetchAllCategories,
-  fetchAllProducts
-} from '@/http/fetchers/fetchers'
+import { fetchAllProducts } from '@/http/fetchers/fetchers'
 import { deleteProduct } from '@/http/Admin/products'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import ProductPreviewCard from '@/components/Shop/ProductPreviewCard/ProductPreviewCard'
 
 const ProductEditForm = () => {
   const {
-    isValid,
     reset,
     newProduct,
-    brandsList,
-    categoriesList,
-    productsList,
     setNewProduct,
-    setCategoriesList,
-    setBrandsList,
     setProductsList,
     preview,
     setPreview
   } = useAdminStore((state) => ({
-    productsList: state.productsList,
     preview: state.preview,
     isValid: state.isValid,
-    categoriesList: state.categoriesList,
-    brandsList: state.brandsList,
     newProduct: state.newProduct,
     setNewProduct: state.setNewProduct,
-    setCategoriesList: state.setCategoriesList,
-    setBrandsList: state.setBrandsList,
-    setProductsList: state.setProductsList,
     reset: state.reset,
     setPreview: state.setPreview
   }))
 
   const [message, setMessage] = useState(null)
-  const [isLoaded, setIsLoaded] = useState(false)
-
-  useEffect(() => {
-    Promise.all([
-      fetchAllCategories(),
-      fetchAllBrands(),
-      fetchAllProducts()
-    ]).then(([categoriesData, brandsData, productsData]) => {
-      setCategoriesList(categoriesData.dataObject.categories)
-      setBrandsList(brandsData.dataObject.brands)
-      setProductsList(productsData.dataObject.products.rows)
-      setIsLoaded(true)
-    })
-  }, [])
 
   const deletePro = (e) => {
     e.preventDefault()
@@ -69,7 +39,7 @@ const ProductEditForm = () => {
     })
   }
 
-  return isLoaded ? (
+  return (
     <>
       <h1>DELETE PRODUCT</h1>
       <div className={classes.formWrapper}>
@@ -121,8 +91,6 @@ const ProductEditForm = () => {
         </div>
       </div>
     </>
-  ) : (
-    <h1>Loading...</h1>
   )
 }
 

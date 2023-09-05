@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { Product } from '@/models/models'
 
 const { Brand } = require('../../../../models/models')
 
@@ -71,10 +72,18 @@ export const DELETE = async (request, { params }) => {
   try {
     const id = params.id
     const brand = await Brand.findByPk(id)
+    const products = await Product.findAll({ where: { brandId: id } })
     if (brand === null) {
       return NextResponse.json({
         ok: false,
         message: 'Brand not found',
+        dataObject: { id }
+      })
+    }
+    if (products.length !== 0) {
+      return NextResponse.json({
+        ok: false,
+        message: 'Brand is assigned to one or more products',
         dataObject: { id }
       })
     }

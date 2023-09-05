@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect } from 'react'
-import AdminSidebar from '../AdminSidebar/AdminSidebar'
+import AdminSidebar from './AdminSidebar/AdminSidebar'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 

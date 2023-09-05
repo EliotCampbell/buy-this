@@ -1,4 +1,4 @@
-import { Category } from '@/models/models'
+import { Category, Product } from '@/models/models'
 import { NextResponse } from 'next/server'
 
 export const GET = async (request, { params }) => {
@@ -70,10 +70,18 @@ export const DELETE = async (request, { params }) => {
   try {
     const id = params.id
     const category = await Category.findByPk(id)
+    const products = await Product.findAll({ where: { categoryId: id } })
     if (category === null) {
       return NextResponse.json({
         ok: false,
         message: 'Category not found',
+        dataObject: { id }
+      })
+    }
+    if (products.length !== 0) {
+      return NextResponse.json({
+        ok: false,
+        message: 'Category is assigned to one or more products',
         dataObject: { id }
       })
     }

@@ -1,4 +1,4 @@
-import Admin from '@/components/Admin/Admin/Admin'
+import Admin from '@/components/Admin/Admin'
 import classes from './adminLayout.module.css'
 
 export default function AdminLayout({ children }) {

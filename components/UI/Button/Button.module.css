@@ -1,5 +1,5 @@
 .Button {
-  flex-grow: 1;
+  width: 100%;
   padding: 13px 15px;
   min-width: 50px;
   border-radius: 2px;

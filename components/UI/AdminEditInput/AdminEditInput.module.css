@@ -1,15 +1,11 @@
 .input {
-  background-color: #ffffff;
   border-radius: 2px;
   color: teal;
   font-size: 18px;
   font-weight: 500;
   font-family: BlenderPro-Bold, sans-serif;
   width: 100%;
-}
-
-.input:hover {
-  background-color: rgb(242, 250, 250);
+  background-color: transparent;
 }
 
 .input::placeholder {

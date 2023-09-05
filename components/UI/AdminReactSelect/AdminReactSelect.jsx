@@ -1,17 +1,17 @@
 import React from 'react'
-import classes from './ReactSelect.module.css'
+import classes from './AdminReactSelect.module.css'
 import Select from 'react-select'
 
-const ReactSelect = ({ options, label, ...props }) => {
+const AdminReactSelect = ({ options, label, ...props }) => {
   const selectStyles = {
     control: (baseStyles) => ({
       ...baseStyles,
+      borderColor: 'rgb(222, 225, 231)',
       borderRadius: '2px',
-      borderColor: 'teal',
       minHeight: '40px',
       boxShadow: 'none',
       '&:hover': {
-        border: 'teal solid 1px'
+        borderColor: 'teal'
       }
     }),
     container: (baseStyles) => ({
@@ -97,6 +97,10 @@ const ReactSelect = ({ options, label, ...props }) => {
     valueContainer: (baseStyles) => ({
       ...baseStyles,
       paddingTop: '6px'
+    }),
+    placeholder: (baseStyles) => ({
+      ...baseStyles,
+      color: '#b4b4b4'
     })
   }
 
@@ -108,4 +112,4 @@ const ReactSelect = ({ options, label, ...props }) => {
   )
 }
 
-export default ReactSelect
+export default AdminReactSelect

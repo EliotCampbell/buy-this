@@ -1,0 +1,27 @@
+.div {
+  margin: 0 0 20px 0;
+  position: relative;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  background-color: transparent;
+  width: 100%;
+}
+
+.label {
+  top: -13px;
+  position: absolute;
+  letter-spacing: 1px;
+  display: block;
+  margin-left: 15px;
+  width: fit-content;
+  margin-bottom: -5px;
+  padding: 5px 6px 0 6px;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 13px;
+  color: teal;
+  background-color: white;
+  border-radius: 3px;
+  z-index: 1;
+}
