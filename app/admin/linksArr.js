@@ -28,21 +28,6 @@ export const linksArr = [
     path: 'manage_products',
     page: <ManageProducts />
   },
-  {
-    linkName: 'Create product',
-    path: 'create_product',
-    page: <ProductCreateForm />
-  },
-  {
-    linkName: 'Update product',
-    path: 'update_product',
-    page: <ProductUpdateForm />
-  },
-  {
-    linkName: 'Delete product',
-    path: 'delete_product',
-    page: <ProductDeleteForm />
-  },
   { title: 'Specifications' },
   {
     linkName: 'Create specification',

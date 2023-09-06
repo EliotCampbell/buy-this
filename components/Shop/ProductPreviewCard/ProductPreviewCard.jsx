@@ -17,7 +17,7 @@ const ProductPreviewCard = ({
       <Link href={`/product/${productId}`} className={classes.productsCard}>
         <div>
           <p className={classes.brand}>
-            {brandId !== '' && brands !== []
+            {brandId
               ? brands.find((el) => el.id.toString() === brandId.toString())
                   ?.name
               : 'Brand'}

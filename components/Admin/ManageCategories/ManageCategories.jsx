@@ -62,9 +62,9 @@ const ManageCategories = () => {
   }
 
   return (
-    <div className={classes.formDiv}>
+    <>
       <h1>MANAGE CATEGORIES</h1>
-      <div className={classes.formWrapper}>
+      <div className={classes.formWithSidePreview}>
         <div className={classes.form}>
           <AdminNewInput
             placeholder={'Add category...'}
@@ -90,7 +90,7 @@ const ManageCategories = () => {
           </AdminNewInput>
 
           {categoriesList.map((el) => (
-            <div className={classes.listRow} key={el.value}>
+            <div className={classes.categoriesBrandslistRow} key={el.value}>
               <Link
                 href={'/store'}
                 onClick={() => {
@@ -167,7 +167,7 @@ const ManageCategories = () => {
         </div>
       </div>
       {message && <MessageString message={message} />}
-    </div>
+    </>
   )
 }
 

@@ -12,8 +12,8 @@ const initialState = {
     specificationId: ''
   },
   newProduct: {
-    brand: { value: '' },
-    category: { value: '' },
+    brand: '',
+    category: '',
     name: '',
     price: '',
     description: '',

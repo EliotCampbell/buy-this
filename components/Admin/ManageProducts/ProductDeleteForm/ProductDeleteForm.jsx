@@ -42,7 +42,7 @@ const ProductEditForm = () => {
   return (
     <>
       <h1>DELETE PRODUCT</h1>
-      <div className={classes.formWrapper}>
+      <div className={classes.formWithSidePreview}>
         <form onSubmit={deletePro} className={classes.form}>
           <ReactSelect
             label={'Select product'}

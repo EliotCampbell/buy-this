@@ -1,8 +1,4 @@
-.formDiv {
-  width: 1000px;
-}
-
-.formWrapper {
+.formWithSidePreview {
   padding-top: 20px;
   display: flex;
   flex-direction: row;
@@ -27,7 +23,7 @@
   padding-left: 10px;
 }
 
-.listRow {
+.categoriesBrandslistRow {
   position: relative;
   height: 40px;
   display: flex;
@@ -37,7 +33,26 @@
   border-bottom: 1px rgb(222, 225, 231) solid;
 }
 
-.listRow:hover {
+.categoriesBrandslistRow:hover {
+  background-color: rgb(242, 250, 250);
+}
+
+.productsListRowWrapper {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  border-bottom: 1px rgb(222, 225, 231) solid;
+}
+
+.productsListRow {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+}
+
+.productsListRow:hover {
   background-color: rgb(242, 250, 250);
 }
 

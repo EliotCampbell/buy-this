@@ -60,9 +60,9 @@ const ManageBrands = () => {
   }
 
   return (
-    <div className={classes.formDiv}>
+    <>
       <h1>MANAGE BRANDS</h1>
-      <div className={classes.formWrapper}>
+      <div className={classes.formWithSidePreview}>
         <div className={classes.form}>
           <AdminNewInput
             placeholder={'Add brand...'}
@@ -88,7 +88,7 @@ const ManageBrands = () => {
           </AdminNewInput>
 
           {brandsList.map((el) => (
-            <div className={classes.listRow} key={el.value}>
+            <div className={classes.categoriesBrandslistRow} key={el.value}>
               <Link
                 href={'/store'}
                 onClick={() => {
@@ -165,7 +165,7 @@ const ManageBrands = () => {
         </div>
       </div>
       {message && <MessageString message={message} />}
-    </div>
+    </>
   )
 }
 
