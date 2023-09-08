@@ -42,7 +42,9 @@ const ProductPreviewCard = ({
 
         <div className={classes.countPriceDiv}>
           <p className={classes.productCount}>Quantity: {quantity}</p>
-          <p className={classes.price}>{productPrice + ',00 $'}</p>
+          <p className={classes.price}>{`${Number.parseFloat(
+            productPrice
+          ).toFixed(2)} €`}</p>
         </div>
       </div>
     </div>

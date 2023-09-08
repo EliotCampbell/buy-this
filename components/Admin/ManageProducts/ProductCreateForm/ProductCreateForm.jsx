@@ -10,6 +10,7 @@ import ProductPreviewCard from '@/components/Shop/ProductPreviewCard/ProductPrev
 import Button from '@/components/UI/Button/Button'
 import { createProduct } from '@/http/Admin/products'
 import MessageString from '@/components/UI/MessageString/MessageString'
+import AdminNewTextArea from '@/components/UI/AdminNewTextArea/AdminNewTextArea'
 
 const ProductCreateForm = () => {
   const { categoriesList, brandsList, fetchProductsList } = useAdminListsStore(
@@ -20,14 +21,13 @@ const ProductCreateForm = () => {
     })
   )
 
-  const { newProduct, preview, setNewProduct, setPreview, reset, isValid } =
+  const { newProduct, preview, setNewProduct, setPreview, reset } =
     useAdminStore((state) => ({
       newProduct: state.newProduct,
       preview: state.preview,
       reset: state.reset,
       setNewProduct: state.setNewProduct,
-      setPreview: state.setPreview,
-      isValid: state.isValid
+      setPreview: state.setPreview
     }))
 
   const [message, setMessage] = useState(null)
@@ -55,11 +55,12 @@ const ProductCreateForm = () => {
 
   return (
     <>
+      <h1>Create product</h1>
       <div className={classes.formWithSidePreview}>
         <div className={classes.form}>
           <AdminNewInput
-            label={'Add a new product'}
-            placeholder={'Start typing a name of new product...'}
+            label={'A new product name'}
+            placeholder={'Name of the new product...'}
             value={newProduct.name}
             onChange={(e) => {
               setNewProduct({ ...newProduct, name: e.target.value })
@@ -87,15 +88,15 @@ const ProductCreateForm = () => {
 
           <AdminNewInput
             value={newProduct.price}
-            placeholder={'47'}
+            placeholder={'47...'}
             label={'Input product price'}
             type={'number'}
             onChange={(e) =>
               setNewProduct({ ...newProduct, price: e.target.value })
             }
           />
-          <AdminNewInput
-            placeholder={'Many words about it'}
+          <AdminNewTextArea
+            placeholder={'Many words about it...'}
             label={'Input product description'}
             value={newProduct.description}
             onChange={(e) =>
@@ -115,9 +116,7 @@ const ProductCreateForm = () => {
             }}
           />
           {message && <MessageString message={message} />}
-          <Button disabled={!isValid} onClick={() => createHandler()}>
-            Create product
-          </Button>
+          <Button onClick={() => createHandler()}>Create product</Button>
         </div>
         <div className={classes.productsCardWrapper}>
           <p className={classes.preview}>Preview</p>

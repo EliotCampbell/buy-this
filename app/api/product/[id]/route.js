@@ -3,13 +3,7 @@ import fs from 'fs'
 const uuid = require('uuid')
 import { writeFile } from 'fs/promises'
 
-const {
-  Product,
-  ProductsInfo,
-  Category,
-  ProductInfo,
-  Brand
-} = require('@/models/models')
+const { Product, Category, ProductInfo, Brand } = require('@/models/models')
 
 export const GET = async (request, { params }) => {
   try {
@@ -146,7 +140,7 @@ export const DELETE = async (request, { params }) => {
       })
     }
     const dataProduct = await Product.destroy({ where: { id: id } })
-    await ProductInfo.destroy({ where: { productId: { id: id } } })
+    await ProductInfo.destroy({ where: { productId: id } })
 
     if (product.img !== 'noImg.jpg') {
       await fs.unlink(`public/static/` + product.img, (err) => {

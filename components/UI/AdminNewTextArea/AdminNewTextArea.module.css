@@ -1,7 +1,7 @@
-.inputDiv {
+.textareaDiv {
   margin: 0 0 20px 0;
   position: relative;
-  height: 40px;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,7 +11,7 @@
   background-color: white;
 }
 
-.inputDiv:hover {
+.textareaDiv:hover {
 }
 
 .label {
@@ -31,17 +31,23 @@
   z-index: 1;
 }
 
-.input {
-  display: flex;
-  align-items: center;
+.textarea {
+  height: 100%;
   background-color: transparent;
   color: teal;
   font-size: 18px;
   font-family: BlenderPro-Bold, sans-serif;
   font-weight: 500;
   flex-grow: 1;
-  height: 40px;
+  resize: none;
+  padding: 10px 5px 5px;
 }
-.input::placeholder {
+
+.textarea::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.textarea::placeholder {
   color: #b4b4b4;
 }

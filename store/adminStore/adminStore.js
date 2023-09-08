@@ -1,7 +1,6 @@
 import { create } from 'zustand'
 
 const initialState = {
-  isValid: true,
   oldProductId: 1,
   newBrand: { name: '', brandId: '' },
   newCategory: { name: '', categoryId: '' },
@@ -27,7 +26,6 @@ export const useAdminStore = create((set) => ({
   reset: () => {
     set(initialState)
   },
-  setIsValid: (bool) => set((state) => ({ isValid: bool })),
   setPreview: (img) =>
     set((state) => ({
       preview: img

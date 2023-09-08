@@ -9,6 +9,7 @@ import AdminReactSelect from '@/components/UI/AdminReactSelect/AdminReactSelect'
 import AdminNewInput from '@/components/UI/AdminNewInput/AdminNewInput'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import { updateProduct } from '@/http/Admin/products'
+import AdminNewTextArea from '@/components/UI/AdminNewTextArea/AdminNewTextArea'
 
 const ProductUpdateForm = () => {
   const { categoriesList, brandsList, fetchProductsList } = useAdminListsStore(
@@ -19,7 +20,7 @@ const ProductUpdateForm = () => {
     })
   )
 
-  const { isValid, newProduct, setNewProduct, preview, setPreview, reset } =
+  const { newProduct, setNewProduct, preview, setPreview, reset } =
     useAdminStore((state) => ({
       setPreview: state.setPreview,
       preview: state.preview,
@@ -53,25 +54,8 @@ const ProductUpdateForm = () => {
 
   return (
     <>
-      <h1>Edit product</h1>
       <div className={classes.formWithSidePreview}>
         <div className={classes.form}>
-          <AdminReactSelect
-            value={newProduct.brand}
-            label={'Choose brand'}
-            options={brandsList}
-            onChange={(option) => {
-              setNewProduct({ ...newProduct, brandId: option })
-            }}
-          ></AdminReactSelect>
-          <AdminReactSelect
-            value={newProduct.category}
-            label={'Choose category'}
-            options={categoriesList}
-            onChange={(option) =>
-              setNewProduct({ ...newProduct, categoryId: option })
-            }
-          ></AdminReactSelect>
           <AdminNewInput
             placeholder={'Bicycle'}
             label={'Input product name'}
@@ -80,6 +64,25 @@ const ProductUpdateForm = () => {
               setNewProduct({ ...newProduct, name: e.target.value })
             }}
           />
+          <div className={classes.inputContainer}>
+            <AdminReactSelect
+              value={newProduct.brand}
+              label={'Choose brand'}
+              options={brandsList}
+              onChange={(option) => {
+                setNewProduct({ ...newProduct, brandId: option })
+              }}
+            ></AdminReactSelect>
+            <div className={classes.inputContainerHorizontalSplitter}></div>
+            <AdminReactSelect
+              value={newProduct.category}
+              label={'Choose category'}
+              options={categoriesList}
+              onChange={(option) =>
+                setNewProduct({ ...newProduct, categoryId: option })
+              }
+            ></AdminReactSelect>
+          </div>
           <AdminNewInput
             placeholder={'47'}
             label={'Input product price'}
@@ -89,7 +92,7 @@ const ProductUpdateForm = () => {
               setNewProduct({ ...newProduct, price: e.target.value })
             }
           />
-          <AdminNewInput
+          <AdminNewTextArea
             placeholder={'Many words about it'}
             label={'Input product description'}
             value={newProduct.description}
@@ -121,9 +124,7 @@ const ProductUpdateForm = () => {
           </Button>
           {message && <MessageString message={message} />}
 
-          <Button disabled={!isValid} onClick={() => updateHandler()}>
-            Update product
-          </Button>
+          <Button onClick={() => updateHandler()}>Update product</Button>
         </div>
         <div className={classes.productsCardWrapper}>
           <p className={classes.preview}>Preview</p>

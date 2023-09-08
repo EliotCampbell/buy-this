@@ -1,8 +1,6 @@
 import ManageCategories from '@/components/Admin/ManageCategories/ManageCategories'
 import ManageBrands from '@/components/Admin/ManageBrands/ManageBrands'
 import ProductCreateForm from '@/components/Admin/ManageProducts/ProductCreateForm/ProductCreateForm'
-import ProductUpdateForm from '@/components/Admin/ManageProducts/ProductUpdateForm/ProductUpdateForm'
-import ProductDeleteForm from '@/components/Admin/ManageProducts/ProductDeleteForm/ProductDeleteForm'
 import SpecificationsCreateForm from '@/components/Admin/Specifications/SpecificationsCreateForm/SpecificationsCreateForm'
 import SpecificationsUpdateForm from '@/components/Admin/Specifications/SpecificationsUpdateForm/SpecificationsUpdateForm'
 import SpecificationsDeleteForm from '@/components/Admin/Specifications/SpecificationsDeleteForm/SpecificationsDeleteForm'
@@ -27,6 +25,11 @@ export const linksArr = [
     linkName: 'Manage products',
     path: 'manage_products',
     page: <ManageProducts />
+  },
+  {
+    linkName: 'Create product',
+    path: 'create_product',
+    page: <ProductCreateForm />
   },
   { title: 'Specifications' },
   {

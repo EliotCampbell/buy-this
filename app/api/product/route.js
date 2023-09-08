@@ -19,7 +19,6 @@ export const POST = async (request) => {
     let description = formData.get('description')
     let info = formData.get('info')
     const img = formData.get('img') || 'noImg.jpg'
-    console.log(name)
     const foundProduct = await Product.findOne({
       where: { name: name }
     })
@@ -28,7 +27,7 @@ export const POST = async (request) => {
     if (foundProduct !== null) {
       return NextResponse.json({
         ok: false,
-        message: 'ProductDetails already exists',
+        message: 'Product already exists',
         dataObject: {
           newDevice: { name, price, brandId, categoryId, description }
         }
@@ -54,7 +53,7 @@ export const POST = async (request) => {
     }
 
     let fileName = 'noImg.jpg'
-    if (img !== 'noImg.jpg' || img !== undefined || true) {
+    if (img !== 'noImg.jpg') {
       fileName = uuid.v4() + '.jpg'
       await writeFile(
         `public/static/${fileName}`,

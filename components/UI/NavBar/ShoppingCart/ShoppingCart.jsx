@@ -41,7 +41,9 @@ const ShoppingCart = () => {
       <div className={classes.amountDiv}>
         <p className={classes.totalAmount}>Total amount:</p>
         <p className={classes.totalAmount}>
-          {cart.reduce((acc, el) => el.price * el.count + acc, 0) + `,00 $`}
+          {`${Number.parseFloat(
+            cart.reduce((acc, el) => el.price * el.count + acc, 0)
+          ).toFixed(2)} €`}
         </p>
       </div>
     </div>

@@ -34,7 +34,9 @@ const ProductPreviewCard = ({
         </div>
         <div className={classes.priceAvailabilityDiv}>
           <p className={classes.inStock}>In stock</p>
-          <p className={classes.price}>{`${productPrice},00 €`}</p>
+          <p className={classes.price}>{`${Number.parseFloat(
+            productPrice
+          ).toFixed(2)} €`}</p>
         </div>
       </Link>
     </div>

@@ -61,7 +61,7 @@ const NavBar = () => {
         const data = await res.json()
         if (data.dataObject.newToken) {
           console.log(
-            'New token is ' + data.dataObject.newToken + ' sent from NavBar.jsx'
+            `New token is  ${data.dataObject.newToken} sent from NavBar.jsx`
           )
           setUser(data.dataObject.decodedUser)
           setIsAuth(true)
