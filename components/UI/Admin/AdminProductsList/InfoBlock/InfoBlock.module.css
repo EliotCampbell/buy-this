@@ -1,0 +1,82 @@
+.infoWrapper {
+  display: flex;
+  padding: 5px;
+  width: 787px;
+  justify-content: space-between;
+}
+
+.infoDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  height: 25px;
+  color: teal;
+  font-size: 24px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.id {
+  display: flex;
+  align-items: center;
+  height: 25px;
+}
+
+.idTitle {
+  font-size: 16px;
+  padding-right: 2px;
+  color: teal;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.idNumber {
+  font-size: 16px;
+  color: #00a6a6;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.price {
+  display: flex;
+  align-self: center;
+  justify-self: start;
+  width: 200px;
+  color: red;
+  font-size: 24px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.categoryAndBrand {
+  display: flex;
+  height: 25px;
+  align-items: center;
+}
+
+.specifications {
+  height: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  color: teal;
+  font-size: 18px;
+  font-family: BlenderPro-Bold, sans-serif;
+  padding-right: 5px;
+}
+
+.info {
+  padding-right: 18px;
+  color: #00a6a6;
+  font-size: 18px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.description {
+  color: teal;
+  font-size: 18px;
+  font-family: BlenderPro-Bold, sans-serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

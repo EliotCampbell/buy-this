@@ -1,0 +1,30 @@
+.icoBlock {
+  display: flex;
+}
+
+.removeIco {
+  margin-left: 5px;
+  color: teal;
+  padding: 4px;
+  height: 26px;
+  width: 26px;
+}
+
+.removeIco:hover {
+  cursor: pointer;
+  color: red;
+  background-color: white;
+}
+
+.editIco {
+  margin-left: 5px;
+  color: teal;
+  padding: 4px;
+  height: 26px;
+  width: 26px;
+}
+.editIco:hover {
+  cursor: pointer;
+  color: green;
+  background-color: white;
+}

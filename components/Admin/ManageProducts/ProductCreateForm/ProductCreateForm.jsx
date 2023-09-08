@@ -3,14 +3,14 @@
 import React, { useRef, useState } from 'react'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
-import AdminReactSelect from '@/components/UI/AdminReactSelect/AdminReactSelect'
-import AdminNewInput from '@/components/UI/AdminNewInput/AdminNewInput'
+import AdminReactSelect from '@/components/UI/Admin/AdminReactSelect/AdminReactSelect'
+import AdminNewInput from '@/components/UI/Admin/AdminNewInput/AdminNewInput'
 import classes from '@/components/Admin/FormsStyles.module.css'
 import ProductPreviewCard from '@/components/Shop/ProductPreviewCard/ProductPreviewCard'
 import Button from '@/components/UI/Button/Button'
 import { createProduct } from '@/http/Admin/products'
 import MessageString from '@/components/UI/MessageString/MessageString'
-import AdminNewTextArea from '@/components/UI/AdminNewTextArea/AdminNewTextArea'
+import AdminNewTextArea from '@/components/UI/Admin/AdminNewTextArea/AdminNewTextArea'
 
 const ProductCreateForm = () => {
   const { categoriesList, brandsList, fetchProductsList } = useAdminListsStore(

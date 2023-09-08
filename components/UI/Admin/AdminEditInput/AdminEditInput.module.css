@@ -1,4 +1,4 @@
-.textarea {
+.input {
   border-radius: 2px;
   color: teal;
   font-size: 18px;
@@ -8,10 +8,10 @@
   background-color: transparent;
 }
 
-.textarea::placeholder {
+.input::placeholder {
   color: #b4b4b4;
 }
 
-.textarea:focus {
+.input:focus {
   background-color: rgb(231, 236, 239);
 }

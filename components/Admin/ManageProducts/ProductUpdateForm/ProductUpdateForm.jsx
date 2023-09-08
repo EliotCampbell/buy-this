@@ -5,11 +5,11 @@ import classes from '../../FormsStyles.module.css'
 import ProductPreviewCard from '../../../Shop/ProductPreviewCard/ProductPreviewCard'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
-import AdminReactSelect from '@/components/UI/AdminReactSelect/AdminReactSelect'
-import AdminNewInput from '@/components/UI/AdminNewInput/AdminNewInput'
+import AdminReactSelect from '@/components/UI/Admin/AdminReactSelect/AdminReactSelect'
+import AdminNewInput from '@/components/UI/Admin/AdminNewInput/AdminNewInput'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import { updateProduct } from '@/http/Admin/products'
-import AdminNewTextArea from '@/components/UI/AdminNewTextArea/AdminNewTextArea'
+import AdminNewTextArea from '@/components/UI/Admin/AdminNewTextArea/AdminNewTextArea'
 
 const ProductUpdateForm = () => {
   const { categoriesList, brandsList, fetchProductsList } = useAdminListsStore(

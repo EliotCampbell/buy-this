@@ -1,4 +1,4 @@
-.Button {
+.ButtonDark {
   padding: 13px 15px;
   min-width: 50px;
   border-radius: 2px;
@@ -11,12 +11,12 @@
   font-family: BlenderPro-Bold, sans-serif;
 }
 
-.Button:hover {
+.ButtonDark:hover {
   cursor: pointer;
   text-decoration: underline;
 }
 
-.Button:disabled {
+.ButtonDark:disabled {
   color: #097171;
   text-decoration: underline;
 }

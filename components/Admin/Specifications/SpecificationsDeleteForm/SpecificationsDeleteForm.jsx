@@ -8,35 +8,23 @@ import { fetchAllProducts, fetchProductById } from '@/http/fetchers/fetchers'
 import { deleteSpecificationById } from '@/http/Admin/specifications'
 import { useProductStore } from '@/store/mainStore/store'
 import MessageString from '@/components/UI/MessageString/MessageString'
+import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 
 const SpecificationsDeleteForm = () => {
-  const { specifications, setSpecifications } = useProductStore((state) => ({
-    specifications: state.specifications,
-    setSpecifications: state.setSpecifications
-  }))
-  const {
-    reset,
-    productsList,
-    setProductsList,
-    newSpecification,
-    setNewSpecification
-  } = useAdminStore((state) => ({
-    setNewSpecification: state.setNewSpecification,
-    newSpecification: state.newSpecification,
+  const { productsList, fetchProductsList } = useAdminListsStore((state) => ({
     productsList: state.productsList,
-    setProductsList: state.setProductsList,
-    reset: state.reset
+    fetchProductsList: state.fetchProductsList
   }))
+
+  const { reset, newSpecification, setNewSpecification } = useAdminStore(
+    (state) => ({
+      setNewSpecification: state.setNewSpecification,
+      newSpecification: state.newSpecification,
+      reset: state.reset
+    })
+  )
 
   const [message, setMessage] = useState(null)
-  const [isLoaded, setIsLoaded] = useState(false)
-
-  useEffect(() => {
-    fetchAllProducts().then((r) => {
-      setProductsList(r.dataObject.products.rows)
-      setIsLoaded(true)
-    })
-  }, [])
 
   const deleteSpecification = (id) => {
     deleteSpecificationById(id).then((r) => {
@@ -45,10 +33,10 @@ const SpecificationsDeleteForm = () => {
     })
   }
 
-  return isLoaded ? (
+  return (
     <div className={classes.specifications}>
       <div>
-        <h1 className={classes.header}>DELETE SPECIFICATION</h1>
+        <h1 className={classes.header}>MANAGE SPECIFICATIONS</h1>
 
         <ReactSelect
           label={'Select product'}
@@ -58,22 +46,17 @@ const SpecificationsDeleteForm = () => {
               ...newSpecification,
               productId: option.value.id
             })
-            fetchProductById(option.value.id).then((r) => {
-              setSpecifications(r.dataObject.product.info)
-            })
           }}
         ></ReactSelect>
         <h1 className={classes.tableTitle}>Specifications:</h1>
 
         <Specifications
           deleteSpecification={deleteSpecification}
-          specifications={specifications}
+          specifications={''}
         />
         {message && <MessageString message={message} />}
       </div>
     </div>
-  ) : (
-    <h1>Loading...</h1>
   )
 }
 

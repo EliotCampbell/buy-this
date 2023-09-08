@@ -6,14 +6,11 @@ export const useProductStore = create((set) => ({
   brands: [],
   products: [],
   productsCount: 0,
-  specifications: [],
   setBrands: (brands) => set((state) => ({ brands: brands })),
   setCategories: (categories) => set((state) => ({ categories: categories })),
   setProducts: (products) => set((state) => ({ products: products })),
   setProductsCount: (productsCount) =>
-    set((state) => ({ productsCount: productsCount })),
-  setSpecifications: (specifications) =>
-    set((state) => ({ specifications: specifications }))
+    set((state) => ({ productsCount: productsCount }))
 }))
 
 export const useSessionStore = create(

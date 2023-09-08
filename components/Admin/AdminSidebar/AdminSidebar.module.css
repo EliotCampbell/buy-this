@@ -14,12 +14,12 @@
   margin-bottom: 22px;
 }
 .adminNavTitleLink {
-  border-bottom: 1px rgb(222, 225, 231) solid;
+  border-bottom: 1px #dee1e7 solid;
   padding: 8px 0;
   font-size: 22px;
   letter-spacing: 2px;
   font-family: BlenderPro-Bold, sans-serif;
-  color: rgb(0 99 99);
+  color: #097171;
 }
 
 .adminNavLink {

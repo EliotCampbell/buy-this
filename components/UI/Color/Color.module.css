@@ -1,0 +1,24 @@
+.color {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 50px;
+  width: 1440px;
+  margin-bottom: 20px;
+}
+
+.text {
+  background-color: white;
+  color: black;
+  font-size: 20px;
+  padding: 10px;
+  margin-left: 20px;
+  border-radius: 2px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.text:hover {
+  background-color: #f1f1f1;
+  text-decoration: underline;
+  cursor: pointer;
+}

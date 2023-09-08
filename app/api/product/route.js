@@ -115,6 +115,7 @@ export const GET = async (req) => {
 
     let products = await Product.findAndCountAll({
       where: { ...whereHandler() },
+      include: [{ model: ProductInfo, as: 'info' }],
       limit,
       page,
       offset,

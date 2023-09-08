@@ -7,10 +7,10 @@ import MessageString from '@/components/UI/MessageString/MessageString'
 import { useQueryStore } from '@/store/mainStore/store'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import classes from '@/components/Admin/FormsStyles.module.css'
-import AdminNewInput from '@/components/UI/AdminNewInput/AdminNewInput'
+import AdminNewInput from '@/components/UI/Admin/AdminNewInput/AdminNewInput'
 import { FiCheck, FiCornerDownLeft, FiPlus, FiTrash } from 'react-icons/fi'
 import Link from 'next/link'
-import AdminEditInput from '@/components/UI/AdminEditInput/AdminEditInput'
+import AdminEditInput from '@/components/UI/Admin/AdminEditInput/AdminEditInput'
 
 const ManageBrands = () => {
   const [message, setMessage] = useState(null)

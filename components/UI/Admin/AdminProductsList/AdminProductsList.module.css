@@ -1,0 +1,68 @@
+.productsListRowWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 120px;
+  width: 1000px;
+  border-bottom: 1px rgb(222, 225, 231) solid;
+}
+
+.changeBackground {
+  background-color: rgb(242, 250, 250);
+}
+
+.productsListRow {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+.productsListRow:hover {
+  background-color: rgb(242, 250, 250);
+}
+
+.productsInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.linkIco {
+  margin-right: 5px;
+  color: teal;
+  padding: 4px;
+  height: 26px;
+  width: 26px;
+}
+
+.linkIco:hover {
+  cursor: pointer;
+  color: green;
+  background-color: white;
+}
+
+.productMiniImgDiv {
+  position: relative;
+  min-height: 100px;
+  min-width: 100px;
+  margin: 5px;
+}
+
+.productMiniImg {
+  height: 100px;
+  width: 100%;
+
+  object-fit: contain;
+}
+
+.name {
+  color: teal;
+  font-size: 20px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.productEditInline {
+  padding: 0 15px 15px 15px;
+  background-color: rgb(242, 250, 250);
+}

@@ -1,24 +1,51 @@
-.Button {
+.ButtonDark {
   width: 100%;
   padding: 13px 15px;
   min-width: 50px;
   border-radius: 2px;
   background-color: #333333;
   font-weight: 500;
-  color: white;
+  color: #f1f1f1;
   text-transform: uppercase;
   font-size: 16px;
   letter-spacing: 0.05em;
   font-family: BlenderPro-Bold, sans-serif;
 }
 
-.Button:hover {
+.ButtonDark:hover {
   cursor: pointer;
-  color: #ffffff;
   background-color: #444444;
 }
 
-.Button:disabled {
-  background-color: #dfe1e4;
+.ButtonLight:active {
+  background-color: #222222;
+}
+
+.ButtonDark:disabled {
+  background-color: #dee1e7;
+  color: #f1f1f1;
+}
+
+.ButtonLight {
+  width: 100%;
+  padding: 13px 15px;
+  min-width: 50px;
+  border-radius: 2px;
+  background-color: #f1f1f1;
+  border: 1px #dee1e7 solid;
+  font-weight: 500;
   color: #333333;
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.ButtonLight:hover {
+  cursor: pointer;
+  background-color: #f2fafa;
+}
+
+.ButtonLight:active {
+  background-color: #f1f1f1;
 }
