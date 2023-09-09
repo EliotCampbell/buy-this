@@ -17,6 +17,11 @@
   font-family: BlenderPro-Bold, sans-serif;
 }
 
+.name:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .id {
   display: flex;
   align-items: center;
@@ -56,6 +61,18 @@
   height: 25px;
   display: flex;
   align-items: center;
+}
+
+.specificationsCount {
+  padding-right: 18px;
+  color: #00a6a6;
+  font-size: 18px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.specificationsCount:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .title {

@@ -2,7 +2,8 @@ import { create } from 'zustand'
 import {
   fetchAllBrands,
   fetchAllCategories,
-  fetchAllProducts
+  fetchAllProducts,
+  fetchProductById
 } from '@/http/fetchers/fetchers'
 
 export const useAdminListsStore = create((set) => ({
@@ -16,7 +17,7 @@ export const useAdminListsStore = create((set) => ({
       fetchAllBrands(),
       fetchAllProducts()
     ]).then(([categoriesData, brandsData, productsData]) => {
-      set((state) => ({
+      set(() => ({
         categoriesList: categoriesData.dataObject.categories.map((el) => ({
           value: el.id,
           label: el.name
@@ -34,7 +35,7 @@ export const useAdminListsStore = create((set) => ({
   },
   fetchCategoriesList: async () => {
     await fetchAllCategories().then((r) => {
-      set((state) => ({
+      set(() => ({
         categoriesList: r.dataObject.categories.map((el) => ({
           value: el.id,
           label: el.name
@@ -44,7 +45,7 @@ export const useAdminListsStore = create((set) => ({
   },
   fetchBrandsList: async () => {
     await fetchAllBrands().then((r) => {
-      set((state) => ({
+      set(() => ({
         brandsList: r.dataObject.brands.map((el) => ({
           value: el.id,
           label: el.name
@@ -54,12 +55,22 @@ export const useAdminListsStore = create((set) => ({
   },
   fetchProductsList: async () => {
     await fetchAllProducts().then((r) => {
-      set((state) => ({
+      set(() => ({
         productsList: r.dataObject.products.rows.map((el) => ({
           value: el,
           label: el.name
         }))
       }))
     })
+  },
+  fetchSpecificationsList: async (productId) => {
+    await fetchProductById(productId).then((r) =>
+      set(() => ({
+        specificationsList: r.dataObject.product.info.map((el) => ({
+          value: el,
+          label: el.title
+        }))
+      }))
+    )
   }
 }))

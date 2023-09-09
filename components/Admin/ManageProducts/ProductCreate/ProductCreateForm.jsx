@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import AdminReactSelect from '@/components/UI/Admin/AdminReactSelect/AdminReactSelect'
@@ -32,21 +32,19 @@ const ProductCreateForm = () => {
 
   const [message, setMessage] = useState(null)
 
-  const inputRef = useRef()
-
-  const createFormData = () => {
+  const createFormData = (product) => {
     const formData = new FormData()
-    formData.append('name', newProduct.name)
-    formData.append('price', newProduct.price.toString())
-    formData.append('img', newProduct.file)
-    formData.append('brandId', newProduct.brand.value)
-    formData.append('categoryId', newProduct.category.value)
-    formData.append('description', newProduct.description)
+    formData.append('name', product.name)
+    formData.append('price', product.price.toString())
+    formData.append('img', product.file)
+    formData.append('brandId', product.brand.value)
+    formData.append('categoryId', product.category.value)
+    formData.append('description', product.description)
     return formData
   }
 
-  const createHandler = async () => {
-    await createProduct(createFormData()).then((r) => {
+  const createHandler = async (product) => {
+    await createProduct(createFormData(product)).then((r) => {
       setMessage(r)
       r.ok && reset()
     })
@@ -75,7 +73,7 @@ const ProductCreateForm = () => {
                 setNewProduct({ ...newProduct, brand: option })
               }}
             ></AdminReactSelect>
-            <div className={classes.inputContainerHorizontalSplitter}></div>
+            <div className={classes.inputContainerVerticalSplitter}></div>
             <AdminReactSelect
               value={newProduct.category === '' ? null : newProduct.category}
               label={'Choose category'}
@@ -107,7 +105,6 @@ const ProductCreateForm = () => {
             }
           />
           <AdminNewInput
-            ref={inputRef}
             type={'file'}
             accept={'.png,.jpg'}
             onChange={(e) => {
@@ -116,7 +113,9 @@ const ProductCreateForm = () => {
             }}
           />
           {message && <MessageString message={message} />}
-          <Button onClick={() => createHandler()}>Create product</Button>
+          <Button onClick={() => createHandler(newProduct)}>
+            Create product
+          </Button>
         </div>
         <div className={classes.productsCardWrapper}>
           <p className={classes.preview}>Preview</p>

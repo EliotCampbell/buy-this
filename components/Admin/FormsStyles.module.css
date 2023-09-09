@@ -88,6 +88,10 @@
   background-color: white;
 }
 
+.icoBlock {
+  display: flex;
+}
+
 .editIco {
   margin-left: 5px;
   color: teal;
@@ -101,11 +105,14 @@
   background-color: white;
 }
 
-.inputContainer {
-  display: flex;
-  width: 100%;
+.horizontalSplitter {
+  height: 20px;
 }
 
-.inputContainerHorizontalSplitter {
+.inputContainer {
+  display: flex;
+}
+
+.inputContainerVerticalSplitter {
   width: 40px;
 }

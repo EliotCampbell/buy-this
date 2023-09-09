@@ -1,0 +1,8 @@
+.inputContainer {
+  display: flex;
+  flex-grow: 1;
+}
+
+.inputContainerVerticalSplitter {
+  width: 40px;
+}

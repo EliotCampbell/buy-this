@@ -98,7 +98,6 @@ const ManageBrands = () => {
                 <FiCornerDownLeft className={classes.linkIco} />
               </Link>
               <AdminEditInput
-                key={el.value}
                 onFocus={() => {
                   setMessage(null)
                   setSelectedBrand(el.value)

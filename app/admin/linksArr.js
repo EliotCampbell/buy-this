@@ -1,10 +1,7 @@
 import ManageCategories from '@/components/Admin/ManageCategories/ManageCategories'
 import ManageBrands from '@/components/Admin/ManageBrands/ManageBrands'
-import ProductCreateForm from '@/components/Admin/ManageProducts/ProductCreateForm/ProductCreateForm'
-import SpecificationsCreateForm from '@/components/Admin/Specifications/SpecificationsCreateForm/SpecificationsCreateForm'
-import SpecificationsUpdateForm from '@/components/Admin/Specifications/SpecificationsUpdateForm/SpecificationsUpdateForm'
-import SpecificationsDeleteForm from '@/components/Admin/Specifications/SpecificationsDeleteForm/SpecificationsDeleteForm'
-import React from 'react'
+import ProductCreateForm from '@/components/Admin/ManageProducts/ProductCreate/ProductCreateForm'
+import ManageSpecifications from '@/components/Admin/ManageSpecifications/ManageSpecifications'
 import ManageProducts from '@/components/Admin/ManageProducts/ManageProducts'
 
 export const linksArr = [
@@ -33,18 +30,8 @@ export const linksArr = [
   },
   { title: 'Specifications' },
   {
-    linkName: 'Create specification',
-    path: 'create_specification',
-    page: <SpecificationsCreateForm />
-  },
-  {
-    linkName: 'Update specification',
-    path: 'update_specification',
-    page: <SpecificationsUpdateForm />
-  },
-  {
-    linkName: 'Delete specification',
-    path: 'delete_specification',
-    page: <SpecificationsDeleteForm />
+    linkName: 'Manage specifications',
+    path: 'manage_specification',
+    page: <ManageSpecifications />
   }
 ]

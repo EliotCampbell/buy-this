@@ -32,14 +32,17 @@ const AdminProductsList = () => {
           </Link>
           {el.value.id !== newProduct.oldProductId && (
             <>
-              <div className={classes.productMiniImgDiv}>
-                <Image
-                  className={classes.productMiniImg}
-                  alt={'image'}
-                  src={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.value.img}`}
-                  fill={true}
-                />
-              </div>
+              <Link href={'/product/' + el.value.id}>
+                <div className={classes.productMiniImgDiv}>
+                  <Image
+                    className={classes.productMiniImg}
+                    alt={'image'}
+                    src={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.value.img}`}
+                    fill={true}
+                    sizes="(max-width: 768px) 100px"
+                  />
+                </div>
+              </Link>
               <InfoBlock element={el} />
             </>
           )}

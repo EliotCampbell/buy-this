@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import Button from '../../../UI/Button/Button'
 import classes from '../../FormsStyles.module.css'
 import ProductPreviewCard from '../../../Shop/ProductPreviewCard/ProductPreviewCard'
@@ -29,11 +29,9 @@ const ProductUpdateForm = () => {
       reset: state.reset
     }))
 
-  const inputRef = useRef()
-
   const [message, setMessage] = useState(null)
 
-  const createFormData = () => {
+  const createFormData = (newProduct) => {
     const formData = new FormData()
     formData.append('name', newProduct.name)
     formData.append('price', newProduct.price.toString())
@@ -44,11 +42,13 @@ const ProductUpdateForm = () => {
     return formData
   }
 
-  const updateHandler = async () => {
-    await updateProduct(newProduct.oldProductId, createFormData()).then((r) => {
-      setMessage(r)
-      r.ok && reset()
-    })
+  const updateHandler = async (product) => {
+    await updateProduct(product.oldProductId, createFormData(product)).then(
+      (r) => {
+        setMessage(r)
+        r.ok && reset()
+      }
+    )
     await fetchProductsList()
   }
 
@@ -63,6 +63,11 @@ const ProductUpdateForm = () => {
             onChange={(e) => {
               setNewProduct({ ...newProduct, name: e.target.value })
             }}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                updateHandler(newProduct).then()
+              }
+            }}
           />
           <div className={classes.inputContainer}>
             <AdminReactSelect
@@ -70,16 +75,16 @@ const ProductUpdateForm = () => {
               label={'Choose brand'}
               options={brandsList}
               onChange={(option) => {
-                setNewProduct({ ...newProduct, brandId: option })
+                setNewProduct({ ...newProduct, brand: option })
               }}
             ></AdminReactSelect>
-            <div className={classes.inputContainerHorizontalSplitter}></div>
+            <div className={classes.inputContainerVerticalSplitter}></div>
             <AdminReactSelect
               value={newProduct.category}
               label={'Choose category'}
               options={categoriesList}
               onChange={(option) =>
-                setNewProduct({ ...newProduct, categoryId: option })
+                setNewProduct({ ...newProduct, category: option })
               }
             ></AdminReactSelect>
           </div>
@@ -91,6 +96,11 @@ const ProductUpdateForm = () => {
             onChange={(e) =>
               setNewProduct({ ...newProduct, price: e.target.value })
             }
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                updateHandler(newProduct).then()
+              }
+            }}
           />
           <AdminNewTextArea
             placeholder={'Many words about it'}
@@ -102,14 +112,23 @@ const ProductUpdateForm = () => {
                 description: e.target.value
               })
             }
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                updateHandler(newProduct).then()
+              }
+            }}
           />
           <AdminNewInput
-            ref={inputRef}
             type={'file'}
             accept={'.png,.jpg'}
             onChange={(e) => {
               setNewProduct({ ...newProduct, file: e.target.files[0] })
               setPreview(URL.createObjectURL(e.target.files[0]))
+            }}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                updateHandler(newProduct).then()
+              }
             }}
           />
           <Button
@@ -122,9 +141,12 @@ const ProductUpdateForm = () => {
           >
             Remove image
           </Button>
+          <div className={classes.horizontalSplitter}></div>
           {message && <MessageString message={message} />}
 
-          <Button onClick={() => updateHandler()}>Update product</Button>
+          <Button onClick={() => updateHandler(newProduct)}>
+            Save product
+          </Button>
         </div>
         <div className={classes.productsCardWrapper}>
           <p className={classes.preview}>Preview</p>

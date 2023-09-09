@@ -1,0 +1,40 @@
+.table {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.Td {
+  color: teal;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 18px;
+  padding: 5px;
+  border: 1px solid rgb(222, 225, 231);
+}
+
+.removeIco {
+  margin-left: 5px;
+  color: teal;
+  padding: 4px;
+  height: 26px;
+  width: 26px;
+}
+
+.removeIco:hover {
+  cursor: pointer;
+  color: red;
+  background-color: white;
+}
+
+.submitIco {
+  margin-left: 5px;
+  color: teal;
+  padding: 4px;
+  height: 26px;
+  width: 26px;
+}
+
+.submitIco:hover {
+  cursor: pointer;
+  color: green;
+  background-color: white;
+}

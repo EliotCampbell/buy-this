@@ -1,4 +1,5 @@
 .inputDiv {
+  width: 100%;
   margin: 0 0 20px 0;
   position: relative;
   height: 40px;
@@ -12,6 +13,8 @@
 }
 
 .inputDiv:hover {
+  border: 1px teal solid;
+  transition: 0.3s;
 }
 
 .label {
