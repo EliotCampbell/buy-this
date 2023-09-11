@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import jwt from 'jsonwebtoken'
 import { User } from '@/models/models'
 import bcrypt from 'bcrypt'
@@ -8,27 +8,52 @@ const generateJwt = (id, email, role = 'USER') =>
 
 export const POST = async (request) => {
   try {
-    const { email, password, role = 'USER' } = await request.json()
-    if (!email || !password) {
+    const role = 'USER'
+    const formData = await request.formData()
+    const email = formData.get('email')
+    const username = formData.get('username')
+    const password = formData.get('password')
+    if (!email || !password || !username) {
       return NextResponse.json({
         ok: false,
-        message: 'No email/password',
-        dataObject: { email }
+        message: 'No email/password/username',
+        dataObject: { email, username }
       })
     }
-    const candidate = await User.findOne({ where: { email } })
-    if (candidate) {
+    const candidateEmail = await User.findOne({ where: { email } })
+    if (candidateEmail) {
       return NextResponse.json({
         ok: false,
         message: 'This email already exist',
         dataObject: { email }
       })
     }
+    const candidateUsername = await User.findOne({ where: { username } })
+    if (candidateUsername) {
+      return NextResponse.json({
+        ok: false,
+        message: 'This username already exist',
+        dataObject: { username }
+      })
+    }
     const hashPassword = await bcrypt.hash(password, 5)
-    const user = await User.create({ email, role, password: hashPassword })
+    const user = await User.create({
+      email,
+      username,
+      role,
+      password: hashPassword
+    })
     const token = generateJwt(user.id, user.email, user.role)
-    return NextResponse.json({ token })
+    return NextResponse.json({
+      ok: true,
+      message: 'Registration completed successfully',
+      dataObject: { token }
+    })
   } catch (e) {
-    console.log('Internal error in registration api' + e.message)
+    return NextResponse.json({
+      ok: false,
+      message: 'Error',
+      dataObject: { error: e.message }
+    })
   }
 }

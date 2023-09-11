@@ -30,6 +30,7 @@ const ProductPreviewCard = ({
             src={productImg}
             alt="img"
             fill={true}
+            sizes="(max-width: 1920px) 294px"
           />
         </div>
         <div className={classes.priceAvailabilityDiv}>

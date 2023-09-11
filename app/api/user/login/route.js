@@ -29,7 +29,13 @@ export const POST = async (request) => {
       {
         ok: true,
         message: 'Token updated successfully',
-        dataObject: { token, id: user.id, email: user.email, role: user.role }
+        dataObject: {
+          token,
+          id: user.id,
+          email: user.email,
+          username: user.username,
+          role: user.role
+        }
       } /*,
       {
         status: 200,

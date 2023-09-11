@@ -14,15 +14,15 @@ const LeftSideNav = ({ setSwitcher }) => {
 
   const logout = () => {
     useUserStore.setState({ user: {} })
-    useSessionStore.setState({ isAuth: false })
+    useSessionStore.setState({ isAuth: false, token: '' })
   }
 
   return (
     <div className={classes.sideNavBack}>
-      <div className={classes.exit} onClick={() => setSwitcher(false)}>
+      <div className={classes.exit} onMouseDown={() => setSwitcher(false)}>
         <div
           className={classes.sideNav}
-          onClick={(event) => {
+          onMouseDown={(event) => {
             event.stopPropagation()
           }}
         >
@@ -49,17 +49,20 @@ const LeftSideNav = ({ setSwitcher }) => {
                     <p className={classes.logoutP}>Logout</p>
                   </Link>
                 </div>
-                {user.id ? (
+                {user ? (
                   <>
-                    <p className={classes.userInfo}>Id: {user?.id}</p>
-                    <p className={classes.userInfo}>Role: {user?.role}</p>
+                    <p className={classes.userInfo}>Id: {user.id}</p>
+                    <p className={classes.userInfo}>
+                      Username: {user.username}
+                    </p>
+                    <p className={classes.userInfo}>Role: {user.role}</p>
                   </>
                 ) : (
                   <p className={classes.userInfo}>User not found!</p>
                 )}
               </>
             ) : (
-              <Login sideMenuSwitcher={setSwitcher} />
+              <Login setSideMenuSwitcher={setSwitcher} />
             )}
           </div>
         </div>

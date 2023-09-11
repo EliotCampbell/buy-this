@@ -3,9 +3,10 @@ const { DataTypes } = require('sequelize')
 
 const User = sequelize.define('user', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  email: { type: DataTypes.STRING, unique: true },
-  password: { type: DataTypes.STRING },
-  role: { type: DataTypes.STRING, defaultValue: 'USER' }
+  username: { type: DataTypes.STRING, unique: true, allowNull: false },
+  email: { type: DataTypes.STRING, unique: true, allowNull: false },
+  password: { type: DataTypes.STRING, allowNull: false },
+  role: { type: DataTypes.STRING, defaultValue: 'USER', allowNull: false }
 })
 
 const Product = sequelize.define('product', {
@@ -54,8 +55,8 @@ Product.belongsTo(Brand)
 Product.hasMany(Rating)
 Rating.belongsTo(Product)
 
-Product.hasMany(ProductInfo, { as: 'info' })
-ProductInfo.belongsTo(Product)
+Product.hasMany(ProductInfo, { foreignKey: 'productId', as: 'info' })
+ProductInfo.belongsTo(Product, { foreignKey: 'productId' })
 
 Category.belongsToMany(Brand, { through: CategoryBrand })
 Brand.belongsToMany(Category, { through: CategoryBrand })
@@ -69,3 +70,14 @@ module.exports = {
   CategoryBrand,
   ProductInfo
 }
+
+/*
+sequelize
+  .sync({ force: true })
+  .then(() => {
+    console.log('Database models synchronized.')
+  })
+  .catch((err) => {
+    console.error('Error synchronizing database models:', err)
+  })
+*/

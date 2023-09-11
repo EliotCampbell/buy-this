@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import classes from './NavBar.module.css'
 import { HiOutlineMagnifyingGlass } from 'react-icons/hi2'
-import IcoButton from '../IcoButton/IcoButton'
+import IcoButton from '../UI/IcoButton/IcoButton'
 import { SlBasket } from 'react-icons/sl'
 import { RiAdminLine, RiUserLine } from 'react-icons/ri'
 import { PiList } from 'react-icons/pi'
@@ -16,9 +16,10 @@ import {
   useUserStore
 } from '@/store/mainStore/store'
 import { BsPerson } from 'react-icons/bs'
-import CartSideNav from '@/components/UI/NavBar/CartSideNav'
+import CartSideNav from '@/components/NavBar/CartSideNav'
 import { fetchAllBrands, fetchAllCategories } from '@/http/fetchers/fetchers'
 import { useShoppingCartStore } from '@/store/shoppingCartStore/shoppingCartStore'
+import { checkAuthToken } from '@/http/auth'
 
 const NavBar = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -47,39 +48,24 @@ const NavBar = () => {
   const { cart } = useShoppingCartStore((state) => ({ cart: state.cart }))
 
   useEffect(() => {
-    const checkAuth = async (token) => {
-      try {
-        const res = await fetch(
-          process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/user/auth_check',
-          {
-            method: 'POST',
-            body: JSON.stringify({
-              token
-            })
-          }
+    checkAuthToken(token).then((r) => {
+      if (r.dataObject.newToken) {
+        console.log(
+          `New token is\n  ${r.dataObject.newToken} \n\nSent from NavBar.jsx`
         )
-        const data = await res.json()
-        if (data.dataObject.newToken) {
-          console.log(
-            `New token is  ${data.dataObject.newToken} sent from NavBar.jsx`
-          )
-          setUser(data.dataObject.decodedUser)
-          setIsAuth(true)
-          setToken(data.dataObject.newToken)
-        } else {
-          console.log('No token or token in not valid' + 'Sent from NavBar.jsx')
-          setUser({})
-          setIsAuth(false)
-          setToken('')
-        }
-      } catch (e) {
-        console.log(e)
-      } finally {
-        setIsLoading(false)
+        setUser(r.dataObject.decodedUser)
+        setIsAuth(true)
+        setToken(r.dataObject.newToken)
+      } else {
+        console.log(
+          'No token or token in not valid' + '\n\nSent from NavBar.jsx'
+        )
+        setUser({})
+        setIsAuth(false)
+        setToken('')
       }
-    }
-
-    checkAuth(token).finally()
+    })
+    setIsLoading(false)
     fetchAllBrands().then((r) => setBrands(r.dataObject.brands))
     fetchAllCategories().then((r) => setCategories(r.dataObject.categories))
   }, [])

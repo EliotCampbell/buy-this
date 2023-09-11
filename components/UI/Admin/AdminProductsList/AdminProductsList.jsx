@@ -39,7 +39,7 @@ const AdminProductsList = () => {
                     alt={'image'}
                     src={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.value.img}`}
                     fill={true}
-                    sizes="(max-width: 768px) 100px"
+                    sizes="(max-width: 1920px) 100px"
                   />
                 </div>
               </Link>

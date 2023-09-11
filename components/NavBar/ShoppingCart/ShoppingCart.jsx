@@ -1,7 +1,7 @@
 import { useShoppingCartStore } from '@/store/shoppingCartStore/shoppingCartStore'
 import React from 'react'
 import classes from './ShoppingCart.module.css'
-import ShoppingCartPreview from '@/components/UI/NavBar/ShoppingCart/ShoppingCartPreview/ShoppingCartPreview'
+import ShoppingCartPreview from '@/components/NavBar/ShoppingCart/ShoppingCartPreview/ShoppingCartPreview'
 import Button from '@/components/UI/Button/Button'
 import Link from 'next/link'
 

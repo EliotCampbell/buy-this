@@ -20,11 +20,18 @@ export const POST = async (request) => {
       decodedUser.email,
       decodedUser.role
     )
-    return NextResponse.json({
-      ok: true,
-      message: 'Token updated successfully',
-      dataObject: { oldToken: token, newToken, decodedUser }
-    })
+    return NextResponse.json(
+      {
+        ok: true,
+        message: 'Token updated successfully',
+        dataObject: { oldToken: token, newToken, decodedUser }
+      },
+      {
+        headers: {
+          'Set-Cookie': `token=${token};Path=/;Max-Age=86400;HttpOnly`
+        }
+      }
+    )
   } catch (e) {
     return NextResponse.json({
       ok: false,

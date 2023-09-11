@@ -6,11 +6,11 @@ export const useProductStore = create((set) => ({
   brands: [],
   products: [],
   productsCount: 0,
-  setBrands: (brands) => set((state) => ({ brands: brands })),
-  setCategories: (categories) => set((state) => ({ categories: categories })),
-  setProducts: (products) => set((state) => ({ products: products })),
+  setBrands: (brands) => set(() => ({ brands: brands })),
+  setCategories: (categories) => set(() => ({ categories: categories })),
+  setProducts: (products) => set(() => ({ products: products })),
   setProductsCount: (productsCount) =>
-    set((state) => ({ productsCount: productsCount }))
+    set(() => ({ productsCount: productsCount }))
 }))
 
 export const useSessionStore = create(
@@ -18,8 +18,8 @@ export const useSessionStore = create(
     (set) => ({
       token: '',
       isAuth: false,
-      setIsAuth: (bool) => set((state) => ({ isAuth: bool })),
-      setToken: (token) => set((state) => ({ token: token }))
+      setIsAuth: (bool) => set(() => ({ isAuth: bool })),
+      setToken: (token) => set(() => ({ token: token }))
     }),
     { name: 'sessionStore', version: 1 }
   )
@@ -28,11 +28,13 @@ export const useSessionStore = create(
 export const useUserStore = create((set) => ({
   isLoading: true,
   user: {},
-  setIsLoading: (bool) => set((state) => ({ isLoading: bool })),
-  setUser: (user) => set((state) => ({ user: user }))
+  message: null,
+  setIsLoading: (bool) => set(() => ({ isLoading: bool })),
+  setUser: (user) => set(() => ({ user: user })),
+  setMessage: (message) => set(() => ({ message: message }))
 }))
 
 export const useQueryStore = create((set) => ({
   query: { limit: 6, page: 1 },
-  setQuery: (query) => set((state) => ({ query }))
+  setQuery: (query) => set(() => ({ query }))
 }))
