@@ -1,10 +1,7 @@
 import { NextResponse } from 'next/server'
-import jwt from 'jsonwebtoken'
 import { User } from '@/models/models'
 import bcrypt from 'bcrypt'
-
-const generateJwt = (id, email, role = 'USER') =>
-  jwt.sign({ id, email, role }, process.env.SECRET_KEY, { expiresIn: '12h' })
+import { generateJwt } from '@/utils'
 
 export const POST = async (request) => {
   try {
@@ -24,30 +21,23 @@ export const POST = async (request) => {
         dataObject: { email }
       })
     }
-    const token = generateJwt(user.id, user.email, user.role)
+    const token = await generateJwt(user.id, user.email, user.role)
     return NextResponse.json(
       {
         ok: true,
         message: 'Token updated successfully',
         dataObject: {
-          token,
           id: user.id,
           email: user.email,
           username: user.username,
           role: user.role
         }
-      } /*,
+      },
       {
-        status: 200,
         headers: {
-          'Set-Cookie': [
-            `userId=${user.id};Path=/;Max-Age=${'86400'};HttpOnly;Secure`,
-            `userEmail=${user.email};Path=/;Max-Age=${'86400'};HttpOnly;Secure`,
-            `userRole=${user.role};Path=/;Max-Age=${'86400'};HttpOnly;Secure`,
-            `token=${token};Path=/;Max-Age=${'86400'};HttpOnly;Secure`
-          ]
+          'Set-Cookie': `token=${token};Path=/;Max-Age=86400;HttpOnly`
         }
-      }*/
+      }
     )
   } catch (e) {
     console.log('Internal error in login api ' + e.message)

@@ -38,27 +38,27 @@ const ManageCategories = () => {
   }))
 
   const create = async () => {
-    await createCategory(newCategory).then((r) => {
+    await createCategory(newCategory).then(async (r) => {
       setMessage(r)
       r.ok && reset()
+      r.ok && (await fetchCategoriesList().then())
     })
-    await fetchCategoriesList().then()
   }
 
   const update = async (id, name) => {
-    await updateCategory(id, name).then((r) => {
+    await updateCategory(id, name).then(async (r) => {
       setMessage(r)
       r.ok && reset()
+      r.ok && (await fetchCategoriesList().then())
     })
-    await fetchCategoriesList().then()
   }
 
   const deleteCategoryById = async (id) => {
-    await deleteCategory(id).then((r) => {
+    await deleteCategory(id).then(async (r) => {
       setMessage(r)
       r.ok && reset()
+      r.ok && (await fetchCategoriesList().then())
     })
-    await fetchCategoriesList().then()
   }
 
   return (

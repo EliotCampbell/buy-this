@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
 
 export const useProductStore = create((set) => ({
   categories: [],
@@ -13,25 +12,13 @@ export const useProductStore = create((set) => ({
     set(() => ({ productsCount: productsCount }))
 }))
 
-export const useSessionStore = create(
-  persist(
-    (set) => ({
-      token: '',
-      isAuth: false,
-      setIsAuth: (bool) => set(() => ({ isAuth: bool })),
-      setToken: (token) => set(() => ({ token: token }))
-    }),
-    { name: 'sessionStore', version: 1 }
-  )
-)
-
 export const useUserStore = create((set) => ({
-  isLoading: true,
+  isAuth: false,
   user: {},
   message: null,
-  setIsLoading: (bool) => set(() => ({ isLoading: bool })),
   setUser: (user) => set(() => ({ user: user })),
-  setMessage: (message) => set(() => ({ message: message }))
+  setMessage: (message) => set(() => ({ message: message })),
+  setIsAuth: (bool) => set(() => ({ isAuth: bool }))
 }))
 
 export const useQueryStore = create((set) => ({

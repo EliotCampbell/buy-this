@@ -3,15 +3,17 @@ import Input from '@/components/UI/Input/Input'
 import Button from '@/components/UI/Button/Button'
 import React, { useState } from 'react'
 import { logFetch } from '@/http/auth'
-import { useSessionStore, useUserStore } from '@/store/mainStore/store'
+import { useUserStore } from '@/store/mainStore/store'
 import MessageString from '@/components/UI/MessageString/MessageString'
 
 const Signin = ({ setLogOrRegSwitcher, setSideMenuSwitcher }) => {
   const [input, setInput] = useState({ email: '', password: '' })
 
-  const { message, setMessage } = useUserStore((state) => ({
+  const { message, setMessage, setUser, setIsAuth } = useUserStore((state) => ({
     message: state.message,
-    setMessage: state.setMessage
+    setMessage: state.setMessage,
+    setUser: state.setUser,
+    setIsAuth: state.setIsAuth
   }))
 
   const signIn = async (e) => {
@@ -20,23 +22,8 @@ const Signin = ({ setLogOrRegSwitcher, setSideMenuSwitcher }) => {
       const data = await logFetch(input)
       if (data.ok === true) {
         setSideMenuSwitcher(false)
-        useUserStore.setState({
-          user: {
-            id: data.dataObject.id,
-            email: data.dataObject.email,
-            username: data.dataObject.username,
-            role: data.dataObject.role
-          }
-        })
-        useSessionStore.setState({
-          token: data.dataObject.token,
-          isAuth: true
-        })
-        console.log(
-          'Login token is\n\n' +
-            data.dataObject.token +
-            '\n\nsent from Login.jsx'
-        )
+        setUser(data.dataObject)
+        setIsAuth(true)
       } else if (data.ok === false) {
         setMessage(data)
       } else {
@@ -53,7 +40,7 @@ const Signin = ({ setLogOrRegSwitcher, setSideMenuSwitcher }) => {
       <form onSubmit={signIn} className={classes.form} id={'login'}>
         <Input
           type={'email'}
-          name={'email'}
+          name={'login'}
           label={'E-mail'}
           placeholder={'my-email@mail.com'}
           value={input.email}
@@ -73,7 +60,6 @@ const Signin = ({ setLogOrRegSwitcher, setSideMenuSwitcher }) => {
             setInput({ ...input, password: e.target.value })
           }}
         ></Input>
-        {message && <MessageString message={message} />}
         <div className={classes.buttonWrapper}>
           <div
             className={classes.registerLink}
@@ -83,6 +69,7 @@ const Signin = ({ setLogOrRegSwitcher, setSideMenuSwitcher }) => {
           </div>
           <Button>{'Log In'}</Button>
         </div>
+        {message && <MessageString message={message} />}
       </form>
     </>
   )

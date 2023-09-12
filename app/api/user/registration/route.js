@@ -1,18 +1,14 @@
 import { NextResponse } from 'next/server'
-import jwt from 'jsonwebtoken'
 import { User } from '@/models/models'
 import bcrypt from 'bcrypt'
-
-const generateJwt = (id, email, role = 'USER') =>
-  jwt.sign({ id, email, role }, process.env.SECRET_KEY, { expiresIn: '12h' })
 
 export const POST = async (request) => {
   try {
     const role = 'USER'
     const formData = await request.formData()
-    const email = formData.get('email')
-    const username = formData.get('username')
-    const password = formData.get('password')
+    const email = formData.get('registration email')
+    const username = formData.get('registration username')
+    const password = formData.get('registration password')
     if (!email || !password || !username) {
       return NextResponse.json({
         ok: false,
@@ -36,18 +32,24 @@ export const POST = async (request) => {
         dataObject: { username }
       })
     }
+    if (password.length < 8) {
+      return NextResponse.json({
+        ok: false,
+        message: 'Password must be at least 8 characters long',
+        dataObject: { username }
+      })
+    }
     const hashPassword = await bcrypt.hash(password, 5)
-    const user = await User.create({
+    await User.create({
       email,
       username,
       role,
       password: hashPassword
     })
-    const token = generateJwt(user.id, user.email, user.role)
     return NextResponse.json({
       ok: true,
-      message: 'Registration completed successfully',
-      dataObject: { token }
+      message: 'Registration completed successfully. Now you can login',
+      dataObject: {}
     })
   } catch (e) {
     return NextResponse.json({

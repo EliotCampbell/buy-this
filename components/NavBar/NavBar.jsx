@@ -10,11 +10,7 @@ import { PiList } from 'react-icons/pi'
 import CategorySideNav from './CategorySideNav'
 import AccountSideNav from './AccountSideNav'
 import Link from 'next/link'
-import {
-  useProductStore,
-  useSessionStore,
-  useUserStore
-} from '@/store/mainStore/store'
+import { useProductStore, useUserStore } from '@/store/mainStore/store'
 import { BsPerson } from 'react-icons/bs'
 import CartSideNav from '@/components/NavBar/CartSideNav'
 import { fetchAllBrands, fetchAllCategories } from '@/http/fetchers/fetchers'
@@ -27,17 +23,10 @@ const NavBar = () => {
   const [accountSwitcher, setAccountSwitcher] = useState(false)
   const [cartSwitcher, setCartSwitcher] = useState(false)
 
-  const { isLoading, setIsLoading, setUser } = useUserStore((state) => ({
-    isLoading: state.isLoading,
-    setUser: state.setUser,
-    setIsLoading: state.setIsLoading
-  }))
-
-  const { token, setToken, setIsAuth, isAuth } = useSessionStore((state) => ({
-    token: state.token,
+  const { isAuth, setIsAuth, setUser } = useUserStore((state) => ({
     isAuth: state.isAuth,
     setIsAuth: state.setIsAuth,
-    setToken: state.setToken
+    setUser: state.setUser
   }))
 
   const { setBrands, setCategories } = useProductStore((state) => ({
@@ -48,24 +37,14 @@ const NavBar = () => {
   const { cart } = useShoppingCartStore((state) => ({ cart: state.cart }))
 
   useEffect(() => {
-    checkAuthToken(token).then((r) => {
-      if (r.dataObject.newToken) {
-        console.log(
-          `New token is\n  ${r.dataObject.newToken} \n\nSent from NavBar.jsx`
-        )
-        setUser(r.dataObject.decodedUser)
+    checkAuthToken().then((r) => {
+      if (r?.ok === true) {
         setIsAuth(true)
-        setToken(r.dataObject.newToken)
+        setUser(r.dataObject)
       } else {
-        console.log(
-          'No token or token in not valid' + '\n\nSent from NavBar.jsx'
-        )
-        setUser({})
         setIsAuth(false)
-        setToken('')
       }
     })
-    setIsLoading(false)
     fetchAllBrands().then((r) => setBrands(r.dataObject.brands))
     fetchAllCategories().then((r) => setCategories(r.dataObject.categories))
   }, [])
@@ -118,7 +97,7 @@ const NavBar = () => {
               <HiOutlineMagnifyingGlass className={classes.glass} />
             </div>
           </form>
-          {!isLoading && isAuth && (
+          {isAuth && (
             <div className={classes.sideButtonsDiv}>
               <IcoButton onClick={() => setAccountSwitcher(true)}>
                 <RiUserLine className={classes.ico} />
@@ -138,7 +117,7 @@ const NavBar = () => {
               </IcoButton>
             </div>
           )}
-          {!isLoading && !isAuth && (
+          {!isAuth && (
             <div className={classes.sideButtonsDiv}>
               <div className={classes.sideButtonsDiv}>
                 <IcoButton>

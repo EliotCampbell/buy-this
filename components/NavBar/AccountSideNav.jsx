@@ -2,19 +2,20 @@ import React from 'react'
 import classes from './AccountSideNav.module.css'
 import { RxCross1 } from 'react-icons/rx'
 import Login from '@/components/Login/Login'
-import { useSessionStore, useUserStore } from '@/store/mainStore/store'
+import { useUserStore } from '@/store/mainStore/store'
 import Link from 'next/link'
 import { BiLogOut } from 'react-icons/bi'
+import { logout } from '@/http/auth'
 
 const LeftSideNav = ({ setSwitcher }) => {
-  const { user } = useUserStore((state) => ({
-    user: state.user
+  const { user, setIsAuth, isAuth } = useUserStore((state) => ({
+    isAuth: state.isAuth,
+    user: state.user,
+    setIsAuth: state.setIsAuth
   }))
-  const { isAuth } = useSessionStore((state) => ({ isAuth: state.isAuth }))
 
-  const logout = () => {
-    useUserStore.setState({ user: {} })
-    useSessionStore.setState({ isAuth: false, token: '' })
+  const logoutHandler = async () => {
+    await logout().then((r) => r.ok && setIsAuth(false))
   }
 
   return (
@@ -39,11 +40,11 @@ const LeftSideNav = ({ setSwitcher }) => {
             {isAuth ? (
               <>
                 <div className={classes.userLogout}>
-                  <h2>{user?.email}</h2>
+                  <h2>{user?.username}</h2>
                   <Link
                     href={'/'}
                     className={classes.logoutDiv}
-                    onClick={() => logout()}
+                    onClick={() => logoutHandler()}
                   >
                     <BiLogOut className={classes.ico} />
                     <p className={classes.logoutP}>Logout</p>
@@ -52,9 +53,7 @@ const LeftSideNav = ({ setSwitcher }) => {
                 {user ? (
                   <>
                     <p className={classes.userInfo}>Id: {user.id}</p>
-                    <p className={classes.userInfo}>
-                      Username: {user.username}
-                    </p>
+                    <p className={classes.userInfo}>E-mail: {user.email}</p>
                     <p className={classes.userInfo}>Role: {user.role}</p>
                   </>
                 ) : (

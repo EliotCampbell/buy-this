@@ -22,7 +22,7 @@
 .productsLineWrapper {
   overflow: auto;
   height: 100%;
-  padding-bottom: 10px;
+  padding-bottom: 40px;
   position: relative;
 }
 

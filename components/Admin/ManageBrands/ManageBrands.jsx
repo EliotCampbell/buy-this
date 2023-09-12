@@ -36,27 +36,27 @@ const ManageBrands = () => {
   }))
 
   const create = async () => {
-    await createBrand(newBrand).then((r) => {
+    await createBrand(newBrand).then(async (r) => {
       setMessage(r)
       r.ok && reset()
+      r.ok && (await fetchBrandsList().then())
     })
-    await fetchBrandsList().then()
   }
 
   const update = async (id, name) => {
-    await updateBrand(id, name).then((r) => {
+    await updateBrand(id, name).then(async (r) => {
       setMessage(r)
       r.ok && reset()
+      r.ok && (await fetchBrandsList().then())
     })
-    await fetchBrandsList().then()
   }
 
   const deleteBrandById = async (id) => {
-    await deleteBrand(id).then((r) => {
+    await deleteBrand(id).then(async (r) => {
       setMessage(r)
       r.ok && reset()
+      r.ok && (await fetchBrandsList().then())
     })
-    await fetchBrandsList().then()
   }
 
   return (

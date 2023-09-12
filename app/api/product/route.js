@@ -87,6 +87,7 @@ export const POST = async (request) => {
       dataObject: { newDevice }
     })
   } catch (e) {
+    console.log(e)
     return NextResponse.json({
       ok: false,
       message: 'Error',

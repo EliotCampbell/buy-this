@@ -10,10 +10,8 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
-    "express-jwt": "^8.4.1",
     "jose": "^4.14.6",
     "js-cookie": "^3.0.5",
-    "jsonwebtoken": "^9.0.1",
     "next": "^13.4.19",
     "pg": "^8.11.2",
     "pg-hstore": "^2.3.4",

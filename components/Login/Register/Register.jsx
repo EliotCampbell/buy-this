@@ -27,9 +27,10 @@ const Register = ({ setLogOrRegSwitcher }) => {
       }
       const formData = new FormData(event.target)
       const data = await registrationFetch(formData)
-      if (data.ok === true) {
+      if (data.ok) {
+        setMessage(data)
         setLogOrRegSwitcher('signin')
-      } else if (data.ok === false) {
+      } else if (!data.ok) {
         setMessage(data)
       } else {
         console.log(`Registration error`)
@@ -45,7 +46,7 @@ const Register = ({ setLogOrRegSwitcher }) => {
       <form onSubmit={register} className={classes.form} id={'register'}>
         <Input
           type={'email'}
-          name={'email'}
+          name={'registration email'}
           label={'E-mail'}
           placeholder={'my-email@mail.com'}
           value={input.email}
@@ -55,10 +56,10 @@ const Register = ({ setLogOrRegSwitcher }) => {
           }}
         ></Input>
         <Input
-          type={'UserName'}
-          name={'username'}
+          type={'text'}
+          name={'registration username'}
           label={'Username'}
-          placeholder={'My Username'}
+          placeholder={'username...'}
           value={input.username}
           onChange={(e) => {
             setMessage(null)
@@ -67,9 +68,9 @@ const Register = ({ setLogOrRegSwitcher }) => {
         ></Input>
         <Input
           type={'password'}
-          name={'password'}
+          name={'registration password'}
           label={'Password'}
-          placeholder={'password'}
+          placeholder={'password...'}
           value={input.password}
           onChange={(e) => {
             setMessage(null)
@@ -77,7 +78,7 @@ const Register = ({ setLogOrRegSwitcher }) => {
           }}
         ></Input>
         <Input
-          name={'repeatPassword'}
+          name={'repeat registration password'}
           label={'Repeat password'}
           placeholder={'Repeat password'}
           value={input.repeatPassword}
@@ -87,7 +88,6 @@ const Register = ({ setLogOrRegSwitcher }) => {
           }}
           type={'password'}
         ></Input>
-        {message && <MessageString message={message} />}
         <div className={classes.buttonWrapper}>
           <div
             className={classes.registerLink}
@@ -100,6 +100,7 @@ const Register = ({ setLogOrRegSwitcher }) => {
           </div>
           <Button type={'submit'}>{'Register'}</Button>
         </div>
+        {message && <MessageString message={message} />}
       </form>
     </>
   )

@@ -9,6 +9,8 @@ import BreadCrumbs from '../../UI/BreadCrumbs/BreadCrumbs'
 import Button from '@/components/UI/Button/Button'
 import { useProductStore } from '@/store/mainStore/store'
 import { useShoppingCartStore } from '@/store/shoppingCartStore/shoppingCartStore'
+import { fetchProduct } from '@/http/fetchers/fetchers'
+import NotFound from '@/components/UI/NotFound/NotFound'
 
 const ProductDetails = ({ productId }) => {
   const { toCart } = useShoppingCartStore((state) => ({
@@ -17,28 +19,20 @@ const ProductDetails = ({ productId }) => {
 
   const { brands } = useProductStore((state) => ({ brands: state.brands }))
 
-  const [product, setProduct] = useState({})
+  const [product, setProduct] = useState(null)
   const [selector, setSelector] = useState('description')
   const [isLoaded, setIsLoaded] = useState(false)
   const [counter, setCounter] = useState(1)
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const res = await fetch(
-          process.env.NEXT_PUBLIC_REACT_APP_API_URL + `api/product/${productId}`
-        )
-        const data = await res.json()
-        setProduct(data.dataObject.product)
-        setIsLoaded(true)
-      } catch (e) {
-        console.log(e)
-      }
-    }
-    fetchProduct().finally()
+    fetchProduct(productId)
+      .then((r) => setProduct(r.dataObject.product))
+      .finally(setIsLoaded(true))
   }, [])
 
-  return isLoaded ? (
+  return !product ? (
+    <NotFound />
+  ) : isLoaded ? (
     <>
       <div className={classes.product}>
         <BreadCrumbs product={product} productId={productId} />
