@@ -20,6 +20,43 @@
   justify-content: space-between;
 }
 
+.productCreateForm {
+  position: relative;
+  margin-bottom: 20px;
+  background-color: #f2fafa;
+  padding: 20px 5px 20px 20px;
+  animation-duration: 350ms;
+  animation-name: slideIn;
+  overflow: hidden;
+}
+
+@keyframes slideIn {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 579px;
+  }
+}
+
+.addProductButtonDiv {
+  padding-bottom: 20px;
+}
+
+.placeholder {
+  font-family: BlenderPro-Bold, sans-serif;
+  color: teal;
+  letter-spacing: 1px;
+  font-size: 18px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 40px;
+  align-items: center;
+  border-bottom: 1px rgb(222, 225, 231) solid;
+}
+
 .preview {
   font-family: BlenderPro-Bold, sans-serif;
   color: teal;

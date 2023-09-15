@@ -114,16 +114,20 @@ export const GET = async (req) => {
       }
     }
 
-    let products = await Product.findAndCountAll({
+    let products = await Product.findAll({
       where: { ...whereHandler() },
-      include: [{ model: ProductInfo, as: 'info' }],
+      include: { model: ProductInfo, as: 'info' },
       limit,
       page,
       offset,
       order: JSON.parse(order)
     })
 
-    if (products.rows.length === 0) {
+    const count = await Product.count({
+      where: { ...whereHandler() }
+    })
+
+    if (count === 0) {
       return NextResponse.json({
         ok: true,
         message: 'Products not found',
@@ -133,7 +137,7 @@ export const GET = async (req) => {
     return NextResponse.json({
       ok: true,
       message: 'Products found successfully',
-      dataObject: { products }
+      dataObject: { count, products }
     })
   } catch (e) {
     return NextResponse.json({

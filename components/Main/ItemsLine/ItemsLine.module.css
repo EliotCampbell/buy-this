@@ -62,6 +62,7 @@
 }
 
 .productsLine {
+  height: 480px;
   width: fit-content;
   display: flex;
   flex-direction: row;

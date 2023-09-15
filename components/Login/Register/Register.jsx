@@ -28,8 +28,8 @@ const Register = ({ setLogOrRegSwitcher }) => {
       const formData = new FormData(event.target)
       const data = await registrationFetch(formData)
       if (data.ok) {
+        setTimeout(() => setLogOrRegSwitcher('signin'), 5000)
         setMessage(data)
-        setLogOrRegSwitcher('signin')
       } else if (!data.ok) {
         setMessage(data)
       } else {

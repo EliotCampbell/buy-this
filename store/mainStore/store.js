@@ -16,8 +16,10 @@ export const useUserStore = create((set) => ({
   isAuth: false,
   user: {},
   message: null,
+  topbarMessage: null,
   setUser: (user) => set(() => ({ user: user })),
   setMessage: (message) => set(() => ({ message: message })),
+  setTopbarMessage: (message) => set(() => ({ topbarMessage: message })),
   setIsAuth: (bool) => set(() => ({ isAuth: bool }))
 }))
 

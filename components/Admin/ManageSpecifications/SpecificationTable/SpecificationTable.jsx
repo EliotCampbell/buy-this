@@ -8,8 +8,15 @@ import {
 } from '@/http/Admin/specifications'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import { useAdminStore } from '@/store/adminStore/adminStore'
+import { useUserStore } from '@/store/mainStore/store'
+
+//todo: display message
 
 const SpecificationTable = () => {
+  const { setMessage } = useUserStore((state) => ({
+    setMessage: state.setMessage
+  }))
+
   const { specificationsList, fetchSpecificationsList } = useAdminListsStore(
     (state) => ({
       fetchSpecificationsList: state.fetchSpecificationsList,
@@ -21,10 +28,8 @@ const SpecificationTable = () => {
     newSpecification,
     setNewSpecification,
     resetExclude,
-    selectedProduct,
-    setMessage
+    selectedProduct
   } = useAdminStore((state) => ({
-    setMessage: state.setMessage,
     selectedProduct: state.selectedProduct,
     setNewSpecification: state.setNewSpecification,
     newSpecification: state.newSpecification,

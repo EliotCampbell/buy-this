@@ -34,8 +34,8 @@ const Products = () => {
         )
 
         const data = await res.json()
-        setProducts(data.dataObject.products.rows)
-        setProductsCount(data.dataObject.products.count)
+        setProducts(data.dataObject.products)
+        setProductsCount(data.dataObject.count)
         setIsLoaded(true)
       } catch (e) {
         console.log(e)

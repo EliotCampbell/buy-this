@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import AdminReactSelect from '@/components/UI/Admin/AdminReactSelect/AdminReactSelect'
@@ -11,6 +11,9 @@ import Button from '@/components/UI/Button/Button'
 import { createProduct } from '@/http/Admin/products'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import AdminNewTextArea from '@/components/UI/Admin/AdminNewTextArea/AdminNewTextArea'
+import { useUserStore } from '@/store/mainStore/store'
+
+//todo: add validation of is numbers in input of price
 
 const ProductCreateForm = () => {
   const { categoriesList, brandsList, fetchProductsList } = useAdminListsStore(
@@ -30,7 +33,10 @@ const ProductCreateForm = () => {
       setPreview: state.setPreview
     }))
 
-  const [message, setMessage] = useState(null)
+  const { message, setMessage } = useUserStore((state) => ({
+    message: state.message,
+    setMessage: state.setMessage
+  }))
 
   const createFormData = (product) => {
     const formData = new FormData()
@@ -52,8 +58,7 @@ const ProductCreateForm = () => {
   }
 
   return (
-    <>
-      <h1>Create product</h1>
+    <div className={classes.productCreateForm}>
       <div className={classes.formWithSidePreview}>
         <div className={classes.form}>
           <AdminNewInput
@@ -61,6 +66,7 @@ const ProductCreateForm = () => {
             placeholder={'Name of the new product...'}
             value={newProduct.name}
             onChange={(e) => {
+              setMessage(null)
               setNewProduct({ ...newProduct, name: e.target.value })
             }}
           ></AdminNewInput>
@@ -70,6 +76,7 @@ const ProductCreateForm = () => {
               label={'Choose brand'}
               options={brandsList}
               onChange={(option) => {
+                setMessage(null)
                 setNewProduct({ ...newProduct, brand: option })
               }}
             ></AdminReactSelect>
@@ -78,9 +85,10 @@ const ProductCreateForm = () => {
               value={newProduct.category === '' ? null : newProduct.category}
               label={'Choose category'}
               options={categoriesList}
-              onChange={(option) =>
+              onChange={(option) => {
+                setMessage(null)
                 setNewProduct({ ...newProduct, category: option })
-              }
+              }}
             ></AdminReactSelect>
           </div>
 
@@ -89,33 +97,36 @@ const ProductCreateForm = () => {
             placeholder={'47...'}
             label={'Input product price'}
             type={'number'}
-            onChange={(e) =>
+            onChange={(e) => {
+              setMessage(null)
               setNewProduct({ ...newProduct, price: e.target.value })
-            }
+            }}
           />
           <AdminNewTextArea
             placeholder={'Many words about it...'}
             label={'Input product description'}
             value={newProduct.description}
-            onChange={(e) =>
+            onChange={(e) => {
+              setMessage(null)
               setNewProduct({
                 ...newProduct,
                 description: e.target.value
               })
-            }
+            }}
           />
           <AdminNewInput
             type={'file'}
             accept={'.png,.jpg'}
             onChange={(e) => {
+              setMessage(null)
               setNewProduct({ ...newProduct, file: e.target.files[0] })
               setPreview(URL.createObjectURL(e.target.files[0]))
             }}
           />
-          {message && <MessageString message={message} />}
           <Button onClick={() => createHandler(newProduct)}>
             Create product
           </Button>
+          {<MessageString message={message} />}
         </div>
         <div className={classes.productsCardWrapper}>
           <p className={classes.preview}>Preview</p>
@@ -128,7 +139,7 @@ const ProductCreateForm = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

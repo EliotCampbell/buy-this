@@ -22,14 +22,14 @@ export const middleware = async (request) => {
         })
       }
       const payload = await verifyJwt(token)
-      if (payload.role !== 'ADMIN') {
+      if (payload.role === 'ADMIN') {
+        return NextResponse.next()
+      } else
         return NextResponse.json({
           ok: false,
           message: 'You are not ADMIN',
           dataObject: {}
         })
-      }
-      return NextResponse.next()
     } catch (e) {
       return NextResponse.json({
         ok: false,
@@ -37,6 +37,16 @@ export const middleware = async (request) => {
         dataObject: { error: e }
       })
     }
+  }
+  if (request.nextUrl.pathname.startsWith('/admin')) {
+    const token = request.cookies.get('token')?.value
+    if (!token) {
+      return NextResponse.redirect(new URL('/', request.url))
+    }
+    const payload = await verifyJwt(token)
+    if (payload.role === 'ADMIN') {
+      return NextResponse.next()
+    } else return NextResponse.redirect(new URL('/', request.url))
   }
   return NextResponse.next()
 }

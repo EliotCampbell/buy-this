@@ -14,6 +14,8 @@ const InfoBlock = ({ element }) => {
       categoriesList: state.categoriesList,
       brandsList: state.brandsList
     }))
+
+  //todo: check how specs are fetches and shows
   return (
     <div className={classes.infoWrapper}>
       <div className={classes.infoDiv}>
@@ -59,7 +61,7 @@ const InfoBlock = ({ element }) => {
                 setSelectedProduct(element.value.id)
                 fetchSpecificationsList(element.value.id).then()
               }}
-            >{` (${element.value.info.length})`}</p>
+            >{`(${element.value.info.length})`}</p>
           </Link>
         </div>
       </div>

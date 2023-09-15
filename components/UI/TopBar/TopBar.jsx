@@ -1,12 +1,14 @@
-import React from "react";
-import classes from "./TopBar.module.css";
-import { AiOutlineCheck } from "react-icons/ai";
-import ReactCountryFlag from "react-country-flag";
+import React from 'react'
+import classes from './TopBar.module.css'
+import { AiOutlineCheck } from 'react-icons/ai'
+import ReactCountryFlag from 'react-country-flag'
+import TopbarMessageString from '@/components/UI/TopbarMessageString/TopbarMessageString'
 
 const TopBar = () => {
   return (
     <div className={classes.topBarWrapper}>
       <div className={classes.topBar}>
+        <TopbarMessageString />
         <div className={classes.checkDiv}>
           <div className={classes.check}>
             <AiOutlineCheck className={classes.ico} />
@@ -27,7 +29,7 @@ const TopBar = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TopBar;
+export default TopBar

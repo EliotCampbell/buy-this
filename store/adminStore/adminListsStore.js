@@ -26,7 +26,7 @@ export const useAdminListsStore = create((set) => ({
           value: el.id,
           label: el.name
         })),
-        productsList: productsData.dataObject.products.rows.map((el) => ({
+        productsList: productsData.dataObject.products.map((el) => ({
           value: el,
           label: el.name
         }))
@@ -56,7 +56,7 @@ export const useAdminListsStore = create((set) => ({
   fetchProductsList: async () => {
     await fetchAllProducts().then((r) => {
       set(() => ({
-        productsList: r.dataObject.products.rows.map((el) => ({
+        productsList: r.dataObject.products.map((el) => ({
           value: el,
           label: el.name
         }))

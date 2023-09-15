@@ -9,7 +9,7 @@ import { useAdminStore } from '@/store/adminStore/adminStore'
 import ButtonBlock from '@/components/UI/Admin/AdminProductsList/ButtonBlock/ButtonBlock'
 import InfoBlock from '@/components/UI/Admin/AdminProductsList/InfoBlock/InfoBlock'
 
-const AdminProductsList = () => {
+const AdminProductsList = ({ setShowNewProductForm }) => {
   const { productsList } = useAdminListsStore((state) => ({
     productsList: state.productsList
   }))
@@ -50,7 +50,10 @@ const AdminProductsList = () => {
             <p className={classes.name}>{el.value.name}</p>
           )}
         </div>
-        <ButtonBlock element={el} />
+        <ButtonBlock
+          element={el}
+          setShowNewProductForm={setShowNewProductForm}
+        />
       </div>
       {el.value.id === newProduct.oldProductId && (
         <div className={classes.productEditInline}>

@@ -5,6 +5,7 @@ import Button from '@/components/UI/Button/Button'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { createSpecificationByProductId } from '@/http/Admin/specifications'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
+import { useUserStore } from '@/store/mainStore/store'
 
 const CreateSpecification = () => {
   const { fetchSpecificationsList } = useAdminListsStore((state) => ({
@@ -13,15 +14,17 @@ const CreateSpecification = () => {
   const {
     newSpecification,
     setNewSpecification,
-    setMessage,
     selectedProduct,
     resetExclude
   } = useAdminStore((state) => ({
     setNewSpecification: state.setNewSpecification,
     newSpecification: state.newSpecification,
-    setMessage: state.setMessage,
     selectedProduct: state.selectedProduct,
     resetExclude: state.resetExclude
+  }))
+
+  const { setMessage } = useUserStore((state) => ({
+    setMessage: state.setMessage
   }))
 
   const create = async (specification) => {

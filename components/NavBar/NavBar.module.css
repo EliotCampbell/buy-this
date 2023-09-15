@@ -63,7 +63,7 @@
 }
 
 .subBarCategory:hover {
-  text-decoration: underline;
+  color: #c5efef;
 }
 
 .brandWrapper {
@@ -123,6 +123,10 @@
   height: 26px;
   width: 26px;
   color: white;
+}
+
+.ico:hover {
+  color: #c5efef;
 }
 
 .searchBar {

@@ -16,7 +16,9 @@ const Product = sequelize.define('product', {
   discountPrice: { type: DataTypes.FLOAT },
   rating: { type: DataTypes.INTEGER, defaultValue: 0 },
   description: { type: DataTypes.TEXT, allowNull: false },
-  img: { type: DataTypes.STRING, allowNull: false }
+  img: { type: DataTypes.STRING, allowNull: false },
+  isHighLight: { type: DataTypes.BOOLEAN },
+  isHotDeal: { type: DataTypes.BOOLEAN }
 })
 
 const Category = sequelize.define('category', {
@@ -72,13 +74,11 @@ module.exports = {
   ProductInfo
 }
 
-/*
-sequelize
+/*sequelize
   .sync({ force: true })
   .then(() => {
     console.log('Database models synchronized.')
   })
   .catch((err) => {
     console.error('Error synchronizing database models:', err)
-  })
-*/
+  })*/

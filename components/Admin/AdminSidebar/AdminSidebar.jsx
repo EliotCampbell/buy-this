@@ -7,25 +7,16 @@ const AdminSidebar = () => {
   return (
     <div className={classes.adminNav}>
       <div className={classes.categories}>
-        {linksArr.map((el) => {
-          if (el.title) {
-            return (
-              <div key={el.title} className={classes.adminNavTitleLink}>
-                {el.title}
-              </div>
-            )
-          } else {
-            return (
-              <Link
-                key={el.path}
-                href={'/admin/' + el.path}
-                className={classes.adminNavLink}
-              >
-                {el.linkName}
-              </Link>
-            )
-          }
-        })}
+        <p className={classes.adminNavTitle}>Choose to manage</p>
+        {linksArr.map((el) => (
+          <Link
+            key={el.path}
+            href={'/admin/' + el.path}
+            className={classes.adminNavLink}
+          >
+            {el.linkName}
+          </Link>
+        ))}
       </div>
     </div>
   )

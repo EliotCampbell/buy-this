@@ -17,8 +17,7 @@ const initialState = {
     description: '',
     file: 'noImg.jpg'
   },
-  preview: process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'static/noImg.jpg',
-  message: null
+  preview: process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'static/noImg.jpg'
 }
 
 export const useAdminStore = create((set) => ({
@@ -33,7 +32,6 @@ export const useAdminStore = create((set) => ({
     set(() => ({
       preview: img
     })),
-  setMessage: (message) => set(() => ({ message: message })),
   reset: () => {
     set(initialState)
   },

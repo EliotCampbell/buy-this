@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { BiLogOut } from 'react-icons/bi'
 import { logout } from '@/http/auth'
 
-const LeftSideNav = ({ setSwitcher }) => {
+const AccountSideNav = ({ setSwitcher }) => {
   const { user, setIsAuth, isAuth } = useUserStore((state) => ({
     isAuth: state.isAuth,
     user: state.user,
@@ -70,4 +70,4 @@ const LeftSideNav = ({ setSwitcher }) => {
   )
 }
 
-export default LeftSideNav
+export default AccountSideNav

@@ -6,6 +6,7 @@ export const POST = async (request) => {
   try {
     const token = request.cookies.get('token')?.value
     if (!token) {
+      console.log('fdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww')
       return NextResponse.json({
         ok: false,
         message: 'Not authorized',

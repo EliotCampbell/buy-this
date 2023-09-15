@@ -22,8 +22,10 @@
 }
 
 .registerLink {
+  white-space: nowrap;
   font-family: BlenderPro-Bold, sans-serif;
   color: teal;
+  padding-right: 20px;
 }
 
 .registerLink:hover {

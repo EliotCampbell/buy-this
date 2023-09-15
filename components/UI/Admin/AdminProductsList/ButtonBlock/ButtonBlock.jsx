@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import classes from './ButtonBlock.module.css'
 import { FiEdit2, FiTrash, FiX } from 'react-icons/fi'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { deleteProduct } from '@/http/Admin/products'
+import { useUserStore } from '@/store/mainStore/store'
 
-const ButtonBlock = ({ element }) => {
+const ButtonBlock = ({ element, setShowNewProductForm }) => {
   const { categoriesList, brandsList, fetchProductsList } = useAdminListsStore(
     (state) => ({
       categoriesList: state.categoriesList,
@@ -23,7 +24,9 @@ const ButtonBlock = ({ element }) => {
     })
   )
 
-  const [message, setMessage] = useState(null)
+  const { setMessage } = useUserStore((state) => ({
+    setMessage: state.setMessage
+  }))
 
   const deleteHandler = async (id) => {
     await deleteProduct(id).then((r) => {
@@ -45,6 +48,7 @@ const ButtonBlock = ({ element }) => {
         <FiEdit2
           className={classes.editIco}
           onMouseDown={() => {
+            setShowNewProductForm(false)
             setNewProduct({
               ...newProduct,
               category: {

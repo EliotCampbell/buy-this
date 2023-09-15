@@ -1,5 +1,5 @@
 const AdminPage = () => {
-  return <h1>Choose anything</h1>
+  return <></>
 }
 
 export default AdminPage

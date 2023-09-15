@@ -9,7 +9,7 @@ import BreadCrumbs from '../../UI/BreadCrumbs/BreadCrumbs'
 import Button from '@/components/UI/Button/Button'
 import { useProductStore } from '@/store/mainStore/store'
 import { useShoppingCartStore } from '@/store/shoppingCartStore/shoppingCartStore'
-import { fetchProduct } from '@/http/fetchers/fetchers'
+import { fetchProductById } from '@/http/fetchers/fetchers'
 import NotFound from '@/components/UI/NotFound/NotFound'
 
 const ProductDetails = ({ productId }) => {
@@ -25,7 +25,7 @@ const ProductDetails = ({ productId }) => {
   const [counter, setCounter] = useState(1)
 
   useEffect(() => {
-    fetchProduct(productId)
+    fetchProductById(productId)
       .then((r) => setProduct(r.dataObject.product))
       .finally(setIsLoaded(true))
   }, [])

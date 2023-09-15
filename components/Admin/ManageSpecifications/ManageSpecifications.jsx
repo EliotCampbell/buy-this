@@ -7,8 +7,13 @@ import MessageString from '@/components/UI/MessageString/MessageString'
 import AdminReactSelect from '@/components/UI/Admin/AdminReactSelect/AdminReactSelect'
 import CreateSpecification from '@/components/Admin/ManageSpecifications/CreateSpecification/CreateSpecification'
 import SpecificationTable from '@/components/Admin/ManageSpecifications/SpecificationTable/SpecificationTable'
+import { useUserStore } from '@/store/mainStore/store'
 
 const ManageSpecifications = () => {
+  const { message } = useUserStore((state) => ({
+    message: state.message
+  }))
+
   const { productsList, fetchSpecificationsList } = useAdminListsStore(
     (state) => ({
       productsList: state.productsList,
@@ -16,21 +21,14 @@ const ManageSpecifications = () => {
     })
   )
 
-  const { setSelectedProduct, selectedProduct, message } = useAdminStore(
-    (state) => ({
-      message: state.message,
-      selectedProduct: state.selectedProduct,
-      setSelectedProduct: state.setSelectedProduct
-    })
-  )
+  const { setSelectedProduct, selectedProduct } = useAdminStore((state) => ({
+    selectedProduct: state.selectedProduct,
+    setSelectedProduct: state.setSelectedProduct
+  }))
 
   return (
     <>
       <h1>MANAGE SPECIFICATIONS</h1>
-      {/* <h3>selectedProduct: {selectedProduct}</h3>
-      <h3>specificationId: {newSpecification.specificationId}</h3>
-      <h3>title: {newSpecification.title}</h3>
-      <h3>description: {newSpecification.description}</h3>*/}
       <div className={classes.form}>
         <AdminReactSelect
           label={'Select product'}

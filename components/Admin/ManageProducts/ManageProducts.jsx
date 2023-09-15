@@ -1,24 +1,33 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import classes from '@/components/Admin/FormsStyles.module.css'
-import { useRouter } from 'next/navigation'
 import AdminProductsList from '@/components/UI/Admin/AdminProductsList/AdminProductsList'
 import Button from '@/components/UI/Button/Button'
+import ProductCreateForm from '@/components/Admin/ManageProducts/ProductCreate/ProductCreateForm'
+import { useAdminStore } from '@/store/adminStore/adminStore'
 
 const ManageProducts = () => {
-  const router = useRouter()
-
+  const { reset } = useAdminStore((state) => ({
+    reset: state.reset
+  }))
+  const [showNewProductForm, setShowNewProductForm] = useState(false)
   return (
     <>
-      <h1>Manage Products</h1>
+      <h1>MANAGE PRODUCTS</h1>
       <div className={classes.formWithoutSidePreview}>
-        <Button
-          style={'light'}
-          onClick={() => router.push('/admin/create_product')}
-        >
-          + ADD PRODUCT...
-        </Button>
-        <AdminProductsList />
+        <div className={classes.addProductButtonDiv}>
+          <Button
+            style={'light'}
+            onClick={() => {
+              setShowNewProductForm(!showNewProductForm)
+              reset()
+            }}
+          >
+            {showNewProductForm ? 'X Cancel ' : '+ ADD PRODUCT...'}
+          </Button>
+        </div>
+        {showNewProductForm && <ProductCreateForm />}
+        <AdminProductsList setShowNewProductForm={setShowNewProductForm} />
       </div>
     </>
   )

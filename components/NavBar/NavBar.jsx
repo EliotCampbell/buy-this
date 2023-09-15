@@ -58,8 +58,8 @@ const NavBar = () => {
             </Link>
           </div>
           <div className={classes.linksDiv}>
-            <Link href={'/'} className={classes.navLink}>
-              SOME NAV
+            <Link href={'/colors'} className={classes.navLink}>
+              COLORS
             </Link>
             <Link href={'/'} className={classes.navLink}>
               SOME NAV
@@ -74,10 +74,10 @@ const NavBar = () => {
               SOME NAV{' '}
             </Link>
             <div className={classes.splitter}></div>
-            <Link href={'/'} className={classes.navLink}>
+            <Link href={'/brands'} className={classes.navLink}>
               BRANDS
             </Link>
-            <Link href={'/'} className={classes.navLink}>
+            <Link href={'/sale'} className={classes.navLink}>
               SALE %
             </Link>
           </div>

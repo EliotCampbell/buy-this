@@ -1,14 +1,14 @@
 .messageString {
-  position: absolute;
-  bottom: 0;
   color: teal;
+  white-space: nowrap;
   font-family: BlenderPro-Bold, 'sans-serif';
   font-size: 15px;
+  padding: 10px 0;
 }
 .errorMessageString {
-  position: absolute;
-  bottom: 0;
   color: red;
+  white-space: nowrap;
   font-family: BlenderPro-Bold, 'sans-serif';
   font-size: 15px;
+  padding: 10px 0;
 }
