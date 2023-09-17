@@ -9,6 +9,16 @@
   animation-name: transition;
 }
 
+@keyframes transition {
+  from {
+    background-color: rgba(51, 51, 51, 0);
+  }
+
+  to {
+    background-color: rgba(51, 51, 51, 0.3);
+  }
+}
+
 .sideNav {
   height: 100%;
   width: 580px;

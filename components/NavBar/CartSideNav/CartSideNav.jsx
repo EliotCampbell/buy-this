@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './CartSideNav.module.css'
 import { RxCross1 } from 'react-icons/rx'
 import ShoppingCart from '@/components/NavBar/ShoppingCart/ShoppingCart'
-//todo: rebuild side navs in 1 left and 1 right block
+
 const CartSideNav = ({ setSwitcher }) => {
   return (
     <div className={classes.sideNavBack}>

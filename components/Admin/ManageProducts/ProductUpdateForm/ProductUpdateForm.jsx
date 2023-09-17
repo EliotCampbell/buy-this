@@ -10,7 +10,8 @@ import AdminNewInput from '@/components/UI/Admin/AdminNewInput/AdminNewInput'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import { updateProduct } from '@/http/Admin/products'
 import AdminNewTextArea from '@/components/UI/Admin/AdminNewTextArea/AdminNewTextArea'
-
+//todo: formdata
+//todo:on product data loading see 404
 const ProductUpdateForm = () => {
   const { categoriesList, brandsList, fetchProductsList } = useAdminListsStore(
     (state) => ({
@@ -45,12 +46,14 @@ const ProductUpdateForm = () => {
   const updateHandler = async (product) => {
     await updateProduct(product.oldProductId, createFormData(product)).then(
       (r) => {
-        setMessage(r)
+        !r.ok && setMessage(r)
         r.ok && reset()
       }
     )
     await fetchProductsList()
   }
+
+  const regExp = /^(?:[0-9]{1,8}(?:\.[0-9]{0,2})?|99999999(?:\.00?)?)$/
 
   return (
     <>
@@ -93,9 +96,11 @@ const ProductUpdateForm = () => {
             label={'Input product price'}
             value={newProduct.price}
             type={'number'}
-            onChange={(e) =>
-              setNewProduct({ ...newProduct, price: e.target.value })
-            }
+            onChange={(e) => {
+              setMessage(null)
+              if (regExp.test(e.target.value) || e.target.value === '')
+                setNewProduct({ ...newProduct, price: e.target.value })
+            }}
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
                 updateHandler(newProduct).then()
@@ -142,8 +147,12 @@ const ProductUpdateForm = () => {
             Remove image
           </Button>
           <div className={classes.horizontalSplitter}></div>
-          {message && <MessageString message={message} />}
 
+          {message && (
+            <div className={classes.messageDiv}>
+              <MessageString message={message} />
+            </div>
+          )}
           <Button onClick={() => updateHandler(newProduct)}>
             Save product
           </Button>

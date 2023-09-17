@@ -3,12 +3,52 @@
   width: 100%;
 }
 
-.Td {
+.tableRow {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  border-bottom: 1px solid rgb(222, 225, 231);
+}
+
+.tableRow:hover {
+  background-color: #f2fafa;
+}
+
+.id {
+  width: 150px;
+  height: 100%;
+  display: flex;
+  align-items: center;
   color: teal;
   font-family: BlenderPro-Bold, sans-serif;
   font-size: 18px;
   padding: 5px;
-  border: 1px solid rgb(222, 225, 231);
+}
+
+.toTrash {
+  justify-content: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: teal;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 18px;
+  padding: 5px;
+}
+
+.inputsDiv {
+  width: 100%;
+}
+
+.Td {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  color: teal;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 18px;
+  padding: 5px;
 }
 
 .removeIco {

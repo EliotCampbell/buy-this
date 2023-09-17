@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import AdminReactSelect from '@/components/UI/Admin/AdminReactSelect/AdminReactSelect'
@@ -11,9 +11,6 @@ import Button from '@/components/UI/Button/Button'
 import { createProduct } from '@/http/Admin/products'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import AdminNewTextArea from '@/components/UI/Admin/AdminNewTextArea/AdminNewTextArea'
-import { useUserStore } from '@/store/mainStore/store'
-
-//todo: add validation of is numbers in input of price
 
 const ProductCreateForm = () => {
   const { categoriesList, brandsList, fetchProductsList } = useAdminListsStore(
@@ -33,10 +30,7 @@ const ProductCreateForm = () => {
       setPreview: state.setPreview
     }))
 
-  const { message, setMessage } = useUserStore((state) => ({
-    message: state.message,
-    setMessage: state.setMessage
-  }))
+  const [message, setMessage] = useState(null)
 
   const createFormData = (product) => {
     const formData = new FormData()
@@ -56,6 +50,8 @@ const ProductCreateForm = () => {
     })
     await fetchProductsList()
   }
+
+  const regExp = /^(?:[0-9]{1,8}(?:\.[0-9]{0,2})?|99999999(?:\.00?)?)$/
 
   return (
     <div className={classes.productCreateForm}>
@@ -96,10 +92,10 @@ const ProductCreateForm = () => {
             value={newProduct.price}
             placeholder={'47...'}
             label={'Input product price'}
-            type={'number'}
             onChange={(e) => {
               setMessage(null)
-              setNewProduct({ ...newProduct, price: e.target.value })
+              if (regExp.test(e.target.value) || e.target.value === '')
+                setNewProduct({ ...newProduct, price: e.target.value })
             }}
           />
           <AdminNewTextArea
@@ -123,10 +119,14 @@ const ProductCreateForm = () => {
               setPreview(URL.createObjectURL(e.target.files[0]))
             }}
           />
+          {message && (
+            <div className={classes.messageDiv}>
+              <MessageString message={message} setMessage={setMessage} />
+            </div>
+          )}
           <Button onClick={() => createHandler(newProduct)}>
             Create product
           </Button>
-          {<MessageString message={message} />}
         </div>
         <div className={classes.productsCardWrapper}>
           <p className={classes.preview}>Preview</p>

@@ -42,7 +42,7 @@ const Signin = ({ setLogOrRegSwitcher, setSideMenuSwitcher }) => {
           type={'email'}
           name={'login'}
           label={'E-mail'}
-          placeholder={'my-email@mail.com'}
+          placeholder={'My-email@mail.com'}
           value={input.email}
           onChange={(e) => {
             setMessage(null)
@@ -53,7 +53,7 @@ const Signin = ({ setLogOrRegSwitcher, setSideMenuSwitcher }) => {
           type={'password'}
           name={'password'}
           label={'Password'}
-          placeholder={'password'}
+          placeholder={'Password'}
           value={input.password}
           onChange={(e) => {
             setMessage(null)

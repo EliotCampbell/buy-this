@@ -11,7 +11,7 @@
 }
 
 .label {
-  letter-spacing: 1px;
+  letter-spacing: 0.02em;
   display: block;
   margin-left: 15px;
   width: fit-content;
@@ -29,11 +29,21 @@
   height: 40px;
   background-color: transparent;
   color: teal;
-  font-size: 16px;
+  font-size: 18px;
   outline: solid teal 1px;
-  font-family: Roboto, sans-serif;
+  font-family: BlenderPro-Bold, sans-serif;
   font-weight: 500;
 }
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  font-family: BlenderPro-Bold, sans-serif;
+  -webkit-text-fill-color: teal;
+  letter-spacing: 0.02em;
+}
+
 .textarea::placeholder {
   color: #b4b4b4;
 }

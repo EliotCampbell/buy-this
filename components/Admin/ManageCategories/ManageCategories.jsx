@@ -5,7 +5,6 @@ import { useAdminStore } from '@/store/adminStore/adminStore'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import classes from '@/components/Admin/FormsStyles.module.css'
 import { FiPlus } from 'react-icons/fi'
-import { useUserStore } from '@/store/mainStore/store'
 import AdminNewInput from '@/components/UI/Admin/AdminNewInput/AdminNewInput'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import CategoryRowItem from '@/components/Admin/ManageCategories/CategoryRowItem/CategoryRowItem'
@@ -26,18 +25,15 @@ const ManageCategories = () => {
     reset: state.reset
   }))
 
-  const { message, setMessage } = useUserStore((state) => ({
-    message: state.message,
-    setMessage: state.setMessage
-  }))
-
-  const create = async () => {
-    await createCategory(newCategory).then(async (r) => {
+  const createHandler = async (category) => {
+    await createCategory(category).then((r) => {
       setMessage(r)
       r.ok && reset()
-      r.ok && (await fetchCategoriesList().then())
+      r.ok && fetchCategoriesList()
     })
   }
+
+  const [message, setMessage] = useState(null)
 
   return (
     <>
@@ -53,15 +49,16 @@ const ManageCategories = () => {
             }}
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
-                create().then()
+                createHandler(newCategory).then()
               }
             }}
           >
             <div className={classes.icoBlock}>
+              <MessageString message={message} setMessage={setMessage} />
               <FiPlus
                 className={classes.submitIco}
                 onClick={() => {
-                  create().then()
+                  createHandler(newCategory).then()
                 }}
               />
             </div>
@@ -81,7 +78,6 @@ const ManageCategories = () => {
           )}
         </div>
       </div>
-      {message && <MessageString message={message} />}
     </>
   )
 }

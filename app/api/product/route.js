@@ -19,6 +19,13 @@ export const POST = async (request) => {
     let description = formData.get('description')
     let info = formData.get('info')
     const img = formData.get('img') || 'noImg.jpg'
+    if (!name || !price || !brandId || !categoryId || !description || !img) {
+      return NextResponse.json({
+        ok: false,
+        message: 'Not all fields provided',
+        dataObject: { name, price, brandId, categoryId, description, info, img }
+      })
+    }
     const foundProduct = await Product.findOne({
       where: { name: name }
     })

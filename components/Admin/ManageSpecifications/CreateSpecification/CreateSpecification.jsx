@@ -44,7 +44,7 @@ const CreateSpecification = () => {
       <div className={classes.inputContainer}>
         <AdminNewInput
           placeholder={'Title'}
-          value={newSpecification.title}
+          value={!newSpecification.id ? newSpecification.title : ''}
           onChange={(e) => {
             setNewSpecification({
               ...newSpecification,
@@ -61,7 +61,7 @@ const CreateSpecification = () => {
         <div className={classes.inputContainerVerticalSplitter}></div>
         <AdminNewInput
           placeholder={'Description'}
-          value={newSpecification.description}
+          value={!newSpecification.id ? newSpecification.description : ''}
           onChange={(e) => {
             setNewSpecification({
               ...newSpecification,

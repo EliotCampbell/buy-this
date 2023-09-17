@@ -48,7 +48,7 @@ const Register = ({ setLogOrRegSwitcher }) => {
           type={'email'}
           name={'registration email'}
           label={'E-mail'}
-          placeholder={'my-email@mail.com'}
+          placeholder={'My-email@mail.com'}
           value={input.email}
           onChange={(e) => {
             setMessage(null)
@@ -59,7 +59,7 @@ const Register = ({ setLogOrRegSwitcher }) => {
           type={'text'}
           name={'registration username'}
           label={'Username'}
-          placeholder={'username...'}
+          placeholder={'Username...'}
           value={input.username}
           onChange={(e) => {
             setMessage(null)
@@ -70,7 +70,7 @@ const Register = ({ setLogOrRegSwitcher }) => {
           type={'password'}
           name={'registration password'}
           label={'Password'}
-          placeholder={'password...'}
+          placeholder={'Password...'}
           value={input.password}
           onChange={(e) => {
             setMessage(null)

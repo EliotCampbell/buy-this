@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-const { ProductInfo, Product } = require('@/models/models')
+const { ProductInfo } = require('@/models/models')
 
 export const GET = async (request, { params }) => {
   try {

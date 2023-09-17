@@ -42,8 +42,23 @@ export const PUT = async (request, { params }) => {
     const brandId = formData.get('brandId')
     const categoryId = formData.get('categoryId')
     const description = formData.get('description')
-    const info = formData.get('info')
+    //const info = formData.get('info')
     const img = formData.get('img')
+    if (
+      !id ||
+      !name ||
+      !price ||
+      !brandId ||
+      !categoryId ||
+      !description ||
+      !img
+    ) {
+      return NextResponse.json({
+        ok: false,
+        message: 'Not all fields provided',
+        dataObject: { id }
+      })
+    }
     const oldProduct = await Product.findByPk(id)
     const foundBrand = await Brand.findByPk(brandId)
     const foundCategory = await Category.findByPk(categoryId)
@@ -72,7 +87,6 @@ export const PUT = async (request, { params }) => {
         }
       })
     }
-
     if (oldProduct.img !== 'noImg.jpg' && oldProduct.img !== img) {
       await fs.unlink(`public/static/` + oldProduct.img, (err) => {
         err && console.log(err)

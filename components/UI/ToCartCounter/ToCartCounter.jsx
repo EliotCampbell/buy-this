@@ -24,7 +24,7 @@ const ToCartCounter = ({ counter, setCounter }) => {
             e.target.value < max &&
             setCounter(Number(e.target.value))
         }}
-        onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+        onKeyDown={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
       ></input>
       <button className={classes.button} onClick={() => incrementor()}>
         <p className={classes.buttonText}>+</p>

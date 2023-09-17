@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import classes from '@/components/Admin/FormsStyles.module.css'
 import Link from 'next/link'
 import { FiCheck, FiCornerDownLeft, FiTrash } from 'react-icons/fi'
 import AdminEditInput from '@/components/UI/Admin/AdminEditInput/AdminEditInput'
-import { useQueryStore, useUserStore } from '@/store/mainStore/store'
+import { useQueryStore } from '@/store/mainStore/store'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { deleteBrand, updateBrand } from '@/http/Admin/brands'
+import MessageString from '@/components/UI/MessageString/MessageString'
 
 const BrandsRowItem = ({ item, selectedBrand, setSelectedBrand }) => {
   const { query, setQuery } = useQueryStore((state) => ({
@@ -25,9 +26,7 @@ const BrandsRowItem = ({ item, selectedBrand, setSelectedBrand }) => {
     reset: state.reset
   }))
 
-  const { setMessage } = useUserStore((state) => ({
-    setMessage: state.setMessage
-  }))
+  const [message, setMessage] = useState(null)
 
   const updateHandler = async (id, name) => {
     await updateBrand(id, name).then(async (r) => {
@@ -37,9 +36,9 @@ const BrandsRowItem = ({ item, selectedBrand, setSelectedBrand }) => {
     })
   }
 
-  const deleteBrandById = async (id) => {
+  const deleteBrandByIdHandler = async (id) => {
     await deleteBrand(id).then(async (r) => {
-      setMessage(r)
+      !r.ok && setMessage(r)
       r.ok && reset()
       r.ok && (await fetchBrandsList().then())
     })
@@ -99,6 +98,7 @@ const BrandsRowItem = ({ item, selectedBrand, setSelectedBrand }) => {
       ></AdminEditInput>
 
       <div className={classes.icoBlock}>
+        <MessageString message={message} setMessage={setMessage} />
         {selectedBrand === item.value && (
           <FiCheck
             className={classes.submitIco}
@@ -113,7 +113,7 @@ const BrandsRowItem = ({ item, selectedBrand, setSelectedBrand }) => {
           className={classes.removeIco}
           onClick={(event) => {
             event.stopPropagation()
-            deleteBrandById(item.value).then()
+            deleteBrandByIdHandler(item.value).then()
           }}
         />
       </div>

@@ -15,7 +15,6 @@ const InfoBlock = ({ element }) => {
       brandsList: state.brandsList
     }))
 
-  //todo: check how specs are fetches and shows
   return (
     <div className={classes.infoWrapper}>
       <div className={classes.infoDiv}>

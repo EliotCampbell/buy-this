@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import classes from './ButtonBlock.module.css'
 import { FiEdit2, FiTrash, FiX } from 'react-icons/fi'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { deleteProduct } from '@/http/Admin/products'
-import { useUserStore } from '@/store/mainStore/store'
+import MessageString from '@/components/UI/MessageString/MessageString'
 
 const ButtonBlock = ({ element, setShowNewProductForm }) => {
   const { categoriesList, brandsList, fetchProductsList } = useAdminListsStore(
@@ -24,19 +24,18 @@ const ButtonBlock = ({ element, setShowNewProductForm }) => {
     })
   )
 
-  const { setMessage } = useUserStore((state) => ({
-    setMessage: state.setMessage
-  }))
+  const [message, setMessage] = useState(null)
 
   const deleteHandler = async (id) => {
     await deleteProduct(id).then((r) => {
-      setMessage(r)
+      !r.ok && setMessage(r)
     })
     await fetchProductsList()
   }
 
   return (
     <div className={classes.icoBlock}>
+      <MessageString message={message} setMessage={setMessage} />
       {element.value.id === newProduct.oldProductId ? (
         <FiX
           className={classes.removeIco}

@@ -4,22 +4,15 @@ import React, { useState } from 'react'
 import { createBrand } from '@/http/Admin/brands'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import MessageString from '@/components/UI/MessageString/MessageString'
-
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import classes from '@/components/Admin/FormsStyles.module.css'
 import AdminNewInput from '@/components/UI/Admin/AdminNewInput/AdminNewInput'
 import { FiPlus } from 'react-icons/fi'
-
 import BrandsRowItem from '@/components/Admin/ManageBrands/BrandsRowItem/BrandsRowItem'
-import { useUserStore } from '@/store/mainStore/store'
 
 const ManageBrands = () => {
   const [selectedBrand, setSelectedBrand] = useState(null)
-
-  const { message, setMessage } = useUserStore((state) => ({
-    message: state.message,
-    setMessage: state.setMessage
-  }))
+  const [message, setMessage] = useState(null)
 
   const { brandsList, fetchBrandsList } = useAdminListsStore((state) => ({
     brandsList: state.brandsList,
@@ -32,8 +25,8 @@ const ManageBrands = () => {
     reset: state.reset
   }))
 
-  const create = async () => {
-    await createBrand(newBrand).then(async (r) => {
+  const createHandler = async (brand) => {
+    await createBrand(brand).then(async (r) => {
       setMessage(r)
       r.ok && reset()
       r.ok && (await fetchBrandsList().then())
@@ -54,15 +47,16 @@ const ManageBrands = () => {
             }}
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
-                create().then()
+                createHandler(newBrand).then()
               }
             }}
           >
             <div className={classes.icoBlock}>
+              <MessageString message={message} setMessage={setMessage} />
               <FiPlus
                 className={classes.submitIco}
                 onClick={() => {
-                  create().then()
+                  createHandler(newBrand).then()
                 }}
               />
             </div>
@@ -84,7 +78,6 @@ const ManageBrands = () => {
           )}
         </div>
       </div>
-      {message && <MessageString message={message} />}
     </>
   )
 }
