@@ -4,6 +4,27 @@
   width: 180px;
 }
 
+.toCart {
+  display: flex;
+  flex-direction: row;
+  margin: 13px 0;
+}
+
+.toCartSplitter {
+  width: 20px;
+  height: 60px;
+}
+
+.cartButton {
+  height: 60px;
+  width: 100%;
+  background-color: teal;
+  color: white;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.06em;
+}
+
 .button {
   width: 60px;
 }

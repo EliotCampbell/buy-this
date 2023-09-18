@@ -32,19 +32,10 @@ const ProductCreateForm = () => {
 
   const [message, setMessage] = useState(null)
 
-  const createFormData = (product) => {
-    const formData = new FormData()
-    formData.append('name', product.name)
-    formData.append('price', product.price.toString())
-    formData.append('img', product.file)
-    formData.append('brandId', product.brand.value)
-    formData.append('categoryId', product.category.value)
-    formData.append('description', product.description)
-    return formData
-  }
-
-  const createHandler = async (product) => {
-    await createProduct(createFormData(product)).then((r) => {
+  const createHandler = async (event) => {
+    event.preventDefault()
+    const formData = new FormData(event.target)
+    await createProduct(formData).then((r) => {
       setMessage(r)
       r.ok && reset()
     })
@@ -56,11 +47,16 @@ const ProductCreateForm = () => {
   return (
     <div className={classes.productCreateForm}>
       <div className={classes.formWithSidePreview}>
-        <div className={classes.form}>
+        <form
+          className={classes.form}
+          onSubmit={(event) => createHandler(event)}
+        >
           <AdminNewInput
             label={'A new product name'}
             placeholder={'Name of the new product...'}
             value={newProduct.name}
+            name={'name'}
+            autocomplete={false}
             onChange={(e) => {
               setMessage(null)
               setNewProduct({ ...newProduct, name: e.target.value })
@@ -71,6 +67,7 @@ const ProductCreateForm = () => {
               value={newProduct.brand === '' ? null : newProduct.brand}
               label={'Choose brand'}
               options={brandsList}
+              name={'brandId'}
               onChange={(option) => {
                 setMessage(null)
                 setNewProduct({ ...newProduct, brand: option })
@@ -81,6 +78,7 @@ const ProductCreateForm = () => {
               value={newProduct.category === '' ? null : newProduct.category}
               label={'Choose category'}
               options={categoriesList}
+              name={'categoryId'}
               onChange={(option) => {
                 setMessage(null)
                 setNewProduct({ ...newProduct, category: option })
@@ -92,6 +90,7 @@ const ProductCreateForm = () => {
             value={newProduct.price}
             placeholder={'47...'}
             label={'Input product price'}
+            name={'price'}
             onChange={(e) => {
               setMessage(null)
               if (regExp.test(e.target.value) || e.target.value === '')
@@ -102,6 +101,7 @@ const ProductCreateForm = () => {
             placeholder={'Many words about it...'}
             label={'Input product description'}
             value={newProduct.description}
+            name={'description'}
             onChange={(e) => {
               setMessage(null)
               setNewProduct({
@@ -113,6 +113,7 @@ const ProductCreateForm = () => {
           <AdminNewInput
             type={'file'}
             accept={'.png,.jpg'}
+            name={'img'}
             onChange={(e) => {
               setMessage(null)
               setNewProduct({ ...newProduct, file: e.target.files[0] })
@@ -124,10 +125,8 @@ const ProductCreateForm = () => {
               <MessageString message={message} setMessage={setMessage} />
             </div>
           )}
-          <Button onClick={() => createHandler(newProduct)}>
-            Create product
-          </Button>
-        </div>
+          <Button>Create product</Button>
+        </form>
         <div className={classes.productsCardWrapper}>
           <p className={classes.preview}>Preview</p>
           <ProductPreviewCard

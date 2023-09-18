@@ -12,13 +12,14 @@ const uuid = require('uuid')
 export const POST = async (request) => {
   try {
     const formData = await request.formData()
+
     let name = formData.get('name')
     let price = formData.get('price')
     let brandId = formData.get('brandId')
     let categoryId = formData.get('categoryId')
     let description = formData.get('description')
     let info = formData.get('info')
-    const img = formData.get('img') || 'noImg.jpg'
+    const img = formData.get('img')
     if (!name || !price || !brandId || !categoryId || !description || !img) {
       return NextResponse.json({
         ok: false,
@@ -60,7 +61,7 @@ export const POST = async (request) => {
     }
 
     let fileName = 'noImg.jpg'
-    if (img !== 'noImg.jpg') {
+    if (img.size > 0) {
       fileName = uuid.v4() + '.jpg'
       await writeFile(
         `public/static/${fileName}`,

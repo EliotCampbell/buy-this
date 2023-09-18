@@ -99,7 +99,7 @@ export const PUT = async (request, { params }) => {
       fileName = oldProduct.img
     }
 
-    if (oldProduct.img !== img && img !== 'noImg.jpg') {
+    if (oldProduct.img !== img && img.size > 0) {
       fileName = uuid.v4() + '.jpg'
       await writeFile(
         `public/static/${fileName}`,

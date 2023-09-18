@@ -10,8 +10,6 @@ import AdminNewInput from '@/components/UI/Admin/AdminNewInput/AdminNewInput'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import { updateProduct } from '@/http/Admin/products'
 import AdminNewTextArea from '@/components/UI/Admin/AdminNewTextArea/AdminNewTextArea'
-//todo: formdata
-//todo:on product data loading see 404
 const ProductUpdateForm = () => {
   const { categoriesList, brandsList, fetchProductsList } = useAdminListsStore(
     (state) => ({
@@ -32,24 +30,13 @@ const ProductUpdateForm = () => {
 
   const [message, setMessage] = useState(null)
 
-  const createFormData = (newProduct) => {
-    const formData = new FormData()
-    formData.append('name', newProduct.name)
-    formData.append('price', newProduct.price.toString())
-    formData.append('img', newProduct.file)
-    formData.append('brandId', newProduct.brand.value)
-    formData.append('categoryId', newProduct.category.value)
-    formData.append('description', newProduct.description)
-    return formData
-  }
-
-  const updateHandler = async (product) => {
-    await updateProduct(product.oldProductId, createFormData(product)).then(
-      (r) => {
-        !r.ok && setMessage(r)
-        r.ok && reset()
-      }
-    )
+  const updateHandler = async (event, oldProductId) => {
+    event.preventDefault()
+    const formData = new FormData(event.target)
+    await updateProduct(oldProductId, formData).then((r) => {
+      !r.ok && setMessage(r)
+      r.ok && reset()
+    })
     await fetchProductsList()
   }
 
@@ -58,17 +45,21 @@ const ProductUpdateForm = () => {
   return (
     <>
       <div className={classes.formWithSidePreview}>
-        <div className={classes.form}>
+        <form
+          className={classes.form}
+          onSubmit={(event) => updateHandler(event, newProduct.oldProductId)}
+        >
           <AdminNewInput
             placeholder={'Bicycle'}
             label={'Input product name'}
             value={newProduct.name}
+            name={'name'}
             onChange={(e) => {
               setNewProduct({ ...newProduct, name: e.target.value })
             }}
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
-                updateHandler(newProduct).then()
+                updateHandler(event, newProduct.oldProductId).then()
               }
             }}
           />
@@ -77,6 +68,7 @@ const ProductUpdateForm = () => {
               value={newProduct.brand}
               label={'Choose brand'}
               options={brandsList}
+              name={'brandId'}
               onChange={(option) => {
                 setNewProduct({ ...newProduct, brand: option })
               }}
@@ -86,6 +78,7 @@ const ProductUpdateForm = () => {
               value={newProduct.category}
               label={'Choose category'}
               options={categoriesList}
+              name={'categoryId'}
               onChange={(option) =>
                 setNewProduct({ ...newProduct, category: option })
               }
@@ -96,6 +89,7 @@ const ProductUpdateForm = () => {
             label={'Input product price'}
             value={newProduct.price}
             type={'number'}
+            name={'price'}
             onChange={(e) => {
               setMessage(null)
               if (regExp.test(e.target.value) || e.target.value === '')
@@ -103,7 +97,7 @@ const ProductUpdateForm = () => {
             }}
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
-                updateHandler(newProduct).then()
+                updateHandler(event, newProduct.oldProductId).then()
               }
             }}
           />
@@ -111,6 +105,7 @@ const ProductUpdateForm = () => {
             placeholder={'Many words about it'}
             label={'Input product description'}
             value={newProduct.description}
+            name={'description'}
             onChange={(e) =>
               setNewProduct({
                 ...newProduct,
@@ -119,25 +114,27 @@ const ProductUpdateForm = () => {
             }
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
-                updateHandler(newProduct).then()
+                updateHandler(event, newProduct.oldProductId).then()
               }
             }}
           />
           <AdminNewInput
             type={'file'}
             accept={'.png,.jpg'}
+            name={'img'}
             onChange={(e) => {
               setNewProduct({ ...newProduct, file: e.target.files[0] })
               setPreview(URL.createObjectURL(e.target.files[0]))
             }}
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
-                updateHandler(newProduct).then()
+                updateHandler(event, newProduct.oldProductId).then()
               }
             }}
           />
           <Button
-            onClick={() => {
+            onClick={(event) => {
+              event.preventDefault()
               setNewProduct({ ...newProduct, file: 'noImg.jpg' })
               setPreview(
                 process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'static/noImg.jpg'
@@ -153,10 +150,8 @@ const ProductUpdateForm = () => {
               <MessageString message={message} />
             </div>
           )}
-          <Button onClick={() => updateHandler(newProduct)}>
-            Save product
-          </Button>
-        </div>
+          <Button>Save product</Button>
+        </form>
         <div className={classes.productsCardWrapper}>
           <p className={classes.preview}>Preview</p>
           <ProductPreviewCard
