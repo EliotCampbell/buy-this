@@ -4,13 +4,16 @@ import React, { useState } from 'react'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import AdminReactSelect from '@/components/UI/Admin/AdminReactSelect/AdminReactSelect'
-import AdminNewInput from '@/components/UI/Admin/AdminNewInput/AdminNewInput'
+import AdminInput from '@/components/UI/Admin/AdminInput/AdminInput'
 import classes from '@/components/Admin/FormsStyles.module.css'
 import ProductPreviewCard from '@/components/Shop/ProductPreviewCard/ProductPreviewCard'
 import Button from '@/components/UI/Button/Button'
 import { createProduct } from '@/http/Admin/products'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import AdminNewTextArea from '@/components/UI/Admin/AdminNewTextArea/AdminNewTextArea'
+import AdminCheckbox from '@/components/UI/Admin/AdminCheckbox/AdminCheckbox'
+import AdminFileInput from '@/components/UI/Admin/AdminFileInput/AdminFileInput'
+import { FaSpinner } from 'react-icons/fa6'
 
 const ProductCreateForm = () => {
   const { categoriesList, brandsList, fetchProductsList } = useAdminListsStore(
@@ -50,18 +53,19 @@ const ProductCreateForm = () => {
         <form
           className={classes.form}
           onSubmit={(event) => createHandler(event)}
+          autoComplete={'disabled'}
         >
-          <AdminNewInput
+          <FaSpinner />
+          <AdminInput
             label={'A new product name'}
             placeholder={'Name of the new product...'}
             value={newProduct.name}
             name={'name'}
-            autocomplete={false}
             onChange={(e) => {
               setMessage(null)
               setNewProduct({ ...newProduct, name: e.target.value })
             }}
-          ></AdminNewInput>
+          ></AdminInput>
           <div className={classes.inputContainer}>
             <AdminReactSelect
               value={newProduct.brand === '' ? null : newProduct.brand}
@@ -85,18 +89,41 @@ const ProductCreateForm = () => {
               }}
             ></AdminReactSelect>
           </div>
-
-          <AdminNewInput
-            value={newProduct.price}
-            placeholder={'47...'}
-            label={'Input product price'}
-            name={'price'}
-            onChange={(e) => {
-              setMessage(null)
-              if (regExp.test(e.target.value) || e.target.value === '')
-                setNewProduct({ ...newProduct, price: e.target.value })
-            }}
-          />
+          <div className={classes.inputContainer}>
+            <AdminInput
+              value={newProduct.price}
+              placeholder={'49.99...'}
+              label={'Input product price'}
+              name={'price'}
+              onChange={(e) => {
+                setMessage(null)
+                if (regExp.test(e.target.value) || e.target.value === '')
+                  setNewProduct({ ...newProduct, price: e.target.value })
+              }}
+            />
+            <div className={classes.inputContainerVerticalSplitter}></div>
+            <AdminCheckbox
+              label={'On sale'}
+              name={'onSale'}
+              onChange={(event) =>
+                setNewProduct({ ...newProduct, onSale: event.target.checked })
+              }
+              checked={newProduct.onSale}
+            />
+            <div className={classes.inputContainerVerticalSplitter}></div>
+            <AdminInput
+              value={newProduct.sellPrice}
+              placeholder={'29.99...'}
+              label={'Input product sell price'}
+              name={'sellPrice'}
+              disabled={!newProduct.onSale}
+              onChange={(e) => {
+                setMessage(null)
+                if (regExp.test(e.target.value) || e.target.value === '')
+                  setNewProduct({ ...newProduct, sellPrice: e.target.value })
+              }}
+            />
+          </div>
           <AdminNewTextArea
             placeholder={'Many words about it...'}
             label={'Input product description'}
@@ -110,8 +137,31 @@ const ProductCreateForm = () => {
               })
             }}
           />
-          <AdminNewInput
-            type={'file'}
+          <div className={classes.inputContainer}>
+            <AdminCheckbox
+              label={'Highlight'}
+              onChange={(event) =>
+                setNewProduct({
+                  ...newProduct,
+                  highlight: event.target.checked
+                })
+              }
+              checked={newProduct.highlight}
+            />
+            <div className={classes.inputContainerVerticalSplitter} />
+            <AdminCheckbox
+              label={'Hot deal'}
+              onChange={(event) =>
+                setNewProduct({
+                  ...newProduct,
+                  hotDeal: event.target.checked
+                })
+              }
+              checked={newProduct.hotDeal}
+            />
+          </div>
+          <AdminFileInput
+            label={'+ ADD PHOTO'}
             accept={'.png,.jpg'}
             name={'img'}
             onChange={(e) => {

@@ -1,10 +1,10 @@
 import classes from '@/components/Login/Login.module.css'
-import Input from '@/components/UI/Input/Input'
 import Button from '@/components/UI/Button/Button'
 import React, { useState } from 'react'
 import { logFetch } from '@/http/auth'
 import { useUserStore } from '@/store/mainStore/store'
 import MessageString from '@/components/UI/MessageString/MessageString'
+import AdminInput from '@/components/UI/Admin/AdminInput/AdminInput'
 
 const Signin = ({ setLogOrRegSwitcher, setSideMenuSwitcher }) => {
   const [input, setInput] = useState({ email: '', password: '' })
@@ -37,8 +37,8 @@ const Signin = ({ setLogOrRegSwitcher, setSideMenuSwitcher }) => {
   return (
     <>
       <h2 className={classes.h2}>Login to your account</h2>
-      <form onSubmit={signIn} className={classes.form} id={'login'}>
-        <Input
+      <form onSubmit={signIn} className={classes.authForm} id={'login'}>
+        <AdminInput
           type={'email'}
           name={'login'}
           label={'E-mail'}
@@ -48,8 +48,8 @@ const Signin = ({ setLogOrRegSwitcher, setSideMenuSwitcher }) => {
             setMessage(null)
             setInput({ ...input, email: e.target.value })
           }}
-        ></Input>
-        <Input
+        ></AdminInput>
+        <AdminInput
           type={'password'}
           name={'password'}
           label={'Password'}
@@ -59,7 +59,7 @@ const Signin = ({ setLogOrRegSwitcher, setSideMenuSwitcher }) => {
             setMessage(null)
             setInput({ ...input, password: e.target.value })
           }}
-        ></Input>
+        ></AdminInput>
         <div className={classes.buttonWrapper}>
           <div
             className={classes.registerLink}

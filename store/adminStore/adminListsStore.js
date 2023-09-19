@@ -15,7 +15,7 @@ export const useAdminListsStore = create((set) => ({
     await Promise.all([
       fetchAllCategories(),
       fetchAllBrands(),
-      fetchAllProducts()
+      fetchAllProducts({ order: '[["name", "ASC"]]' })
     ]).then(([categoriesData, brandsData, productsData]) => {
       set(() => ({
         categoriesList: categoriesData.dataObject.categories.map((el) => ({
@@ -54,7 +54,7 @@ export const useAdminListsStore = create((set) => ({
     })
   },
   fetchProductsList: async () => {
-    await fetchAllProducts().then((r) => {
+    await fetchAllProducts({ order: '[["name", "ASC"]]' }).then((r) => {
       set(() => ({
         productsList: r.dataObject.products.map((el) => ({
           value: el,

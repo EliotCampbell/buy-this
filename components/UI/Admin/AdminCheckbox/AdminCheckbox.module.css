@@ -1,0 +1,30 @@
+.label {
+  padding: 0 15px;
+  display: flex;
+  flex-wrap: nowrap;
+  width: fit-content;
+  margin: 13px 0 10px 0;
+  position: relative;
+  align-items: center;
+  border: 1px rgb(222, 225, 231) solid;
+  border-radius: 2px;
+  background-color: white;
+  white-space: nowrap;
+  height: 40px;
+  letter-spacing: 0.03em;
+  font-size: 18px;
+  font-family: BlenderPro-Bold, sans-serif;
+  color: teal;
+  transition: 300ms;
+}
+
+.label:hover {
+  color: #00a6a6;
+  transition: 300ms;
+  cursor: pointer;
+  border: 1px teal solid;
+}
+
+.checkbox {
+  margin-right: 10px;
+}

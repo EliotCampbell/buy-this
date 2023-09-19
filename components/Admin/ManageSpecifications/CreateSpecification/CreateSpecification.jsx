@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './CreateSpecification.module.css'
-import AdminNewInput from '@/components/UI/Admin/AdminNewInput/AdminNewInput'
+import AdminInput from '@/components/UI/Admin/AdminInput/AdminInput'
 import Button from '@/components/UI/Button/Button'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { createSpecificationByProductId } from '@/http/Admin/specifications'
@@ -42,7 +42,7 @@ const CreateSpecification = () => {
   return (
     <>
       <div className={classes.inputContainer}>
-        <AdminNewInput
+        <AdminInput
           placeholder={'Title'}
           value={!newSpecification.id ? newSpecification.title : ''}
           onChange={(e) => {
@@ -57,9 +57,9 @@ const CreateSpecification = () => {
               create(newSpecification).then()
             }
           }}
-        ></AdminNewInput>
+        ></AdminInput>
         <div className={classes.inputContainerVerticalSplitter}></div>
-        <AdminNewInput
+        <AdminInput
           placeholder={'Description'}
           value={!newSpecification.id ? newSpecification.description : ''}
           onChange={(e) => {
@@ -74,7 +74,7 @@ const CreateSpecification = () => {
               create(newSpecification).then()
             }
           }}
-        ></AdminNewInput>
+        ></AdminInput>
       </div>
       <Button onClick={() => create(newSpecification).then()} style={'light'}>
         + ADD SPECIFICATION

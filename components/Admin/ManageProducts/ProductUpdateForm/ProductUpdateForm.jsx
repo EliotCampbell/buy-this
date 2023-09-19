@@ -6,10 +6,11 @@ import ProductPreviewCard from '../../../Shop/ProductPreviewCard/ProductPreviewC
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import AdminReactSelect from '@/components/UI/Admin/AdminReactSelect/AdminReactSelect'
-import AdminNewInput from '@/components/UI/Admin/AdminNewInput/AdminNewInput'
+import AdminInput from '@/components/UI/Admin/AdminInput/AdminInput'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import { updateProduct } from '@/http/Admin/products'
 import AdminNewTextArea from '@/components/UI/Admin/AdminNewTextArea/AdminNewTextArea'
+import AdminCheckbox from '@/components/UI/Admin/AdminCheckbox/AdminCheckbox'
 const ProductUpdateForm = () => {
   const { categoriesList, brandsList, fetchProductsList } = useAdminListsStore(
     (state) => ({
@@ -49,7 +50,7 @@ const ProductUpdateForm = () => {
           className={classes.form}
           onSubmit={(event) => updateHandler(event, newProduct.oldProductId)}
         >
-          <AdminNewInput
+          <AdminInput
             placeholder={'Bicycle'}
             label={'Input product name'}
             value={newProduct.name}
@@ -84,23 +85,42 @@ const ProductUpdateForm = () => {
               }
             ></AdminReactSelect>
           </div>
-          <AdminNewInput
-            placeholder={'47'}
-            label={'Input product price'}
-            value={newProduct.price}
-            type={'number'}
-            name={'price'}
-            onChange={(e) => {
-              setMessage(null)
-              if (regExp.test(e.target.value) || e.target.value === '')
-                setNewProduct({ ...newProduct, price: e.target.value })
-            }}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') {
-                updateHandler(event, newProduct.oldProductId).then()
+          <div className={classes.inputContainer}>
+            <AdminInput
+              placeholder={'49.99...'}
+              label={'Input product price'}
+              value={newProduct.price}
+              type={'number'}
+              name={'price'}
+              onChange={(e) => {
+                setMessage(null)
+                if (regExp.test(e.target.value) || e.target.value === '')
+                  setNewProduct({ ...newProduct, price: e.target.value })
+              }}
+            />
+            <div className={classes.inputContainerVerticalSplitter}></div>
+            <AdminCheckbox
+              label={'On sale'}
+              name={'onSale'}
+              onChange={(event) =>
+                setNewProduct({ ...newProduct, onSale: event.target.checked })
               }
-            }}
-          />
+              checked={newProduct.onSale}
+            />
+            <div className={classes.inputContainerVerticalSplitter}></div>
+            <AdminInput
+              value={newProduct.sellPrice}
+              placeholder={'29.99...'}
+              label={'Input product sell price'}
+              name={'sellPrice'}
+              disabled={!newProduct.onSale}
+              onChange={(e) => {
+                setMessage(null)
+                if (regExp.test(e.target.value) || e.target.value === '')
+                  setNewProduct({ ...newProduct, sellPrice: e.target.value })
+              }}
+            />
+          </div>
           <AdminNewTextArea
             placeholder={'Many words about it'}
             label={'Input product description'}
@@ -118,7 +138,30 @@ const ProductUpdateForm = () => {
               }
             }}
           />
-          <AdminNewInput
+          <div className={classes.inputContainer}>
+            <AdminCheckbox
+              label={'Highlight'}
+              onChange={(event) =>
+                setNewProduct({
+                  ...newProduct,
+                  highlight: event.target.checked
+                })
+              }
+              checked={newProduct.highlight}
+            />
+            <div className={classes.inputContainerVerticalSplitter} />
+            <AdminCheckbox
+              label={'Hot deal'}
+              onChange={(event) =>
+                setNewProduct({
+                  ...newProduct,
+                  hotDeal: event.target.checked
+                })
+              }
+              checked={newProduct.hotDeal}
+            />
+          </div>
+          <AdminInput
             type={'file'}
             accept={'.png,.jpg'}
             name={'img'}

@@ -1,10 +1,10 @@
 import classes from '@/components/Login/Login.module.css'
-import Input from '@/components/UI/Input/Input'
 import Button from '@/components/UI/Button/Button'
 import React, { useState } from 'react'
 import { registrationFetch } from '@/http/auth'
 import { useUserStore } from '@/store/mainStore/store'
 import MessageString from '@/components/UI/MessageString/MessageString'
+import AdminInput from '@/components/UI/Admin/AdminInput/AdminInput'
 
 const Register = ({ setLogOrRegSwitcher }) => {
   const [input, setInput] = useState({
@@ -43,8 +43,8 @@ const Register = ({ setLogOrRegSwitcher }) => {
   return (
     <>
       <h2 className={classes.h2}>Create a Buy This! Account</h2>
-      <form onSubmit={register} className={classes.form} id={'register'}>
-        <Input
+      <form onSubmit={register} className={classes.authForm} id={'register'}>
+        <AdminInput
           type={'email'}
           name={'registration email'}
           label={'E-mail'}
@@ -54,8 +54,8 @@ const Register = ({ setLogOrRegSwitcher }) => {
             setMessage(null)
             setInput({ ...input, email: e.target.value })
           }}
-        ></Input>
-        <Input
+        ></AdminInput>
+        <AdminInput
           type={'text'}
           name={'registration username'}
           label={'Username'}
@@ -65,8 +65,8 @@ const Register = ({ setLogOrRegSwitcher }) => {
             setMessage(null)
             setInput({ ...input, username: e.target.value })
           }}
-        ></Input>
-        <Input
+        ></AdminInput>
+        <AdminInput
           type={'password'}
           name={'registration password'}
           label={'Password'}
@@ -76,8 +76,8 @@ const Register = ({ setLogOrRegSwitcher }) => {
             setMessage(null)
             setInput({ ...input, password: e.target.value })
           }}
-        ></Input>
-        <Input
+        ></AdminInput>
+        <AdminInput
           name={'repeat registration password'}
           label={'Repeat password'}
           placeholder={'Repeat password'}
@@ -87,7 +87,7 @@ const Register = ({ setLogOrRegSwitcher }) => {
             setInput({ ...input, repeatPassword: e.target.value })
           }}
           type={'password'}
-        ></Input>
+        ></AdminInput>
         <div className={classes.buttonWrapper}>
           <div
             className={classes.registerLink}

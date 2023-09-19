@@ -22,7 +22,7 @@ export const middleware = async (request) => {
         })
       }
       const payload = await verifyJwt(token)
-      if (payload.role === 'ADMIN') {
+      if (payload?.role === 'ADMIN') {
         return NextResponse.next()
       } else
         return NextResponse.json({
@@ -44,7 +44,7 @@ export const middleware = async (request) => {
       return NextResponse.redirect(new URL('/', request.url))
     }
     const payload = await verifyJwt(token)
-    if (payload.role === 'ADMIN') {
+    if (payload?.role === 'ADMIN') {
       return NextResponse.next()
     } else return NextResponse.redirect(new URL('/', request.url))
   }

@@ -14,6 +14,10 @@ const initialState = {
     category: '',
     name: '',
     price: '',
+    onSale: false,
+    highlight: false,
+    hotDeal: false,
+    sellPrice: '',
     description: '',
     file: 'noImg.jpg'
   },

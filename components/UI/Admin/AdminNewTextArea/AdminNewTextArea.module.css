@@ -1,27 +1,14 @@
-.textareaDiv {
-  display: flex;
-  flex-grow: 1;
-  margin: 0 0 20px 0;
-  position: relative;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 5px;
-  border: 1px rgb(222, 225, 231) solid;
-  border-radius: 2px;
-  background-color: white;
-}
-
-.textareaDiv:hover {
+.textareaDivActive {
+  border: 1px teal solid !important;
 }
 
 .label {
-  top: -13px;
-  position: absolute;
+  margin-bottom: -18px;
+  position: relative;
   letter-spacing: 1px;
   display: block;
   margin-left: 15px;
   width: fit-content;
-  margin-bottom: -5px;
   padding: 5px 6px 0 6px;
   font-family: BlenderPro-Bold, sans-serif;
   font-size: 13px;
@@ -32,15 +19,28 @@
 }
 
 .textarea {
+  padding: 10px 8px;
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  margin: 13px 0 10px 0;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px rgb(222, 225, 231) solid;
+  border-radius: 2px;
+  background-color: white;
   height: 100%;
-  background-color: transparent;
   color: teal;
   font-size: 18px;
   font-family: BlenderPro-Bold, sans-serif;
   font-weight: 500;
-  flex-grow: 1;
   resize: none;
-  padding: 10px 5px 5px;
+  transition: 300ms;
+}
+
+.textarea:hover {
+  border: 1px teal solid;
+  transition: 0.3s;
 }
 
 .textarea::-webkit-scrollbar {
@@ -50,4 +50,8 @@
 
 .textarea::placeholder {
   color: #b4b4b4;
+}
+
+.textarea:focus {
+  border: 1px teal solid;
 }

@@ -12,6 +12,10 @@ export const generateJwt = async (id, email, role = 'USER') => {
 }
 
 export const verifyJwt = async (token) => {
-  const { payload } = await jwtVerify(token, secret)
-  return payload
+  try {
+    const { payload } = await jwtVerify(token, secret)
+    return payload
+  } catch (error) {
+    console.log(error.message)
+  }
 }

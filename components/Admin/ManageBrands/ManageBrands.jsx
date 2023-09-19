@@ -6,7 +6,7 @@ import { useAdminStore } from '@/store/adminStore/adminStore'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import classes from '@/components/Admin/FormsStyles.module.css'
-import AdminNewInput from '@/components/UI/Admin/AdminNewInput/AdminNewInput'
+import AdminInput from '@/components/UI/Admin/AdminInput/AdminInput'
 import { FiPlus } from 'react-icons/fi'
 import BrandsRowItem from '@/components/Admin/ManageBrands/BrandsRowItem/BrandsRowItem'
 
@@ -38,7 +38,7 @@ const ManageBrands = () => {
       <h1>MANAGE BRANDS</h1>
       <div className={classes.formWithSidePreview}>
         <div className={classes.form}>
-          <AdminNewInput
+          <AdminInput
             placeholder={'Add brand...'}
             value={!selectedBrand ? newBrand.name : ''}
             onChange={(e) => {
@@ -60,7 +60,7 @@ const ManageBrands = () => {
                 }}
               />
             </div>
-          </AdminNewInput>
+          </AdminInput>
 
           {brandsList.length > 0 ? (
             brandsList.map((el) => {

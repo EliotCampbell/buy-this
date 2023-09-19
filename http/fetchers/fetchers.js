@@ -20,10 +20,12 @@ export const fetchAllBrands = async () => {
   }
 }
 
-export const fetchAllProducts = async () => {
+export const fetchAllProducts = async (query) => {
   try {
     const res = await fetch(
-      process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/product'
+      process.env.NEXT_PUBLIC_REACT_APP_API_URL +
+        'api/product?' +
+        (query && new URLSearchParams(query))
     )
     return await res.json()
   } catch (e) {

@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import classes from './AdminNewTextArea.module.css'
 
 const AdminNewTextArea = ({ children, label, ...props }) => {
+  const ref = useRef()
   return (
-    <div className={classes.textareaDiv}>
+    <>
       {label && <label className={classes.label}>{label}</label>}
-      <textarea className={classes.textarea} {...props} />
+      <textarea className={classes.textarea} {...props} ref={ref} />
       {children}
-    </div>
+    </>
   )
 }
-
 export default AdminNewTextArea

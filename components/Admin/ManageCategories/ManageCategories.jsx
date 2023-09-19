@@ -5,7 +5,7 @@ import { useAdminStore } from '@/store/adminStore/adminStore'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import classes from '@/components/Admin/FormsStyles.module.css'
 import { FiPlus } from 'react-icons/fi'
-import AdminNewInput from '@/components/UI/Admin/AdminNewInput/AdminNewInput'
+import AdminInput from '@/components/UI/Admin/AdminInput/AdminInput'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import CategoryRowItem from '@/components/Admin/ManageCategories/CategoryRowItem/CategoryRowItem'
 
@@ -40,7 +40,7 @@ const ManageCategories = () => {
       <h1>MANAGE CATEGORIES</h1>
       <div className={classes.formWithSidePreview}>
         <div className={classes.form}>
-          <AdminNewInput
+          <AdminInput
             placeholder={'Add category...'}
             value={!selectedCategory ? newCategory.name : ''}
             onChange={(e) => {
@@ -62,7 +62,7 @@ const ManageCategories = () => {
                 }}
               />
             </div>
-          </AdminNewInput>
+          </AdminInput>
 
           {categoriesList.length > 0 ? (
             categoriesList.map((el) => (

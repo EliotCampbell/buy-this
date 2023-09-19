@@ -1,0 +1,75 @@
+.inputDiv {
+  width: 100%;
+  margin: 13px 0 10px 0;
+  position: relative;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+}
+
+.label {
+  top: -13px;
+  position: absolute;
+  letter-spacing: 0.05em;
+  width: fit-content;
+  margin: 0 0 -5px 15px;
+  padding: 5px 6px 0 6px;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 13px;
+  color: teal;
+  background-color: white;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.disabledLabel {
+  color: #dee1e7;
+}
+
+.disabledInput::placeholder {
+  color: #dee1e7 !important;
+}
+
+.input {
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  color: teal;
+  font-size: 18px;
+  font-family: BlenderPro-Bold, sans-serif;
+  flex-grow: 1;
+  height: 40px;
+  border: 1px rgb(222, 225, 231) solid;
+  border-radius: 2px;
+  transition: 300ms;
+}
+
+.input:hover {
+  border: 1px teal solid;
+  transition: 300ms;
+}
+
+.disabledInput:hover {
+  border: 1px rgb(222, 225, 231) solid;
+}
+
+.input:focus {
+  border: 1px teal solid;
+  transition: 300ms;
+}
+
+.input::placeholder {
+  color: #b4b4b4;
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  font-family: BlenderPro-Bold, sans-serif;
+  -webkit-text-fill-color: teal;
+  letter-spacing: 0.02em;
+}
