@@ -9,7 +9,9 @@ const ProductPreviewCard = ({
   brandId,
   productName,
   productImg,
-  productPrice
+  productPrice,
+  discountPrice,
+  inStock
 }) => {
   const brands = useProductStore((state) => state.brands)
   return (
@@ -34,10 +36,28 @@ const ProductPreviewCard = ({
           />
         </div>
         <div className={classes.priceAvailabilityDiv}>
-          <p className={classes.inStock}>In stock</p>
-          <p className={classes.price}>{`${Number.parseFloat(
-            productPrice
-          ).toFixed(2)} €`}</p>
+          <p
+            className={
+              inStock > 5
+                ? classes.inStock
+                : inStock > 0
+                ? classes.runningOut
+                : classes.notInStock
+            }
+          >{`${inStock} in stock`}</p>
+          <div className={classes.priceWrapper}>
+            <p className={discountPrice ? classes.brokenPrice : classes.price}>
+              {`${Number.parseFloat(productPrice).toFixed(2)} €`}
+              {discountPrice && (
+                <div className={classes.brokenPriceCross}></div>
+              )}
+            </p>
+            {discountPrice && (
+              <p className={classes.salePrice}>
+                {`${Number.parseFloat(discountPrice).toFixed(2)} €`}
+              </p>
+            )}
+          </div>
         </div>
       </Link>
     </div>

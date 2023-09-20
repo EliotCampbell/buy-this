@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import classes from '@/components/Admin/FormsStyles.module.css'
-import AdminProductsList from '@/components/UI/Admin/AdminProductsList/AdminProductsList'
+import AdminProductsList from '@/components/Admin/ManageProducts/AdminProductsList/AdminProductsList'
 import Button from '@/components/UI/Button/Button'
 import ProductCreateForm from '@/components/Admin/ManageProducts/ProductCreate/ProductCreateForm'
 import { useAdminStore } from '@/store/adminStore/adminStore'

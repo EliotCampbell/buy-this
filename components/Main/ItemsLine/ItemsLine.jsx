@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react'
 import classes from './ItemsLine.module.css'
 import ProductPreviewCard from '../../../components/Shop/ProductPreviewCard/ProductPreviewCard'
 
-const ItemsLine = ({ title, products }) => {
+const ItemsLine = ({ title, dark, products }) => {
   const scrollContainerRef = useRef(null)
   const [scrollPosition, setScrollPosition] = useState(0)
 
@@ -17,7 +17,7 @@ const ItemsLine = ({ title, products }) => {
   }
 
   return (
-    <div className={classes.lineWrapper}>
+    <div className={`${classes.lineWrapper} ${dark && classes.dark}`}>
       <div className={classes.line}>
         <p className={classes.title}>{title}</p>
         <div className={classes.productsLineWrapper}>
@@ -33,6 +33,7 @@ const ItemsLine = ({ title, products }) => {
                 productName={el.name}
                 productImg={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.img}`}
                 productPrice={el.price}
+                inStock={el.inStock}
                 key={el.id}
               />
             ))}

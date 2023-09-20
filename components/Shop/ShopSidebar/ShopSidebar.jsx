@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react'
 import classes from './ShopSidebar.module.css'
-import ReactSelect from '../../UI/ReactSelect/ReactSelect'
 import { useProductStore, useQueryStore } from '@/store/mainStore/store'
+import AdminReactSelect from '@/components/UI/AdminInputs/AdminReactSelect/AdminReactSelect'
 
 const ShopSidebar = () => {
   const { categories, brands } = useProductStore((state) => ({
@@ -52,7 +52,7 @@ const ShopSidebar = () => {
       {
         <>
           <p className={classes.categories}>FILTER</p>
-          <ReactSelect
+          <AdminReactSelect
             label={'Select brand'}
             options={brands.map((el) => ({
               value: el.id,

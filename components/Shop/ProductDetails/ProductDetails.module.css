@@ -50,27 +50,56 @@
   color: teal;
   font-family: BlenderPro-Bold, sans-serif;
   font-size: 28px;
-  padding: 7px 0 3px;
+  padding: 3px 0 3px;
+}
+
+.productPriceWrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 .productPrice {
-  color: red;
+  color: teal;
   font-family: BlenderPro-Bold, sans-serif;
   font-size: 40px;
-  padding: 10px 0;
+}
+
+.brokenPrice {
+  font-size: 32px;
+  color: #dee1e7;
+  text-decoration: line-through;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.salePrice {
+  color: red;
+  font-size: 24px;
+  font-family: BlenderPro-Bold, sans-serif;
 }
 
 .inStock {
   font-family: BlenderPro-Bold, sans-serif;
   font-size: 18px;
-  color: #2a962a;
+  color: green;
+}
+
+.runningOut {
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 18px;
+  color: orange;
+}
+
+.notInStock {
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 18px;
+  color: red;
 }
 
 .productRating {
   color: teal;
   font-family: BlenderPro-Bold, sans-serif;
   font-size: 17px;
-  padding: 7px 0;
+  padding: 10px 0;
 }
 
 .productContentChangers {

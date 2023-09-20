@@ -5,7 +5,7 @@ import { useAdminStore } from '@/store/adminStore/adminStore'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import classes from '@/components/Admin/FormsStyles.module.css'
 import { FiPlus } from 'react-icons/fi'
-import AdminInput from '@/components/UI/Admin/AdminInput/AdminInput'
+import AdminInput from '@/components/UI/AdminInputs/AdminInput/AdminInput'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import CategoryRowItem from '@/components/Admin/ManageCategories/CategoryRowItem/CategoryRowItem'
 
@@ -27,7 +27,7 @@ const ManageCategories = () => {
 
   const createHandler = async (category) => {
     await createCategory(category).then((r) => {
-      setMessage(r)
+      !r.ok && setMessage(r)
       r.ok && reset()
       r.ok && fetchCategoriesList()
     })

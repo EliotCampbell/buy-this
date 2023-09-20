@@ -2,8 +2,8 @@ import { create } from 'zustand'
 
 const initialState = {
   selectedProduct: null,
-  newBrand: { name: '', brandId: '' },
-  newCategory: { name: '', categoryId: '' },
+  newBrand: { name: '', brandId: null },
+  newCategory: { name: '', categoryId: null },
   newSpecification: {
     id: null,
     title: '',
@@ -17,9 +17,10 @@ const initialState = {
     onSale: false,
     highlight: false,
     hotDeal: false,
-    sellPrice: '',
+    discountPrice: '',
     description: '',
-    file: 'noImg.jpg'
+    file: 'noImg.jpg',
+    inStock: 0
   },
   preview: process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'static/noImg.jpg'
 }

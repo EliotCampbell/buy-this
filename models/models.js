@@ -17,8 +17,10 @@ const Product = sequelize.define('product', {
   rating: { type: DataTypes.INTEGER, defaultValue: 0 },
   description: { type: DataTypes.TEXT, allowNull: false },
   img: { type: DataTypes.STRING, allowNull: false },
-  isHighLight: { type: DataTypes.BOOLEAN },
-  isHotDeal: { type: DataTypes.BOOLEAN }
+  highlight: { type: DataTypes.BOOLEAN, defaultValue: false },
+  hotDeal: { type: DataTypes.BOOLEAN, defaultValue: false },
+  onSale: { type: DataTypes.BOOLEAN, defaultValue: false },
+  inStock: { type: DataTypes.INTEGER, defaultValue: 0 }
 })
 
 const Category = sequelize.define('category', {

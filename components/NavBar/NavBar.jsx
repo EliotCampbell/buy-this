@@ -4,8 +4,6 @@ import React, { useEffect, useState } from 'react'
 import classes from './NavBar.module.css'
 import { HiOutlineMagnifyingGlass } from 'react-icons/hi2'
 import IcoButton from '../UI/IcoButton/IcoButton'
-import { SlBasket } from 'react-icons/sl'
-import { RiAdminLine, RiUserLine } from 'react-icons/ri'
 import { PiList } from 'react-icons/pi'
 import CategorySideNav from './CategorySideNav/CategorySideNav'
 import AccountSideNav from './AccountSideNav/AccountSideNav'
@@ -16,6 +14,7 @@ import CartSideNav from '@/components/NavBar/CartSideNav/CartSideNav'
 import { fetchAllBrands, fetchAllCategories } from '@/http/fetchers/fetchers'
 import { useShoppingCartStore } from '@/store/shoppingCartStore/shoppingCartStore'
 import { checkAuthToken } from '@/http/auth'
+import { FiShoppingCart, FiTool, FiUser } from 'react-icons/fi'
 
 const NavBar = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -100,17 +99,17 @@ const NavBar = () => {
           {isAuth && (
             <div className={classes.sideButtonsDiv}>
               <IcoButton onClick={() => setAccountSwitcher(true)}>
-                <RiUserLine className={classes.ico} />
+                <FiUser className={classes.ico} />
               </IcoButton>
               <div className={classes.splitter}></div>
               <IcoButton>
                 <Link href={'/admin'}>
-                  <RiAdminLine className={classes.ico} />
+                  <FiTool className={classes.ico} />
                 </Link>
               </IcoButton>
               <div className={classes.splitter}></div>
               <IcoButton onClick={() => setCartSwitcher(true)}>
-                <SlBasket className={classes.ico} />
+                <FiShoppingCart className={classes.ico} />
                 <p className={classes.cartCounter}>
                   {cart.reduce((acc, el) => el.count + acc, 0)}
                 </p>

@@ -21,8 +21,16 @@ const InfoBlock = ({ element }) => {
         <div className={classes.id}>
           <p className={classes.idTitle}>ID:</p>
           <p className={classes.idNumber}>{element.value.id}</p>
+          {element.value.highlight && (
+            <p className={classes.idNumber}>{'#highlight'}</p>
+          )}
+          {element.value.hotDeal && (
+            <p className={classes.idNumber}>{'#hotDeal'}</p>
+          )}
+          {element.value.onSale && (
+            <p className={classes.idNumber}>{'#onSale'}</p>
+          )}
         </div>
-
         <Link href={'/product/' + element.value.id}>
           <p
             className={classes.name}
@@ -34,6 +42,20 @@ const InfoBlock = ({ element }) => {
             {element.value.name}
           </p>
         </Link>
+        <div className={classes.categoryAndBrand}>
+          <p className={classes.title}>{'In stock:'}</p>
+          <p
+            className={
+              element.value.inStock > 5
+                ? classes.inStock
+                : element.value.inStock > 0
+                ? classes.runningOut
+                : classes.notInStock
+            }
+          >
+            {element.value.inStock}
+          </p>
+        </div>
         <div className={classes.categoryAndBrand}>
           <p className={classes.title}>Category:</p>
           <p className={classes.info}>{` ${
@@ -64,9 +86,20 @@ const InfoBlock = ({ element }) => {
           </Link>
         </div>
       </div>
-      <p className={classes.price}>{`${Number.parseFloat(
-        element.value.price
-      ).toFixed(2)} €`}</p>
+      <div className={classes.priceWrapper}>
+        <p
+          className={
+            element.value.discountPrice ? classes.brokenPrice : classes.price
+          }
+        >
+          {`${Number.parseFloat(element.value.price).toFixed(2)} €`}
+        </p>
+        {element.value.discountPrice && (
+          <p className={classes.salePrice}>{`${Number.parseFloat(
+            element.value.discountPrice
+          ).toFixed(2)} €`}</p>
+        )}
+      </div>
     </div>
   )
 }

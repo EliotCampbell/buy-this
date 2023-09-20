@@ -37,10 +37,31 @@ const ProductDetails = async ({ productId }) => {
               >{`Rating ${product.rating}`}</p>
             </div>
             <div className={classes.mainInfoBottom}>
-              <p className={classes.productPrice}>{`${Number.parseFloat(
-                product.price
-              ).toFixed(2)} €`}</p>
-              <p className={classes.inStock}>Still 4 in stock</p>
+              <div className={classes.productPriceWrapper}>
+                <p
+                  className={
+                    product.discountPrice
+                      ? classes.brokenPrice
+                      : classes.productPrice
+                  }
+                >{`${Number.parseFloat(product.price).toFixed(2)} €`}</p>
+                {product.discountPrice && (
+                  <p className={classes.productPrice}>{`${Number.parseFloat(
+                    product.discountPrice
+                  ).toFixed(2)} €`}</p>
+                )}
+              </div>
+              <p
+                className={
+                  product.inStock > 5
+                    ? classes.inStock
+                    : product.inStock > 0
+                    ? classes.runningOut
+                    : classes.notInStock
+                }
+              >
+                Still {product.inStock} in stock
+              </p>
 
               <ToCartCounterAndButton product={product} />
             </div>

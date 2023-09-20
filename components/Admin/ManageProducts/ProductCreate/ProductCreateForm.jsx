@@ -3,16 +3,16 @@
 import React, { useState } from 'react'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
-import AdminReactSelect from '@/components/UI/Admin/AdminReactSelect/AdminReactSelect'
-import AdminInput from '@/components/UI/Admin/AdminInput/AdminInput'
+import AdminReactSelect from '@/components/UI/AdminInputs/AdminReactSelect/AdminReactSelect'
+import AdminInput from '@/components/UI/AdminInputs/AdminInput/AdminInput'
 import classes from '@/components/Admin/FormsStyles.module.css'
 import ProductPreviewCard from '@/components/Shop/ProductPreviewCard/ProductPreviewCard'
 import Button from '@/components/UI/Button/Button'
 import { createProduct } from '@/http/Admin/products'
 import MessageString from '@/components/UI/MessageString/MessageString'
-import AdminNewTextArea from '@/components/UI/Admin/AdminNewTextArea/AdminNewTextArea'
-import AdminCheckbox from '@/components/UI/Admin/AdminCheckbox/AdminCheckbox'
-import AdminFileInput from '@/components/UI/Admin/AdminFileInput/AdminFileInput'
+import AdminNewTextArea from '@/components/UI/AdminInputs/AdminNewTextArea/AdminNewTextArea'
+import AdminCheckbox from '@/components/UI/AdminInputs/AdminCheckbox/AdminCheckbox'
+import AdminFileInput from '@/components/UI/AdminInputs/AdminFileInput/AdminFileInput'
 import { FaSpinner } from 'react-icons/fa6'
 
 const ProductCreateForm = () => {
@@ -53,7 +53,6 @@ const ProductCreateForm = () => {
         <form
           className={classes.form}
           onSubmit={(event) => createHandler(event)}
-          autoComplete={'disabled'}
         >
           <FaSpinner />
           <AdminInput
@@ -88,6 +87,25 @@ const ProductCreateForm = () => {
                 setNewProduct({ ...newProduct, category: option })
               }}
             ></AdminReactSelect>
+            <div className={classes.inputContainerVerticalSplitter}></div>
+            <AdminInput
+              value={newProduct.inStock}
+              placeholder={'3...'}
+              label={'In stock'}
+              name={'inStock'}
+              onChange={(e) => {
+                setMessage(null)
+                if (
+                  /^(?:\d{1,3}|999)$/.test(e.target.value) ||
+                  e.target.value === null ||
+                  e.target.value === ''
+                )
+                  setNewProduct({
+                    ...newProduct,
+                    inStock: e.target.value
+                  })
+              }}
+            />
           </div>
           <div className={classes.inputContainer}>
             <AdminInput
@@ -112,15 +130,18 @@ const ProductCreateForm = () => {
             />
             <div className={classes.inputContainerVerticalSplitter}></div>
             <AdminInput
-              value={newProduct.sellPrice}
+              value={newProduct.discountPrice}
               placeholder={'29.99...'}
-              label={'Input product sell price'}
-              name={'sellPrice'}
+              label={'Input product sale price'}
+              name={'salePrice'}
               disabled={!newProduct.onSale}
               onChange={(e) => {
                 setMessage(null)
                 if (regExp.test(e.target.value) || e.target.value === '')
-                  setNewProduct({ ...newProduct, sellPrice: e.target.value })
+                  setNewProduct({
+                    ...newProduct,
+                    discountPrice: e.target.value
+                  })
               }}
             />
           </div>
@@ -139,6 +160,7 @@ const ProductCreateForm = () => {
           />
           <div className={classes.inputContainer}>
             <AdminCheckbox
+              name={'highlight'}
               label={'Highlight'}
               onChange={(event) =>
                 setNewProduct({
@@ -150,6 +172,7 @@ const ProductCreateForm = () => {
             />
             <div className={classes.inputContainerVerticalSplitter} />
             <AdminCheckbox
+              name={'hotDeal'}
               label={'Hot deal'}
               onChange={(event) =>
                 setNewProduct({

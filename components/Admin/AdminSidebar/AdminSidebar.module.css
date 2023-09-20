@@ -23,6 +23,8 @@
 }
 
 .adminNavLink {
+  display: flex;
+  align-items: center;
   border-bottom: 1px #dee1e7 solid;
   padding: 20px 10px 20px 10px;
   font-size: 20px;
@@ -31,7 +33,17 @@
   color: teal;
 }
 
+.ico {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
 .adminNavLink:hover {
   background-color: #f2fafa;
   text-decoration: underline;
+}
+
+.adminNavLink:active {
+  text-decoration: none;
 }

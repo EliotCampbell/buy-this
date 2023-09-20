@@ -6,7 +6,7 @@ import { useAdminStore } from '@/store/adminStore/adminStore'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import classes from '@/components/Admin/FormsStyles.module.css'
-import AdminInput from '@/components/UI/Admin/AdminInput/AdminInput'
+import AdminInput from '@/components/UI/AdminInputs/AdminInput/AdminInput'
 import { FiPlus } from 'react-icons/fi'
 import BrandsRowItem from '@/components/Admin/ManageBrands/BrandsRowItem/BrandsRowItem'
 
@@ -27,7 +27,7 @@ const ManageBrands = () => {
 
   const createHandler = async (brand) => {
     await createBrand(brand).then(async (r) => {
-      setMessage(r)
+      !r.ok && setMessage(r)
       r.ok && reset()
       r.ok && (await fetchBrandsList().then())
     })

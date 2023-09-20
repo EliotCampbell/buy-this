@@ -6,17 +6,17 @@ import { Product } from '@/models/models'
 
 const Main = async () => {
   const highlights = await Product.findAll({
-    limit: 8
+    where: { highlight: true }
   }).then((data) => data.map((el) => ({ ...el.dataValues })))
 
   const hotDeals = await Product.findAll({
-    limit: 8
+    where: { hotDeal: true }
   }).then((data) => data.map((el) => ({ ...el.dataValues })))
 
   return (
     <div className={classes.main}>
       <CarouselBlock />
-      <ItemsLine title={'HIGHLIGHTS'} products={highlights} />
+      <ItemsLine title={'HIGHLIGHTS'} products={highlights} dark={true} />
       <ItemsLine title={'HOT DEALS'} products={hotDeals} />
     </div>
   )

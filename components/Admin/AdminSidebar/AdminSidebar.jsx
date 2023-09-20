@@ -14,6 +14,7 @@ const AdminSidebar = () => {
             href={'/admin/' + el.path}
             className={classes.adminNavLink}
           >
+            <div className={classes.ico}>{el.ico}</div>
             {el.linkName}
           </Link>
         ))}

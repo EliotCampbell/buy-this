@@ -6,8 +6,8 @@ import ProductUpdateForm from '@/components/Admin/ManageProducts/ProductUpdateFo
 import React from 'react'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import { useAdminStore } from '@/store/adminStore/adminStore'
-import ButtonBlock from '@/components/UI/Admin/AdminProductsList/ButtonBlock/ButtonBlock'
-import InfoBlock from '@/components/UI/Admin/AdminProductsList/InfoBlock/InfoBlock'
+import ButtonBlock from '@/components/Admin/ManageProducts/AdminProductsList/ButtonBlock/ButtonBlock'
+import InfoBlock from '@/components/Admin/ManageProducts/AdminProductsList/InfoBlock/InfoBlock'
 
 const AdminProductsList = ({ setShowNewProductForm }) => {
   const { productsList } = useAdminListsStore((state) => ({

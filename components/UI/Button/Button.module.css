@@ -17,13 +17,13 @@
   background-color: #444444;
 }
 
-.ButtonLight:active {
-  background-color: #222222;
-}
-
 .ButtonDark:disabled {
   background-color: #dee1e7;
   color: #f1f1f1;
+}
+
+.ButtonDark:active {
+  background-color: #222222;
 }
 
 .ButtonLight {

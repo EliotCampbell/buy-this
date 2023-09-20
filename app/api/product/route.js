@@ -12,19 +12,31 @@ const uuid = require('uuid')
 export const POST = async (request) => {
   try {
     const formData = await request.formData()
-
-    let name = formData.get('name')
-    let price = formData.get('price')
-    let brandId = formData.get('brandId')
-    let categoryId = formData.get('categoryId')
-    let description = formData.get('description')
-    let info = formData.get('info')
+    const name = formData.get('name')
+    const price = formData.get('price')
+    const brandId = formData.get('brandId')
+    const categoryId = formData.get('categoryId')
+    const description = formData.get('description')
+    const info = formData.get('info')
+    const highlight = formData.get('highlight')
+    const hotDeal = formData.get('hotDeal')
     const img = formData.get('img')
+    const onSale = formData.get('onSale')
+    const discountPrice = formData.get('salePrice')
+    const inStock = formData.get('inStock')
+
     if (!name || !price || !brandId || !categoryId || !description || !img) {
       return NextResponse.json({
         ok: false,
         message: 'Not all fields provided',
-        dataObject: { name, price, brandId, categoryId, description, info, img }
+        dataObject: {
+          name,
+          price,
+          brandId,
+          categoryId,
+          description,
+          img
+        }
       })
     }
     const foundProduct = await Product.findOne({
@@ -35,7 +47,7 @@ export const POST = async (request) => {
     if (foundProduct !== null) {
       return NextResponse.json({
         ok: false,
-        message: 'Product already exists',
+        message: `Product with name "${name}" is already exists`,
         dataObject: {
           newDevice: { name, price, brandId, categoryId, description }
         }
@@ -75,12 +87,16 @@ export const POST = async (request) => {
       brandId,
       categoryId,
       description,
-      img: fileName
+      img: fileName,
+      onSale,
+      discountPrice,
+      highlight,
+      hotDeal,
+      inStock
     })
 
     if (info) {
-      info = JSON.parse(info)
-      info.forEach((i) => {
+      JSON.parse(info).forEach((i) => {
         ProductsInfo.create({
           title: i.title,
           description: i.description,
@@ -124,7 +140,10 @@ export const GET = async (req) => {
 
     let products = await Product.findAll({
       where: { ...whereHandler() },
-      include: { model: ProductInfo, as: 'info' },
+      include: [
+        { model: ProductInfo, as: 'info' },
+        { model: Brand, as: 'brand' }
+      ],
       limit,
       page,
       offset,

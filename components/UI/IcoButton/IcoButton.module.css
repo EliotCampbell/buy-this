@@ -9,6 +9,7 @@
   justify-content: center;
   height: 45px;
   width: 45px;
+  transition: 300ms;
 }
 
 .button:hover {
@@ -18,4 +19,9 @@
 .button:disabled {
   background-color: #dfe1e4;
   color: #333333;
+}
+
+.button:active {
+  box-shadow: inset #097171 0 0 10px 2px;
+  transition: 0ms;
 }

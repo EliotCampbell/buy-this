@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { registrationFetch } from '@/http/auth'
 import { useUserStore } from '@/store/mainStore/store'
 import MessageString from '@/components/UI/MessageString/MessageString'
-import AdminInput from '@/components/UI/Admin/AdminInput/AdminInput'
+import AdminInput from '@/components/UI/AdminInputs/AdminInput/AdminInput'
 
 const Register = ({ setLogOrRegSwitcher }) => {
   const [input, setInput] = useState({

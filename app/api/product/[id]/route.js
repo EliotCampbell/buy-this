@@ -10,7 +10,10 @@ export const GET = async (request, { params }) => {
     const id = params.id
     const product = await Product.findOne({
       where: { id },
-      include: [{ model: ProductInfo, as: 'info' }]
+      include: [
+        { model: ProductInfo, as: 'info' },
+        { model: Brand, as: 'brand' }
+      ]
     })
     if (product === null) {
       return NextResponse.json({
@@ -43,7 +46,12 @@ export const PUT = async (request, { params }) => {
     const categoryId = formData.get('categoryId')
     const description = formData.get('description')
     //const info = formData.get('info')
+    const highlight = formData.get('highlight')
+    const hotDeal = formData.get('hotDeal')
     const img = formData.get('img')
+    const onSale = formData.get('onSale')
+    const discountPrice = formData.get('sellPrice')
+    const inStock = formData.get('inStock')
     if (
       !id ||
       !name ||
@@ -56,7 +64,15 @@ export const PUT = async (request, { params }) => {
       return NextResponse.json({
         ok: false,
         message: 'Not all fields provided',
-        dataObject: { id }
+        dataObject: {
+          id,
+          name,
+          price,
+          brandId,
+          categoryId,
+          description,
+          img
+        }
       })
     }
     const oldProduct = await Product.findByPk(id)
@@ -114,7 +130,12 @@ export const PUT = async (request, { params }) => {
         brandId,
         categoryId,
         description,
-        img: fileName
+        img: fileName,
+        highlight,
+        hotDeal,
+        onSale,
+        discountPrice,
+        inStock
       },
       { where: { id: id } }
     )

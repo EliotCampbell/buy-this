@@ -7,13 +7,11 @@ import { deleteProduct } from '@/http/Admin/products'
 import MessageString from '@/components/UI/MessageString/MessageString'
 
 const ButtonBlock = ({ element, setShowNewProductForm }) => {
-  const { categoriesList, brandsList, fetchProductsList } = useAdminListsStore(
-    (state) => ({
-      categoriesList: state.categoriesList,
-      brandsList: state.brandsList,
-      fetchProductsList: state.fetchProductsList
-    })
-  )
+  const { categoriesList, fetchProductsList } = useAdminListsStore((state) => ({
+    categoriesList: state.categoriesList,
+    brandsList: state.brandsList,
+    fetchProductsList: state.fetchProductsList
+  }))
 
   const { newProduct, setPreview, setNewProduct, reset } = useAdminStore(
     (state) => ({
@@ -48,6 +46,7 @@ const ButtonBlock = ({ element, setShowNewProductForm }) => {
           className={classes.editIco}
           onMouseDown={() => {
             setShowNewProductForm(false)
+            console.log(element.value)
             setNewProduct({
               ...newProduct,
               category: {
@@ -58,17 +57,19 @@ const ButtonBlock = ({ element, setShowNewProductForm }) => {
                 value: element.value.categoryId
               },
               brand: {
-                label: brandsList.find(
-                  (el) =>
-                    el.value.toString() === element.value.brandId.toString()
-                ).label,
-                value: element.value.brandId
+                label: element.value.brand.name,
+                value: element.value.brand.id
               },
               name: element.value.name,
               price: element.value.price,
               description: element.value.description,
               oldProductId: element.value.id,
-              file: element.value.img
+              file: element.value.img,
+              onSale: element.value.onSale,
+              highlight: element.value.highlight,
+              hotDeal: element.value.hotDeal,
+              discountPrice: element.value.discountPrice,
+              inStock: element.value.inStock
             })
             setPreview(
               process.env.NEXT_PUBLIC_REACT_APP_API_URL +

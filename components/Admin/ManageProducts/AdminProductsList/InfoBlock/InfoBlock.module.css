@@ -15,6 +15,7 @@
   color: teal;
   font-size: 24px;
   font-family: BlenderPro-Bold, sans-serif;
+  padding-right: 15px;
 }
 
 .name:hover {
@@ -39,13 +40,31 @@
   font-size: 16px;
   color: #00a6a6;
   font-family: BlenderPro-Bold, sans-serif;
+  padding-right: 15px;
+}
+
+.priceWrapper {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-self: start;
 }
 
 .price {
-  display: flex;
-  align-self: center;
-  justify-self: start;
-  width: 200px;
+  color: teal;
+  font-size: 24px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.brokenPrice {
+  font-size: 20px;
+  color: #dee1e7;
+  text-decoration: line-through;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.salePrice {
   color: red;
   font-size: 24px;
   font-family: BlenderPro-Bold, sans-serif;
@@ -87,6 +106,27 @@
   color: #00a6a6;
   font-size: 18px;
   font-family: BlenderPro-Bold, sans-serif;
+}
+
+.inStock {
+  color: green;
+  font-size: 18px;
+  font-family: BlenderPro-Bold, sans-serif;
+  padding-right: 5px;
+}
+
+.notInStock {
+  color: red;
+  font-size: 18px;
+  font-family: BlenderPro-Bold, sans-serif;
+  padding-right: 5px;
+}
+
+.runningOut {
+  color: orange;
+  font-size: 18px;
+  font-family: BlenderPro-Bold, sans-serif;
+  padding-right: 5px;
 }
 
 .description {

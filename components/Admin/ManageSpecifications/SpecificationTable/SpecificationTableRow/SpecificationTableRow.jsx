@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import classes from '@/components/Admin/ManageSpecifications/SpecificationTable/SpecificationTable.module.css'
-import AdminEditInput from '@/components/UI/Admin/AdminEditInput/AdminEditInput'
+import AdminEditInput from '@/components/UI/AdminInputs/AdminEditInput/AdminEditInput'
 import { FiCheck, FiTrash } from 'react-icons/fi'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'

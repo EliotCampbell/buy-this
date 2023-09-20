@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './CreateSpecification.module.css'
-import AdminInput from '@/components/UI/Admin/AdminInput/AdminInput'
+import AdminInput from '@/components/UI/AdminInputs/AdminInput/AdminInput'
 import Button from '@/components/UI/Button/Button'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { createSpecificationByProductId } from '@/http/Admin/specifications'

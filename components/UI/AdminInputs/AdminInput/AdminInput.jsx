@@ -1,7 +1,13 @@
 import React from 'react'
 import classes from './AdminInput.module.css'
 
-const AdminInput = ({ children, label, disabled, ...props }) => {
+const AdminInput = ({
+  children,
+  label,
+  disabled,
+  autoComplete = 'off',
+  ...props
+}) => {
   return (
     <div
       className={`${classes.inputDiv} ${disabled && classes.disabledInputDiv}`}
@@ -14,6 +20,7 @@ const AdminInput = ({ children, label, disabled, ...props }) => {
         </label>
       )}
       <input
+        autoComplete={autoComplete}
         className={`${classes.input} ${disabled && classes.disabledInput}`}
         {...props}
         disabled={disabled}

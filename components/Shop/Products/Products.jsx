@@ -3,9 +3,9 @@
 import React, { useEffect, useState } from 'react'
 import classes from './Products.module.css'
 import ProductPreviewCard from '../ProductPreviewCard/ProductPreviewCard'
-import ReactSelect from '../../UI/ReactSelect/ReactSelect'
 import Pagination from '../../UI/Pagination/Pagination'
 import { useProductStore, useQueryStore } from '@/store/mainStore/store'
+import AdminReactSelect from '@/components/UI/AdminInputs/AdminReactSelect/AdminReactSelect'
 
 const Products = () => {
   const { products, setProducts, productsCount, setProductsCount, categories } =
@@ -62,7 +62,7 @@ const Products = () => {
         <p className={classes.offersCount}>Offers count: {productsCount}</p>
         <div className={classes.selectsWrapper}>
           <div className={classes.countSelectWrapper}>
-            <ReactSelect
+            <AdminReactSelect
               label={'Count on page'}
               options={[
                 { label: '6', value: 6 },
@@ -75,10 +75,10 @@ const Products = () => {
                 setQuery({ ...query, limit: option.value })
                 setSelectState({ ...selectState, countSelect: option })
               }}
-            ></ReactSelect>
+            ></AdminReactSelect>
           </div>
           <div className={classes.orderSelectWrapper}>
-            <ReactSelect
+            <AdminReactSelect
               label={'Order by'}
               options={[
                 { label: 'Price ascending', value: '[["price", "ASC"]]' },
@@ -91,7 +91,7 @@ const Products = () => {
                 setQuery({ ...query, order: option.value })
                 setSelectState({ ...selectState, orderSelect: option })
               }}
-            ></ReactSelect>
+            ></AdminReactSelect>
           </div>
         </div>
       </div>
@@ -105,6 +105,8 @@ const Products = () => {
               productName={el.name}
               productImg={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.img}`}
               productPrice={el.price}
+              discountPrice={el.discountPrice}
+              inStock={el.inStock}
               key={el.id}
             />
           ))}
