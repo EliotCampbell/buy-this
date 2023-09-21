@@ -44,17 +44,13 @@ const ProductInfo = sequelize.define('product_info', {
   description: { type: DataTypes.STRING, allowNull: false }
 })
 
-const CategoryBrand = sequelize.define('category_brand', {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }
-})
-
 const Order = sequelize.define('order', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }
 })
 
-/*const OrderProduct = sequelize.define('order_user', {
+const OrderProduct = sequelize.define('order_product', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }
-})*/
+})
 
 const Cart = sequelize.define('cart', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }
@@ -67,17 +63,26 @@ const CartProduct = sequelize.define('cart_product', {
 User.hasOne(Cart)
 Cart.belongsTo(User)
 
+User.hasMany(Order)
+Order.belongsTo(User)
+
 Cart.hasMany(CartProduct)
 CartProduct.belongsTo(Cart)
+
+Order.hasMany(OrderProduct)
+OrderProduct.belongsTo(Order)
 
 Product.hasMany(CartProduct)
 CartProduct.belongsTo(Product)
 
-User.hasMany(Rating)
-Rating.belongsTo(User)
+Product.hasMany(OrderProduct)
+OrderProduct.belongsTo(Product)
 
-User.hasMany(Order)
-Order.belongsTo(User)
+Product.hasMany(Rating)
+Rating.belongsTo(Product)
+
+Product.hasMany(ProductInfo, { as: 'info' })
+ProductInfo.belongsTo(Product)
 
 Category.hasMany(Product)
 Product.belongsTo(Category)
@@ -85,17 +90,8 @@ Product.belongsTo(Category)
 Brand.hasMany(Product)
 Product.belongsTo(Brand)
 
-Product.hasMany(Rating)
-Rating.belongsTo(Product)
-
-Product.hasMany(ProductInfo)
-ProductInfo.belongsTo(Product)
-
-Product.hasMany(Order)
-Order.belongsTo(Product)
-
-Category.belongsToMany(Brand, { through: CategoryBrand })
-Brand.belongsToMany(Category, { through: CategoryBrand })
+User.hasMany(Rating)
+Rating.belongsTo(User)
 
 module.exports = {
   User,
@@ -103,16 +99,15 @@ module.exports = {
   Category,
   Brand,
   Rating,
-  CategoryBrand,
   ProductInfo,
   Order
 }
 
-/*sequelize
+sequelize
   .sync({ force: true })
   .then(() => {
     console.log('Database models synchronized.')
   })
   .catch((err) => {
     console.error('Error synchronizing database models:', err)
-  })*/
+  })
