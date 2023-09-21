@@ -236,6 +236,7 @@ const ProductUpdateForm = () => {
             productPrice={newProduct.price}
             discountPrice={newProduct.discountPrice}
             inStock={newProduct.inStock}
+            onSale={newProduct.onSale}
           />
         </div>
       </div>

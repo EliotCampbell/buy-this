@@ -56,8 +56,38 @@
   font-family: BlenderPro-Bold, sans-serif;
 }
 
+.priceWrapper {
+  display: flex;
+  align-items: end;
+}
+
 .price {
   color: teal;
+  font-size: 20px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.brokenPrice {
+  position: relative;
+  font-size: 14px;
+  color: teal;
+  padding: 3px 3px;
+  margin: 0 12px;
+  font-family: BrandonGrotesque, sans-serif;
+}
+
+.brokenPriceCross {
+  bottom: 8px;
+  left: 0;
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  background-color: teal;
+  rotate: -15deg;
+}
+
+.salePrice {
+  color: red;
   font-size: 20px;
   font-family: BlenderPro-Bold, sans-serif;
 }

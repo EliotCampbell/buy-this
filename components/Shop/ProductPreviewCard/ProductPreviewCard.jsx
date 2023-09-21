@@ -11,7 +11,8 @@ const ProductPreviewCard = ({
   productImg,
   productPrice,
   discountPrice,
-  inStock
+  inStock,
+  onSale
 }) => {
   const brands = useProductStore((state) => state.brands)
   return (
@@ -46,13 +47,13 @@ const ProductPreviewCard = ({
             }
           >{`${inStock} in stock`}</p>
           <div className={classes.priceWrapper}>
-            <p className={discountPrice ? classes.brokenPrice : classes.price}>
+            <div className={onSale ? classes.brokenPrice : classes.price}>
               {`${Number.parseFloat(productPrice).toFixed(2)} €`}
               {discountPrice && (
                 <div className={classes.brokenPriceCross}></div>
               )}
-            </p>
-            {discountPrice && (
+            </div>
+            {onSale && (
               <p className={classes.salePrice}>
                 {`${Number.parseFloat(discountPrice).toFixed(2)} €`}
               </p>

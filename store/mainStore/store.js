@@ -27,6 +27,6 @@ export const useUserStore = create((set) => ({
 }))
 
 export const useQueryStore = create((set) => ({
-  query: { limit: 6, page: 1 },
+  query: { limit: 6, page: 1, order: '[["price", "ASC"]]' },
   setQuery: (query) => set(() => ({ query }))
 }))

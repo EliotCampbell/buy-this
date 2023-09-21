@@ -5,8 +5,24 @@ export const useShoppingCartStore = create(
   persist(
     (set) => ({
       cart: [],
-      addProduct: (productId, name, count, price, img) => {
-        const candidate = { productId, name, count, price, img }
+      addProduct: (
+        productId,
+        name,
+        count,
+        price,
+        onSale = false,
+        discountPrice = null,
+        img
+      ) => {
+        const candidate = {
+          productId,
+          name,
+          count,
+          price,
+          img,
+          discountPrice,
+          onSale
+        }
         set((state) => {
           const oldProduct = state.cart.find(
             (el) => el.productId === candidate.productId
@@ -23,13 +39,18 @@ export const useShoppingCartStore = create(
                   name: candidate.name,
                   price: candidate.price,
                   img: candidate.img,
+                  onSale: candidate.onSale,
+                  discountPrice: candidate.discountPrice,
                   count: candidate.count + oldProduct.count
                 }
               ]
             }
           } else {
             return {
-              cart: [...state.cart, { productId, name, count, price, img }]
+              cart: [
+                ...state.cart,
+                { productId, name, count, price, img, discountPrice, onSale }
+              ]
             }
           }
         })

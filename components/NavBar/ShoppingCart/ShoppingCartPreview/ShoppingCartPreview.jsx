@@ -11,7 +11,9 @@ const ProductPreviewCard = ({
   quantity,
   productName,
   productPrice,
-  productImg
+  productImg,
+  onSale,
+  discountPrice
 }) => {
   const { removeProduct } = useShoppingCartStore((state) => ({
     removeProduct: state.removeProduct
@@ -42,9 +44,19 @@ const ProductPreviewCard = ({
 
         <div className={classes.countPriceDiv}>
           <p className={classes.productCount}>Quantity: {quantity}</p>
-          <p className={classes.price}>{`${Number.parseFloat(
-            productPrice
-          ).toFixed(2)} €`}</p>
+          <div className={classes.priceWrapper}>
+            <p className={onSale ? classes.brokenPrice : classes.price}>
+              {`${Number.parseFloat(productPrice).toFixed(2)} €`}
+              {discountPrice && (
+                <div className={classes.brokenPriceCross}></div>
+              )}
+            </p>
+            {onSale && (
+              <p className={classes.salePrice}>
+                {`${Number.parseFloat(discountPrice).toFixed(2)} €`}
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>

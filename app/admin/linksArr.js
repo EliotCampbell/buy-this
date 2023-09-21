@@ -46,7 +46,7 @@ export const linksArr = [
   },
   {
     ico: <FiShoppingBag />,
-    linkName: 'orders',
+    linkName: 'Orders',
     path: 'orders',
     page: <Orders />
   }

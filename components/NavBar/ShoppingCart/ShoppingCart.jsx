@@ -29,6 +29,8 @@ const ShoppingCart = () => {
               productPrice={el.price}
               productImg={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.img}`}
               quantity={el.count}
+              onSale={el.onSale}
+              discountPrice={el.discountPrice}
               key={el.productId}
             />
           ))}
@@ -42,7 +44,13 @@ const ShoppingCart = () => {
         <p className={classes.totalAmount}>Total amount:</p>
         <p className={classes.totalAmount}>
           {`${Number.parseFloat(
-            cart.reduce((acc, el) => el.price * el.count + acc, 0)
+            cart.reduce(
+              (acc, el) =>
+                el.onSale
+                  ? el.discountPrice * el.count + acc
+                  : el.price * el.count + acc,
+              0
+            )
           ).toFixed(2)} €`}
         </p>
       </div>

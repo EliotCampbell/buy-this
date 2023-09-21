@@ -45,7 +45,15 @@ const ToCartCounterAndButton = ({ product }) => {
       <Button
         className={classes.cartButton}
         onClick={() =>
-          toCart(product.id, product.name, counter, product.price, product.img)
+          toCart(
+            product.id,
+            product.name,
+            counter,
+            product.price,
+            product.onSale,
+            product.discountPrice,
+            product.img
+          )
         }
         disabled={counter <= 0}
       >

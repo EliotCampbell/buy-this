@@ -6,6 +6,7 @@ import ProductPreviewCard from '../ProductPreviewCard/ProductPreviewCard'
 import Pagination from '../../UI/Pagination/Pagination'
 import { useProductStore, useQueryStore } from '@/store/mainStore/store'
 import AdminReactSelect from '@/components/UI/AdminInputs/AdminReactSelect/AdminReactSelect'
+import { fetchAllProducts } from '@/http/fetchers/fetchers'
 
 const Products = () => {
   const { products, setProducts, productsCount, setProductsCount, categories } =
@@ -22,30 +23,25 @@ const Products = () => {
     setQuery: state.setQuery
   }))
 
-  const [isLoaded, setIsLoaded] = useState(false)
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch(
-          process.env.NEXT_PUBLIC_REACT_APP_API_URL +
-            'api/product?' +
-            new URLSearchParams(query)
-        )
-
-        const data = await res.json()
+        const data = await fetchAllProducts(query)
         setProducts(data.dataObject.products)
         setProductsCount(data.dataObject.count)
-        setIsLoaded(true)
       } catch (e) {
-        console.log(e)
+        console.log(e.message)
       }
     }
     fetchProducts().finally()
   }, [query])
 
   const [selectState, setSelectState] = useState({
-    countSelect: { label: query.limit.toString(), value: query.limit }
+    countSelect: {
+      label: query.limit.toString(),
+      value: query.limit
+    },
+    orderSelect: { label: 'Price ascending', value: '[["price", "ASC"]]' }
   })
 
   return (
@@ -65,10 +61,10 @@ const Products = () => {
             <AdminReactSelect
               label={'Count on page'}
               options={[
-                { label: '6', value: 6 },
-                { label: '9', value: 9 },
-                { label: '12', value: 12 },
-                { label: '15', value: 15 }
+                { label: '18', value: 18 },
+                { label: '24', value: 24 },
+                { label: '32', value: 32 },
+                { label: '64', value: 64 }
               ]}
               value={selectState.countSelect}
               onChange={(option) => {
@@ -96,25 +92,22 @@ const Products = () => {
         </div>
       </div>
       <div className={classes.splitter}></div>
-      {isLoaded ? (
-        <div className={classes.products}>
-          {products.map((el) => (
-            <ProductPreviewCard
-              productId={el.id}
-              brandId={el.brandId}
-              productName={el.name}
-              productImg={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.img}`}
-              productPrice={el.price}
-              discountPrice={el.discountPrice}
-              inStock={el.inStock}
-              key={el.id}
-            />
-          ))}
-        </div>
-      ) : (
-        <h1>LOADING...</h1>
-      )}
-
+      <div className={classes.products}>
+        {products.map((el) => (
+          <ProductPreviewCard
+            productId={el.id}
+            brandId={el.brandId}
+            productName={el.name}
+            productImg={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.img}`}
+            productPrice={el.price}
+            discountPrice={el.discountPrice}
+            inStock={el.inStock}
+            onSale={el.onSale}
+            key={el.id}
+          />
+        ))}
+      </div>
+      )
       <Pagination />
     </div>
   )

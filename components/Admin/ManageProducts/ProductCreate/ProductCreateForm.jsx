@@ -208,6 +208,9 @@ const ProductCreateForm = () => {
             productName={newProduct.name === '' ? 'Name' : newProduct.name}
             productImg={preview}
             productPrice={newProduct.price}
+            discountPrice={newProduct.discountPrice}
+            inStock={newProduct.inStock}
+            onSale={newProduct.onSale}
           />
         </div>
       </div>

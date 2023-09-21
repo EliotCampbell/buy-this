@@ -40,12 +40,10 @@ const ProductDetails = async ({ productId }) => {
               <div className={classes.productPriceWrapper}>
                 <p
                   className={
-                    product.discountPrice
-                      ? classes.brokenPrice
-                      : classes.productPrice
+                    product.onSale ? classes.brokenPrice : classes.productPrice
                   }
                 >{`${Number.parseFloat(product.price).toFixed(2)} €`}</p>
-                {product.discountPrice && (
+                {product.onSale && (
                   <p className={classes.productPrice}>{`${Number.parseFloat(
                     product.discountPrice
                   ).toFixed(2)} €`}</p>
