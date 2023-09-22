@@ -8,7 +8,6 @@ import { useProductStore, useQueryStore } from '@/store/mainStore/store'
 
 const BreadCrumbs = ({ product, productId }) => {
   const pathname = usePathname()
-  console.log(pathname)
   const { query } = useQueryStore((state) => ({
     query: state.query
   }))

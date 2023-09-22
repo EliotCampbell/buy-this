@@ -31,7 +31,7 @@ const CartProductRow = ({ productId, productCount }) => {
               fill
             />
           </div>
-          <div className={classes.productInfoWrapper}>
+          <div className={classes.SpecificationsWrapper}>
             <p className={classes.name}>{product.name}</p>
             <p
               className={

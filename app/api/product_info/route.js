@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-const { ProductInfo, Product } = require('@/models/models')
+const { Specification, Product } = require('@/models/models')
 
 export const POST = async (request) => {
   try {
@@ -18,7 +18,7 @@ export const POST = async (request) => {
         }
       })
     }
-    const foundInfo = await ProductInfo.findOne({
+    const foundInfo = await Specification.findOne({
       where: { title, productId }
     })
     if (foundInfo !== null) {
@@ -31,7 +31,7 @@ export const POST = async (request) => {
         }
       })
     }
-    const newInfo = await ProductInfo.create({
+    const newInfo = await Specification.create({
       title,
       description,
       productId

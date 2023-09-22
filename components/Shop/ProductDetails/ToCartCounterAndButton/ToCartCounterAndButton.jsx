@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import classes from './ToCartCounterAndButton.module.css'
 import Button from '@/components/UI/Button/Button'
 import { useShoppingCartStore } from '@/store/shoppingCartStore/shoppingCartStore'
+import { addProduct, addProductToCart } from '@/http/cart'
 
 const ToCartCounterAndButton = ({ product }) => {
   const { toCart } = useShoppingCartStore((state) => ({
@@ -45,7 +46,7 @@ const ToCartCounterAndButton = ({ product }) => {
       <Button
         className={classes.cartButton}
         onClick={() =>
-          toCart(
+          /*toCart(
             product.id,
             product.name,
             counter,
@@ -53,6 +54,11 @@ const ToCartCounterAndButton = ({ product }) => {
             product.onSale,
             product.discountPrice,
             product.img
+          )*/
+          addProductToCart(
+            product.id,
+            counter,
+            product.onSale ? product.discountPrice : product.price
           )
         }
         disabled={counter <= 0}

@@ -157,7 +157,15 @@ const NavBar = () => {
       </div>
       {leftSwitcher && <CategorySideNav switcher={setLeftSwitcher} />}
       {accountSwitcher && <AccountSideNav setSwitcher={setAccountSwitcher} />}
-      {cartSwitcher && <CartSideNav setSwitcher={setCartSwitcher} />}
+      {cartSwitcher && (
+        <CartSideNav setSwitcher={setCartSwitcher}>
+          {
+            <>
+              <h3>{`DB shopping cart >>>>`}</h3>
+            </>
+          }
+        </CartSideNav>
+      )}
     </div>
   )
 }

@@ -100,7 +100,7 @@ const Register = ({ setLogOrRegSwitcher }) => {
           </div>
           <Button type={'submit'}>{'Register'}</Button>
         </div>
-        {message && <MessageString message={message} />}
+        {message && <MessageString message={message} maxWidth />}
       </form>
     </>
   )

@@ -1,0 +1,106 @@
+.cartPositionWrapper {
+  padding: 20px 0;
+  border-bottom-color: rgb(222, 225, 231);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  height: 120px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.cartPositionDescription {
+  padding-left: 15px;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nameDiv {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.productName {
+  color: teal;
+  font-size: 18px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.productName:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.removeIco {
+  color: teal;
+}
+
+.removeIco:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.countPriceDiv {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: fit-content;
+}
+
+.productCount {
+  color: teal;
+  font-size: 18px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.priceWrapper {
+  display: flex;
+  align-items: end;
+}
+
+.price {
+  color: teal;
+  font-size: 20px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.brokenPrice {
+  position: relative;
+  font-size: 14px;
+  color: teal;
+  padding: 3px 3px;
+  margin: 0 12px;
+  font-family: BrandonGrotesque, sans-serif;
+}
+
+.brokenPriceCross {
+  bottom: 8px;
+  left: 0;
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  background-color: teal;
+  rotate: -15deg;
+}
+
+.salePrice {
+  color: red;
+  font-size: 20px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.imgDiv {
+  height: 80px;
+  width: 80px;
+  align-items: center;
+  position: relative;
+}
+
+.img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}

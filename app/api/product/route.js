@@ -4,7 +4,7 @@ const {
   Product,
   ProductsInfo,
   Category,
-  ProductInfo,
+  Specification,
   Brand
 } = require('@/models/models')
 const uuid = require('uuid')
@@ -141,7 +141,7 @@ export const GET = async (req) => {
     let products = await Product.findAll({
       where: { ...whereHandler() },
       include: [
-        { model: ProductInfo, as: 'info' },
+        { model: Specification, as: 'info' },
         { model: Brand, as: 'brand' }
       ],
       limit,

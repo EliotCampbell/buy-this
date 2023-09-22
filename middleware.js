@@ -48,5 +48,21 @@ export const middleware = async (request) => {
       return NextResponse.next()
     } else return NextResponse.redirect(new URL('/', request.url))
   }
+  if (request.nextUrl.pathname.startsWith('/api/cart')) {
+    const token = request.cookies.get('token')?.value
+    if (!token) {
+      return NextResponse.redirect(new URL('/', request.url))
+    }
+    const payload = await verifyJwt(token)
+    if (payload?.id) {
+      const headers = new Headers(request.headers)
+      headers.set('userId', `${payload.id}`)
+      return NextResponse.next({
+        request: {
+          headers
+        }
+      })
+    } else NextResponse.redirect(new URL('/', request.url))
+  }
   return NextResponse.next()
 }

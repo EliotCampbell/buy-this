@@ -8,8 +8,31 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.messageStringMaxWidth {
+  width: 100%;
+  margin: auto 0;
+  color: #00a6a6;
+  font-family: BlenderPro-Bold, 'sans-serif';
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .errorMessageString {
   width: 250px;
+  margin: auto 0;
+  color: red;
+  font-family: BlenderPro-Bold, 'sans-serif';
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.errorMessageStringMaxWidth {
+  width: 100%;
   margin: auto 0;
   color: red;
   font-family: BlenderPro-Bold, 'sans-serif';

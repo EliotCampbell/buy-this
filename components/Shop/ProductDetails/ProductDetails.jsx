@@ -2,14 +2,14 @@ import React from 'react'
 import classes from './ProductDetails.module.css'
 import ToCartCounterAndButton from '@/components/Shop/ProductDetails/ToCartCounterAndButton/ToCartCounterAndButton'
 import BreadCrumbs from '../../UI/BreadCrumbs/BreadCrumbs'
-import { Brand, Product, ProductInfo } from '@/models/models'
+import { Brand, Product, Specification } from '@/models/models'
 import ProductContent from '@/components/Shop/ProductDetails/ProductContent/ProductContent'
 
 const ProductDetails = async ({ productId }) => {
   const product = await Product.findOne({
     where: { id: productId },
     include: [
-      { model: ProductInfo, as: 'info' },
+      { model: Specification, as: 'info' },
       { model: Brand, as: 'brand' }
     ]
   }).then((data) => {

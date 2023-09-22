@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server'
 
-const { ProductInfo } = require('@/models/models')
+const { Specification } = require('@/models/models')
 
 export const GET = async (request, { params }) => {
   try {
     const specificationId = params.id
-    const foundSpecification = await ProductInfo.findByPk(specificationId)
+    const foundSpecification = await Specification.findByPk(specificationId)
     if (foundSpecification === null) {
       return NextResponse.json({
         ok: false,
@@ -38,7 +38,7 @@ export const PUT = async (request, { params }) => {
 
     const title = formData.get('title')
     const description = formData.get('description')
-    const oldInfo = await ProductInfo.findByPk(id)
+    const oldInfo = await Specification.findByPk(id)
     if (oldInfo === null) {
       return NextResponse.json({
         ok: false,
@@ -49,11 +49,11 @@ export const PUT = async (request, { params }) => {
         }
       })
     }
-    const newInfoStatus = await ProductInfo.update(
+    const newInfoStatus = await Specification.update(
       { title, description },
       { where: { id: id } }
     )
-    const newInfo = await ProductInfo.findByPk(id)
+    const newInfo = await Specification.findByPk(id)
     if (newInfoStatus[0] === 1)
       return NextResponse.json({
         ok: true,
@@ -84,7 +84,7 @@ export const PUT = async (request, { params }) => {
 export const DELETE = async (request, { params }) => {
   try {
     const id = params.id
-    const specification = await ProductInfo.findByPk(id)
+    const specification = await Specification.findByPk(id)
     if (specification === null) {
       NextResponse.json({
         ok: false,
@@ -92,7 +92,7 @@ export const DELETE = async (request, { params }) => {
         dataObject: { id }
       })
     }
-    const deletedSpecification = await ProductInfo.destroy({
+    const deletedSpecification = await Specification.destroy({
       where: { id: id }
     })
     if (deletedSpecification === 1) {

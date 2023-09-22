@@ -69,7 +69,7 @@ const Signin = ({ setLogOrRegSwitcher, setSideMenuSwitcher }) => {
           </div>
           <Button>{'Log In'}</Button>
         </div>
-        {message && <MessageString message={message} />}
+        {message && <MessageString message={message} maxWidth />}
       </form>
     </>
   )

@@ -1,12 +1,10 @@
-'use client'
-import classes from './ShoppingCartPreview.module.css'
+import classes from './DBShoppingCartPreview.module.css'
 import Image from 'next/image'
 import { FiTrash } from 'react-icons/fi'
 import React from 'react'
-import { useShoppingCartStore } from '@/store/shoppingCartStore/shoppingCartStore'
 import Link from 'next/link'
 
-const ProductPreviewCard = ({
+const DBProductPreviewCard = ({
   productId,
   quantity,
   productName,
@@ -15,10 +13,6 @@ const ProductPreviewCard = ({
   onSale,
   discountPrice
 }) => {
-  const { removeProduct } = useShoppingCartStore((state) => ({
-    removeProduct: state.removeProduct
-  }))
-
   return (
     <div className={classes.cartPositionWrapper}>
       <div className={classes.imgDiv}>
@@ -34,10 +28,7 @@ const ProductPreviewCard = ({
           <Link className={classes.productName} href={`/product/${productId}`}>
             {productName}
           </Link>
-          <p
-            className={classes.removeIco}
-            onClick={() => removeProduct(productId)}
-          >
+          <p className={classes.removeIco}>
             <FiTrash />
           </p>
         </div>
@@ -63,4 +54,4 @@ const ProductPreviewCard = ({
   )
 }
 
-export default ProductPreviewCard
+export default DBProductPreviewCard

@@ -38,36 +38,33 @@ const Rating = sequelize.define('rating', {
   rate: { type: DataTypes.INTEGER, allowNull: false }
 })
 
-const ProductInfo = sequelize.define('product_info', {
+const Specification = sequelize.define('specification', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   title: { type: DataTypes.STRING, allowNull: false },
   description: { type: DataTypes.STRING, allowNull: false }
 })
 
 const Order = sequelize.define('order', {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  amount: { type: DataTypes.FLOAT, allowNull: false }
 })
 
 const OrderProduct = sequelize.define('order_product', {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }
-})
-
-const Cart = sequelize.define('cart', {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  quantity: { type: DataTypes.INTEGER, allowNull: false },
+  price: { type: DataTypes.FLOAT, allowNull: false }
 })
 
 const CartProduct = sequelize.define('cart_product', {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  quantity: { type: DataTypes.INTEGER, allowNull: false }
 })
-
-User.hasOne(Cart)
-Cart.belongsTo(User)
 
 User.hasMany(Order)
 Order.belongsTo(User)
 
-Cart.hasMany(CartProduct)
-CartProduct.belongsTo(Cart)
+User.hasMany(Order)
+CartProduct.belongsTo(User)
 
 Order.hasMany(OrderProduct)
 OrderProduct.belongsTo(Order)
@@ -81,8 +78,8 @@ OrderProduct.belongsTo(Product)
 Product.hasMany(Rating)
 Rating.belongsTo(Product)
 
-Product.hasMany(ProductInfo, { as: 'info' })
-ProductInfo.belongsTo(Product)
+Product.hasMany(Specification, { as: 'info' })
+Specification.belongsTo(Product)
 
 Category.hasMany(Product)
 Product.belongsTo(Category)
@@ -99,15 +96,17 @@ module.exports = {
   Category,
   Brand,
   Rating,
-  ProductInfo,
-  Order
+  Specification,
+  Order,
+  CartProduct,
+  OrderProduct
 }
 
-sequelize
+/*sequelize
   .sync({ force: true })
   .then(() => {
     console.log('Database models synchronized.')
   })
   .catch((err) => {
     console.error('Error synchronizing database models:', err)
-  })
+  })*/

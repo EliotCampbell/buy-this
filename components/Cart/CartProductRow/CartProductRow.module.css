@@ -23,7 +23,7 @@
   object-fit: contain;
 }
 
-.productInfoWrapper {
+.SpecificationsWrapper {
   display: flex;
   padding-left: 40px;
   flex-direction: column;

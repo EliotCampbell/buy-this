@@ -13,7 +13,7 @@ export const POST = async (request) => {
       })
     }
     const payload = await verifyJwt(token)
-    const user = await User.findOne({ where: { email: payload.email } })
+    const user = await User.findOne({ where: { id: payload.id } })
     const newToken = await generateJwt(user.id, user.email, user.role)
     return NextResponse.json(
       {
