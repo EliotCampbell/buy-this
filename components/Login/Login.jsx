@@ -5,7 +5,7 @@ import classes from './Login.module.css'
 import Signin from '@/components/Login/Signin/Signin'
 import Register from '@/components/Login/Register/Register'
 
-const Login = ({ setSideMenuSwitcher }) => {
+const Login = ({ setAccountSwitcher }) => {
   const [logOrRegSwitcher, setLogOrRegSwitcher] = useState('signin')
 
   return (
@@ -13,7 +13,7 @@ const Login = ({ setSideMenuSwitcher }) => {
       {logOrRegSwitcher === 'signin' ? (
         <Signin
           setLogOrRegSwitcher={setLogOrRegSwitcher}
-          setSideMenuSwitcher={setSideMenuSwitcher}
+          setAccountSwitcher={setAccountSwitcher}
         />
       ) : (
         <Register setLogOrRegSwitcher={setLogOrRegSwitcher} />

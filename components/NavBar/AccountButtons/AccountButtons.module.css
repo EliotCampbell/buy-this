@@ -1,0 +1,22 @@
+.sideButtonsDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.splitter {
+  border-right: solid 1px;
+  margin: 0 15px;
+  height: 45px;
+  color: rgba(255, 255, 255, 0.41);
+}
+
+.ico {
+  height: 26px;
+  width: 26px;
+  color: white;
+}
+
+.ico:hover {
+  color: #c5efef;
+}

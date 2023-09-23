@@ -1,13 +1,19 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import classes from './AccountSideNav.module.css'
-import { RxCross1 } from 'react-icons/rx'
-import Login from '@/components/Login/Login'
 import { useUserStore } from '@/store/mainStore/store'
 import Link from 'next/link'
 import { BiLogOut } from 'react-icons/bi'
 import { logout } from '@/http/auth'
+import IcoButton from '@/components/UI/IcoButton/IcoButton'
+import { FiUser } from 'react-icons/fi'
+import SideMenu from '@/components/NavBar/SideMenu/SideMenu'
+import Login from '@/components/Login/Login'
 
-const AccountSideNav = ({ setSwitcher }) => {
+const AccountSideNav = () => {
+  const [accountSwitcher, setAccountSwitcher] = useState(false)
+
   const { user, setIsAuth, isAuth } = useUserStore((state) => ({
     isAuth: state.isAuth,
     user: state.user,
@@ -19,54 +25,43 @@ const AccountSideNav = ({ setSwitcher }) => {
   }
 
   return (
-    <div className={classes.sideNavBack}>
-      <div className={classes.exit} onMouseDown={() => setSwitcher(false)}>
-        <div
-          className={classes.sideNav}
-          onMouseDown={(event) => {
-            event.stopPropagation()
-          }}
-        >
-          <div className={classes.top}>
-            <div
-              className={classes.topTextWrapper}
-              onClick={() => setSwitcher(false)}
-            >
-              <RxCross1 />
-              <p className={classes.topText}>Account</p>
-            </div>
-          </div>
-          <div className={classes.contentWrapper}>
-            {isAuth ? (
-              <>
-                <div className={classes.userLogout}>
-                  <h2>{user?.username}</h2>
-                  <Link
-                    href={'/'}
-                    className={classes.logoutDiv}
-                    onClick={() => logoutHandler()}
-                  >
-                    <BiLogOut className={classes.ico} />
-                    <p className={classes.logoutP}>Logout</p>
-                  </Link>
-                </div>
-                {user ? (
-                  <>
-                    <p className={classes.userInfo}>Id: {user.id}</p>
-                    <p className={classes.userInfo}>E-mail: {user.email}</p>
-                    <p className={classes.userInfo}>Role: {user.role}</p>
-                  </>
-                ) : (
-                  <p className={classes.userInfo}>User not found!</p>
-                )}
-              </>
-            ) : (
-              <Login setSideMenuSwitcher={setSwitcher} />
-            )}
-          </div>
+    <>
+      <IcoButton>
+        <div onClick={() => setAccountSwitcher(true)}>
+          <FiUser className={classes.ico} />
         </div>
-      </div>
-    </div>
+      </IcoButton>
+      {accountSwitcher && (
+        <SideMenu setSwitcher={setAccountSwitcher}>
+          {isAuth ? (
+            <>
+              <div className={classes.userLogout}>
+                <h2>{user?.username}</h2>
+                <Link
+                  href={'/'}
+                  className={classes.logoutDiv}
+                  onClick={() => logoutHandler()}
+                >
+                  <BiLogOut className={classes.logoutIco} />
+                  <p className={classes.logoutP}>Logout</p>
+                </Link>
+              </div>
+              {user ? (
+                <>
+                  <p className={classes.userInfo}>Id: {user.id}</p>
+                  <p className={classes.userInfo}>E-mail: {user.email}</p>
+                  <p className={classes.userInfo}>Role: {user.role}</p>
+                </>
+              ) : (
+                <p className={classes.userInfo}>User not found!</p>
+              )}
+            </>
+          ) : (
+            <Login setAccountSwitcher={setAccountSwitcher} />
+          )}
+        </SideMenu>
+      )}
+    </>
   )
 }
 

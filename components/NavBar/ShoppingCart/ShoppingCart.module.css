@@ -1,3 +1,29 @@
+.ico {
+  height: 26px;
+  width: 26px;
+  color: white;
+}
+
+.ico:hover {
+  color: #c5efef;
+}
+
+.cartCounter {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  top: 0;
+  right: 0;
+  border-radius: 100%;
+  background-color: #333333;
+  line-height: 20px;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .shoppingCart {
   display: flex;
   flex-direction: column;
@@ -51,5 +77,6 @@
 }
 
 .emptyMessage {
+  align-self: center;
   padding: 50px 0 30px;
 }

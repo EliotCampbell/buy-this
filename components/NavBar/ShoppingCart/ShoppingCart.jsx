@@ -1,60 +1,75 @@
-import { useShoppingCartStore } from '@/store/shoppingCartStore/shoppingCartStore'
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import classes from './ShoppingCart.module.css'
-import ShoppingCartPreview from '@/components/NavBar/ShoppingCart/ShoppingCartPreview/ShoppingCartPreview'
 import Button from '@/components/UI/Button/Button'
 import Link from 'next/link'
+import ShoppingCartPreview from '@/components/NavBar/ShoppingCart/ShoppingCartPreview/ShoppingCartPreview'
+import { FiShoppingCart } from 'react-icons/fi'
+import IcoButton from '@/components/UI/IcoButton/IcoButton'
+import SideMenu from '@/components/NavBar/SideMenu/SideMenu'
 
-const ShoppingCart = () => {
-  const { cart } = useShoppingCartStore((state) => ({
-    cart: state.cart
-  }))
+const ShoppingCart = ({ products }) => {
+  const [cartSwitcher, setCartSwitcher] = useState(false)
 
   return (
-    <div className={classes.shoppingCart}>
-      <div className={classes.cartTitle}>
-        <p className={classes.cartTitleName}>YOUR CART</p>
-        <p className={classes.cartArticle}>
-          {cart.reduce((acc, el) => el.count + acc, 0) + ' Articles'}
+    <>
+      <IcoButton onClick={() => setCartSwitcher(true)}>
+        <FiShoppingCart className={classes.ico} />
+        <p className={classes.cartCounter}>
+          {products.reduce((acc, el) => el.quantity + acc, 0)}
         </p>
-      </div>
-      {cart.length === 0 ? (
-        <h3 className={classes.emptyMessage}>Your shopping cart is empty.</h3>
-      ) : (
-        <>
-          {cart.map((el) => (
-            <ShoppingCartPreview
-              productId={el.productId}
-              productName={el.name}
-              productPrice={el.price}
-              productImg={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.img}`}
-              quantity={el.count}
-              onSale={el.onSale}
-              discountPrice={el.discountPrice}
-              key={el.productId}
-            />
-          ))}
-          <div className={classes.splitter}></div>
-          <Link className={classes.link} href={'/checkout/cart'}>
-            <Button onClick={() => {}}>ORDER</Button>
-          </Link>
-        </>
+      </IcoButton>{' '}
+      {cartSwitcher && (
+        <SideMenu setSwitcher={setCartSwitcher}>
+          <div className={classes.shoppingCart}>
+            <div className={classes.cartTitle}>
+              <p className={classes.cartTitleName}>YOUR CART</p>
+              <p className={classes.cartArticle}>
+                {products.reduce((acc, el) => el.quantity + acc, 0) +
+                  ' Articles'}
+              </p>
+            </div>
+            {products.length === 0 ? (
+              <h3 className={classes.emptyMessage}>
+                Your shopping cart is empty.
+              </h3>
+            ) : (
+              <>
+                {products.map((el) => (
+                  <ShoppingCartPreview
+                    key={el.cartProductId}
+                    cartProduct={el}
+                  />
+                ))}
+                <div className={classes.splitter}></div>
+                <Link
+                  className={classes.link}
+                  href={'/checkout/cart'}
+                  onClick={() => setCartSwitcher(false)}
+                >
+                  <Button>ORDER</Button>
+                </Link>
+              </>
+            )}
+            <div className={classes.amountDiv}>
+              <p className={classes.totalAmount}>Total amount:</p>
+              <p className={classes.totalAmount}>
+                {`${Number.parseFloat(
+                  products.reduce(
+                    (acc, el) =>
+                      el.onSale
+                        ? el.discountPrice * el.quantity + acc
+                        : el.price * el.quantity + acc,
+                    0
+                  )
+                ).toFixed(2)} €`}
+              </p>
+            </div>
+          </div>
+        </SideMenu>
       )}
-      <div className={classes.amountDiv}>
-        <p className={classes.totalAmount}>Total amount:</p>
-        <p className={classes.totalAmount}>
-          {`${Number.parseFloat(
-            cart.reduce(
-              (acc, el) =>
-                el.onSale
-                  ? el.discountPrice * el.count + acc
-                  : el.price * el.count + acc,
-              0
-            )
-          ).toFixed(2)} €`}
-        </p>
-      </div>
-    </div>
+    </>
   )
 }
 

@@ -4,6 +4,7 @@
   width: 100%;
   position: fixed;
   z-index: 10;
+  left: 0;
   top: 0;
   animation-duration: 500ms;
   animation-name: transition;
@@ -27,6 +28,7 @@
   animation-name: slideIn;
   overflow: hidden;
 }
+
 @keyframes slideIn {
   from {
     margin-left: 100%;
@@ -38,6 +40,7 @@
     width: 580px;
   }
 }
+
 .exit {
   display: flex;
   justify-content: flex-end;
@@ -72,7 +75,11 @@
   line-height: 0;
 }
 
+.topTextWrapper:hover {
+  cursor: pointer;
+}
+
 .contentWrapper {
-  padding: 30px 40px;
+  padding: 15px 55px;
   width: 580px;
 }

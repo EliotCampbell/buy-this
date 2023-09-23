@@ -23,14 +23,16 @@
 }
 
 .adminNavLink {
+  height: 60px;
   display: flex;
   align-items: center;
   border-bottom: 1px #dee1e7 solid;
-  padding: 20px 10px 20px 10px;
+  padding: 0 10px 0 10px;
   font-size: 20px;
   letter-spacing: 0.05em;
   font-family: BlenderPro-Bold, sans-serif;
   color: teal;
+  transition: 100ms;
 }
 
 .ico {
@@ -41,9 +43,10 @@
 
 .adminNavLink:hover {
   background-color: #f2fafa;
-  text-decoration: underline;
+  transition: 100ms;
 }
 
 .adminNavLink:active {
-  text-decoration: none;
+  padding-top: 5px;
+  transition: 0ms;
 }

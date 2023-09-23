@@ -6,7 +6,7 @@ import { useUserStore } from '@/store/mainStore/store'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import AdminInput from '@/components/UI/AdminInputs/AdminInput/AdminInput'
 
-const Signin = ({ setLogOrRegSwitcher, setSideMenuSwitcher }) => {
+const Signin = ({ setLogOrRegSwitcher, setAccountSwitcher }) => {
   const [input, setInput] = useState({ email: '', password: '' })
 
   const { message, setMessage, setUser, setIsAuth } = useUserStore((state) => ({
@@ -21,7 +21,7 @@ const Signin = ({ setLogOrRegSwitcher, setSideMenuSwitcher }) => {
       e.preventDefault()
       const data = await logFetch(input)
       if (data.ok === true) {
-        setSideMenuSwitcher(false)
+        setAccountSwitcher(false)
         setUser(data.dataObject)
         setIsAuth(true)
       } else if (data.ok === false) {

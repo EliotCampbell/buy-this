@@ -109,3 +109,32 @@
 .navP:hover {
   text-decoration: underline;
 }
+
+.categories {
+  width: 300px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 0 40px;
+  box-shadow: rgba(0, 0, 0, 0.77) 2px 2px 4px -2px;
+  border-bottom-right-radius: 4px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.categoriesText {
+  padding-left: 15px;
+}
+
+.ico {
+  height: 26px;
+  width: 26px;
+  color: white;
+}
+
+.ico:hover {
+  color: #c5efef;
+}

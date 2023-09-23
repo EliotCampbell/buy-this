@@ -14,10 +14,13 @@ const Register = ({ setLogOrRegSwitcher }) => {
     repeatPassword: ''
   })
 
-  const { message, setMessage } = useUserStore((state) => ({
-    message: state.message,
-    setMessage: state.setMessage
-  }))
+  const { message, setMessage, setTemporaryMessage } = useUserStore(
+    (state) => ({
+      message: state.message,
+      setMessage: state.setMessage,
+      setTemporaryMessage: state.setTemporaryMessage
+    })
+  )
 
   const register = async (event) => {
     event.preventDefault()
@@ -29,7 +32,7 @@ const Register = ({ setLogOrRegSwitcher }) => {
       const data = await registrationFetch(formData)
       if (data.ok) {
         setTimeout(() => setLogOrRegSwitcher('signin'), 5000)
-        setMessage(data)
+        setTemporaryMessage(data)
       } else if (!data.ok) {
         setMessage(data)
       } else {

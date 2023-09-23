@@ -3,7 +3,6 @@ import CarouselBlock from './CarouselBlock/CarouselBlock'
 import classes from './Main.module.css'
 import ItemsLine from './ItemsLine/ItemsLine'
 import { Product } from '@/models/models'
-import DBShoppingCart from '@/components/NavBar/DBShoppingCart/DBShoppingCart'
 
 const Main = async () => {
   const highlights = await Product.findAll({
@@ -19,7 +18,6 @@ const Main = async () => {
       <CarouselBlock />
       <ItemsLine title={'HIGHLIGHTS'} products={highlights} dark={true} />
       <ItemsLine title={'HOT DEALS'} products={hotDeals} />
-      <DBShoppingCart />
     </div>
   )
 }

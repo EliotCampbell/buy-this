@@ -21,25 +21,31 @@ const ItemsLine = ({ title, dark, products }) => {
       <div className={classes.line}>
         <p className={classes.title}>{title}</p>
         <div className={classes.productsLineWrapper}>
-          <div
-            className={classes.productsLine}
-            ref={scrollContainerRef}
-            style={{ transform: `translateX(-${scrollPosition}px)` }}
-          >
-            {products?.map((el) => (
-              <ProductPreviewCard
-                productId={el.id}
-                brandId={el.brandId}
-                productName={el.name}
-                productImg={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.img}`}
-                productPrice={el.price}
-                discountPrice={el.discountPrice}
-                inStock={el.inStock}
-                onSale={el.onSale}
-                key={el.id}
-              />
-            ))}
-          </div>
+          {products.length > 0 ? (
+            <div
+              className={classes.productsLine}
+              ref={scrollContainerRef}
+              style={{ transform: `translateX(-${scrollPosition}px)` }}
+            >
+              {products?.map((el) => (
+                <ProductPreviewCard
+                  productId={el.id}
+                  brandId={el.brandId}
+                  productName={el.name}
+                  productImg={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.img}`}
+                  productPrice={el.price}
+                  discountPrice={el.discountPrice}
+                  inStock={el.inStock}
+                  onSale={el.onSale}
+                  key={el.id}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className={classes.placeholder}>
+              <h2>{`No products with checked parameter "#${title.toLowerCase()}" in admin menu.`}</h2>
+            </div>
+          )}
           <button className={classes.slideButtonL} onClick={handleScrollLeft}>
             {'<'}
           </button>

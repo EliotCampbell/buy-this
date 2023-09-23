@@ -1,24 +1,12 @@
-import React, { useEffect, useState } from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import classes from '@/components/Cart/CartProductRow/CartProductRow.module.css'
-import { fetchProductById } from '@/http/fetchers/fetchers'
 import Image from 'next/image'
 import AdminInput from '@/components/UI/AdminInputs/AdminInput/AdminInput'
 
-const CartProductRow = ({ productId, productCount }) => {
-  const [product, setProduct] = useState(null)
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const data = await fetchProductById(productId)
-        setProduct(data.dataObject.product)
-      } catch (e) {
-        console.log(e.message)
-      }
-    }
-    fetchProduct().then()
-  }, [productId])
-
+const CartProductRow = ({ product }) => {
+  const [productCount, setProductCount] = useState(product.quantity)
   return (
     product && (
       <div className={classes.row}>
@@ -62,7 +50,7 @@ const CartProductRow = ({ productId, productCount }) => {
         </div>
         <div className={classes.sumSection}>
           {`${Number.parseFloat(
-            productCount *
+            product.quantity *
               (product.onSale ? product.discountPrice : product.price)
           ).toFixed(2)} €`}
         </div>

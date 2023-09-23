@@ -3,14 +3,10 @@
 import React, { useState } from 'react'
 import classes from './ToCartCounterAndButton.module.css'
 import Button from '@/components/UI/Button/Button'
-import { useShoppingCartStore } from '@/store/shoppingCartStore/shoppingCartStore'
-import { addProduct, addProductToCart } from '@/http/cart'
+import { addProductToCart } from '@/http/cart'
+import { useRouter } from 'next/navigation'
 
 const ToCartCounterAndButton = ({ product }) => {
-  const { toCart } = useShoppingCartStore((state) => ({
-    toCart: state.addProduct
-  }))
-
   const [counter, setCounter] = useState(1)
   const decrementor = () => {
     counter > 1 && setCounter(counter - 1)
@@ -19,6 +15,8 @@ const ToCartCounterAndButton = ({ product }) => {
     counter < 1000 && setCounter(counter + 1)
   }
   const regExp = /^(?:[0-9]|[1-9][0-9]{0,2}|)$/
+
+  const router = useRouter()
 
   return (
     <div className={classes.toCart}>
@@ -46,20 +44,11 @@ const ToCartCounterAndButton = ({ product }) => {
       <Button
         className={classes.cartButton}
         onClick={() =>
-          /*toCart(
-            product.id,
-            product.name,
-            counter,
-            product.price,
-            product.onSale,
-            product.discountPrice,
-            product.img
-          )*/
           addProductToCart(
             product.id,
             counter,
             product.onSale ? product.discountPrice : product.price
-          )
+          ).then(() => router.refresh())
         }
         disabled={counter <= 0}
       >

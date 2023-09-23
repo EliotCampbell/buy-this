@@ -20,7 +20,8 @@ const Product = sequelize.define('product', {
   highlight: { type: DataTypes.BOOLEAN, defaultValue: false },
   hotDeal: { type: DataTypes.BOOLEAN, defaultValue: false },
   onSale: { type: DataTypes.BOOLEAN, defaultValue: false },
-  inStock: { type: DataTypes.INTEGER, defaultValue: 0 }
+  inStock: { type: DataTypes.INTEGER, defaultValue: 0 },
+  hidden: { type: DataTypes.BOOLEAN, defaultValue: false }
 })
 
 const Category = sequelize.define('category', {
@@ -46,7 +47,8 @@ const Specification = sequelize.define('specification', {
 
 const Order = sequelize.define('order', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  amount: { type: DataTypes.FLOAT, allowNull: false }
+  amount: { type: DataTypes.FLOAT, allowNull: false },
+  address: { type: DataTypes.STRING, allowNull: false }
 })
 
 const OrderProduct = sequelize.define('order_product', {

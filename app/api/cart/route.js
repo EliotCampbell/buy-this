@@ -1,25 +1,26 @@
 import { NextResponse } from 'next/server'
-import { CartProduct } from '@/models/models'
+import { CartProduct, Product } from '@/models/models'
 import { headers } from 'next/headers'
 
-export const GET = async (request) => {
+export const GET = async () => {
   try {
-    const userId = 1
-    const data = await request.json()
-    const product = await CartProduct.findOne({
-      where: { userId: userId, productId: data.productId }
+    const headersList = headers()
+    const userId = headersList.get('userId')
+    const products = await CartProduct.findAll({
+      where: { userId: userId },
+      include: { model: Product, as: 'product' }
     })
-    if (product) {
+    if (products) {
       return NextResponse.json({
         ok: true,
         message: 'Product found successfully',
-        dataObject: { product }
+        dataObject: { products }
       })
     } else
       return NextResponse.json({
         ok: false,
         message: 'Product not found',
-        dataObject: { productId }
+        dataObject: {}
       })
   } catch (e) {
     return NextResponse.json({
@@ -34,17 +35,15 @@ export const POST = async (request) => {
   try {
     const headersList = headers()
     const userId = headersList.get('userId')
-    console.log(userId)
-    const data = await request.json()
+    const candidate = await request.json()
     const product = await CartProduct.findOne({
-      where: { userId: userId, productId: data.productId }
+      where: { userId: userId, productId: candidate.productId }
     })
-    if (product === null) {
+    if (!product) {
       const addedProduct = await CartProduct.create({
-        productId: data.productId,
+        productId: candidate.productId,
         userId,
-        quantity: data.quantity,
-        price: data.price
+        quantity: candidate.quantity
       })
       return NextResponse.json({
         ok: true,
@@ -52,50 +51,26 @@ export const POST = async (request) => {
         dataObject: { addedProduct }
       })
     }
+    if (userId !== product?.userId.toString()) {
+      return NextResponse.json({
+        ok: false,
+        message: "You can't add an item to cart of another user.",
+        dataObject: {}
+      })
+    }
     if (product) {
-      console.log('Product is already added')
-    }
-  } catch (e) {
-    return NextResponse.json({
-      ok: false,
-      message: 'Error',
-      dataObject: { error: e.message }
-    })
-  }
-}
-
-/*
-export const DELETE = async (request, { params }) => {
-  try {
-    const id = params.id
-    const brand = await Brand.findByPk(id)
-    const products = await Product.findAll({ where: { brandId: id } })
-    if (brand === null) {
-      return NextResponse.json({
-        ok: false,
-        message: 'Brand not found',
-        dataObject: { id }
-      })
-    }
-    if (products.length !== 0) {
-      return NextResponse.json({
-        ok: false,
-        message: 'Brand is assigned to one or more products',
-        dataObject: { id }
-      })
-    }
-    const deletedBrand = await Brand.destroy({ where: { id: id } })
-    if (deletedBrand === 1) {
+      const updatedProduct = await CartProduct.update(
+        {
+          productId: candidate.productId,
+          userId,
+          quantity: candidate.quantity + product.quantity
+        },
+        { where: { id: product.id } }
+      )
       return NextResponse.json({
         ok: true,
-        message: 'Brand deleted successfully',
-        dataObject: { id }
-      })
-    } else {
-      return NextResponse.json({
-        ok: false,
-        message: "Can't delete brand",
-        dataObject: { id }
+        message: 'Product added successfully',
+        dataObject: { updatedProduct }
       })
     }
   } catch (e) {
@@ -106,4 +81,3 @@ export const DELETE = async (request, { params }) => {
     })
   }
 }
-*/

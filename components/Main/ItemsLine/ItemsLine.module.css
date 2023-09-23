@@ -2,7 +2,7 @@
   width: 100%;
   letter-spacing: 2px;
   margin: 40px 0 0 0;
-  padding-top: 40px;
+  padding: 40px 0 20px 0;
 }
 
 .dark {
@@ -33,7 +33,7 @@
   font-size: 22px;
   color: white;
   position: absolute;
-  top: calc(50% - 25px);
+  top: calc(50% - 50px);
   background-color: teal;
   height: 50px;
   width: 50px;
@@ -70,8 +70,9 @@
   transition: transform 0.3s ease;
 }
 
-.productWrapper {
+.placeholder {
+  height: 480px;
   display: flex;
-  width: 360px;
-  padding: 20px 12px 0 12px;
+  align-items: center;
+  justify-content: center;
 }

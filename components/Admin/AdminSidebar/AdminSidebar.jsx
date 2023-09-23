@@ -7,7 +7,7 @@ const AdminSidebar = () => {
   return (
     <div className={classes.adminNav}>
       <div className={classes.categories}>
-        <p className={classes.adminNavTitle}>Choose to manage</p>
+        <p className={classes.adminNavTitle}>CHOOSE TO MANAGE</p>
         {linksArr.map((el) => (
           <Link
             key={el.path}
