@@ -11,10 +11,14 @@ export const GET = async () => {
       include: { model: Product, as: 'product' }
     })
     if (products) {
+      const formattedProducts = products.map((product) => ({
+        quantity: product.quantity,
+        ...product.product.dataValues
+      }))
       return NextResponse.json({
         ok: true,
         message: 'Product found successfully',
-        dataObject: { products }
+        dataObject: { products: formattedProducts }
       })
     } else
       return NextResponse.json({
