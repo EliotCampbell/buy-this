@@ -30,7 +30,7 @@ const ItemsLine = ({ title, dark, products }) => {
               {products?.map((el) => (
                 <ProductPreviewCard
                   productId={el.id}
-                  brandId={el.brandId}
+                  brand={el.brand}
                   productName={el.name}
                   productImg={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.img}`}
                   productPrice={el.price}

@@ -2,26 +2,18 @@ import { NextResponse } from 'next/server'
 import { verifyJwt } from '@/utils'
 
 export const middleware = async (request) => {
-  if (
-    (request.method !== 'GET' &&
-      request.nextUrl.pathname.startsWith('/api/brand')) ||
-    (request.method !== 'GET' &&
-      request.nextUrl.pathname.startsWith('/api/category')) ||
-    (request.method !== 'GET' &&
-      request.nextUrl.pathname.startsWith('/api/product')) ||
-    (request.method !== 'GET' &&
-      request.nextUrl.pathname.startsWith('/api/product_info'))
-  ) {
+  const token = request.cookies.get('token')?.value
+  const payload = token && (await verifyJwt(token))
+  //ADMIN api routes
+  if (request.nextUrl.pathname.startsWith('/api/admin_routes')) {
     try {
-      const token = request.cookies.get('token')?.value
       if (!token) {
         return NextResponse.json({
           ok: false,
-          message: 'Not authorized',
+          message: 'Bad token/token is expired',
           dataObject: {}
         })
       }
-      const payload = await verifyJwt(token)
       if (payload?.role === 'ADMIN') {
         return NextResponse.next()
       } else
@@ -30,39 +22,69 @@ export const middleware = async (request) => {
           message: 'You are not ADMIN',
           dataObject: {}
         })
-    } catch (e) {
+    } catch (error) {
       return NextResponse.json({
         ok: false,
-        message: 'Check role middleware error',
-        dataObject: { error: e }
+        message: 'Check ADMIN role api middleware error',
+        dataObject: { error: error }
       })
     }
   }
-  if (request.nextUrl.pathname.startsWith('/admin')) {
-    const token = request.cookies.get('token')?.value
-    if (!token) {
-      return NextResponse.redirect(new URL('/', request.url))
-    }
-    const payload = await verifyJwt(token)
-    if (payload?.role === 'ADMIN') {
-      return NextResponse.next()
-    } else return NextResponse.redirect(new URL('/', request.url))
-  }
-  if (request.nextUrl.pathname.startsWith('/api/cart')) {
-    const token = request.cookies.get('token')?.value
-    if (!token) {
-      return NextResponse.redirect(new URL('/', request.url))
-    }
-    const payload = await verifyJwt(token)
-    if (payload?.id) {
-      const headers = new Headers(request.headers)
-      headers.set('userId', `${payload.id}`)
-      return NextResponse.next({
-        request: {
-          headers
-        }
+  // ADMIN routes
+  else if (request.nextUrl.pathname.startsWith('/admin')) {
+    try {
+      if (payload?.role === 'ADMIN') NextResponse.next()
+      else {
+        return NextResponse.redirect(new URL('/', request.url))
+      }
+    } catch (error) {
+      return NextResponse.json({
+        ok: false,
+        message: 'Check ADMIN role middleware error',
+        dataObject: { error: error }
       })
-    } else NextResponse.redirect(new URL('/', request.url))
+    }
+  }
+  // USER API routes
+  else if (request.nextUrl.pathname.startsWith('/api/user_routes')) {
+    try {
+      if (!token) {
+        return NextResponse.json({
+          ok: false,
+          message: 'Bad token/token is expired',
+          dataObject: {}
+        })
+      }
+      if (payload.id) {
+        return NextResponse.next()
+      } else
+        return NextResponse.json({
+          ok: false,
+          message: 'You are not logged in',
+          dataObject: {}
+        })
+    } catch (error) {
+      return NextResponse.json({
+        ok: false,
+        message: 'Check user middleware error',
+        dataObject: { error: error }
+      })
+    }
+  }
+  // USER routes
+  else if (request.nextUrl.pathname.startsWith('/checkout')) {
+    try {
+      if (payload?.id) NextResponse.next()
+      else {
+        return NextResponse.redirect(new URL('/', request.url))
+      }
+    } catch (error) {
+      return NextResponse.json({
+        ok: false,
+        message: 'Check user routes middleware error',
+        dataObject: { error: error }
+      })
+    }
   }
   return NextResponse.next()
 }

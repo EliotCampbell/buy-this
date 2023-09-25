@@ -21,7 +21,12 @@ export const POST = async (request) => {
         dataObject: { email }
       })
     }
-    const token = await generateJwt(user.id, user.email, user.role)
+    const token = await generateJwt(
+      user.id,
+      user.email,
+      user.role,
+      user.username
+    )
     return NextResponse.json(
       {
         ok: true,

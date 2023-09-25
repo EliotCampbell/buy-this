@@ -1,7 +1,7 @@
 export const fetchAllCategories = async () => {
   try {
     const res = await fetch(
-      process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/category'
+      process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/public_routes/category'
     )
     return await res.json()
   } catch (e) {
@@ -12,7 +12,7 @@ export const fetchAllCategories = async () => {
 export const fetchAllBrands = async () => {
   try {
     const res = await fetch(
-      process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/brand'
+      process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/public_routes/brand'
     )
     return await res.json()
   } catch (e) {
@@ -24,7 +24,7 @@ export const fetchAllProducts = async (query) => {
   try {
     const res = await fetch(
       process.env.NEXT_PUBLIC_REACT_APP_API_URL +
-        'api/product?' +
+        'api/public_routes/product?' +
         (query && new URLSearchParams(query))
     )
     return await res.json()
@@ -35,7 +35,9 @@ export const fetchAllProducts = async (query) => {
 export const fetchProductById = async (id) => {
   try {
     const res = await fetch(
-      process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/product/' + id
+      process.env.NEXT_PUBLIC_REACT_APP_API_URL +
+        'api/public_routes/product/' +
+        id
     )
     return await res.json()
   } catch (e) {

@@ -9,7 +9,7 @@ import { FiShoppingCart } from 'react-icons/fi'
 import IcoButton from '@/components/UI/IcoButton/IcoButton'
 import SideMenu from '@/components/NavBar/SideMenu/SideMenu'
 
-const ShoppingCart = ({ products }) => {
+const ShoppingCart = ({ cartProducts }) => {
   const [cartSwitcher, setCartSwitcher] = useState(false)
 
   return (
@@ -17,7 +17,7 @@ const ShoppingCart = ({ products }) => {
       <IcoButton onClick={() => setCartSwitcher(true)}>
         <FiShoppingCart className={classes.ico} />
         <p className={classes.cartCounter}>
-          {products.reduce((acc, el) => el.quantity + acc, 0)}
+          {cartProducts.reduce((acc, el) => el.quantity + acc, 0)}
         </p>
       </IcoButton>{' '}
       {cartSwitcher && (
@@ -26,17 +26,17 @@ const ShoppingCart = ({ products }) => {
             <div className={classes.cartTitle}>
               <p className={classes.cartTitleName}>YOUR CART</p>
               <p className={classes.cartArticle}>
-                {products.reduce((acc, el) => el.quantity + acc, 0) +
+                {cartProducts.reduce((acc, el) => el.quantity + acc, 0) +
                   ' Articles'}
               </p>
             </div>
-            {products.length === 0 ? (
+            {cartProducts.length === 0 ? (
               <h3 className={classes.emptyMessage}>
                 Your shopping cart is empty.
               </h3>
             ) : (
               <>
-                {products.map((el) => (
+                {cartProducts.map((el) => (
                   <ShoppingCartPreview
                     key={el.cartProductId}
                     cartProduct={el}
@@ -56,7 +56,7 @@ const ShoppingCart = ({ products }) => {
               <p className={classes.totalAmount}>Total amount:</p>
               <p className={classes.totalAmount}>
                 {`${Number.parseFloat(
-                  products.reduce(
+                  cartProducts.reduce(
                     (acc, el) =>
                       el.onSale
                         ? el.discountPrice * el.quantity + acc

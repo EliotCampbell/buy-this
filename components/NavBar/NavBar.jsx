@@ -2,22 +2,10 @@ import React from 'react'
 import classes from './NavBar.module.css'
 import CategorySideNav from './CategorySideNav/CategorySideNav'
 import Link from 'next/link'
-import { CartProduct, Product } from '@/models/models'
 import SearchBar from '@/components/NavBar/SearchBar/SearchBar'
 import AccountButtons from '@/components/NavBar/AccountButtons/AccountButtons'
 
 const NavBar = async () => {
-  const cartProducts = await CartProduct.findAll({
-    where: { userId: 1 },
-    include: [{ model: Product, as: 'product' }]
-  }).then((data) =>
-    data.map((el) => ({
-      cartProductId: el.dataValues.id,
-      quantity: el.dataValues.quantity,
-      ...el.dataValues.product.dataValues
-    }))
-  )
-
   // const { setBrands, setCategories } = useProductStore((state) => ({
   //   setBrands: state.setBrands,
   //   setCategories: state.setCategories
@@ -53,7 +41,7 @@ const NavBar = async () => {
 
         <div className={classes.leftDiv}>
           <SearchBar />
-          <AccountButtons cartProducts={cartProducts} />
+          <AccountButtons />
         </div>
       </div>
       <div className={classes.subBar}>
