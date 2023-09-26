@@ -2,19 +2,13 @@
 
 import React, { useState } from 'react'
 import classes from './ShopSidebar.module.css'
-import { useProductStore, useQueryStore } from '@/store/mainStore/store'
 import AdminReactSelect from '@/components/UI/AdminInputs/AdminReactSelect/AdminReactSelect'
+import { useCustomRouter } from '@/components/Shop/useCustomRouter'
 
-const ShopSidebar = () => {
-  const { categories, brands } = useProductStore((state) => ({
-    categories: state.categories,
-    brands: state.brands
-  }))
+const ShopSidebar = ({ categories }) => {
+  const { setSearchParam } = useCustomRouter()
 
-  const { query, setQuery } = useQueryStore((state) => ({
-    query: state.query,
-    setQuery: state.setQuery
-  }))
+  const brands = []
 
   const [selectedBrand, setSelectedBrand] = useState(null)
 
@@ -22,27 +16,12 @@ const ShopSidebar = () => {
     <div className={classes.shopNav}>
       {
         <>
-          <p
-            className={classes.categories}
-            onClick={() => {
-              setQuery({
-                ...query,
-                categoryId: ''
-              })
-            }}
-          >
-            CATEGORIES
-          </p>
+          <p className={classes.categories}>CATEGORIES</p>
           {categories.map((el) => (
             <div
               className={classes.shopNavLink}
               key={el.id}
-              onClick={() => {
-                setQuery({
-                  ...query,
-                  categoryId: el.id
-                })
-              }}
+              onClick={() => setSearchParam('categoryId', el.id)}
             >
               {el.name}
             </div>

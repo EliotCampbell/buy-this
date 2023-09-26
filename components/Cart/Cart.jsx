@@ -1,22 +1,31 @@
-'use client'
-
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import classes from './Cart.module.css'
 import CartProductRow from '@/components/Cart/CartProductRow/CartProductRow'
 import Button from '@/components/UI/Button/Button'
-import { fetchCart } from '@/http/cart'
+import { CartProduct, Product } from '@/models/models'
+import { cookies } from 'next/headers'
+import { verifyJwt } from '@/utils'
 
-const Cart = () => {
-  const [cart, setCart] = useState([])
-
-  useEffect(() => {
-    const fetch = async () => {
-      await fetchCart().then((data) => {
-        setCart(data.dataObject.products)
+const Cart = async () => {
+  const nextCookies = cookies()
+  const token = nextCookies.get('token')?.value
+  const payload = await verifyJwt(token)
+  const getCartProducts = async (payload) => {
+    if (payload?.id) {
+      return await CartProduct.findAll({
+        where: { userId: payload.id },
+        include: [{ model: Product, as: 'product' }]
+      }).then((data) => {
+        return data.map((el) => ({
+          cartProductId: el.dataValues.id,
+          quantity: el.dataValues.quantity,
+          ...el.dataValues.product.dataValues
+        }))
       })
-    }
-    fetch().finally()
-  }, [])
+    } else return []
+  }
+
+  const cartProducts = await getCartProducts(payload)
 
   return (
     <div className={classes.cartWrapper}>
@@ -28,7 +37,7 @@ const Cart = () => {
         <p className={classes.rowTitleSum}>SUM</p>
       </div>
 
-      {cart.map((product) => (
+      {cartProducts.map((product) => (
         <CartProductRow product={product} key={product.productId} />
       ))}
 

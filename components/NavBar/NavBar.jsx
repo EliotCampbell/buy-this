@@ -4,18 +4,13 @@ import CategorySideNav from './CategorySideNav/CategorySideNav'
 import Link from 'next/link'
 import SearchBar from '@/components/NavBar/SearchBar/SearchBar'
 import AccountButtons from '@/components/NavBar/AccountButtons/AccountButtons'
+import { Category } from '@/models/models'
 
 const NavBar = async () => {
-  // const { setBrands, setCategories } = useProductStore((state) => ({
-  //   setBrands: state.setBrands,
-  //   setCategories: state.setCategories
-  // }))
-  //
+  const categories = await Category.findAll().then((data) =>
+    data.map((category) => category.get({ plain: true }))
+  )
 
-  // useEffect(() => {
-  //   fetchAllBrands().then((r) => setBrands(r.dataObject.brands))
-  //   fetchAllCategories().then((r) => setCategories(r.dataObject.categories))
-  // }, [])
   return (
     <div className={classes.navBarWrapper}>
       <div className={classes.navBar}>
@@ -45,7 +40,7 @@ const NavBar = async () => {
         </div>
       </div>
       <div className={classes.subBar}>
-        <CategorySideNav />
+        <CategorySideNav categories={categories} />
         <div className={classes.subBarContent}>
           <Link href={'/'} className={classes.subBarCategory}>
             CATEGORY 1

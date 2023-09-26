@@ -19,11 +19,6 @@
   margin-bottom: 5px;
 }
 
-.categories:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
 .shopNavLink {
   letter-spacing: 1px;
   padding: 10px;

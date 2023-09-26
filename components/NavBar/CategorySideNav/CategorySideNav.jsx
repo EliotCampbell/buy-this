@@ -1,13 +1,12 @@
 'use client'
-
 import React, { useState } from 'react'
 import classes from './CategorySideNav.module.css'
 import { RxCross1 } from 'react-icons/rx'
 import Link from 'next/link'
-import { useProductStore, useQueryStore } from '@/store/mainStore/store'
+import { useQueryStore } from '@/store/mainStore/store'
 import { PiList } from 'react-icons/pi'
 
-const CategorySideNav = () => {
+const CategorySideNav = ({ categories }) => {
   const { query, setQuery } = useQueryStore((state) => ({
     query: state.query,
     setQuery: state.setQuery
@@ -51,7 +50,7 @@ const CategorySideNav = () => {
                 >
                   <p className={classes.navP}>SHOW ALL PRODUCTS</p>
                 </Link>
-                {useProductStore.getState().categories.map((el) => (
+                {categories.map((el) => (
                   <Link
                     href={`/store`}
                     className={classes.navEl}

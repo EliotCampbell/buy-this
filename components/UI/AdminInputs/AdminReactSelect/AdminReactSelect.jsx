@@ -1,12 +1,14 @@
+'use client'
+
 import React from 'react'
 import classes from './AdminReactSelect.module.css'
 import Select from 'react-select'
 
 const AdminReactSelect = ({ options, label, ...props }) => {
   const selectStyles = {
-    control: (baseStyles) => ({
+    control: (baseStyles, state) => ({
       ...baseStyles,
-      borderColor: 'rgb(222, 225, 231)',
+      borderColor: state.isFocused ? 'teal' : 'rgb(222, 225, 231)',
       borderRadius: '2px',
       minHeight: '40px',
       boxShadow: 'none',

@@ -1,17 +1,16 @@
+'use client'
+
 import React from 'react'
 import classes from './Pagination.module.css'
-import { useProductStore, useQueryStore } from '@/store/mainStore/store'
 import PaginationButton from '@/components/UI/PaginationButton/PaginationButton'
+import { useSearchParams } from 'next/navigation'
+import { useCustomRouter } from '@/components/Shop/useCustomRouter'
 
-const Pagination = () => {
-  const { productsCount } = useProductStore((state) => ({
-    productsCount: state.productsCount
-  }))
-
-  const { setQuery, query } = useQueryStore((state) => ({
-    query: state.query,
-    setQuery: state.setQuery
-  }))
+const Pagination = ({ products }) => {
+  const { addSearchParam } = useCustomRouter()
+  const searchParams = useSearchParams()
+  const limit = searchParams.get('limit') || 18
+  const page = searchParams.get('page') || 1
 
   const createPagesArr = (productsCount, limit) => {
     const pagesArr = []
@@ -23,12 +22,12 @@ const Pagination = () => {
   }
 
   const prevPageHandler = () => {
-    query.page > 1 && setQuery({ ...query, page: query.page - 1 })
+    page > 1 && addSearchParam('page', page - 1)
   }
 
   const nextPageHandler = (productsCount, limit) => {
     const lastPage = Math.ceil(productsCount / limit)
-    lastPage > query.page && setQuery({ ...query, page: query.page + 1 })
+    lastPage > page && addSearchParam('page', page + 1)
   }
 
   return (
@@ -37,18 +36,18 @@ const Pagination = () => {
         <button className={classes.button} onClick={() => prevPageHandler()}>
           {'<'}
         </button>
-        {createPagesArr(productsCount, query.limit).map((el) => (
+        {createPagesArr(products.count, limit).map((el) => (
           <PaginationButton
             key={el}
-            onClick={() => setQuery({ ...query, page: el })}
-            disabled={query.page === el}
+            onClick={() => addSearchParam('page', el)}
+            disabled={page === el}
           >
             {el}
           </PaginationButton>
         ))}
         <button
           className={classes.button}
-          onClick={() => nextPageHandler(productsCount, query.limit)}
+          onClick={() => nextPageHandler(products.count, limit)}
         >
           {'>'}
         </button>
