@@ -19,7 +19,11 @@ const ProductDetails = async ({ productId }) => {
   return (
     <>
       <div className={classes.product}>
-        <BreadCrumbs product={product} productId={productId} />
+        <BreadCrumbs
+          product={product}
+          productId={productId}
+          breadCrumbType={product}
+        />
         <div className={classes.productMain}>
           <div className={classes.photoDiv}>
             <img

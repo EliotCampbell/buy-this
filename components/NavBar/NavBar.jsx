@@ -4,12 +4,10 @@ import CategorySideNav from './CategorySideNav/CategorySideNav'
 import Link from 'next/link'
 import SearchBar from '@/components/NavBar/SearchBar/SearchBar'
 import AccountButtons from '@/components/NavBar/AccountButtons/AccountButtons'
-import { Category } from '@/models/models'
+import { getAllCategories } from '@/getters'
 
 const NavBar = async () => {
-  const categories = await Category.findAll().then((data) =>
-    data.map((category) => category.get({ plain: true }))
-  )
+  const categories = await getAllCategories()
 
   return (
     <div className={classes.navBarWrapper}>

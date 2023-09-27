@@ -12,6 +12,9 @@ const Products = ({ products, categories }) => {
   const { addSearchParam, addMultiSearchParam } = useCustomRouter()
   const searchParams = useSearchParams()
   const categoryId = searchParams.get('categoryId')
+  const limit = searchParams.get('limit')
+  /*  const orderKey = searchParams.get('orderKey')
+  const orderValue = searchParams.get('orderValue')*/
   return (
     <div className={classes.productsWrapper}>
       <h1>
@@ -34,6 +37,8 @@ const Products = ({ products, categories }) => {
                 { label: '32', value: 32 },
                 { label: '64', value: 64 }
               ]}
+              placeholder={'Choose...'}
+              value={limit ? { label: limit, value: limit } : null}
               onChange={(option) => addSearchParam('limit', option.value)}
               isSearchable={false}
             ></AdminReactSelect>

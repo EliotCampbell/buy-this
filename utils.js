@@ -17,6 +17,6 @@ export const verifyJwt = async (token) => {
     return payload
   } catch (error) {
     console.log('utils.verify failed:' + error.message)
-    return undefined
+    return null
   }
 }

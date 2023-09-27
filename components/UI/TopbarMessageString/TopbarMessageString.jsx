@@ -1,9 +1,9 @@
 'use client'
 import classes from './TopbarMessageString.module.css'
-import { useUserStore } from '@/store/mainStore/store'
+import { useMessageStore } from '@/store/messageStore/messageStore'
 
 const TopbarMessageString = () => {
-  const { data } = useUserStore((state) => ({ data: state.topbarMessage }))
+  const { data } = useMessageStore((state) => ({ data: state.topbarMessage }))
 
   data?.dataObject?.error &&
     console.log(data.dataObject.error + ` Sent from MessageString`)

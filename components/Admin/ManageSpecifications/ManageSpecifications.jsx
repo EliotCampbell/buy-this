@@ -1,18 +1,15 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
-import classes from './ManageSpecifications.module.css'
+import classes from '@/components/Admin/FormsStyles.module.css'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import AdminReactSelect from '@/components/UI/AdminInputs/AdminReactSelect/AdminReactSelect'
 import CreateSpecification from '@/components/Admin/ManageSpecifications/CreateSpecification/CreateSpecification'
 import SpecificationTable from '@/components/Admin/ManageSpecifications/SpecificationTable/SpecificationTable'
-import { useUserStore } from '@/store/mainStore/store'
 
 const ManageSpecifications = () => {
-  const { message } = useUserStore((state) => ({
-    message: state.message
-  }))
+  const [message, setMessage] = useState(null)
 
   const { productsList, fetchSpecificationsList } = useAdminListsStore(
     (state) => ({
@@ -38,7 +35,7 @@ const ManageSpecifications = () => {
             fetchSpecificationsList(option.value.id).then()
           }}
         ></AdminReactSelect>
-        {selectedProduct && <CreateSpecification />}
+        {selectedProduct && <CreateSpecification setMessage={setMessage} />}
         <SpecificationTable />
       </div>
       {message && <MessageString message={message} />}

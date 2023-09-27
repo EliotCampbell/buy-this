@@ -9,6 +9,7 @@ export const useCustomRouter = () => {
     const currentParams = new URLSearchParams(
       Array.from(searchParams.entries())
     )
+    currentParams.set('page', '1')
     currentParams.set(title, value)
     router.push(`${pathname}/?${currentParams}`)
   }
@@ -17,6 +18,7 @@ export const useCustomRouter = () => {
     const currentParams = new URLSearchParams(
       Array.from(searchParams.entries())
     )
+    currentParams.set('page', '1')
     const paramsArray = Object.entries(params)
     paramsArray.map((param) => {
       currentParams.set(param[0], param[1])
@@ -25,6 +27,7 @@ export const useCustomRouter = () => {
   }
   const setSearchParam = (title, parameter) => {
     const currentParams = new URLSearchParams()
+    currentParams.set('page', '1')
     currentParams.set(title, parameter)
     router.push(`${pathname}/?${currentParams}`)
   }

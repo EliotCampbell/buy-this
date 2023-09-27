@@ -1,11 +1,11 @@
-import { Brand, Product, Specification } from '@/models/models'
+import { Brand, Category, Product, Specification } from '@/models/models'
 
 export const getAllProducts = async ({
   orderKey = 'price',
   orderValue = 'ASC',
-  offset = 0,
   page = 1,
   limit = 18,
+  offset = (page - 1) * limit,
   brandId = null,
   categoryId = null
 } = {}) => {
@@ -35,4 +35,16 @@ export const getAllProducts = async ({
     order: [[orderKey, orderValue]]
   }).then((data) => data.map((product) => product.get({ plain: true })))
   return { count, rows: products }
+}
+
+export const getAllCategories = async () => {
+  return await Category.findAll().then((data) =>
+    data.map((category) => category.get({ plain: true }))
+  )
+}
+
+export const getAllBrands = async () => {
+  return await Brand.findAll().then((data) =>
+    data.map((brand) => brand.get({ plain: true }))
+  )
 }

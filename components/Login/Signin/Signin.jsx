@@ -1,20 +1,19 @@
+'use client'
+
 import classes from '@/components/Login/Login.module.css'
 import Button from '@/components/UI/Button/Button'
 import React, { useState } from 'react'
 import { logFetch } from '@/http/auth'
-import { useUserStore } from '@/store/mainStore/store'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import AdminInput from '@/components/UI/AdminInputs/AdminInput/AdminInput'
+import { useRouter } from 'next/navigation'
 
 const Signin = ({ setLogOrRegSwitcher, setAccountSwitcher }) => {
   const [input, setInput] = useState({ email: '', password: '' })
 
-  const { message, setMessage, setUser, setIsAuth } = useUserStore((state) => ({
-    message: state.message,
-    setMessage: state.setMessage,
-    setUser: state.setUser,
-    setIsAuth: state.setIsAuth
-  }))
+  const [message, setMessage] = useState(null)
+
+  const router = useRouter()
 
   const signIn = async (e) => {
     try {
@@ -22,8 +21,7 @@ const Signin = ({ setLogOrRegSwitcher, setAccountSwitcher }) => {
       const data = await logFetch(input)
       if (data.ok === true) {
         setAccountSwitcher(false)
-        setUser(data.dataObject)
-        setIsAuth(true)
+        router.refresh()
       } else if (data.ok === false) {
         setMessage(data)
       } else {

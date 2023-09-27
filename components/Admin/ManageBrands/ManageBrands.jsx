@@ -36,7 +36,7 @@ const ManageBrands = () => {
   return (
     <>
       <h1>MANAGE BRANDS</h1>
-      <div className={classes.formWithSidePreview}>
+      <div className={classes.formWithoutSidePreview}>
         <div className={classes.form}>
           <AdminInput
             placeholder={'Add brand...'}

@@ -5,10 +5,8 @@ import classes from './ShopSidebar.module.css'
 import AdminReactSelect from '@/components/UI/AdminInputs/AdminReactSelect/AdminReactSelect'
 import { useCustomRouter } from '@/components/Shop/useCustomRouter'
 
-const ShopSidebar = ({ categories }) => {
-  const { setSearchParam } = useCustomRouter()
-
-  const brands = []
+const ShopSidebar = ({ categories, brands }) => {
+  const { setSearchParam, addSearchParam } = useCustomRouter()
 
   const [selectedBrand, setSelectedBrand] = useState(null)
 
@@ -39,10 +37,7 @@ const ShopSidebar = ({ categories }) => {
             }))}
             value={selectedBrand}
             onChange={(option) => {
-              setQuery({
-                ...query,
-                brandId: option.value
-              })
+              addSearchParam('brandId', option.value)
               setSelectedBrand(option)
             }}
           />

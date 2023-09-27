@@ -56,7 +56,14 @@ export const middleware = async (request) => {
         })
       }
       if (payload.id) {
-        return NextResponse.next()
+        //add userId to user API headers
+        const headers = new Headers(request.headers)
+        headers.set('userId', `${payload.id}`)
+        return NextResponse.next({
+          request: {
+            headers
+          }
+        })
       } else
         return NextResponse.json({
           ok: false,

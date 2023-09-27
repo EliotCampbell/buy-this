@@ -3,18 +3,12 @@ import classes from '@/components/Admin/FormsStyles.module.css'
 import Link from 'next/link'
 import { FiCheck, FiCornerDownLeft, FiTrash } from 'react-icons/fi'
 import AdminEditInput from '@/components/UI/AdminInputs/AdminEditInput/AdminEditInput'
-import { useQueryStore } from '@/store/mainStore/store'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import { deleteBrand, updateBrand } from '@/http/Admin/brands'
 import MessageString from '@/components/UI/MessageString/MessageString'
 
 const BrandsRowItem = ({ item, selectedBrand, setSelectedBrand }) => {
-  const { query, setQuery } = useQueryStore((state) => ({
-    query: state.query,
-    setQuery: state.setQuery
-  }))
-
   const { productsList, fetchBrandsList } = useAdminListsStore((state) => ({
     productsList: state.productsList,
     fetchBrandsList: state.fetchBrandsList
@@ -45,13 +39,8 @@ const BrandsRowItem = ({ item, selectedBrand, setSelectedBrand }) => {
   }
 
   return (
-    <div className={classes.categoriesBrandslistRow}>
-      <Link
-        href={'/store'}
-        onClick={() => {
-          setQuery({ ...query, brandId: item.value })
-        }}
-      >
+    <div className={classes.listRow}>
+      <Link href={`/store?=${item.value}`}>
         <FiCornerDownLeft className={classes.linkIco} />
       </Link>
       <AdminEditInput

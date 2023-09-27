@@ -2,14 +2,14 @@
 import React, { useEffect } from 'react'
 import AdminSidebar from './AdminSidebar/AdminSidebar'
 import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
-import { useUserStore } from '@/store/mainStore/store'
+import { useMessageStore } from '@/store/messageStore/messageStore'
 
 const Admin = () => {
   const { fetchAll } = useAdminListsStore((state) => ({
     fetchAll: state.fetchAll
   }))
 
-  const { setTopbarMessage } = useUserStore((state) => ({
+  const { setTopbarMessage } = useMessageStore((state) => ({
     setTopbarMessage: state.setTopbarMessage
   }))
 

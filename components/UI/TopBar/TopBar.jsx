@@ -3,6 +3,7 @@ import classes from './TopBar.module.css'
 import { AiOutlineCheck } from 'react-icons/ai'
 import ReactCountryFlag from 'react-country-flag'
 import TopbarMessageString from '@/components/UI/TopbarMessageString/TopbarMessageString'
+import { FiChevronDown } from 'react-icons/fi'
 
 const TopBar = () => {
   return (
@@ -26,6 +27,7 @@ const TopBar = () => {
         <div className={classes.langSelect}>
           <ReactCountryFlag countryCode="GB" svg title="US" />
           <p className={classes.langText}>EN</p>
+          <FiChevronDown />
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ const User = sequelize.define('user', {
 
 const Product = sequelize.define('product', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  /*  itemCode: {type: DataTypes.STRING,  unique: true, allowNull: true },*/
   name: { type: DataTypes.STRING, unique: true, allowNull: false },
   price: { type: DataTypes.FLOAT, allowNull: false },
   discountPrice: { type: DataTypes.FLOAT },
@@ -65,7 +66,7 @@ const CartProduct = sequelize.define('cart_product', {
 User.hasMany(Order)
 Order.belongsTo(User)
 
-User.hasMany(Order)
+User.hasMany(CartProduct)
 CartProduct.belongsTo(User)
 
 Order.hasMany(OrderProduct)

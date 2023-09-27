@@ -9,12 +9,18 @@ import IcoButton from '@/components/UI/IcoButton/IcoButton'
 import { FiUser } from 'react-icons/fi'
 import SideMenu from '@/components/NavBar/SideMenu/SideMenu'
 import Login from '@/components/Login/Login'
+import { useRouter } from 'next/navigation'
 
 const AccountSideNav = ({ payload }) => {
   const [accountSwitcher, setAccountSwitcher] = useState(false)
 
+  const router = useRouter()
+
   const logoutHandler = async () => {
-    await logout().then()
+    await logout().then(() => {
+      setAccountSwitcher(false)
+      router.refresh()
+    })
   }
 
   return (

@@ -11,7 +11,7 @@ import {
   FiTag,
   FiUsers
 } from 'react-icons/fi'
-import Orders from '@/components/Admin/Orders/Orders'
+import ManageOrders from '@/components/Admin/ManageOrders/ManageOrders'
 
 export const linksArr = [
   {
@@ -48,6 +48,6 @@ export const linksArr = [
     ico: <FiShoppingBag />,
     linkName: 'Orders',
     path: 'orders',
-    page: <Orders />
+    page: <ManageOrders />
   }
 ]

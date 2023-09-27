@@ -10,7 +10,7 @@ export const registrationFetch = async (formData) =>
     body: formData
   }).then((res) => res.json())
 
-export const checkAuthToken = async () => {
+/*export const checkAuthToken = async () => {
   try {
     const res = await fetch(
       process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/user_routes/auth_check',
@@ -22,12 +22,12 @@ export const checkAuthToken = async () => {
   } catch (e) {
     console.log(e)
   }
-}
+}*/
 
 export const logout = async () => {
   try {
     return await fetch(
-      process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/user-routes/logout'
+      process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/user_routes/logout'
     ).then((r) => r.json())
   } catch (e) {
     console.log(e)

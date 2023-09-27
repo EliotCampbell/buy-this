@@ -38,7 +38,7 @@ const ManageCategories = () => {
   return (
     <>
       <h1>MANAGE CATEGORIES</h1>
-      <div className={classes.formWithSidePreview}>
+      <div className={classes.formWithoutSidePreview}>
         <div className={classes.form}>
           <AdminInput
             placeholder={'Add category...'}
