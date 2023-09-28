@@ -1,0 +1,10 @@
+.toCart {
+  display: flex;
+  flex-direction: row;
+  margin: 13px 0;
+}
+
+.toCartSplitter {
+  width: 20px;
+  height: 60px;
+}

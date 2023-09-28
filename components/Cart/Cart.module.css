@@ -1,5 +1,7 @@
 .cartWrapper {
   padding-top: 40px;
+  display: flex;
+  flex-direction: column;
 }
 
 .rowTitles {
@@ -61,4 +63,10 @@
   align-items: center;
   justify-content: space-around;
   flex-direction: column;
+}
+
+.button {
+  align-self: end;
+  padding-top: 20px;
+  width: 300px;
 }

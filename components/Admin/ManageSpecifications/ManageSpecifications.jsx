@@ -26,19 +26,21 @@ const ManageSpecifications = () => {
   return (
     <>
       <h1>MANAGE SPECIFICATIONS</h1>
-      <div className={classes.form}>
-        <AdminReactSelect
-          label={'Select product'}
-          options={productsList}
-          onChange={(option) => {
-            setSelectedProduct(option.value.id)
-            fetchSpecificationsList(option.value.id).then()
-          }}
-        ></AdminReactSelect>
-        {selectedProduct && <CreateSpecification setMessage={setMessage} />}
-        <SpecificationTable />
+      <div className={classes.formWithoutSidePreview}>
+        <div className={classes.form}>
+          <AdminReactSelect
+            label={'Select product'}
+            options={productsList}
+            onChange={(option) => {
+              setSelectedProduct(option.value.id)
+              fetchSpecificationsList(option.value.id).then()
+            }}
+          ></AdminReactSelect>
+          {selectedProduct && <CreateSpecification setMessage={setMessage} />}
+          <SpecificationTable />
+        </div>
+        {message && <MessageString message={message} />}
       </div>
-      {message && <MessageString message={message} />}
     </>
   )
 }

@@ -14,10 +14,18 @@ const ManageUsers = () => {
   return (
     <>
       <h1>MANAGE USERS</h1>
-      <div className={classes.form}>
-        {usersList.map((user) => (
-          <div className={classes.listRow}>{user.value.username}</div>
-        ))}
+      <div className={classes.formWithoutSidePreview}>
+        <div className={classes.form}>
+          {usersList.map((user) => (
+            <div className={classes.listRow}>
+              <p className={classes.title}>id:{user.value.id}</p>
+              <p className={classes.title}>{user.value.username}</p>
+              <p className={classes.title}>{user.value.email}</p>
+              <p className={classes.title}> {user.value.role}</p>
+              <p className={classes.title}>orders count:{0}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   )

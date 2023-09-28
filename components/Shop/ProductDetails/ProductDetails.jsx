@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './ProductDetails.module.css'
-import ToCartCounterAndButton from '@/components/Shop/ProductDetails/ToCartCounterAndButton/ToCartCounterAndButton'
+import ToCartBlock from '@/components/Shop/ProductDetails/ToCartBlock/ToCartBlock'
 import BreadCrumbs from '../../UI/BreadCrumbs/BreadCrumbs'
 import { Brand, Product, Specification } from '@/models/models'
 import ProductContent from '@/components/Shop/ProductDetails/ProductContent/ProductContent'
@@ -55,17 +55,15 @@ const ProductDetails = async ({ productId }) => {
               </div>
               <p
                 className={
-                  product.inStock > 5
-                    ? classes.inStock
-                    : product.inStock > 0
-                    ? classes.runningOut
-                    : classes.notInStock
+                  (product.inStock > 4 && classes.inStock) ||
+                  (product.inStock < 1 && classes.outOfStock) ||
+                  classes.runningOut
                 }
               >
                 Still {product.inStock} in stock
               </p>
 
-              <ToCartCounterAndButton product={product} />
+              <ToCartBlock product={product} />
             </div>
           </div>
         </div>

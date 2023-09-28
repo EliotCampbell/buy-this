@@ -1,0 +1,9 @@
+.cartButton {
+  height: 60px;
+  width: 100%;
+  background-color: teal;
+  color: white;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.06em;
+}

@@ -1,0 +1,84 @@
+.popUpBackground {
+  background-color: rgba(51, 51, 51, 0.3);
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  animation-duration: 500ms;
+  animation-name: transition;
+}
+
+@keyframes transition {
+  from {
+    background-color: rgba(51, 51, 51, 0);
+  }
+
+  to {
+    background-color: rgba(51, 51, 51, 0.3);
+  }
+}
+
+.popUp {
+  margin: 80px auto 0;
+  width: 800px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.topSection {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.messageOk {
+  padding: 5px;
+  height: 40px;
+  width: 40px;
+  margin-right: 15px;
+  font-size: 30px;
+  color: green;
+  border-radius: 100%;
+  border: 3px solid green;
+}
+
+.messageError {
+  height: 40px;
+  width: 40px;
+  margin-right: 15px;
+  font-size: 30px;
+  color: red;
+  border-radius: 100%;
+  border: 3px solid red;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+}
+
+.x {
+  display: flex;
+  color: teal;
+}
+
+.x:hover {
+  cursor: pointer;
+}
+
+.content {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.buttonWrapper {
+  margin-top: 20px;
+  width: 200px;
+}

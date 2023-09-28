@@ -169,3 +169,8 @@
 .inputContainerVerticalSplitter {
   width: 40px;
 }
+.title {
+  font-family: BlenderPro-Bold, sans-serif;
+  color: teal;
+  font-size: 18px;
+}

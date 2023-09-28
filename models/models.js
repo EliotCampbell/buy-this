@@ -7,6 +7,8 @@ const User = sequelize.define('user', {
   email: { type: DataTypes.STRING, unique: true, allowNull: false },
   password: { type: DataTypes.STRING, allowNull: false },
   role: { type: DataTypes.STRING, defaultValue: 'USER', allowNull: false }
+  /*  address: { type: DataTypes.STRING },
+   * phoneNumber: {type: DataTypes.STRING}*/
 })
 
 const Product = sequelize.define('product', {
@@ -50,6 +52,14 @@ const Order = sequelize.define('order', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   amount: { type: DataTypes.FLOAT, allowNull: false },
   address: { type: DataTypes.STRING, allowNull: false }
+  /*postalCode:{type: DataTypes.STRING , allowNull: false},
+  city:{type: DataTypes.STRING , allowNull: false},
+  country:{type: DataTypes.STRING , allowNull: false},
+  phoneNumber: {type: DataTypes.STRING , allowNull: false},
+   title:  {type: DataTypes.STRING , allowNull: false},
+   firstName:  {type: DataTypes.STRING , allowNull: false},
+   lastName:  {type: DataTypes.STRING , allowNull: false}
+   */
 })
 
 const OrderProduct = sequelize.define('order_product', {
@@ -62,6 +72,12 @@ const CartProduct = sequelize.define('cart_product', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   quantity: { type: DataTypes.INTEGER, allowNull: false }
 })
+
+/*const general = sequelize.define('general', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false },
+  country: { type: DataTypes.STRING, allowNull: false },
+  shippingCost: { type: DataTypes.FLOAT,allowNull: false}
+})*/
 
 User.hasMany(Order)
 Order.belongsTo(User)
