@@ -1,3 +1,4 @@
+'use client'
 import classes from './ShoppingCartPreview.module.css'
 import Image from 'next/image'
 import { FiTrash } from 'react-icons/fi'

@@ -3,3 +3,78 @@
   display: flex;
   flex-direction: column;
 }
+
+.checkout {
+}
+
+.steps {
+  display: flex;
+}
+
+.step {
+  width: 476px;
+  height: 50px;
+  background-color: #dee1e7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selectedStep {
+  width: 476px;
+  height: 50px;
+  background-color: teal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepSplitter {
+  width: 6px;
+  height: 50px;
+}
+
+.stepTitle {
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+}
+
+.stepOverview {
+  padding-top: 20px;
+  display: flex;
+  width: 100%;
+}
+
+.formWrapper {
+  width: 958px;
+  margin-right: 6px;
+}
+
+.form {
+  width: 100%;
+}
+
+.formTitle {
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 20px;
+  height: 30px;
+  color: teal;
+  border-bottom: 1px solid #dee1e7;
+  margin-bottom: 20px;
+}
+
+.formRow {
+  display: flex;
+}
+
+.formRowSplitter {
+  width: 20px;
+}
+
+.summary {
+  width: 476px;
+  background-color: #dee1e7;
+  padding: 20px;
+  height: fit-content;
+}

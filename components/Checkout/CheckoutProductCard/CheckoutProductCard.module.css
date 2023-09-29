@@ -1,0 +1,80 @@
+.cartPositionWrapper {
+  padding: 20px 0;
+  border-top: 1px solid rgb(222, 225, 231);
+  height: 150px;
+  width: 100%;
+}
+
+.cartProduct {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 15px;
+}
+
+.cartPositionDescription {
+  padding-left: 15px;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nameDiv {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.productName {
+  color: teal;
+  font-size: 18px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.productName:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.removeIco {
+  color: teal;
+}
+
+.removeIco:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.countPriceDiv {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: fit-content;
+}
+
+.productCount {
+  color: teal;
+  font-size: 18px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.price {
+  color: teal;
+  font-size: 20px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.imgDiv {
+  height: 80px;
+  width: 80px;
+  align-items: center;
+  position: relative;
+}
+
+.img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
