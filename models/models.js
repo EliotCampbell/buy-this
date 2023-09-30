@@ -58,7 +58,8 @@ const Order = sequelize.define('order', {
   phoneNumber: {type: DataTypes.STRING , allowNull: false},
    title:  {type: DataTypes.STRING , allowNull: false},
    firstName:  {type: DataTypes.STRING , allowNull: false},
-   lastName:  {type: DataTypes.STRING , allowNull: false}
+   lastName:  {type: DataTypes.STRING , allowNull: false},
+   email:  {type: DataTypes.STRING , allowNull: false}
    */
 })
 
@@ -73,7 +74,7 @@ const CartProduct = sequelize.define('cart_product', {
   quantity: { type: DataTypes.INTEGER, allowNull: false }
 })
 
-/*const general = sequelize.define('general', {
+/*const general = sequelize.define('shipping_costs', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false },
   country: { type: DataTypes.STRING, allowNull: false },
   shippingCost: { type: DataTypes.FLOAT,allowNull: false}

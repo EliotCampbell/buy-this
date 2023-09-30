@@ -86,11 +86,7 @@ export const middleware = async (request) => {
         return NextResponse.redirect(new URL('/', request.url))
       }
     } catch (error) {
-      return NextResponse.json({
-        ok: false,
-        message: 'Check user routes middleware error',
-        dataObject: { error: error }
-      })
+      return NextResponse.redirect(new URL('/', request.url))
     }
   }
   return NextResponse.next()
