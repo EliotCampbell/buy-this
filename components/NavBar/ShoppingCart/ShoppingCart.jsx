@@ -45,7 +45,7 @@ const ShoppingCart = ({ cartProducts }) => {
                 <div className={classes.splitter}></div>
                 <Link
                   className={classes.link}
-                  href={'/checkout/cart'}
+                  href={'/cart'}
                   onClick={() => setCartSwitcher(false)}
                 >
                   <Button>ORDER</Button>

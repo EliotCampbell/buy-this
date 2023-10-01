@@ -28,10 +28,6 @@
   color: #dee1e7;
 }
 
-.disabledInput::placeholder {
-  color: #dee1e7 !important;
-}
-
 .input {
   padding: 0 8px;
   display: flex;
@@ -45,6 +41,14 @@
   border: 1px rgb(222, 225, 231) solid;
   border-radius: 2px;
   transition: 300ms;
+}
+
+.disabledInput {
+  color: #dee1e7;
+}
+
+.disabledInput::placeholder {
+  color: #dee1e7;
 }
 
 .input:hover {

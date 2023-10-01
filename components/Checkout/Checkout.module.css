@@ -14,7 +14,7 @@
 .step {
   width: 476px;
   height: 50px;
-  background-color: #dee1e7;
+  background-color: #f1f1f1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,10 +38,17 @@
   font-family: BlenderPro-Bold, sans-serif;
   font-size: 18px;
   letter-spacing: 0.05em;
+  color: teal;
+}
+
+.selectedStepTitle {
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.05em;
 }
 
 .stepOverview {
-  padding-top: 20px;
+  padding-top: 40px;
   display: flex;
   width: 100%;
 }
@@ -56,6 +63,16 @@
 }
 
 .formTitle {
+  margin-top: 40px;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 20px;
+  height: 30px;
+  color: teal;
+  border-bottom: 1px solid #dee1e7;
+  margin-bottom: 20px;
+}
+
+.summaryTitle {
   font-family: BlenderPro-Bold, sans-serif;
   font-size: 20px;
   height: 30px;
@@ -65,7 +82,10 @@
 }
 
 .formRow {
+  width: 100%;
+  min-height: 40px;
   display: flex;
+  justify-content: space-between;
 }
 
 .formRowSplitter {
@@ -73,8 +93,60 @@
 }
 
 .summary {
-  width: 476px;
-  background-color: #dee1e7;
+  margin-left: 20px;
+  width: 456px;
+  background-color: #f1f1f1;
   padding: 20px;
   height: fit-content;
+}
+
+.paymentMethod {
+  width: 100%;
+  border: 1px solid #dee1e7;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px;
+}
+
+.selectedPaymentMethod {
+  width: 100%;
+  border: 1px solid #dee1e7;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px;
+}
+
+.paymentMethodTitle {
+  color: teal;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 18px;
+}
+
+.checkoutData {
+  color: teal;
+  font-size: 16px;
+  font-family: BrandonGrotesque, sans-serif;
+}
+
+.postalCodeInputWrapper {
+  width: 200px;
+}
+
+.horizontalSplitter {
+  height: 20px;
+  width: 100%;
+}
+
+.summaryText {
+  color: teal;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 18px;
+}
+.summaryTextThin {
+  color: teal;
+  font-family: BrandonGrotesque, sans-serif;
 }

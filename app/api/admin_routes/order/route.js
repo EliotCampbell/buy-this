@@ -1,4 +1,5 @@
-import { Order, User } from '@/models/models'
+/*
+import { Order, OrderProduct, User } from '@/models/models'
 import { NextResponse } from 'next/server'
 
 export const GET = async () => {
@@ -6,8 +7,8 @@ export const GET = async () => {
     const users = await User.findAll({
       order: [['id', 'ASC']],
       include: [
-        { model: Order, as: 'orders' }
-        /*        { model: OrderProduct, as: 'orderProduct' }*/
+        { model: Order, as: 'orders' },
+        { model: OrderProduct, as: 'orderProduct' }
       ]
     })
     if (users.length)
@@ -30,3 +31,4 @@ export const GET = async () => {
     })
   }
 }
+*/

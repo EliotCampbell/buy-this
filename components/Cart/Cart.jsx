@@ -21,7 +21,7 @@ const Cart = async () => {
         <CartProductRow product={product} key={product.productId} />
       ))}
       <div className={classes.button}>
-        <Link href={'/checkout/address'}>
+        <Link href={'/checkout'}>
           <Button>CHECKOUT</Button>
         </Link>
       </div>

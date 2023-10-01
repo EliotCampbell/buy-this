@@ -1,6 +1,6 @@
 export const logFetch = async (credentials) => {
   try {
-    await fetch('http://localhost:3000/api/public_routes/login', {
+    return await fetch('http://localhost:3000/api/public_routes/login', {
       method: 'POST',
       body: JSON.stringify(credentials)
     }).then((res) => res.json())
@@ -11,7 +11,7 @@ export const logFetch = async (credentials) => {
 
 export const registrationFetch = async (formData) => {
   try {
-    await fetch('http://localhost:3000/api/public_routes/registration', {
+    return await fetch('http://localhost:3000/api/public_routes/registration', {
       method: 'POST',
       body: formData
     }).then((res) => res.json())
@@ -22,7 +22,7 @@ export const registrationFetch = async (formData) => {
 
 export const checkAuthToken = async () => {
   try {
-    await fetch(
+    return await fetch(
       process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/user_routes/auth_check',
       {
         method: 'POST'

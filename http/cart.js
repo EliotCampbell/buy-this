@@ -1,6 +1,6 @@
 export const getCart = async () => {
   try {
-    await fetch(
+    return await fetch(
       process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/user_routes/cart/'
     ).then((res) => res.json())
   } catch (error) {
@@ -10,7 +10,7 @@ export const getCart = async () => {
 
 export const addProductToCart = async (productId, quantity, price) => {
   try {
-    await fetch(
+    return await fetch(
       process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/user_routes/cart/',
       {
         method: 'POST',
@@ -24,7 +24,7 @@ export const addProductToCart = async (productId, quantity, price) => {
 
 export const changeProductQuantity = async (productInCartId, quantity) => {
   try {
-    await fetch(
+    return await fetch(
       process.env.NEXT_PUBLIC_REACT_APP_API_URL +
         'api/user_routes/cart/' +
         productInCartId,
@@ -40,7 +40,7 @@ export const changeProductQuantity = async (productInCartId, quantity) => {
 
 export const removeProductFromCart = async (productInCartId) => {
   try {
-    await fetch(
+    return await fetch(
       process.env.NEXT_PUBLIC_REACT_APP_API_URL +
         'api/user_routes/cart/' +
         productInCartId,

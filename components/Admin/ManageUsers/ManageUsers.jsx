@@ -9,7 +9,6 @@ const ManageUsers = () => {
     usersList: state.usersList,
     fetchUsersList: state.fetchUsersList
   }))
-  console.log(usersList)
 
   return (
     <>
@@ -17,12 +16,14 @@ const ManageUsers = () => {
       <div className={classes.formWithoutSidePreview}>
         <div className={classes.form}>
           {usersList.map((user) => (
-            <div className={classes.listRow}>
+            <div className={classes.listRow} key={user.value.id}>
               <p className={classes.title}>id:{user.value.id}</p>
               <p className={classes.title}>{user.value.username}</p>
               <p className={classes.title}>{user.value.email}</p>
               <p className={classes.title}> {user.value.role}</p>
-              <p className={classes.title}>orders count:{0}</p>
+              <p className={classes.title}>
+                orders count:{user.value.orders.length}
+              </p>
             </div>
           ))}
         </div>

@@ -65,12 +65,12 @@ export const getMyCart = async () => {
     return await CartProduct.findAll({
       where: { userId: payload.id },
       include: [{ model: Product, as: 'product' }]
-    }).then((data) => {
-      return data.map((el) => ({
+    }).then((data) =>
+      data.map((el) => ({
         cartProductId: el.dataValues.id,
         quantity: el.dataValues.quantity,
         ...el.dataValues.product.dataValues
       }))
-    })
+    )
   } else return []
 }

@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+}
+
+.label {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 16px;
+  color: teal !important;
+}
+.input {
+  height: 20px;
+  width: 20px;
+  margin: 10px;
+}

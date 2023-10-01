@@ -3,9 +3,9 @@ import classes from './CheckoutProductCard.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const CheckoutProductCard = ({ cartProduct }) => {
-  return (
-    <div className={classes.cartPositionWrapper}>
+const CheckoutProductCard = ({ cartProducts }) => {
+  return cartProducts.map((cartProduct) => (
+    <div className={classes.cartPositionWrapper} key={cartProduct.id}>
       <div className={classes.cartProduct}>
         <div className={classes.imgDiv}>
           <Image
@@ -38,7 +38,7 @@ const CheckoutProductCard = ({ cartProduct }) => {
         </div>
       </div>
     </div>
-  )
+  ))
 }
 
 export default CheckoutProductCard

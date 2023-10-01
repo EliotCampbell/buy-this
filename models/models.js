@@ -6,9 +6,12 @@ const User = sequelize.define('user', {
   username: { type: DataTypes.STRING, unique: true, allowNull: false },
   email: { type: DataTypes.STRING, unique: true, allowNull: false },
   password: { type: DataTypes.STRING, allowNull: false },
-  role: { type: DataTypes.STRING, defaultValue: 'USER', allowNull: false }
-  /*  address: { type: DataTypes.STRING },
-   * phoneNumber: {type: DataTypes.STRING}*/
+  role: { type: DataTypes.STRING, defaultValue: 'USER', allowNull: false },
+  /*address: { type: DataTypes.STRING },
+  postalCode: { type: DataTypes.STRING, allowNull: false },
+  city: { type: DataTypes.STRING, allowNull: false },
+  country: { type: DataTypes.STRING, allowNull: false },*/
+  phoneNumber: { type: DataTypes.STRING }
 })
 
 const Product = sequelize.define('product', {
@@ -51,16 +54,15 @@ const Specification = sequelize.define('specification', {
 const Order = sequelize.define('order', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   amount: { type: DataTypes.FLOAT, allowNull: false },
-  address: { type: DataTypes.STRING, allowNull: false }
-  /*postalCode:{type: DataTypes.STRING , allowNull: false},
-  city:{type: DataTypes.STRING , allowNull: false},
-  country:{type: DataTypes.STRING , allowNull: false},
-  phoneNumber: {type: DataTypes.STRING , allowNull: false},
-   title:  {type: DataTypes.STRING , allowNull: false},
-   firstName:  {type: DataTypes.STRING , allowNull: false},
-   lastName:  {type: DataTypes.STRING , allowNull: false},
-   email:  {type: DataTypes.STRING , allowNull: false}
-   */
+  country: { type: DataTypes.STRING, allowNull: false },
+  address: { type: DataTypes.STRING, allowNull: false },
+  postalCode: { type: DataTypes.STRING, allowNull: false },
+  city: { type: DataTypes.STRING, allowNull: false },
+  phoneNumber: { type: DataTypes.STRING, allowNull: false },
+  title: { type: DataTypes.STRING, allowNull: false },
+  firstName: { type: DataTypes.STRING, allowNull: false },
+  lastName: { type: DataTypes.STRING, allowNull: false },
+  email: { type: DataTypes.STRING, allowNull: false }
 })
 
 const OrderProduct = sequelize.define('order_product', {
