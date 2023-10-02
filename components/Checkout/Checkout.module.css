@@ -64,21 +64,55 @@
 
 .formTitle {
   margin-top: 40px;
+  border-bottom: 1px solid #dee1e7;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.formTitleText {
   font-family: BlenderPro-Bold, sans-serif;
   font-size: 20px;
   height: 30px;
   color: teal;
-  border-bottom: 1px solid #dee1e7;
-  margin-bottom: 20px;
+}
+
+.formTitleEdit {
+  font-family: BrandonGrotesque, sans-serif;
+  font-size: 16px;
+  color: teal;
+}
+
+.formTitleEdit:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .summaryTitle {
-  font-family: BlenderPro-Bold, sans-serif;
-  font-size: 20px;
   height: 30px;
-  color: teal;
   border-bottom: 1px solid #dee1e7;
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.summaryEdit {
+  font-family: BrandonGrotesque, sans-serif;
+  font-size: 16px;
+  color: teal;
+}
+
+.summaryEdit:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.summaryTitleText {
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 20px;
+  color: teal;
 }
 
 .formRow {

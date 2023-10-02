@@ -1,7 +1,8 @@
 import React from 'react'
 import classes from '@/components/Checkout/Checkout.module.css'
 import Button from '@/components/UI/Button/Button'
-import CheckoutProductCard from '@/components/Checkout/CheckoutProductCard/CheckoutProductCard'
+
+import SummaryBlock from '@/components/Checkout/SummaryBlock/SummaryBlock'
 
 const CheckoutPaymentType = ({
   setStep,
@@ -36,12 +37,7 @@ const CheckoutPaymentType = ({
           )}
         </div>
       </div>
-      <div className={classes.summary}>
-        <h3>YOUR ORDER</h3>
-        {cartProducts.map((product) => (
-          <CheckoutProductCard cartProduct={product} key={product.id} />
-        ))}
-      </div>
+      <SummaryBlock cartProducts={cartProducts} />
     </div>
   )
 }

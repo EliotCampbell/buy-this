@@ -1,10 +1,10 @@
 import React from 'react'
 import classes from '@/components/Checkout/Checkout.module.css'
 import Button from '@/components/UI/Button/Button'
-import CheckoutProductCard from '@/components/Checkout/CheckoutProductCard/CheckoutProductCard'
 import { checkout } from '@/http/fetchers/checkout'
+import SummaryBlock from '@/components/Checkout/SummaryBlock/SummaryBlock'
 
-const CheckoutConfirm = ({ checkoutForm, cartProducts, setSuccess }) => {
+const CheckoutConfirm = ({ checkoutForm, cartProducts }) => {
   const checkoutHandler = () =>
     checkout({ ...checkoutForm, country: checkoutForm.country.value })
   return (
@@ -26,12 +26,7 @@ const CheckoutConfirm = ({ checkoutForm, cartProducts, setSuccess }) => {
         <p className={classes.checkoutData}>{checkoutForm.paymentMethod}</p>
         <Button onClick={() => checkoutHandler()}>BUY THIS!</Button>
       </div>
-      <div className={classes.summary}>
-        <h3>YOUR ORDER</h3>
-        {cartProducts.map((product) => (
-          <CheckoutProductCard cartProduct={product} key={product.id} />
-        ))}
-      </div>
+      <SummaryBlock cartProducts={cartProducts} />
     </div>
   )
 }

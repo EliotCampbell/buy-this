@@ -20,8 +20,8 @@ const ToCartButton = ({ product, counter }) => {
             counter,
             product.onSale ? product.discountPrice : product.price
           ).then((data) => {
-            setPopupMessage(data)
             router.refresh()
+            setPopupMessage(data)
           })
         }
         disabled={counter <= 0 || counter > product.inStock}

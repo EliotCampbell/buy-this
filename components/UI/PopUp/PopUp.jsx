@@ -38,7 +38,7 @@ const PopUp = ({ message, setMessage }) => {
             </Button>
           </div>
           <div className={classes.buttonWrapper}>
-            <Link href={'/checkout/cart'}>
+            <Link href={'/cart'}>
               <Button>ORDER NOW</Button>
             </Link>
           </div>

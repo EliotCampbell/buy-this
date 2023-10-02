@@ -4,7 +4,7 @@ import AdminInput from '@/components/UI/AdminInputs/AdminInput/AdminInput'
 import AdminRadio from '@/components/UI/AdminInputs/AdminRadio/AdminRadio'
 import AdminReactSelect from '@/components/UI/AdminInputs/AdminReactSelect/AdminReactSelect'
 import Button from '@/components/UI/Button/Button'
-import CheckoutProductCard from '@/components/Checkout/CheckoutProductCard/CheckoutProductCard'
+import SummaryBlock from '@/components/Checkout/SummaryBlock/SummaryBlock'
 
 const CheckoutAddress = ({
   setStep,
@@ -13,13 +13,16 @@ const CheckoutAddress = ({
   checkoutForm,
   setCheckoutForm
 }) => {
+  const regExp = /^\+[0-9]*$/
   return (
     <div className={classes.stepOverview}>
       <div className={classes.formWrapper}>
         <h1>PERSONAL INFORMATION & ADDRESS</h1>
         <div className={classes.form}>
-          <p className={classes.formTitle}>CONTACTS</p>
-          <div className={classes.formRow}>
+          <div className={classes.formTitle}>
+            <p className={classes.formTitleText}>CONTACTS</p>
+          </div>
+          <form className={classes.formRow} onSubmit={() => setStep('payment')}>
             <AdminInput
               label={'Email'}
               placeholder={'johannes.schmidt@example.com...'}
@@ -32,17 +35,27 @@ const CheckoutAddress = ({
             <div className={classes.formRowSplitter} />
             <AdminInput
               label={'Phone number'}
-              placeholder={'+49 30 12345678...'}
+              placeholder={'included country code e.g.+49 30 12345678...'}
               disabled={user.phoneNumber}
               value={checkoutForm.phoneNumber}
-              onChange={(event) =>
+              required={true}
+              type={'tel'}
+              onFocus={() =>
+                !checkoutForm.phoneNumber &&
                 setCheckoutForm({
                   ...checkoutForm,
-                  phoneNumber: event.target.value
+                  phoneNumber: '+'
                 })
               }
+              onChange={(event) => {
+                regExp.test(event.target.value) &&
+                  setCheckoutForm({
+                    ...checkoutForm,
+                    phoneNumber: event.target.value
+                  })
+              }}
             />
-          </div>
+          </form>
           <AdminRadio
             name={'title'}
             options={['Mr', 'Mrs', 'Company']}
@@ -75,7 +88,9 @@ const CheckoutAddress = ({
               }
             />
           </div>
-          <p className={classes.formTitle}>ADDRESS</p>
+          <div className={classes.formTitle}>
+            <p className={classes.formTitleText}>ADDRESS</p>
+          </div>
           <div className={classes.formRow}>
             <div className={classes.postalCodeInputWrapper}>
               <AdminInput
@@ -125,46 +140,9 @@ const CheckoutAddress = ({
           </div>
         </div>
         <div className={classes.horizontalSplitter} />
-        <Button onClick={() => setStep('payment')}>CONTINUE</Button>
+        <Button>CONTINUE</Button>
       </div>
-      <div className={classes.summary}>
-        <p className={classes.summaryTitle}>YOUR ORDER</p>
-        <CheckoutProductCard cartProducts={cartProducts} />
-        <p className={classes.summaryTitle}>ORDER SUMMARY</p>
-        <div className={classes.formRow}>
-          <p className={classes.summaryTextThin}>Total Product Value</p>
-          <p className={classes.summaryText}>
-            {Number.parseFloat(
-              cartProducts.reduce(
-                (acc, el) =>
-                  el.onSale
-                    ? el.discountPrice * el.quantity + acc
-                    : el.price * el.quantity + acc,
-                0
-              )
-            ).toFixed(2)}
-          </p>
-        </div>
-        <div className={classes.formRow}>
-          <p className={classes.summaryTextThin}>Shipping cost</p>
-          <p className={classes.summaryText}>{'1,99 €'}</p>
-        </div>
-        <div className={classes.formRow}>
-          <p className={classes.summaryTextThin}>Total amount incl. VAT</p>
-          <p className={classes.summaryText}>
-            {Number.parseFloat(
-              cartProducts.reduce(
-                (acc, el) =>
-                  el.onSale
-                    ? el.discountPrice * el.quantity + acc
-                    : el.price * el.quantity + acc,
-                1,
-                99
-              )
-            ).toFixed(2)}
-          </p>
-        </div>
-      </div>
+      <SummaryBlock cartProducts={cartProducts} />
     </div>
   )
 }
