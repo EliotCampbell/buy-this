@@ -30,7 +30,7 @@
 }
 
 .stepSplitter {
-  width: 6px;
+  width: 20px;
   height: 50px;
 }
 
@@ -55,7 +55,6 @@
 
 .formWrapper {
   width: 958px;
-  margin-right: 6px;
 }
 
 .form {
@@ -63,6 +62,7 @@
 }
 
 .formTitle {
+  height: 30px;
   margin-top: 40px;
   border-bottom: 1px solid #dee1e7;
   margin-bottom: 20px;
@@ -74,7 +74,6 @@
 .formTitleText {
   font-family: BlenderPro-Bold, sans-serif;
   font-size: 20px;
-  height: 30px;
   color: teal;
 }
 
@@ -122,48 +121,84 @@
   justify-content: space-between;
 }
 
+.paymentRow {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #dee1e7;
+}
+
 .formRowSplitter {
   width: 20px;
 }
 
 .summary {
   margin-left: 20px;
-  width: 456px;
+  width: 468px;
   background-color: #f1f1f1;
   padding: 20px;
   height: fit-content;
 }
 
 .paymentMethod {
+  height: 52px;
   width: 100%;
   border: 1px solid #dee1e7;
-  height: 50px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px 40px;
+  padding: 0 40px;
+  justify-content: center;
 }
 
 .selectedPaymentMethod {
   width: 100%;
-  border: 1px solid #dee1e7;
-  height: 150px;
+  border: 1px solid teal;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px 40px;
+  padding: 0 40px;
+  justify-content: center;
+}
+
+.paymentMethodDescriptionWrapper {
+  padding: 20px 0;
+  width: 100%;
+}
+
+.paymentMethodDescription {
+  color: teal;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 18px;
+}
+
+.paymentMethodButton {
+  width: 200px;
+  align-self: end;
+  margin-bottom: 20px;
+}
+
+.radio {
+  height: 20px;
+  width: 20px;
 }
 
 .paymentMethodTitle {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
   color: teal;
   font-family: BlenderPro-Bold, sans-serif;
   font-size: 18px;
 }
 
 .checkoutData {
+  padding-bottom: 10px;
   color: teal;
   font-size: 16px;
-  font-family: BrandonGrotesque, sans-serif;
+  font-family: BlenderPro-Bold, sans-serif;
 }
 
 .postalCodeInputWrapper {
@@ -183,4 +218,18 @@
 .summaryTextThin {
   color: teal;
   font-family: BrandonGrotesque, sans-serif;
+}
+
+.dataGroup {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.success {
+  padding-top: 200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -52,3 +52,16 @@ export const removeProductFromCart = async (productInCartId) => {
     console.log(error)
   }
 }
+
+export const removeAllProductsFromCart = async () => {
+  try {
+    return await fetch(
+      process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/user_routes/cart/',
+      {
+        method: 'DELETE'
+      }
+    ).then((res) => res.json())
+  } catch (error) {
+    console.log(error)
+  }
+}

@@ -85,3 +85,40 @@ export const POST = async (request) => {
     })
   }
 }
+
+export const DELETE = async () => {
+  try {
+    const headersList = headers()
+    const userId = headersList.get('userId')
+    if (!userId) {
+      return NextResponse.json({
+        ok: false,
+        message: "Can't get userId",
+        dataObject: {}
+      })
+    }
+    const deletedProduct = await CartProduct.destroy({
+      where: { userId: userId }
+    })
+    if (deletedProduct === 1) {
+      return NextResponse.json({
+        ok: true,
+        message: 'Products in cart deleted successfully',
+        dataObject: {}
+      })
+    } else {
+      console.log(deletedProduct)
+      return NextResponse.json({
+        ok: false,
+        message: "Can't delete products in cart",
+        dataObject: {}
+      })
+    }
+  } catch (error) {
+    return NextResponse.json({
+      ok: false,
+      message: 'Error',
+      dataObject: { error: error.message }
+    })
+  }
+}

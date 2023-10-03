@@ -62,7 +62,8 @@ const Order = sequelize.define('order', {
   title: { type: DataTypes.STRING, allowNull: false },
   firstName: { type: DataTypes.STRING, allowNull: false },
   lastName: { type: DataTypes.STRING, allowNull: false },
-  email: { type: DataTypes.STRING, allowNull: false }
+  email: { type: DataTypes.STRING, allowNull: false },
+  orderStatus: { type: DataTypes.STRING, defaultValue: 'new', allowNull: false }
 })
 
 const OrderProduct = sequelize.define('order_product', {

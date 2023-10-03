@@ -1,32 +1,83 @@
 import React from 'react'
 import classes from '@/components/Checkout/Checkout.module.css'
-import Button from '@/components/UI/Button/Button'
 import { checkout } from '@/http/fetchers/checkout'
 import SummaryBlock from '@/components/Checkout/SummaryBlock/SummaryBlock'
+import SummaryShoppingCart from '@/components/Checkout/SummaryShoppingCart/SummaryShoppingCart'
+import { removeAllProductsFromCart } from '@/http/cart'
+import { useRouter } from 'next/navigation'
 
-const CheckoutConfirm = ({ checkoutForm, cartProducts }) => {
+const CheckoutConfirm = ({ checkoutForm, cartProducts, setStep }) => {
+  const router = useRouter()
   const checkoutHandler = () =>
-    checkout({ ...checkoutForm, country: checkoutForm.country.value })
+    checkout({ ...checkoutForm, country: checkoutForm.country.value }).then(
+      (data) => {
+        if (data.ok) {
+          setStep('success')
+          removeAllProductsFromCart().then(() => router.refresh())
+        } else {
+          alert('Error of placing order')
+        }
+      }
+    )
   return (
     <div className={classes.stepOverview}>
       <div className={classes.formWrapper}>
-        <p className={classes.formTitle}>CHECK YOUR ORDER</p>
+        <h1>CHECK YOUR ORDER</h1>
+        <div className={classes.horizontalSplitter} />
         <p className={classes.checkoutData}>Please check your data carefully</p>
-        <p className={classes.formTitle}>PERSONAL DATA</p>
-        <p className={classes.checkoutData}>{checkoutForm.email}</p>
-        <p className={classes.checkoutData}>{checkoutForm.phoneNumber}</p>
-        <p className={classes.checkoutData}>{checkoutForm.firstName}</p>
-        <p className={classes.checkoutData}>{checkoutForm.lastName}</p>
-        <p className={classes.formTitle}>ADDRESS</p>
-        <p className={classes.checkoutData}>{checkoutForm.postalCode}</p>
-        <p className={classes.checkoutData}>{checkoutForm.address}</p>
-        <p className={classes.checkoutData}>{checkoutForm.city}</p>
-        <p className={classes.checkoutData}>{checkoutForm.country.value}</p>
-        <p className={classes.formTitle}>PAYMENT</p>
-        <p className={classes.checkoutData}>{checkoutForm.paymentMethod}</p>
-        <Button onClick={() => checkoutHandler()}>BUY THIS!</Button>
+        <div className={classes.dataGroup}>
+          <div className={classes.formTitle}>
+            <p className={classes.formTitleText}>PAYMENT</p>
+            <p
+              className={classes.formTitleEdit}
+              onClick={() => setStep('payment')}
+            >
+              Edit
+            </p>
+          </div>
+          <p className={classes.checkoutData}>{checkoutForm.paymentMethod}</p>
+        </div>
+        <div className={classes.formRow}>
+          <div className={classes.dataGroup}>
+            <div className={classes.formTitle}>
+              <p className={classes.formTitleText}>PERSONAL DATA</p>
+              <p
+                className={classes.formTitleEdit}
+                onClick={() => setStep('address')}
+              >
+                Edit
+              </p>
+            </div>
+            <p
+              className={classes.checkoutData}
+            >{`${checkoutForm.title}. ${checkoutForm.firstName} ${checkoutForm.lastName}`}</p>
+            <p className={classes.checkoutData}>{checkoutForm.phoneNumber}</p>
+            <p className={classes.checkoutData}>{checkoutForm.email}</p>
+          </div>
+          <div className={classes.formRowSplitter} />
+          <div className={classes.dataGroup}>
+            <div className={classes.formTitle}>
+              <p className={classes.formTitleText}>ADDRESS</p>
+              <p
+                className={classes.formTitleEdit}
+                onClick={() => setStep('address')}
+              >
+                Edit
+              </p>
+            </div>
+            <p className={classes.checkoutData}>{checkoutForm.postalCode}</p>
+            <p className={classes.checkoutData}>{checkoutForm.address}</p>
+            <p
+              className={classes.checkoutData}
+            >{`${checkoutForm.city}, ${checkoutForm.country.value}`}</p>
+          </div>
+        </div>
+        <SummaryShoppingCart cartProducts={cartProducts} />
       </div>
-      <SummaryBlock cartProducts={cartProducts} />
+      <SummaryBlock
+        checkoutHandler={checkoutHandler}
+        cartProducts={cartProducts}
+      />
     </div>
   )
 }

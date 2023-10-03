@@ -13,7 +13,6 @@ const Checkout = () => {
   const [cartProducts, setCartProducts] = useState([])
   const [user, setUser] = useState([])
   const [checkoutForm, setCheckoutForm] = useState({})
-  const [success, setSuccess] = useState(false)
   useEffect(() => {
     checkAuthToken().then((data) => {
       setUser(data.dataObject)
@@ -24,87 +23,78 @@ const Checkout = () => {
 
   return (
     <div className={classes.checkoutWrapper}>
-      {success ? (
-        <CheckoutSuccess />
-      ) : (
-        <>
-          <div className={classes.steps}>
-            <div
+      {step !== 'success' && (
+        <div className={classes.steps}>
+          <div
+            className={step === 'address' ? classes.selectedStep : classes.step}
+            onClick={() => setStep('address')}
+          >
+            <p
               className={
-                step === 'address' ? classes.selectedStep : classes.step
-              }
-              onClick={() => setStep('address')}
-            >
-              <p
-                className={
-                  step === 'address'
-                    ? classes.selectedStepTitle
-                    : classes.stepTitle
-                }
-              >
-                1. ADDRESS
-              </p>
-            </div>
-            <div className={classes.stepSplitter}></div>
-            <div
-              className={
-                step === 'payment' ? classes.selectedStep : classes.step
-              }
-              onClick={() => step === 'confirm' && setStep('payment')}
-            >
-              <p
-                className={
-                  step === 'payment'
-                    ? classes.selectedStepTitle
-                    : classes.stepTitle
-                }
-              >
-                2. PAYMENT TYPE
-              </p>
-            </div>
-            <div className={classes.stepSplitter}></div>
-            <div
-              className={
-                step === 'confirm' ? classes.selectedStep : classes.step
+                step === 'address'
+                  ? classes.selectedStepTitle
+                  : classes.stepTitle
               }
             >
-              <p
-                className={
-                  step === 'confirm'
-                    ? classes.selectedStepTitle
-                    : classes.stepTitle
-                }
-              >
-                3. CONFIRMATION
-              </p>
-            </div>
+              1. ADDRESS
+            </p>
           </div>
-          {step === 'address' && (
-            <CheckoutAddress
-              setStep={setStep}
-              cartProducts={cartProducts}
-              user={user}
-              checkoutForm={checkoutForm}
-              setCheckoutForm={setCheckoutForm}
-            />
-          )}
-          {step === 'payment' && (
-            <CheckoutPaymentType
-              setStep={setStep}
-              cartProducts={cartProducts}
-              checkoutForm={checkoutForm}
-              setCheckoutForm={setCheckoutForm}
-            />
-          )}
-          {step === 'confirm' && (
-            <CheckoutConfirm
-              cartProducts={cartProducts}
-              checkoutForm={checkoutForm}
-              setSuccess={setSuccess}
-            />
-          )}
-        </>
+          <div className={classes.stepSplitter}></div>
+          <div
+            className={step === 'payment' ? classes.selectedStep : classes.step}
+            onClick={() => step === 'confirm' && setStep('payment')}
+          >
+            <p
+              className={
+                step === 'payment'
+                  ? classes.selectedStepTitle
+                  : classes.stepTitle
+              }
+            >
+              2. PAYMENT TYPE
+            </p>
+          </div>
+          <div className={classes.stepSplitter}></div>
+          <div
+            className={step === 'confirm' ? classes.selectedStep : classes.step}
+          >
+            <p
+              className={
+                step === 'confirm'
+                  ? classes.selectedStepTitle
+                  : classes.stepTitle
+              }
+            >
+              3. CONFIRMATION
+            </p>
+          </div>
+        </div>
       )}
+      {step === 'address' && (
+        <CheckoutAddress
+          setStep={setStep}
+          cartProducts={cartProducts}
+          user={user}
+          checkoutForm={checkoutForm}
+          setCheckoutForm={setCheckoutForm}
+        />
+      )}
+      {step === 'payment' && (
+        <CheckoutPaymentType
+          setStep={setStep}
+          cartProducts={cartProducts}
+          checkoutForm={checkoutForm}
+          setCheckoutForm={setCheckoutForm}
+        />
+      )}
+      {step === 'confirm' && (
+        <CheckoutConfirm
+          setStep={setStep}
+          cartProducts={cartProducts}
+          checkoutForm={checkoutForm}
+        />
+      )}
+      {step === 'success' && <CheckoutSuccess />}
     </div>
   )
 }

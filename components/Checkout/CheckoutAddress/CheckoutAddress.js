@@ -18,15 +18,16 @@ const CheckoutAddress = ({
     <div className={classes.stepOverview}>
       <div className={classes.formWrapper}>
         <h1>PERSONAL INFORMATION & ADDRESS</h1>
-        <div className={classes.form}>
+        <form className={classes.form} onSubmit={() => setStep('payment')}>
           <div className={classes.formTitle}>
             <p className={classes.formTitleText}>CONTACTS</p>
           </div>
-          <form className={classes.formRow} onSubmit={() => setStep('payment')}>
+          <div className={classes.formRow}>
             <AdminInput
               label={'Email'}
               placeholder={'johannes.schmidt@example.com...'}
               disabled={user.email}
+              required={true}
               value={checkoutForm.email}
               onChange={(event) =>
                 setCheckoutForm({ ...checkoutForm, email: event.target.value })
@@ -55,8 +56,9 @@ const CheckoutAddress = ({
                   })
               }}
             />
-          </form>
+          </div>
           <AdminRadio
+            required={true}
             name={'title'}
             options={['Mr', 'Mrs', 'Company']}
             onChange={(event) => {
@@ -65,6 +67,7 @@ const CheckoutAddress = ({
           />
           <div className={classes.formRow}>
             <AdminInput
+              required={true}
               label={'First name'}
               placeholder={'Johannes...'}
               value={checkoutForm.firstName}
@@ -77,6 +80,7 @@ const CheckoutAddress = ({
             />
             <div className={classes.formRowSplitter} />
             <AdminInput
+              required={true}
               label={'Last name'}
               placeholder={'Schmidt...'}
               value={checkoutForm.lastName}
@@ -94,6 +98,7 @@ const CheckoutAddress = ({
           <div className={classes.formRow}>
             <div className={classes.postalCodeInputWrapper}>
               <AdminInput
+                required={true}
                 label={'Postal code'}
                 placeholder={'10115...'}
                 value={checkoutForm.postalCode}
@@ -107,6 +112,7 @@ const CheckoutAddress = ({
             </div>
             <div className={classes.formRowSplitter} />
             <AdminInput
+              required={true}
               label={'Address'}
               placeholder={'Schwarzwaldstraße 99...'}
               value={checkoutForm.address}
@@ -120,6 +126,7 @@ const CheckoutAddress = ({
           </div>
           <div className={classes.formRow}>
             <AdminInput
+              required={true}
               label={'City'}
               placeholder={'Berlin...'}
               value={checkoutForm.city}
@@ -129,6 +136,7 @@ const CheckoutAddress = ({
             />
             <div className={classes.formRowSplitter} />
             <AdminReactSelect
+              required={true}
               label={'Country'}
               options={[{ label: 'Germany', value: 'Germany' }]}
               placeholder={'Germany...'}
@@ -138,9 +146,9 @@ const CheckoutAddress = ({
               }
             />
           </div>
-        </div>
-        <div className={classes.horizontalSplitter} />
-        <Button>CONTINUE</Button>
+          <div className={classes.horizontalSplitter} />
+          <Button>CONTINUE</Button>
+        </form>
       </div>
       <SummaryBlock cartProducts={cartProducts} />
     </div>

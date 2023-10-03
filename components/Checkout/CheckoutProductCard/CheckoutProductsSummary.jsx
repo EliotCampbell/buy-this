@@ -1,9 +1,9 @@
 import React from 'react'
-import classes from './CheckoutProductCard.module.css'
+import classes from './CheckoutProductsSummary.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const CheckoutProductCard = ({ cartProducts }) => {
+const CheckoutProductsSummary = ({ cartProducts }) => {
   return cartProducts.map((cartProduct) => (
     <div className={classes.cartPositionWrapper} key={cartProduct.id}>
       <div className={classes.cartProduct}>
@@ -41,4 +41,4 @@ const CheckoutProductCard = ({ cartProducts }) => {
   ))
 }
 
-export default CheckoutProductCard
+export default CheckoutProductsSummary

@@ -1,0 +1,127 @@
+.cartWrapper {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rowTitles {
+  padding-top: 40px;
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid #dee1e7;
+}
+
+.rowTitleProduct {
+  font-family: BrandonGrotesque, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: teal;
+  width: 31%;
+  padding-bottom: 20px;
+}
+
+.rowTitleQuantity {
+  font-family: BrandonGrotesque, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: teal;
+  width: 23%;
+  padding-bottom: 20px;
+  text-align: end;
+}
+
+.rowTitlePrice {
+  font-family: BrandonGrotesque, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: teal;
+  width: 23%;
+  padding-bottom: 20px;
+  text-align: end;
+}
+
+.rowTitleSum {
+  font-family: BrandonGrotesque, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: teal;
+  width: 23%;
+  padding-bottom: 20px;
+  text-align: end;
+  padding-right: 20px;
+}
+
+.row {
+  padding: 20px 0;
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid #dee1e7;
+}
+
+.productSection {
+  display: flex;
+  width: 31%;
+}
+
+.imgWrapper {
+  min-height: 120px;
+  min-width: 120px;
+  position: relative;
+}
+
+.img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.SpecificationsWrapper {
+  display: flex;
+  padding-left: 40px;
+  flex-direction: column;
+}
+
+.quantitySection {
+  display: flex;
+  justify-content: end;
+  width: 23%;
+}
+
+.priceSection {
+  display: flex;
+  justify-content: end;
+  width: 23%;
+}
+
+.price {
+  color: teal;
+  font-size: 20px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.name {
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.05em;
+  color: teal;
+}
+
+.salePrice {
+  color: red;
+  font-size: 20px;
+  font-family: BlenderPro-Bold, sans-serif;
+}
+
+.sumSection {
+  display: flex;
+  justify-content: end;
+  color: teal;
+  font-size: 20px;
+  font-family: BlenderPro-Bold, sans-serif;
+  width: 23%;
+  padding-right: 20px;
+}

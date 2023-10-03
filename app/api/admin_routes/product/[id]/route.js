@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server'
 import fs from 'fs'
 const uuid = require('uuid')
 import { writeFile } from 'fs/promises'
-
 const { Product, Category, Specification, Brand } = require('@/models/models')
 
 export const PUT = async (request, { params }) => {
@@ -72,7 +71,12 @@ export const PUT = async (request, { params }) => {
         }
       })
     }
-    if (oldProduct.img !== 'noImg.jpg' && oldProduct.img !== img) {
+    console.log(oldProduct.dataValues.img)
+    console.log(img)
+    if (
+      oldProduct.dataValues.img !== 'noImg.jpg' &&
+      oldProduct.dataValues.img !== img
+    ) {
       await fs.unlink(`public/static/` + oldProduct.img, (err) => {
         err && console.log(err)
       })
@@ -150,21 +154,21 @@ export const DELETE = async (request, { params }) => {
       await fs.unlink(`public/static/` + product.img, (err) => {
         err && console.log(err)
       })
+    }
 
-      if (dataProduct === 1) {
-        return NextResponse.json({
-          ok: true,
-          message: 'Product successfully deleted',
-          dataObject: { product }
-        })
-      }
-      if (dataProduct === 0) {
-        return NextResponse.json({
-          ok: false,
-          message: "Can't delete product",
-          dataObject: { product }
-        })
-      }
+    if (dataProduct === 1) {
+      return NextResponse.json({
+        ok: true,
+        message: 'Product successfully deleted',
+        dataObject: { product }
+      })
+    }
+    if (dataProduct === 0) {
+      return NextResponse.json({
+        ok: false,
+        message: "Can't delete product",
+        dataObject: { product }
+      })
     }
   } catch (e) {
     return NextResponse.json({

@@ -13,7 +13,9 @@ const CheckoutPaymentType = ({
   return (
     <div className={classes.stepOverview}>
       <div className={classes.formWrapper}>
-        <p className={classes.formTitle}>PAYMENT METHOD</p>
+        <h1>PAYMENT METHOD</h1>
+        <div className={classes.horizontalSplitter} />
+        <div className={classes.horizontalSplitter} />
         <div
           className={
             checkoutForm.paymentMethod === 'crypto'
@@ -24,16 +26,28 @@ const CheckoutPaymentType = ({
             setCheckoutForm({ ...checkoutForm, paymentMethod: 'crypto' })
           }
         >
-          <p className={classes.paymentMethodTitle}>Crypto</p>
+          <div className={classes.paymentRow}>
+            <input className={classes.radio} type={'radio'}></input>
+            <p className={classes.paymentMethodTitle}>Crypto</p>
+          </div>
           {checkoutForm.paymentMethod === 'crypto' && (
-            <Button
-              onClick={(event) => {
-                event.preventDefault()
-                setStep('confirm')
-              }}
-            >
-              CONTINUE
-            </Button>
+            <>
+              <div className={classes.paymentMethodDescriptionWrapper}>
+                <p className={classes.paymentMethodDescription}>
+                  Pay by crypto through PayByCrypto.cc
+                </p>
+              </div>
+              <div className={classes.paymentMethodButton}>
+                <Button
+                  onClick={(event) => {
+                    event.preventDefault()
+                    setStep('confirm')
+                  }}
+                >
+                  CONTINUE
+                </Button>
+              </div>
+            </>
           )}
         </div>
       </div>
