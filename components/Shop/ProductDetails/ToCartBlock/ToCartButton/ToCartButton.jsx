@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import classes from './ToCartButton.module.css'
-import { addProductToCart } from '@/http/cart'
+import { addProductToCart } from '@/http/user/cart'
 import Button from '@/components/UI/Button/Button'
 import { useRouter } from 'next/navigation'
 import PopUp from '@/components/UI/PopUp/PopUp'

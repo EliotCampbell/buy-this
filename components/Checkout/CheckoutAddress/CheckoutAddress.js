@@ -11,7 +11,10 @@ const CheckoutAddress = ({
   cartProducts,
   user,
   checkoutForm,
-  setCheckoutForm
+  setCheckoutForm,
+  productsCost,
+  shippingCost,
+  totalCost
 }) => {
   const regExp = /^\+[0-9]*$/
   return (
@@ -150,7 +153,12 @@ const CheckoutAddress = ({
           <Button>CONTINUE</Button>
         </form>
       </div>
-      <SummaryBlock cartProducts={cartProducts} />
+      <SummaryBlock
+        cartProducts={cartProducts}
+        productsCost={productsCost}
+        shippingCost={shippingCost}
+        totalCost={totalCost}
+      />
     </div>
   )
 }

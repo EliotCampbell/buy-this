@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import classes from './Checkout.module.css'
 import CheckoutAddress from '@/components/Checkout/CheckoutAddress/CheckoutAddress'
-import { getCart } from '@/http/cart'
-import { checkAuthToken } from '@/http/auth'
+import { getCart } from '@/http/user/cart'
+import { checkAuthToken } from '@/http/user/auth'
 import CheckoutPaymentType from '@/components/Checkout/CheckoutPaymentType/CheckoutPaymentType'
 import CheckoutConfirm from '@/components/Checkout/CheckoutConfirm/CheckoutConfirm'
 import CheckoutSuccess from '@/components/Checkout/CheckoutSuccess/CheckoutSuccess'
@@ -20,6 +20,28 @@ const Checkout = () => {
     })
     getCart().then((data) => setCartProducts(data.dataObject.products))
   }, [])
+
+  const productsCost = Number.parseFloat(
+    cartProducts.reduce(
+      (acc, el) =>
+        el.onSale
+          ? el.discountPrice * el.quantity + acc
+          : el.price * el.quantity + acc,
+      0
+    )
+  ).toFixed(2)
+
+  const shippingCost = 1.99
+
+  const totalCost = Number.parseFloat(
+    cartProducts.reduce(
+      (acc, el) =>
+        el.onSale
+          ? el.discountPrice * el.quantity + acc
+          : el.price * el.quantity + acc,
+      shippingCost
+    )
+  ).toFixed(2)
 
   return (
     <div className={classes.checkoutWrapper}>
@@ -77,6 +99,9 @@ const Checkout = () => {
           user={user}
           checkoutForm={checkoutForm}
           setCheckoutForm={setCheckoutForm}
+          productsCost={productsCost}
+          shippingCost={shippingCost}
+          totalCost={totalCost}
         />
       )}
       {step === 'payment' && (
@@ -85,6 +110,9 @@ const Checkout = () => {
           cartProducts={cartProducts}
           checkoutForm={checkoutForm}
           setCheckoutForm={setCheckoutForm}
+          productsCost={productsCost}
+          shippingCost={shippingCost}
+          totalCost={totalCost}
         />
       )}
       {step === 'confirm' && (
@@ -92,6 +120,9 @@ const Checkout = () => {
           setStep={setStep}
           cartProducts={cartProducts}
           checkoutForm={checkoutForm}
+          productsCost={productsCost}
+          shippingCost={shippingCost}
+          totalCost={totalCost}
         />
       )}
       {step === 'success' && <CheckoutSuccess />}

@@ -1,27 +1,23 @@
-/*
-import { Order, OrderProduct, User } from '@/models/models'
+import { Order, OrderProduct } from '@/models/models'
 import { NextResponse } from 'next/server'
 
 export const GET = async () => {
   try {
-    const users = await User.findAll({
+    const orders = await Order.findAll({
       order: [['id', 'ASC']],
-      include: [
-        { model: Order, as: 'orders' },
-        { model: OrderProduct, as: 'orderProduct' }
-      ]
+      include: [{ model: OrderProduct, as: 'order_products' }]
     })
-    if (users.length)
+    if (orders.length)
       return NextResponse.json({
         ok: true,
-        message: 'Users found successfully',
-        dataObject: { users }
+        message: 'Orders found successfully',
+        dataObject: { orders }
       })
     else
       return NextResponse.json({
         ok: false,
         message: 'Users not found',
-        dataObject: { users }
+        dataObject: { orders }
       })
   } catch (e) {
     return NextResponse.json({
@@ -31,4 +27,3 @@ export const GET = async () => {
     })
   }
 }
-*/

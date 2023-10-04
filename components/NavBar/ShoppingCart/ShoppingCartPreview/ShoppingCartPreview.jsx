@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { FiTrash } from 'react-icons/fi'
 import React from 'react'
 import Link from 'next/link'
-import { removeProductFromCart } from '@/http/cart'
+import { removeProductFromCart } from '@/http/user/cart'
 import { useRouter } from 'next/navigation'
 
 const ProductPreviewCard = ({ cartProduct }) => {

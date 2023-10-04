@@ -3,7 +3,7 @@
 import classes from '@/components/Login/Login.module.css'
 import Button from '@/components/UI/Button/Button'
 import React, { useState } from 'react'
-import { logFetch } from '@/http/auth'
+import { logFetch } from '@/http/user/auth'
 import MessageString from '@/components/UI/MessageString/MessageString'
 import AdminInput from '@/components/UI/AdminInputs/AdminInput/AdminInput'
 import { useRouter } from 'next/navigation'

@@ -3,9 +3,10 @@ import {
   fetchAllBrands,
   fetchAllCategories,
   fetchAllProducts,
-  fetchAllUsers,
   fetchProductById
 } from '@/http/fetchers/fetchers'
+import { fetchAllUsers } from '@/http/admin/users'
+import { fetchAllOrders } from '@/http/admin/orders'
 
 export const useAdminListsStore = create((set) => ({
   productsList: [],
@@ -13,32 +14,40 @@ export const useAdminListsStore = create((set) => ({
   brandsList: [],
   specificationsList: [],
   usersList: [],
+  ordersList: [],
   fetchAll: async () => {
     await Promise.all([
       fetchAllCategories(),
       fetchAllBrands(),
       fetchAllProducts({ order: '[["name", "ASC"]]' }),
-      fetchAllUsers()
-    ]).then(([categoriesData, brandsData, productsData, usersData]) => {
-      set(() => ({
-        categoriesList: categoriesData.dataObject.categories.map((el) => ({
-          value: el.id,
-          label: el.name
-        })),
-        brandsList: brandsData.dataObject.brands.map((el) => ({
-          value: el.id,
-          label: el.name
-        })),
-        productsList: productsData.dataObject.products.map((el) => ({
-          value: el,
-          label: el.name
-        })),
-        usersList: usersData.dataObject.users.map((el) => ({
-          value: el,
-          label: el.name
+      fetchAllUsers(),
+      fetchAllOrders()
+    ]).then(
+      ([categoriesData, brandsData, productsData, usersData, ordersData]) => {
+        set(() => ({
+          categoriesList: categoriesData.dataObject.categories.map((el) => ({
+            value: el.id,
+            label: el.name
+          })),
+          brandsList: brandsData.dataObject.brands.map((el) => ({
+            value: el.id,
+            label: el.name
+          })),
+          productsList: productsData.dataObject.products.map((el) => ({
+            value: el,
+            label: el.name
+          })),
+          usersList: usersData.dataObject.users.map((el) => ({
+            value: el,
+            label: el.name
+          })),
+          ordersList: ordersData.dataObject.orders.map((el) => ({
+            value: el,
+            label: el.name
+          }))
         }))
-      }))
-    })
+      }
+    )
   },
   fetchCategoriesList: async () => {
     await fetchAllCategories().then((r) => {

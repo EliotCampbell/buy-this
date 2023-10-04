@@ -4,6 +4,7 @@ import { verifyJwt } from '@/utils'
 export const middleware = async (request) => {
   const token = request.cookies.get('token')?.value
   const payload = token && (await verifyJwt(token))
+
   //ADMIN api routes
   if (request.nextUrl.pathname.startsWith('/api/admin_routes')) {
     try {

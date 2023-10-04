@@ -8,7 +8,10 @@ const CheckoutPaymentType = ({
   setStep,
   checkoutForm,
   setCheckoutForm,
-  cartProducts
+  cartProducts,
+  productsCost,
+  shippingCost,
+  totalCost
 }) => {
   return (
     <div className={classes.stepOverview}>
@@ -51,7 +54,12 @@ const CheckoutPaymentType = ({
           )}
         </div>
       </div>
-      <SummaryBlock cartProducts={cartProducts} />
+      <SummaryBlock
+        cartProducts={cartProducts}
+        productsCost={productsCost}
+        shippingCost={shippingCost}
+        totalCost={totalCost}
+      />
     </div>
   )
 }

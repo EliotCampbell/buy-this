@@ -3,10 +3,17 @@ import classes from '@/components/Checkout/Checkout.module.css'
 import { checkout } from '@/http/fetchers/checkout'
 import SummaryBlock from '@/components/Checkout/SummaryBlock/SummaryBlock'
 import SummaryShoppingCart from '@/components/Checkout/SummaryShoppingCart/SummaryShoppingCart'
-import { removeAllProductsFromCart } from '@/http/cart'
+import { removeAllProductsFromCart } from '@/http/user/cart'
 import { useRouter } from 'next/navigation'
 
-const CheckoutConfirm = ({ checkoutForm, cartProducts, setStep }) => {
+const CheckoutConfirm = ({
+  checkoutForm,
+  cartProducts,
+  setStep,
+  productsCost,
+  shippingCost,
+  totalCost
+}) => {
   const router = useRouter()
   const checkoutHandler = () =>
     checkout({ ...checkoutForm, country: checkoutForm.country.value }).then(
@@ -76,7 +83,9 @@ const CheckoutConfirm = ({ checkoutForm, cartProducts, setStep }) => {
       </div>
       <SummaryBlock
         checkoutHandler={checkoutHandler}
-        cartProducts={cartProducts}
+        productsCost={productsCost}
+        shippingCost={shippingCost}
+        totalCost={totalCost}
       />
     </div>
   )

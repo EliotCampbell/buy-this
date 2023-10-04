@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import Counter from '@/components/Shop/ProductDetails/ToCartBlock/Counter/Counter'
-import { changeProductQuantity } from '@/http/cart'
+import { changeProductQuantity } from '@/http/user/cart'
 import { useRouter } from 'next/navigation'
 
 const CartCounterBlock = ({ product }) => {

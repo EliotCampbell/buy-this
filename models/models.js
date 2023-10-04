@@ -7,16 +7,16 @@ const User = sequelize.define('user', {
   email: { type: DataTypes.STRING, unique: true, allowNull: false },
   password: { type: DataTypes.STRING, allowNull: false },
   role: { type: DataTypes.STRING, defaultValue: 'USER', allowNull: false },
-  /*address: { type: DataTypes.STRING },
-  postalCode: { type: DataTypes.STRING, allowNull: false },
-  city: { type: DataTypes.STRING, allowNull: false },
-  country: { type: DataTypes.STRING, allowNull: false },*/
+  address: { type: DataTypes.STRING },
+  postalCode: { type: DataTypes.STRING },
+  city: { type: DataTypes.STRING },
+  country: { type: DataTypes.STRING },
   phoneNumber: { type: DataTypes.STRING }
 })
 
 const Product = sequelize.define('product', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  /*  itemCode: {type: DataTypes.STRING,  unique: true, allowNull: true },*/
+  itemCode: { type: DataTypes.STRING, unique: true, allowNull: true },
   name: { type: DataTypes.STRING, unique: true, allowNull: false },
   price: { type: DataTypes.FLOAT, allowNull: false },
   discountPrice: { type: DataTypes.FLOAT },
@@ -77,11 +77,16 @@ const CartProduct = sequelize.define('cart_product', {
   quantity: { type: DataTypes.INTEGER, allowNull: false }
 })
 
-/*const general = sequelize.define('shipping_costs', {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false },
+const General = sequelize.define('shipping_costs', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false
+  },
   country: { type: DataTypes.STRING, allowNull: false },
-  shippingCost: { type: DataTypes.FLOAT,allowNull: false}
-})*/
+  shippingCost: { type: DataTypes.FLOAT, allowNull: false }
+})
 
 User.hasMany(Order)
 Order.belongsTo(User)
@@ -122,7 +127,8 @@ module.exports = {
   Specification,
   Order,
   CartProduct,
-  OrderProduct
+  OrderProduct,
+  General
 }
 
 /*sequelize
