@@ -67,12 +67,17 @@
 }
 
 .topText {
+  color: #f1f1f1;
   font-family: BlenderPro-Bold, sans-serif;
   font-size: 17px;
   padding-left: 15px;
   letter-spacing: 1px;
   white-space: nowrap;
   line-height: 0;
+}
+
+.x {
+  color: #f1f1f1;
 }
 
 .topTextWrapper:hover {

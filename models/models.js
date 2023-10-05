@@ -63,7 +63,12 @@ const Order = sequelize.define('order', {
   firstName: { type: DataTypes.STRING, allowNull: false },
   lastName: { type: DataTypes.STRING, allowNull: false },
   email: { type: DataTypes.STRING, allowNull: false },
-  orderStatus: { type: DataTypes.STRING, defaultValue: 'new', allowNull: false }
+  orderStatus: {
+    type: DataTypes.STRING,
+    defaultValue: 'new',
+    allowNull: false
+  },
+  productsQuantity: { type: DataTypes.INTEGER, allowNull: false }
 })
 
 const OrderProduct = sequelize.define('order_product', {
@@ -77,7 +82,7 @@ const CartProduct = sequelize.define('cart_product', {
   quantity: { type: DataTypes.INTEGER, allowNull: false }
 })
 
-const General = sequelize.define('shipping_costs', {
+const ShippingCost = sequelize.define('shipping_costs', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -128,7 +133,7 @@ module.exports = {
   Order,
   CartProduct,
   OrderProduct,
-  General
+  ShippingCost
 }
 
 /*sequelize

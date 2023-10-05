@@ -25,7 +25,7 @@ export const checkAuthToken = async () => {
     return await fetch(
       process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/user_routes/auth_check',
       {
-        method: 'POST'
+        method: 'GET'
       }
     ).then((res) => res.json())
   } catch (error) {

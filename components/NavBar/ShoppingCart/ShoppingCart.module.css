@@ -1,7 +1,7 @@
 .ico {
+  color: #f1f1f1;
   height: 26px;
   width: 26px;
-  color: white;
 }
 
 .ico:hover {
@@ -9,6 +9,7 @@
 }
 
 .cartCounter {
+  color: #f1f1f1;
   position: absolute;
   height: 20px;
   width: 20px;

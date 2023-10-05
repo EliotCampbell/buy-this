@@ -29,7 +29,7 @@ const CategorySideNav = ({ categories }) => {
                   className={classes.topTextWrapper}
                   onClick={() => setLeftSwitcher(false)}
                 >
-                  <RxCross1 />
+                  <RxCross1 className={classes.x} />
                   <p className={classes.topText}>Close side menu</p>
                 </div>
               </div>

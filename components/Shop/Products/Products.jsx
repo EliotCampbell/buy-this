@@ -72,21 +72,24 @@ const Products = ({ products, categories }) => {
       </div>
       <div className={classes.splitter}></div>
       <div className={classes.products}>
-        {products.rows.map((el) => (
-          <ProductPreviewCard
-            productId={el.id}
-            brand={el.brand.name}
-            productName={el.name}
-            productImg={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.img}`}
-            productPrice={el.price}
-            discountPrice={el.discountPrice}
-            inStock={el.inStock}
-            onSale={el.onSale}
-            key={el.id}
-          />
-        ))}
+        {products.rows.length ? (
+          products.rows.map((el) => (
+            <ProductPreviewCard
+              productId={el.id}
+              brand={el.brand.name}
+              productName={el.name}
+              productImg={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.img}`}
+              productPrice={el.price}
+              discountPrice={el.discountPrice}
+              inStock={el.inStock}
+              onSale={el.onSale}
+              key={el.id}
+            />
+          ))
+        ) : (
+          <h3 className={classes.placeholder}>Products not found.</h3>
+        )}
       </div>
-      )
       <Pagination products={products} />
     </div>
   )

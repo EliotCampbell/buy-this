@@ -1,5 +1,6 @@
 import React from 'react'
 import classes from './Footer.module.css'
+import Link from 'next/link'
 
 const Footer = () => {
   const links = [
@@ -15,9 +16,9 @@ const Footer = () => {
     <div className={classes.footerWrapper}>
       <div className={classes.footer}>
         {links.map((el) => (
-          <div to={'/'}>
+          <Link href={'/'}>
             <p className={classes.footerText}>{el.title.toUpperCase()}</p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

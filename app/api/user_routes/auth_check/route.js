@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { generateJwt, verifyJwt } from '@/utils'
 import { User } from '@/models/models'
 
-export const POST = async (request) => {
+export const GET = async (request) => {
   try {
     const token = request.cookies.get('token')?.value
     if (!token) {
@@ -25,10 +25,15 @@ export const POST = async (request) => {
         ok: true,
         message: 'Token updated successfully',
         dataObject: {
-          id: user.id,
-          email: user.email,
-          username: user.username,
-          role: user.role
+          id: user.dataValues.id,
+          username: user.dataValues.username,
+          email: user.dataValues.email,
+          role: user.dataValues.role,
+          address: user.dataValues.address,
+          postalCode: user.dataValues.postalCode,
+          city: user.dataValues.city,
+          country: user.dataValues.country,
+          phoneNumber: user.dataValues.phoneNumber
         }
       },
       {

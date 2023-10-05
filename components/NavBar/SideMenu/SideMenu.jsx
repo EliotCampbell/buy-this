@@ -17,7 +17,7 @@ const SideMenu = ({ children, setSwitcher }) => {
               className={classes.topTextWrapper}
               onClick={() => setSwitcher(false)}
             >
-              <RxCross1 />
+              <RxCross1 className={classes.x} />
               <p className={classes.topText}>Account</p>
             </div>
           </div>

@@ -9,9 +9,11 @@ import {
   FiList,
   FiShoppingBag,
   FiTag,
+  FiTruck,
   FiUsers
 } from 'react-icons/fi'
 import ManageOrders from '@/components/Admin/ManageOrders/ManageOrders'
+import ManageShipping from '@/components/Admin/ManageShipping/ManageShipping'
 
 export const linksArr = [
   {
@@ -47,7 +49,13 @@ export const linksArr = [
   {
     ico: <FiShoppingBag />,
     linkName: 'Orders',
-    path: 'orders',
+    path: 'manage_orders',
     page: <ManageOrders />
+  },
+  {
+    ico: <FiTruck />,
+    linkName: 'Shipping',
+    path: 'manage_shipping',
+    page: <ManageShipping />
   }
 ]

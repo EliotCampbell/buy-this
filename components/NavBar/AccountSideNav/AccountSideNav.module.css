@@ -15,18 +15,21 @@
 }
 
 .logoutIco {
+  transition: 200ms;
   height: 26px;
   width: 26px;
   color: red;
 }
 
 .logoutDiv {
+  transition: 200ms;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
 .logoutP {
+  transition: 200ms;
   color: red;
   font-family: BlenderPro-Bold, sans-serif;
   font-size: 20px;
@@ -34,10 +37,30 @@
 }
 
 .userLogout {
+  position: relative;
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+  height: 30px;
+  align-items: center;
+}
+
+.logoutDiv:hover {
+  cursor: pointer;
+  transition: 200ms;
+  .logoutIco {
+    color: #00a6a6;
+    transition: 100ms;
+  }
+  .logoutP {
+    color: #00a6a6;
+  }
+  margin-right: -1px;
+}
+
+.logoutDiv:active {
+  margin-right: 0;
 }
 
 .navEl {

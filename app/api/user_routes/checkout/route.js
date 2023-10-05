@@ -1,5 +1,11 @@
 import { headers } from 'next/headers'
-import { CartProduct, Order, OrderProduct, Product } from '@/models/models'
+import {
+  CartProduct,
+  Order,
+  OrderProduct,
+  Product,
+  ShippingCost
+} from '@/models/models'
 import { NextResponse } from 'next/server'
 
 export const POST = async (request) => {
@@ -13,15 +19,20 @@ export const POST = async (request) => {
     }).then((data) =>
       data.map((cartProduct) => cartProduct.get({ plain: true }))
     )
+    const shippingCost = await ShippingCost.findOne({
+      where: { country: data.country }
+    })
     const sum = Number.parseFloat(
       cart.reduce(
         (acc, el) =>
           el.product.onSale
             ? el.product.discountPrice * el.quantity + acc
             : el.product.price * el.quantity + acc,
-        0
+        1.99
       )
     ).toFixed(2)
+
+    const quantity = cart.reduce((acc, el) => el.quantity + acc, 0)
     const order = await Order.create({
       userId: userId,
       email: data.email,
@@ -33,7 +44,8 @@ export const POST = async (request) => {
       postalCode: data.postalCode,
       city: data.city,
       country: data.country,
-      amount: sum
+      amount: sum,
+      productsQuantity: quantity
     })
     const orderProduct = await OrderProduct.bulkCreate(
       cart.map((cartProduct) => ({

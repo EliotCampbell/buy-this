@@ -14,10 +14,12 @@ const Checkout = () => {
   const [user, setUser] = useState([])
   const [checkoutForm, setCheckoutForm] = useState({})
   useEffect(() => {
-    checkAuthToken().then((data) => {
-      setUser(data.dataObject)
-      setCheckoutForm({ ...checkoutForm, email: data.dataObject.email })
-    })
+    checkAuthToken()
+      .then((data) => {
+        setUser(data.dataObject)
+        setCheckoutForm({ ...checkoutForm, email: data.dataObject.email })
+      })
+      .then(() => console.log(user))
     getCart().then((data) => setCartProducts(data.dataObject.products))
   }, [])
 

@@ -16,16 +16,17 @@ const CheckoutConfirm = ({
 }) => {
   const router = useRouter()
   const checkoutHandler = () =>
-    checkout({ ...checkoutForm, country: checkoutForm.country.value }).then(
-      (data) => {
-        if (data.ok) {
-          setStep('success')
-          removeAllProductsFromCart().then(() => router.refresh())
-        } else {
-          alert('Error of placing order')
-        }
+    checkout({
+      ...checkoutForm,
+      country: checkoutForm.country.value
+    }).then((data) => {
+      if (data.ok) {
+        setStep('success')
+        removeAllProductsFromCart().then(() => router.refresh())
+      } else {
+        alert('Error of placing order')
       }
-    )
+    })
   return (
     <div className={classes.stepOverview}>
       <div className={classes.formWrapper}>
