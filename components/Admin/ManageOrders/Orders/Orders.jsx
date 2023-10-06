@@ -22,7 +22,7 @@ const Orders = () => {
         <p className={classes.tableTitleCustomer}>CUSTOMER</p>
       </div>
       {ordersList.map((order) => (
-        <div className={classes.listRowWrapper} key={order.value.id}>
+        <div key={order.value.id}>
           <div
             className={classes.listRow}
             onClick={() =>
@@ -99,6 +99,7 @@ const Orders = () => {
                   <p className={classes.orderDetailsTitleName}>PRODUCT</p>
                   <p className={classes.orderDetailsTitleQuantity}>QUANTITY</p>
                   <p className={classes.orderDetailsTitlePrice}>PRICE</p>
+                  <p className={classes.orderDetailsTitlePrice}>SUM</p>
                 </div>
                 {orderDetails.orderProducts.map((orderProduct) => (
                   <div
@@ -117,6 +118,11 @@ const Orders = () => {
                     <p className={classes.orderDetailsPrice}>
                       {`${Number.parseFloat(orderProduct.price).toFixed(2)} €`}
                     </p>
+                    <p className={classes.orderDetailsPrice}>
+                      {`${Number.parseFloat(
+                        orderProduct.price * orderProduct.quantity
+                      ).toFixed(2)} €`}
+                    </p>
                   </div>
                 ))}
                 <div className={classes.orderDetailsSummary}>
@@ -125,6 +131,7 @@ const Orders = () => {
                   <p className={classes.orderDetailsQuantity}>
                     {order.value.productsQuantity}
                   </p>
+                  <p className={classes.orderDetailsPrice}></p>
                   <p className={classes.orderDetailsPrice}>
                     {`${Number.parseFloat(order.value.amount).toFixed(2)} €`}
                   </p>

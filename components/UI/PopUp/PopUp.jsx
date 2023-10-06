@@ -31,18 +31,20 @@ const PopUp = ({ message, setMessage }) => {
             }}
           />
         </div>
-        <div className={classes.content}>
-          <div className={classes.buttonWrapper}>
-            <Button style={'light'} onClick={() => setMessage(null)}>
-              CONTINUE SHOPPING
-            </Button>
+        {message.ok && (
+          <div className={classes.content}>
+            <div className={classes.buttonWrapper}>
+              <Button style={'light'} onClick={() => setMessage(null)}>
+                CONTINUE SHOPPING
+              </Button>
+            </div>
+            <div className={classes.buttonWrapper}>
+              <Link href={'/cart'}>
+                <Button>ORDER NOW</Button>
+              </Link>
+            </div>
           </div>
-          <div className={classes.buttonWrapper}>
-            <Link href={'/cart'}>
-              <Button>ORDER NOW</Button>
-            </Link>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   )

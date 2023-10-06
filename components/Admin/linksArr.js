@@ -7,7 +7,7 @@ import {
   FiGrid,
   FiInfo,
   FiList,
-  FiShoppingBag,
+  FiPackage,
   FiTag,
   FiTruck,
   FiUsers
@@ -47,7 +47,7 @@ export const linksArr = [
     page: <ManageUsers />
   },
   {
-    ico: <FiShoppingBag />,
+    ico: <FiPackage />,
     linkName: 'Orders',
     path: 'manage_orders',
     page: <ManageOrders />

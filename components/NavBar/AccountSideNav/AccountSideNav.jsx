@@ -9,6 +9,8 @@ import { FiUser } from 'react-icons/fi'
 import SideMenu from '@/components/NavBar/SideMenu/SideMenu'
 import Login from '@/components/Login/Login'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { linksArr } from './linksArr'
 
 const AccountSideNav = ({ payload }) => {
   const [accountSwitcher, setAccountSwitcher] = useState(false)
@@ -38,15 +40,29 @@ const AccountSideNav = ({ payload }) => {
         <SideMenu setSwitcher={setAccountSwitcher}>
           {payload ? (
             <>
-              <div className={classes.userLogout}>
-                <h2>{payload.username}</h2>
-                <div
-                  className={classes.logoutDiv}
-                  onClick={() => logoutHandler().then(() => router.push('/'))}
-                >
-                  <BiLogOut className={classes.logoutIco} />
-                  <p className={classes.logoutP}>Logout</p>
-                </div>
+              <div className={classes.userTitle}>
+                <p className={classes.navTitle}>MANAGE ACCOUNT</p>
+                <p>{payload.username}</p>
+              </div>
+              <div className={classes.options}>
+                {linksArr.map((el) => (
+                  <Link
+                    key={el.path}
+                    href={'/account/' + el.path}
+                    className={classes.navLink}
+                    onClick={() => setAccountSwitcher(false)}
+                  >
+                    <div className={classes.navIco}>{el.ico}</div>
+                    {el.linkName}
+                  </Link>
+                ))}
+              </div>
+              <div
+                className={classes.logoutDiv}
+                onClick={() => logoutHandler().then(() => router.push('/'))}
+              >
+                <BiLogOut className={classes.logoutIco} />
+                <p className={classes.logoutP}>Logout</p>
               </div>
               {userInfo ? (
                 <>

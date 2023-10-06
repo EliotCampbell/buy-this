@@ -49,14 +49,7 @@ export const middleware = async (request) => {
   // USER API routes
   else if (request.nextUrl.pathname.startsWith('/api/user_routes')) {
     try {
-      if (!token) {
-        return NextResponse.json({
-          ok: false,
-          message: 'Bad token/token is expired',
-          dataObject: {}
-        })
-      }
-      if (payload.id) {
+      if (payload?.id) {
         //add userId to user API headers
         const headers = new Headers(request.headers)
         headers.set('userId', `${payload.id}`)
@@ -68,7 +61,7 @@ export const middleware = async (request) => {
       } else
         return NextResponse.json({
           ok: false,
-          message: 'You are not logged in',
+          message: 'Please login into your account',
           dataObject: {}
         })
     } catch (error) {

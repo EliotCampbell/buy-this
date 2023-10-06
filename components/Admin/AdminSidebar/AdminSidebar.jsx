@@ -3,7 +3,7 @@
 import React from 'react'
 import classes from './AdminSidebar.module.css'
 import Link from 'next/link'
-import { linksArr } from '@/app/admin/linksArr'
+import { linksArr } from '@/components/Admin/linksArr'
 
 const AdminSidebar = () => {
   return (

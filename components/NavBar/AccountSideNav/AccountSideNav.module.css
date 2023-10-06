@@ -1,6 +1,5 @@
 .userInfo {
   font-family: BlenderPro-Bold, sans-serif;
-  color: teal;
   padding-top: 10px;
 }
 
@@ -22,10 +21,12 @@
 }
 
 .logoutDiv {
+  width: 100%;
   transition: 200ms;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: end;
 }
 
 .logoutP {
@@ -36,14 +37,15 @@
   padding-left: 10px;
 }
 
-.userLogout {
+.userTitle {
   position: relative;
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
-  height: 30px;
   align-items: center;
+  border-bottom: 1px #dee1e7 solid;
+  padding: 10px 0;
 }
 
 .logoutDiv:hover {
@@ -176,4 +178,47 @@
 
 .ico:hover {
   color: #c5efef;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  color: teal;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 22px;
+}
+
+.navTitle {
+  font-size: 22px;
+  font-family: BlenderPro-Bold, sans-serif;
+  color: #097171;
+}
+
+.navLink {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px #dee1e7 solid;
+  font-size: 20px;
+  letter-spacing: 0.05em;
+  font-family: BlenderPro-Bold, sans-serif;
+  color: #097171;
+  transition: 100ms;
+}
+
+.navIco {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.navLink:hover {
+  text-decoration: underline;
+}
+
+.navLink:active {
+  padding-top: 5px;
+  transition: 0ms;
 }

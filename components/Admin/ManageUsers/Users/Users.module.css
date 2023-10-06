@@ -1,0 +1,84 @@
+.listTitleRow {
+  position: relative;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  border-bottom: 1px rgb(222, 225, 231) solid;
+}
+
+.listTitleId {
+  display: flex;
+  justify-content: end;
+  width: 75px;
+  font-size: 18px;
+}
+
+.listTitleUsername {
+  display: flex;
+  justify-content: end;
+  width: 500px;
+  font-size: 18px;
+}
+
+.listTitleEmail {
+  display: flex;
+  justify-content: end;
+  width: 500px;
+  font-size: 18px;
+}
+
+.listTitleRole {
+  display: flex;
+  justify-content: end;
+  width: 300px;
+  font-size: 18px;
+}
+
+.listTitleOrders {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  font-size: 18px;
+}
+
+.listRow {
+  position: relative;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  border-bottom: 1px rgb(222, 225, 231) solid;
+}
+
+.listId {
+  display: flex;
+  justify-content: end;
+  width: 75px;
+}
+
+.listUsername {
+  display: flex;
+  justify-content: end;
+  width: 500px;
+}
+
+.listEmail {
+  display: flex;
+  justify-content: end;
+  width: 500px;
+}
+
+.listRole {
+  display: flex;
+  justify-content: end;
+  width: 300px;
+}
+
+.listOrders {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+}

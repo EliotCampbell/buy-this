@@ -1,5 +1,5 @@
 import React from 'react'
-import { linksArr } from '@/app/admin/linksArr'
+import { linksArr } from '@/components/Admin/linksArr'
 import classes from './page.module.css'
 
 const AdministrationPage = ({ params }) => {
