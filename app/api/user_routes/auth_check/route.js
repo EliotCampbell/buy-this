@@ -3,13 +3,15 @@ import { generateJwt, verifyJwt } from '@/utils'
 import { User } from '@/models/models'
 
 export const GET = async (request) => {
+  console.log('kkkkkk')
   try {
     const token = request.cookies.get('token')?.value
+    console.log('!!!' + token)
     if (!token) {
       return NextResponse.json({
         ok: false,
         message: 'Not authorized',
-        dataObject: {}
+        dataObject: { token }
       })
     }
     const payload = await verifyJwt(token)

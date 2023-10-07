@@ -48,79 +48,79 @@
 
 .tableTitleId {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 75px;
   font-size: 18px;
 }
 
 .tableId {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 75px;
 }
 
 .tableTitleDate {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 200px;
   font-size: 18px;
 }
 
 .tableDate {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 200px;
 }
 
 .tableTitleStatus {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 150px;
   font-size: 18px;
 }
 
 .tableStatus {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 150px;
 }
 
 .tableTitleProductsCount {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 200px;
   font-size: 18px;
 }
 
 .tableProductsCount {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 200px;
 }
 
 .tableTitleCustomer {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   flex-grow: 1;
   font-size: 18px;
 }
 
 .tableCustomer {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   flex-grow: 1;
 }
 
 .tableTitleAmount {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 125px;
   font-size: 18px;
 }
 
 .tableAmount {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 125px;
 }
 
@@ -176,39 +176,39 @@
   font-size: 16px;
   width: 300px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .orderDetailsName {
   width: 300px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .orderDetailsTitleQuantity {
   font-size: 16px;
   display: flex;
   width: 100%;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .orderDetailsQuantity {
   display: flex;
   width: 100%;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .orderDetailsTitlePrice {
   font-size: 16px;
   display: flex;
   width: 200px;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .orderDetailsPrice {
   display: flex;
   width: 200px;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .shippingInfoContainer {
@@ -236,6 +236,6 @@
 
 .addressText {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   padding: 1px 0;
 }

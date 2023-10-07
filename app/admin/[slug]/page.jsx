@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { linksArr } from '@/components/Admin/linksArr'
 import classes from './page.module.css'
