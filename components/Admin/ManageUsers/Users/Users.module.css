@@ -10,35 +10,35 @@
 
 .listTitleId {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 75px;
   font-size: 18px;
 }
 
 .listTitleUsername {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 500px;
   font-size: 18px;
 }
 
 .listTitleEmail {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 500px;
   font-size: 18px;
 }
 
 .listTitleRole {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 300px;
   font-size: 18px;
 }
 
 .listTitleOrders {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 100%;
   font-size: 18px;
 }
@@ -55,30 +55,30 @@
 
 .listId {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 75px;
 }
 
 .listUsername {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 500px;
 }
 
 .listEmail {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 500px;
 }
 
 .listRole {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 300px;
 }
 
 .listOrders {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 100%;
 }

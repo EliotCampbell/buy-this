@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 const { Product, Specification, Brand } = require('@/models/models')
+export const dynamic = 'force-dynamic'
 
 export const GET = async (req) => {
   try {

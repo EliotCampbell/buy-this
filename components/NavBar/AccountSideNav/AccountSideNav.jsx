@@ -19,7 +19,6 @@ const AccountSideNav = ({ payload }) => {
   useEffect(() => {
     checkAuthToken().then((data) => {
       setUserInfo(data.dataObject)
-      console.log(data)
     })
   }, [])
   const logoutHandler = async () => {

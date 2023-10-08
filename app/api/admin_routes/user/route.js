@@ -1,5 +1,6 @@
-import { Order, User } from '@/models/models'
 import { NextResponse } from 'next/server'
+import { Order, User } from '@/models/models'
+export const dynamic = 'force-dynamic'
 
 export const GET = async () => {
   try {

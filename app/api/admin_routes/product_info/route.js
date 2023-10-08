@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-
-const { Specification, Product } = require('@/models/models')
+import { Specification, Product } from '@/models/models'
 
 export const POST = async (request) => {
   try {

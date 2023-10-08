@@ -87,13 +87,13 @@
 
 .quantitySection {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 23%;
 }
 
 .priceSection {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 23%;
 }
 
@@ -118,7 +118,7 @@
 
 .sumSection {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   color: teal;
   font-size: 20px;
   font-family: BlenderPro-Bold, sans-serif;

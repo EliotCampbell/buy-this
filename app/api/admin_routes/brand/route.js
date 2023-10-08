@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-
-const { Brand } = require('@/models/models')
+import { Brand } from '@/models/models'
+export const dynamic = 'force-dynamic'
 
 export const POST = async (req) => {
   try {

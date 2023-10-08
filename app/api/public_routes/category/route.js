@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { Category } from '@/models/models'
+export const dynamic = 'force-dynamic'
 
 export const GET = async () => {
   try {

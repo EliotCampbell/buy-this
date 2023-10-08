@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { writeFile } from 'fs/promises'
-const { Product, ProductsInfo, Category, Brand } = require('@/models/models')
+import { Product, Specification, Category, Brand } from '@/models/models'
 const uuid = require('uuid')
 
 export const POST = async (request) => {
@@ -91,7 +91,7 @@ export const POST = async (request) => {
 
     if (info) {
       JSON.parse(info).forEach((i) => {
-        ProductsInfo.create({
+        Specification.create({
           title: i.title,
           description: i.description,
           deviceId: newDevice.id
