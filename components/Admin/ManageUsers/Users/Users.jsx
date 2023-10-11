@@ -18,7 +18,7 @@ const Users = () => {
       </div>
       {usersList.map((user) => (
         <div className={classes.listRow} key={user.value.id}>
-          <p className={classes.listId}>id:{user.value.id}</p>
+          <p className={classes.listId}>{user.value.id}</p>
           <p className={classes.listUsername}>{user.value.username}</p>
           <p className={classes.listEmail}>{user.value.email}</p>
           <p className={classes.listRole}> {user.value.role}</p>

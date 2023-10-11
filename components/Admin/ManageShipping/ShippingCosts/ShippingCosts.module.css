@@ -1,0 +1,101 @@
+.listTitleRow {
+  width: 100%;
+  position: relative;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  border-bottom: 1px rgb(222, 225, 231) solid;
+}
+
+.listTitleId {
+  display: flex;
+  justify-content: flex-end;
+  width: 75px;
+  font-size: 18px;
+}
+
+.listTitleCountry {
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
+  font-size: 18px;
+}
+
+.listTitleCity {
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
+  font-size: 18px;
+}
+
+.listTitleArea {
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
+  font-size: 18px;
+}
+
+.listTitleShippingCost {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  font-size: 18px;
+}
+
+.listRow {
+  position: relative;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  border-bottom: 1px rgb(222, 225, 231) solid;
+}
+
+.listId {
+  display: flex;
+  justify-content: flex-end;
+  width: 75px;
+}
+
+.listCountry {
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
+}
+
+.listCountry {
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
+}
+.listCity {
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
+}
+.listArea {
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
+}
+.listShippingCost {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.removeIco {
+  margin-left: 5px;
+  color: teal;
+  padding: 4px;
+  height: 26px;
+  width: 26px;
+}
+
+.removeIco:hover {
+  cursor: pointer;
+  color: red;
+  background-color: white;
+}

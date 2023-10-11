@@ -90,6 +90,8 @@ const ShippingCost = sequelize.define('shipping_costs', {
     allowNull: false
   },
   country: { type: DataTypes.STRING, allowNull: false },
+  city: { type: DataTypes.STRING },
+  area: { type: DataTypes.STRING },
   shippingCost: { type: DataTypes.FLOAT, allowNull: false }
 })
 

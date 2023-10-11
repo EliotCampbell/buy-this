@@ -3,6 +3,7 @@ import {
   fetchAllBrands,
   fetchAllCategories,
   fetchAllProducts,
+  fetchAllShippingCosts,
   fetchProductById
 } from '@/http/fetchers/fetchers'
 import { fetchAllUsers } from '@/http/admin/users'
@@ -15,16 +16,24 @@ export const useAdminListsStore = create((set) => ({
   specificationsList: [],
   usersList: [],
   ordersList: [],
-  shippingCostList: [],
+  shippingCostsList: [],
   fetchAll: async () => {
     await Promise.all([
       fetchAllCategories(),
       fetchAllBrands(),
       fetchAllProducts({ order: '[["name", "ASC"]]' }),
       fetchAllUsers(),
-      fetchAllOrders()
+      fetchAllOrders(),
+      fetchAllShippingCosts()
     ]).then(
-      ([categoriesData, brandsData, productsData, usersData, ordersData]) => {
+      ([
+        categoriesData,
+        brandsData,
+        productsData,
+        usersData,
+        ordersData,
+        shippingCostsData
+      ]) => {
         set(() => ({
           categoriesList: categoriesData.dataObject.categories.map((el) => ({
             value: el.id,
@@ -45,7 +54,13 @@ export const useAdminListsStore = create((set) => ({
           ordersList: ordersData.dataObject.orders.map((el) => ({
             value: el,
             label: el.name
-          }))
+          })),
+          shippingCostsList: shippingCostsData.dataObject.shippingCosts.map(
+            (el) => ({
+              value: el,
+              label: el.name
+            })
+          )
         }))
       }
     )
@@ -94,6 +109,16 @@ export const useAdminListsStore = create((set) => ({
     await fetchAllUsers().then((r) =>
       set(() => ({
         usersList: r.dataObject.users.map((el) => ({
+          value: el,
+          label: el.username
+        }))
+      }))
+    )
+  },
+  fetchShippingCostsList: async () => {
+    await fetchAllShippingCosts().then((r) =>
+      set(() => ({
+        shippingCostsList: r.shippingCosts.users.map((el) => ({
           value: el,
           label: el.username
         }))

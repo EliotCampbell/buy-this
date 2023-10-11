@@ -45,3 +45,15 @@ export const fetchProductById = async (id) => {
     console.log(e)
   }
 }
+
+export const fetchAllShippingCosts = async () => {
+  try {
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_REACT_APP_API_URL +
+        'api/public_routes/shipping_cost/'
+    )
+    return await res.json()
+  } catch (e) {
+    console.log(e)
+  }
+}
