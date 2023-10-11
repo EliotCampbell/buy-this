@@ -22,9 +22,7 @@ const Users = () => {
           <p className={classes.listUsername}>{user.value.username}</p>
           <p className={classes.listEmail}>{user.value.email}</p>
           <p className={classes.listRole}> {user.value.role}</p>
-          <p className={classes.listOrders}>
-            orders count:{user.value.orders.length}
-          </p>
+          <p className={classes.listOrders}>{user.value.orders.length}</p>
         </div>
       ))}
     </>

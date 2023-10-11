@@ -118,9 +118,9 @@ export const useAdminListsStore = create((set) => ({
   fetchShippingCostsList: async () => {
     await fetchAllShippingCosts().then((r) =>
       set(() => ({
-        shippingCostsList: r.shippingCosts.users.map((el) => ({
+        shippingCostsList: r.dataObject.shippingCosts.map((el) => ({
           value: el,
-          label: el.username
+          label: el.country
         }))
       }))
     )

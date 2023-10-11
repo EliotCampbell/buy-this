@@ -28,7 +28,7 @@ export const POST = async (request) => {
           el.product.onSale
             ? el.product.discountPrice * el.quantity + acc
             : el.product.price * el.quantity + acc,
-        1.99
+        shippingCost.dataValues.shippingCost
       )
     ).toFixed(2)
 
@@ -45,7 +45,8 @@ export const POST = async (request) => {
       city: data.city,
       country: data.country,
       amount: sum,
-      productsQuantity: quantity
+      productsQuantity: quantity,
+      shippingCost: shippingCost.dataValues.shippingCost
     })
     const orderProduct = await OrderProduct.bulkCreate(
       cart.map((cartProduct) => ({
@@ -61,7 +62,6 @@ export const POST = async (request) => {
       dataObject: { order, orderProduct }
     })
   } catch (error) {
-    console.log(error)
     return NextResponse.json({
       ok: false,
       message: 'Error',
@@ -69,24 +69,3 @@ export const POST = async (request) => {
     })
   }
 }
-
-/*
-Promise.all(itemsToUpdate.map(async (item) => {
-  try {
-    const { id, count, price } = item;
-    const updatedItem = await Item.findByPk(id);
-
-    if (updatedItem) {
-      // Update the fields individually
-      updatedItem.count = count;
-      updatedItem.price = price;
-
-      await updatedItem.save();
-      console.log(`Item with ID ${id} updated successfully.`);
-    } else {
-      console.log(`Item with ID ${id} not found.`);
-    }
-  } catch (error) {
-    console.error(`Error updating item with ID ${item.id}:`, error);
-  }
-}))*/

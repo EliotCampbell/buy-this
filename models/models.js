@@ -68,7 +68,14 @@ const Order = sequelize.define('order', {
     defaultValue: 'new',
     allowNull: false
   },
-  productsQuantity: { type: DataTypes.INTEGER, allowNull: false }
+  productsQuantity: { type: DataTypes.INTEGER, allowNull: false },
+  trackingCode: { type: DataTypes.STRING },
+  shippingCost: { type: DataTypes.FLOAT, allowNull: false },
+  paymentStatus: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  }
 })
 
 const OrderProduct = sequelize.define('order_product', {

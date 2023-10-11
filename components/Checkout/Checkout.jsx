@@ -13,6 +13,7 @@ const Checkout = () => {
   const [cartProducts, setCartProducts] = useState([])
   const [user, setUser] = useState([])
   const [checkoutForm, setCheckoutForm] = useState({})
+  const [shippingCost, setShippingCost] = useState(0)
   useEffect(() => {
     checkAuthToken()
       .then((data) => {
@@ -32,8 +33,6 @@ const Checkout = () => {
       0
     )
   ).toFixed(2)
-
-  const shippingCost = 1.99
 
   const totalCost = Number.parseFloat(
     cartProducts.reduce(
@@ -103,6 +102,7 @@ const Checkout = () => {
           setCheckoutForm={setCheckoutForm}
           productsCost={productsCost}
           shippingCost={shippingCost}
+          setShippingCost={setShippingCost}
           totalCost={totalCost}
         />
       )}

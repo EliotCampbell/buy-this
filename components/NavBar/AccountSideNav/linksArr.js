@@ -9,31 +9,26 @@ export const linksArr = [
   {
     ico: <FiUser />,
     linkName: 'Account',
-    path: '',
-    page: <ManageCategories />
+    path: '/account'
   },
   {
     ico: <FiPackage />,
     linkName: 'Orders',
-    path: '',
-    page: <ManageBrands />
+    path: ''
   },
   {
     ico: <FiSend />,
     linkName: 'Address',
-    path: '',
-    page: <ManageProducts />
+    path: ''
   },
   {
     ico: <FiFileText />,
     linkName: 'Personal information',
-    path: '',
-    page: <ManageSpecifications />
+    path: ''
   },
   {
     ico: <FiLock />,
     linkName: 'Password',
-    path: '',
-    page: <ManageUsers />
+    path: ''
   }
 ]

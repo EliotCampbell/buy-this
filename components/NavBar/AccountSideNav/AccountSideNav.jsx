@@ -47,7 +47,7 @@ const AccountSideNav = ({ payload }) => {
                 {linksArr.map((el) => (
                   <Link
                     key={el.path}
-                    href={'/account/' + el.path}
+                    href={el.path}
                     className={classes.navLink}
                     onClick={() => setAccountSwitcher(false)}
                   >

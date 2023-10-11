@@ -1,6 +1,6 @@
 export const createShippingCost = async (formData) => {
   try {
-    await fetch('http://localhost:3000/api/admin_routes/shipping_costs', {
+    await fetch('http://localhost:3000/api/admin_routes/shipping_cost', {
       method: 'POST',
       body: formData
     }).then((res) => res.json())
@@ -11,7 +11,7 @@ export const createShippingCost = async (formData) => {
 
 export const updateShippingCost = async (id, formData) => {
   try {
-    await fetch('http://localhost:3000/api/admin_routes/shipping_costs/' + id, {
+    await fetch('http://localhost:3000/api/admin_routes/shipping_cost/' + id, {
       method: 'PATCH',
       body: formData
     }).then((res) => res.json())
@@ -22,7 +22,7 @@ export const updateShippingCost = async (id, formData) => {
 
 export const deleteShippingCost = async (id) => {
   try {
-    await fetch('http://localhost:3000/api/admin_routes/shipping_costs/' + id, {
+    await fetch('http://localhost:3000/api/admin_routes/shipping_cost/' + id, {
       method: 'DELETE'
     }).then((res) => res.json())
   } catch (error) {

@@ -18,7 +18,7 @@ const CheckoutConfirm = ({
   const checkoutHandler = () =>
     checkout({
       ...checkoutForm,
-      country: checkoutForm.country.value
+      country: checkoutForm.country.value.country
     }).then((data) => {
       if (data.ok) {
         setStep('success')
@@ -77,7 +77,7 @@ const CheckoutConfirm = ({
             <p className={classes.checkoutData}>{checkoutForm.address}</p>
             <p
               className={classes.checkoutData}
-            >{`${checkoutForm.city}, ${checkoutForm.country.value}`}</p>
+            >{`${checkoutForm.city}, ${checkoutForm.country.value.country}`}</p>
           </div>
         </div>
         <SummaryShoppingCart cartProducts={cartProducts} />

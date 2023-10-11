@@ -1,3 +1,13 @@
+.inputsRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.verticalSplitter {
+  min-height: 100%;
+  min-width: 20px;
+}
+
 .listTitleRow {
   width: 100%;
   position: relative;
@@ -86,12 +96,24 @@
   justify-content: flex-end;
   width: 100%;
 }
+
+.icoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.createIco {
+  min-height: 26px;
+  min-width: 26px;
+}
+
 .removeIco {
   margin-left: 5px;
-  color: teal;
   padding: 4px;
-  height: 26px;
-  width: 26px;
+  min-height: 26px;
+  min-width: 26px;
 }
 
 .removeIco:hover {

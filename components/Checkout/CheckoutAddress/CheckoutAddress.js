@@ -1,10 +1,13 @@
-import React from 'react'
+'use client'
+
+import React, { useEffect } from 'react'
 import classes from '@/components/Checkout/Checkout.module.css'
 import AdminInput from '@/components/UI/AdminInputs/AdminInput/AdminInput'
 import AdminRadio from '@/components/UI/AdminInputs/AdminRadio/AdminRadio'
 import AdminReactSelect from '@/components/UI/AdminInputs/AdminReactSelect/AdminReactSelect'
 import Button from '@/components/UI/Button/Button'
 import SummaryBlock from '@/components/Checkout/SummaryBlock/SummaryBlock'
+import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 
 const CheckoutAddress = ({
   setStep,
@@ -14,14 +17,31 @@ const CheckoutAddress = ({
   setCheckoutForm,
   productsCost,
   shippingCost,
-  totalCost
+  totalCost,
+  setShippingCost
 }) => {
   const regExp = /^\+[0-9]*$/
+  const { shippingCostsList, fetchShippingCostsList } = useAdminListsStore(
+    (state) => ({
+      shippingCostsList: state.shippingCostsList,
+      fetchShippingCostsList: state.fetchShippingCostsList
+    })
+  )
+  useEffect(() => {
+    const fetch = async () => await fetchShippingCostsList()
+    fetch().then()
+  }, [])
   return (
     <div className={classes.stepOverview}>
       <div className={classes.formWrapper}>
         <h1>PERSONAL INFORMATION & ADDRESS</h1>
-        <form className={classes.form} onSubmit={() => setStep('payment')}>
+        <form
+          className={classes.form}
+          onSubmit={(event) => {
+            event.preventDefault()
+            setStep('payment')
+          }}
+        >
           <div className={classes.formTitle}>
             <p className={classes.formTitleText}>CONTACTS</p>
           </div>
@@ -141,12 +161,14 @@ const CheckoutAddress = ({
             <AdminReactSelect
               required={true}
               label={'Country'}
-              options={[{ label: 'Germany', value: 'Germany' }]}
+              options={shippingCostsList}
               placeholder={'Germany...'}
               value={checkoutForm.country}
-              onChange={(option) =>
+              onChange={(option) => {
+                console.log(option.value.shippingCost)
                 setCheckoutForm({ ...checkoutForm, country: option })
-              }
+                setShippingCost(option.value.shippingCost)
+              }}
             />
           </div>
           <div className={classes.horizontalSplitter} />
