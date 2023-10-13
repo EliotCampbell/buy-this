@@ -3,7 +3,10 @@ import classes from './ProductDetails.module.css'
 import ToCartBlock from '@/components/Shop/ProductDetails/ToCartBlock/ToCartBlock'
 import BreadCrumbs from '../../UI/BreadCrumbs/BreadCrumbs'
 import { Brand, Product, Specification } from '@/models/models'
-import ProductContent from '@/components/Shop/ProductDetails/ProductContent/ProductContent'
+import Description from '@/components/Shop/ProductDetails/Description/Description'
+import Specifications from '@/components/Shop/ProductDetails/Specifications/Specifications'
+import RatingsComments from '@/components/Shop/ProductDetails/RatingsComments/RatingsComments'
+import HorizontalMenu from '@/components/UI/HorizontalMenu/HorizontalMenu'
 
 const ProductDetails = async ({ productId }) => {
   const product = await Product.findOne({
@@ -15,6 +18,17 @@ const ProductDetails = async ({ productId }) => {
   }).then((data) => {
     return data.toJSON()
   })
+  const menu = [
+    {
+      title: 'DESCRIPTION',
+      component: <Description description={product.description} />
+    },
+    {
+      title: 'SPECIFICATIONS',
+      component: <Specifications specifications={product.info} />
+    },
+    { title: 'COMMENTS & RATINGS', component: <RatingsComments /> }
+  ]
 
   return (
     <>
@@ -67,7 +81,7 @@ const ProductDetails = async ({ productId }) => {
             </div>
           </div>
         </div>
-        <ProductContent product={product} />
+        <HorizontalMenu menu={menu} />
       </div>
     </>
   )

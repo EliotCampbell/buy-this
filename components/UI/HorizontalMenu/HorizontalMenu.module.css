@@ -1,0 +1,51 @@
+.productContentChangers {
+  display: flex;
+  padding-top: 40px;
+}
+
+.contentHeaderDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border-bottom: 4px #d3d3d3 solid;
+}
+
+.selectedContentHeaderDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border-bottom: 4px teal solid;
+}
+
+.splitter {
+  height: 40px;
+  width: 50px;
+  border-bottom: 4px #d3d3d3 solid;
+}
+
+.contentHeaderText {
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  color: teal;
+}
+
+.contentHeaderText:hover {
+  cursor: pointer;
+}
+
+.filler {
+  height: 40px;
+  flex-grow: 1;
+  border-bottom: 4px #d3d3d3 solid;
+}
+
+.content {
+  padding-top: 20px;
+}
+
+.contentHeaderWrapper {
+  display: flex;
+}

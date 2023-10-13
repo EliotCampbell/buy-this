@@ -18,14 +18,9 @@
   padding: 5px 6px 0 6px;
   font-family: BlenderPro-Bold, sans-serif;
   font-size: 13px;
-  color: teal;
   background-color: white;
   border-radius: 3px;
   z-index: 1;
-}
-
-.disabledLabel {
-  color: #dee1e7;
 }
 
 .input {
@@ -33,7 +28,7 @@
   display: flex;
   align-items: center;
   background-color: transparent;
-  color: teal;
+  color: #097171;
   font-size: 18px;
   font-family: BlenderPro-Bold, sans-serif;
   flex-grow: 1;
@@ -44,7 +39,7 @@
 }
 
 .disabledInput {
-  color: #dee1e7;
+  background-color: #f1f1f1;
 }
 
 .disabledInput::placeholder {

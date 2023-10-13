@@ -73,7 +73,11 @@ export const middleware = async (request) => {
     }
   }
   // USER routes
-  else if (request.nextUrl.pathname.startsWith('/checkout')) {
+  else if (
+    request.nextUrl.pathname.startsWith('/checkout') ||
+    request.nextUrl.pathname.startsWith('/account') ||
+    request.nextUrl.pathname.startsWith('/cart')
+  ) {
     try {
       if (payload?.id) NextResponse.next()
       else {

@@ -20,3 +20,13 @@ export const verifyJwt = async (token) => {
     return null
   }
 }
+
+export const getFormData = async (request) => {
+  const objectData = {}
+  await request.formData().then((data) => {
+    for (const [key, value] of data.entries()) {
+      objectData[key] = value
+    }
+  })
+  return objectData
+}

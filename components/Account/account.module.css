@@ -3,3 +3,8 @@
   width: 1440px;
   padding-top: 40px;
 }
+
+.userInfo {
+  font-family: BlenderPro-Bold, sans-serif;
+  padding-top: 10px;
+}

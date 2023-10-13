@@ -1,0 +1,89 @@
+.listTitleRow {
+  position: relative;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  margin-top: 20px;
+  border-bottom: 1px rgb(222, 225, 231) solid;
+}
+
+.listRow {
+  position: relative;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  border-bottom: 1px rgb(222, 225, 231) solid;
+  flex-direction: row;
+}
+
+.listTitleId {
+  width: 75px;
+}
+
+.listTitleDate {
+  display: flex;
+  justify-content: flex-end;
+  width: 250px;
+}
+
+.listTitleQuantity {
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
+}
+
+.listTitleStatus {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.listTitleAmount {
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
+}
+
+.listTitleDetails {
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
+}
+
+.listId {
+  width: 75px;
+}
+
+.listDate {
+  display: flex;
+  justify-content: flex-end;
+  width: 250px;
+}
+
+.listQuantity {
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
+}
+
+.listStatus {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.listAmount {
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
+}
+
+.listDetails {
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
+}
