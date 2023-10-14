@@ -1,22 +1,30 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AdminInput from '@/components/UI/AdminInputs/AdminInput/AdminInput'
 import Button from '@/components/UI/Button/Button'
 import { patchPersonalData } from '@/http/user/personalData'
+import { useRouter } from 'next/navigation'
 
 const PersonalInformation = ({ userInfo = null }) => {
+  const router = useRouter()
   const handleSubmit = async (event) => {
     event.preventDefault()
     const formData = new FormData(event.target)
-    await patchPersonalData(formData)
+    await patchPersonalData(formData).then(
+      (data) => data.ok && router.refresh()
+    )
   }
-  const [form, setForm] = useState({
-    email: userInfo.email,
-    address: userInfo.address,
-    postalCode: userInfo.postalCode,
-    country: userInfo.country,
-    phoneNumber: userInfo.phoneNumber
-  })
+  useEffect(() => {
+    setForm({
+      email: userInfo.email,
+      address: userInfo.address,
+      postalCode: userInfo.postalCode,
+      city: userInfo.city,
+      country: userInfo.country,
+      phoneNumber: userInfo.phoneNumber
+    })
+  }, [userInfo])
+  const [form, setForm] = useState({})
   return (
     <form onSubmit={(event) => handleSubmit(event)}>
       <AdminInput
@@ -24,6 +32,14 @@ const PersonalInformation = ({ userInfo = null }) => {
         value={form.email}
         label={'Your email address'}
         onChange={(event) => setForm({ ...form, email: event.target.value })}
+      />
+      <AdminInput
+        value={form.phoneNumber}
+        label={'Your phone number'}
+        name={'phoneNumber'}
+        onChange={(event) =>
+          setForm({ ...form, phoneNumber: event.target.value })
+        }
       />
       <AdminInput
         value={form.address}
@@ -50,14 +66,6 @@ const PersonalInformation = ({ userInfo = null }) => {
         label={'Your country'}
         name={'country'}
         onChange={(event) => setForm({ ...form, country: event.target.value })}
-      />
-      <AdminInput
-        value={form.phoneNumber}
-        label={'Your phone number'}
-        name={'phoneNumber'}
-        onChange={(event) =>
-          setForm({ ...form, phoneNumber: event.target.value })
-        }
       />
       <Button>SAVE</Button>
     </form>

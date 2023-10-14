@@ -85,8 +85,8 @@ export const useAdminListsStore = create((set) => ({
       }))
     })
   },
-  fetchProductsList: async () => {
-    await fetchAllProducts({ order: '[["name", "ASC"]]' }).then((r) => {
+  fetchProductsList: async (query = { order: '[["name", "ASC"]]' }) => {
+    await fetchAllProducts(query).then((r) => {
       set(() => ({
         productsList: r.dataObject.products.map((el) => ({
           value: el,

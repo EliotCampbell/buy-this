@@ -42,8 +42,9 @@
 }
 
 .ButtonLight:hover {
+  border: 1px teal solid;
+  transition: 0.3s;
   cursor: pointer;
-  background-color: #f2fafa;
 }
 
 .ButtonLight:active {

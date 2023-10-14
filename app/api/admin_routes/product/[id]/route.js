@@ -2,50 +2,16 @@ import { NextResponse } from 'next/server'
 import fs from 'fs'
 const uuid = require('uuid')
 import { writeFile } from 'fs/promises'
+import { getFormData } from '@/utils'
 const { Product, Category, Specification, Brand } = require('@/models/models')
 
-export const PUT = async (request, { params }) => {
+export const PATCH = async (request, { params }) => {
   try {
     const id = params.id
-    const formData = await request.formData()
-    const name = formData.get('name')
-    const price = formData.get('price')
-    const brandId = formData.get('brandId')
-    const categoryId = formData.get('categoryId')
-    const description = formData.get('description')
-    //const info = formData.get('info')
-    const highlight = formData.get('highlight')
-    const hotDeal = formData.get('hotDeal')
-    const img = formData.get('img')
-    const onSale = formData.get('onSale')
-    const discountPrice = formData.get('sellPrice')
-    const inStock = formData.get('inStock')
-    if (
-      !id ||
-      !name ||
-      !price ||
-      !brandId ||
-      !categoryId ||
-      !description ||
-      !img
-    ) {
-      return NextResponse.json({
-        ok: false,
-        message: 'Not all fields provided',
-        dataObject: {
-          id,
-          name,
-          price,
-          brandId,
-          categoryId,
-          description,
-          img
-        }
-      })
-    }
+    const formData = await getFormData(request)
     const oldProduct = await Product.findByPk(id)
-    const foundBrand = await Brand.findByPk(brandId)
-    const foundCategory = await Category.findByPk(categoryId)
+    const foundBrand = await Brand.findByPk(formData.brandId)
+    const foundCategory = await Category.findByPk(formData.categoryId)
     if (!oldProduct) {
       return NextResponse.json({
         ok: false,
@@ -58,7 +24,7 @@ export const PUT = async (request, { params }) => {
         ok: false,
         message: 'This category not found',
         dataObject: {
-          newDevice: { name, price, brandId, categoryId, description }
+          newDevice: formData
         }
       })
     }
@@ -67,50 +33,30 @@ export const PUT = async (request, { params }) => {
         ok: false,
         message: 'This brand not found',
         dataObject: {
-          newDevice: { name, price, brandId, categoryId, description }
+          newDevice: formData
         }
       })
     }
-    console.log(oldProduct.dataValues.img)
-    console.log(img)
+    let fileName = oldProduct.img
     if (
-      oldProduct.dataValues.img !== 'noImg.jpg' &&
-      oldProduct.dataValues.img !== img
+      (formData.img.size > 0 && oldProduct.img !== 'noImg.jpg') ||
+      (formData.removeImg && oldProduct.img !== 'noImg.jpg')
     ) {
       await fs.unlink(`public/static/` + oldProduct.img, (err) => {
         err && console.log(err)
       })
     }
 
-    let fileName = 'noImg.jpg'
-
-    if (oldProduct.img === img) {
-      fileName = oldProduct.img
-    }
-
-    if (oldProduct.img !== img && img.size > 0) {
+    if (formData.img.size > 0) {
       fileName = uuid.v4() + '.jpg'
       await writeFile(
         `public/static/${fileName}`,
-        Buffer.from(await img.arrayBuffer())
+        Buffer.from(await formData.img.arrayBuffer())
       )
     }
-
     const data = await Product.update(
-      {
-        name,
-        price,
-        brandId,
-        categoryId,
-        description,
-        img: fileName,
-        highlight,
-        hotDeal,
-        onSale,
-        discountPrice,
-        inStock
-      },
-      { where: { id: id } }
+      { ...formData, img: fileName },
+      { where: { id } }
     )
     const newProduct = await Product.findByPk(id)
     if (data[0] === 1) {

@@ -46,7 +46,6 @@ const ButtonBlock = ({ element, setShowNewProductForm }) => {
           className={classes.editIco}
           onMouseDown={() => {
             setShowNewProductForm(false)
-            console.log(element.value)
             setNewProduct({
               ...newProduct,
               category: {
@@ -64,7 +63,6 @@ const ButtonBlock = ({ element, setShowNewProductForm }) => {
               price: element.value.price,
               description: element.value.description,
               oldProductId: element.value.id,
-              file: element.value.img,
               onSale: element.value.onSale,
               highlight: element.value.highlight,
               hotDeal: element.value.hotDeal,

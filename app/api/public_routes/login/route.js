@@ -13,7 +13,7 @@ export const POST = async (request) => {
         message: 'User not found',
         dataObject: { email }
       })
-    let comparePassword = bcrypt.compareSync(password, user.password)
+    const comparePassword = bcrypt.compareSync(password, user.password)
     if (!comparePassword) {
       return NextResponse.json({
         ok: false,

@@ -1,0 +1,219 @@
+.ico {
+  height: 26px;
+  width: 26px;
+  color: white;
+}
+
+.ico:hover {
+  color: #c5efef;
+}
+
+.logoutIco {
+  transition: 200ms;
+  height: 26px;
+  width: 26px;
+  color: red;
+}
+
+.logoutDiv {
+  width: 100%;
+  transition: 200ms;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.logoutP {
+  transition: 200ms;
+  color: red;
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 20px;
+  padding-left: 10px;
+}
+
+.userTitle {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px #dee1e7 solid;
+  padding: 10px 0;
+}
+
+.logoutDiv:hover {
+  cursor: pointer;
+  transition: 200ms;
+  .logoutIco {
+    color: #00a6a6;
+    transition: 100ms;
+  }
+  .logoutP {
+    color: #00a6a6;
+  }
+  margin-right: -1px;
+}
+
+.logoutDiv:active {
+  margin-right: 0;
+}
+
+.navEl {
+  display: flex;
+  align-items: center;
+  height: 48px;
+}
+
+.mainNavP:hover {
+  text-decoration: underline;
+}
+
+.navP {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  font-family: BlenderPro-Bold, sans-serif;
+  letter-spacing: 0.03em;
+  font-size: 20px;
+  border-bottom: 1px rgba(222, 225, 231, 0.41) solid;
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+}
+
+.navP:hover {
+  text-decoration: underline;
+}
+.sideNavBack {
+  background-color: rgba(51, 51, 51, 0.3);
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  animation-duration: 500ms;
+  animation-name: transition;
+}
+
+@keyframes transition {
+  from {
+    background-color: rgba(51, 51, 51, 0);
+  }
+
+  to {
+    background-color: rgba(51, 51, 51, 0.3);
+  }
+}
+
+.sideNav {
+  height: 100%;
+  width: 580px;
+  background-color: #ffffff;
+  animation-duration: 500ms;
+  animation-name: slideIn;
+  overflow: hidden;
+}
+@keyframes slideIn {
+  from {
+    margin-left: 100%;
+    width: 0;
+  }
+
+  to {
+    margin-left: 0;
+    width: 580px;
+  }
+}
+.exit {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+}
+
+.top {
+  padding-left: 30px;
+  background-color: teal;
+  height: 42px;
+  width: 100%;
+}
+
+.topTextWrapper {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  width: fit-content;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.topText {
+  font-family: BlenderPro-Bold, sans-serif;
+  font-size: 17px;
+  padding-left: 15px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  line-height: 0;
+}
+
+.contentWrapper {
+  padding: 30px 40px;
+  width: 580px;
+}
+
+.ico {
+  height: 26px;
+  width: 26px;
+  color: white;
+}
+
+.ico:hover {
+  color: #c5efef;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  color: teal;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 22px;
+}
+
+.navTitle {
+  font-size: 22px;
+  font-family: BlenderPro-Bold, sans-serif;
+  color: #097171;
+}
+
+.navLink {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px #dee1e7 solid;
+  font-size: 20px;
+  letter-spacing: 0.05em;
+  font-family: BlenderPro-Bold, sans-serif;
+  color: #097171;
+  transition: 100ms;
+}
+
+.navIco {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.navLink:hover {
+  text-decoration: underline;
+}
+
+.navLink:active {
+  padding-top: 5px;
+  transition: 0ms;
+}

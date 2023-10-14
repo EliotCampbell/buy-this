@@ -192,7 +192,7 @@ const ProductUpdateForm = () => {
             />
           </div>
           <AdminFileInput
-            label={'CHANGE PHOTO PHOTO'}
+            label={'CHANGE PHOTO'}
             type={'file'}
             accept={'.png,.jpg'}
             name={'img'}
@@ -200,16 +200,11 @@ const ProductUpdateForm = () => {
               setNewProduct({ ...newProduct, file: e.target.files[0] })
               setPreview(URL.createObjectURL(e.target.files[0]))
             }}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') {
-                updateHandler(event, newProduct.oldProductId).then()
-              }
-            }}
           />
           <Button
             onClick={(event) => {
               event.preventDefault()
-              setNewProduct({ ...newProduct, file: 'noImg.jpg' })
+              setNewProduct({ ...newProduct, removeImg: true })
               setPreview(
                 process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'static/noImg.jpg'
               )

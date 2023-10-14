@@ -6,7 +6,7 @@ export const createProduct = async (formData) =>
 
 export const updateProduct = async (id, formData) =>
   await fetch('http://localhost:3000/api/admin_routes/product/' + id, {
-    method: 'PUT',
+    method: 'PATCH',
     body: formData
   }).then((res) => res.json())
 

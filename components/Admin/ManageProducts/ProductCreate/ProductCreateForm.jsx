@@ -13,7 +13,6 @@ import MessageString from '@/components/UI/MessageString/MessageString'
 import AdminNewTextArea from '@/components/UI/AdminInputs/AdminNewTextArea/AdminNewTextArea'
 import AdminCheckbox from '@/components/UI/AdminInputs/AdminCheckbox/AdminCheckbox'
 import AdminFileInput from '@/components/UI/AdminInputs/AdminFileInput/AdminFileInput'
-import { FaSpinner } from 'react-icons/fa6'
 
 const ProductCreateForm = () => {
   const { categoriesList, brandsList, fetchProductsList } = useAdminListsStore(
@@ -54,7 +53,6 @@ const ProductCreateForm = () => {
           className={classes.form}
           onSubmit={(event) => createHandler(event)}
         >
-          <FaSpinner />
           <AdminInput
             label={'A new product name'}
             placeholder={'Name of the new product...'}

@@ -7,12 +7,12 @@
   display: flex;
   align-items: center;
   border: 1px #dee1e7 solid;
+  color: #333333;
   border-radius: 2px;
-  background-color: #dee1e7;
+  background-color: #f1f1f1;
   justify-content: center;
   font-family: BlenderPro-Bold, sans-serif;
   font-size: 16px;
-  color: teal;
 }
 
 .label:hover {

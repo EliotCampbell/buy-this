@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { Op } from 'sequelize'
 const { Product, Specification, Brand } = require('@/models/models')
 export const dynamic = 'force-dynamic'
 
@@ -10,6 +11,7 @@ export const GET = async (req) => {
     const limit = nextSearchParams.get('limit') || null
     const page = nextSearchParams.get('page') || 1
     const order = nextSearchParams.get('order') || null
+    const search = nextSearchParams.get('search') || ''
     const offset = (page - 1) * (limit || 0)
 
     const whereHandler = () => {
@@ -21,7 +23,7 @@ export const GET = async (req) => {
     }
 
     let products = await Product.findAll({
-      where: { ...whereHandler() },
+      where: { ...whereHandler(), name: { [Op.iLike]: `%${search}%` } },
       include: [
         { model: Specification, as: 'info' },
         { model: Brand, as: 'brand' }

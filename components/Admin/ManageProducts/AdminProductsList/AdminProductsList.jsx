@@ -4,18 +4,17 @@ import { FiCornerDownLeft } from 'react-icons/fi'
 import Image from 'next/image'
 import ProductUpdateForm from '@/components/Admin/ManageProducts/ProductUpdateForm/ProductUpdateForm'
 import React from 'react'
-import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 import { useAdminStore } from '@/store/adminStore/adminStore'
 import ButtonBlock from '@/components/Admin/ManageProducts/AdminProductsList/ButtonBlock/ButtonBlock'
 import InfoBlock from '@/components/Admin/ManageProducts/AdminProductsList/InfoBlock/InfoBlock'
+import { useAdminListsStore } from '@/store/adminStore/adminListsStore'
 
 const AdminProductsList = ({ setShowNewProductForm }) => {
-  const { productsList } = useAdminListsStore((state) => ({
-    productsList: state.productsList
-  }))
-
   const { newProduct } = useAdminStore((state) => ({
     newProduct: state.newProduct
+  }))
+  const { productsList } = useAdminListsStore((state) => ({
+    productsList: state.productsList
   }))
 
   return productsList.map((el) => (

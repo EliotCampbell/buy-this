@@ -27,7 +27,7 @@ const ShoppingCart = ({ cartProducts }) => {
               <p className={classes.cartTitleName}>YOUR CART</p>
               <p className={classes.cartArticle}>
                 {cartProducts.reduce((acc, el) => el.quantity + acc, 0) +
-                  'Articles'}
+                  ' articles'}
               </p>
             </div>
             {cartProducts.length === 0 ? (

@@ -1,9 +1,4 @@
-import ManageCategories from '@/components/Admin/ManageCategories/ManageCategories'
-import ManageBrands from '@/components/Admin/ManageBrands/ManageBrands'
-import ManageSpecifications from '@/components/Admin/ManageSpecifications/ManageSpecifications'
-import ManageProducts from '@/components/Admin/ManageProducts/ManageProducts'
-import ManageUsers from '@/components/Admin/ManageUsers/ManageUsers'
-import { FiFileText, FiLock, FiPackage, FiSend, FiUser } from 'react-icons/fi'
+import { FiFileText, FiLock, FiPackage, FiUser } from 'react-icons/fi'
 
 export const linksArr = [
   {
@@ -14,11 +9,6 @@ export const linksArr = [
   {
     ico: <FiPackage />,
     linkName: 'Orders',
-    path: ''
-  },
-  {
-    ico: <FiSend />,
-    linkName: 'Address',
     path: ''
   },
   {

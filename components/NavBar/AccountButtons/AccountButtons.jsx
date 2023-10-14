@@ -1,13 +1,11 @@
 import React from 'react'
 import classes from './AccountButtons.module.css'
 import AccountSideNav from '@/components/NavBar/AccountSideNav/AccountSideNav'
-import IcoButton from '@/components/UI/IcoButton/IcoButton'
-import Link from 'next/link'
-import { FiTool } from 'react-icons/fi'
 import ShoppingCart from '@/components/NavBar/ShoppingCart/ShoppingCart'
 import { cookies } from 'next/headers'
 import { verifyJwt } from '@/utils'
 import { CartProduct, Product } from '@/models/models'
+import AdminSideNav from '@/components/NavBar/AdminSideNav/AdminSideNav'
 
 const AccountButtons = async () => {
   const nextCookies = cookies()
@@ -39,11 +37,7 @@ const AccountButtons = async () => {
           <div className={classes.splitter}></div>
           {payload.role === 'ADMIN' && (
             <>
-              <IcoButton>
-                <Link href={'/admin'}>
-                  <FiTool className={classes.ico} />
-                </Link>
-              </IcoButton>
+              <AdminSideNav />
               <div className={classes.splitter}></div>
             </>
           )}
