@@ -13,8 +13,27 @@ const Products = ({ products, categories }) => {
   const searchParams = useSearchParams()
   const categoryId = searchParams.get('categoryId')
   const limit = searchParams.get('limit')
-  /*  const orderKey = searchParams.get('orderKey')
-  const orderValue = searchParams.get('orderValue')*/
+  const orderKey = searchParams.get('orderKey')
+  const orderValue = searchParams.get('orderValue')
+
+  const sortOptions = [
+    {
+      label: 'Price ascending',
+      value: { order: "[['name', 'ASC']]" }
+    },
+    {
+      label: 'Price descending',
+      value: { order: "[['name', 'DESC']]" }
+    },
+    {
+      label: 'Name A-Z',
+      value: { orderKey: 'name', orderValue: 'ASC' }
+    },
+    {
+      label: 'Name Z-A',
+      value: { orderKey: 'name', orderValue: 'DESC' }
+    }
+  ]
   return (
     <div className={classes.productsWrapper}>
       <h1>
@@ -46,24 +65,15 @@ const Products = ({ products, categories }) => {
           <div className={classes.orderSelectWrapper}>
             <AdminReactSelect
               label={'Order by'}
-              options={[
-                {
-                  label: 'Price ascending',
-                  value: { orderKey: 'price', orderValue: 'ASC' }
-                },
-                {
-                  label: 'Price descending',
-                  value: { orderKey: 'price', orderValue: 'DESC' }
-                },
-                {
-                  label: 'Name A-Z',
-                  value: { orderKey: 'name', orderValue: 'ASC' }
-                },
-                {
-                  label: 'Name Z-A',
-                  value: { orderKey: 'name', orderValue: 'DESC' }
+              value={
+                orderValue &&
+                orderKey && {
+                  label: sortOptions.find(
+                    (el) => el.value.orderValue === orderValue
+                  ).label
                 }
-              ]}
+              }
+              options={sortOptions}
               isSearchable={false}
               onChange={(option) => addMultiSearchParam(option.value)}
             ></AdminReactSelect>
@@ -72,15 +82,15 @@ const Products = ({ products, categories }) => {
       </div>
       <div className={classes.splitter}></div>
       <div className={classes.products}>
-        {products.rows.length ? (
-          products.rows.map((el) => (
+        {products.products.length ? (
+          products.products.map((el) => (
             <ProductPreviewCard
               productId={el.id}
               brand={el.brand.name}
               productName={el.name}
               productImg={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.img}`}
               productPrice={el.price}
-              discountPrice={el.discountPrice}
+              salePrice={el.salePrice}
               inStock={el.inStock}
               onSale={el.onSale}
               key={el.id}

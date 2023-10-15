@@ -63,7 +63,7 @@ const ProductDetails = async ({ productId }) => {
                 >{`${Number.parseFloat(product.price).toFixed(2)} €`}</p>
                 {product.onSale && (
                   <p className={classes.productPrice}>{`${Number.parseFloat(
-                    product.discountPrice
+                    product.salePrice
                   ).toFixed(2)} €`}</p>
                 )}
               </div>

@@ -21,7 +21,7 @@ export const useAdminListsStore = create((set) => ({
     await Promise.all([
       fetchAllCategories(),
       fetchAllBrands(),
-      fetchAllProducts({ order: '[["name", "ASC"]]' }),
+      fetchAllProducts(),
       fetchAllUsers(),
       fetchAllOrders(),
       fetchAllShippingCosts()

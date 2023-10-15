@@ -166,9 +166,6 @@
   flex-grow: 1;
 }
 
-.inputContainerVerticalSplitter {
-  width: 40px;
-}
 .title {
   font-family: BlenderPro-Bold, sans-serif;
   color: teal;

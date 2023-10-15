@@ -18,7 +18,7 @@ const initialState = {
     onSale: false,
     highlight: false,
     hotDeal: false,
-    discountPrice: '',
+    salePrice: '',
     description: '',
     file: null,
     inStock: 0

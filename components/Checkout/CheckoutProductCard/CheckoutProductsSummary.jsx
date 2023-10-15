@@ -31,7 +31,7 @@ const CheckoutProductsSummary = ({ cartProducts }) => {
             </p>
             <div className={classes.price}>
               {cartProduct.onSale
-                ? `${Number.parseFloat(cartProduct.discountPrice).toFixed(2)} €`
+                ? `${Number.parseFloat(cartProduct.salePrice).toFixed(2)} €`
                 : `${Number.parseFloat(cartProduct.price).toFixed(2)} €`}
             </div>
           </div>

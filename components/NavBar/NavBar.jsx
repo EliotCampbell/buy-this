@@ -23,10 +23,10 @@ const NavBar = async () => {
               COLORS
             </Link>
             <div className={classes.splitter}></div>
-            <Link href={'/brands'} className={classes.navLink}>
+            <Link href={'/store/brands'} className={classes.navLink}>
               BRANDS
             </Link>
-            <Link href={'/sale'} className={classes.navLink}>
+            <Link href={'/store?onSale=true'} className={classes.navLink}>
               SALE %
             </Link>
           </div>

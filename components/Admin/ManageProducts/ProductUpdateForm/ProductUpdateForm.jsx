@@ -134,7 +134,7 @@ const ProductUpdateForm = () => {
             />
             <div className={classes.inputContainerVerticalSplitter}></div>
             <AdminInput
-              value={newProduct.discountPrice}
+              value={newProduct.salePrice}
               placeholder={'29.99...'}
               label={'Input product sell price'}
               name={'sellPrice'}
@@ -144,7 +144,7 @@ const ProductUpdateForm = () => {
                 if (regExp.test(e.target.value) || e.target.value === '')
                   setNewProduct({
                     ...newProduct,
-                    discountPrice: e.target.value
+                    salePrice: e.target.value
                   })
               }}
             />
@@ -229,7 +229,7 @@ const ProductUpdateForm = () => {
             productName={newProduct.name === '' ? 'Name' : newProduct.name}
             productImg={preview}
             productPrice={newProduct.price}
-            discountPrice={newProduct.discountPrice}
+            salePrice={newProduct.salePrice}
             inStock={newProduct.inStock}
             onSale={newProduct.onSale}
           />

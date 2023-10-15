@@ -53,18 +53,18 @@ const Cart = ({ cartProducts }) => {
             <div className={classes.priceSection}>
               <div
                 className={
-                  product.discountPrice ? classes.salePrice : classes.price
+                  product.salePrice ? classes.salePrice : classes.price
                 }
               >
                 {`${Number.parseFloat(
-                  product.discountPrice || product.price
+                  product.salePrice || product.price
                 ).toFixed(2)} €`}
               </div>
             </div>
             <div className={classes.sumSection}>
               {`${Number.parseFloat(
                 product.quantity *
-                  (product.onSale ? product.discountPrice : product.price)
+                  (product.onSale ? product.salePrice : product.price)
               ).toFixed(2)} €`}
             </div>
           </div>

@@ -30,3 +30,11 @@ export const getFormData = async (request) => {
   })
   return objectData
 }
+export const getURLParams = (request) => {
+  const searchParamsObject = {}
+  const nextSearchParams = new URLSearchParams(request.nextUrl.search)
+  for (const [key, value] of nextSearchParams.entries()) {
+    searchParamsObject[key] = value
+  }
+  return searchParamsObject
+}

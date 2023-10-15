@@ -1,41 +1,51 @@
 import { NextResponse } from 'next/server'
 import { Op } from 'sequelize'
+import { getURLParams } from '@/utils'
 const { Product, Specification, Brand } = require('@/models/models')
 export const dynamic = 'force-dynamic'
 
-export const GET = async (req) => {
+export const GET = async (request) => {
   try {
-    const nextSearchParams = new URLSearchParams(req.nextUrl.search)
-    const brandId = nextSearchParams.get('brandId') || null
-    const categoryId = nextSearchParams.get('categoryId') || null
-    const limit = nextSearchParams.get('limit') || null
-    const page = nextSearchParams.get('page') || 1
-    const order = nextSearchParams.get('order') || null
-    const search = nextSearchParams.get('search') || ''
-    const offset = (page - 1) * (limit || 0)
+    const searchParams = getURLParams(request)
+    console.log(searchParams)
 
-    const whereHandler = () => {
-      if (brandId && !categoryId) return { brandId }
-      if (!brandId && categoryId) return { categoryId }
-      if (brandId && categoryId) return { categoryId, brandId }
-      else {
-      }
-    }
+    const whereHandler = () => ({
+      ...(searchParams.search && {
+        name: { [Op.iLike]: `%${searchParams.search}%` }
+      }),
+      ...(searchParams.brandId && {
+        brandId: searchParams.brandId
+      }),
+      ...(searchParams.categoryId && {
+        categoryId: searchParams.categoryId
+      }),
+      ...(searchParams.onSale && {
+        onSale: searchParams.onSale
+      })
+    })
 
-    let products = await Product.findAll({
-      where: { ...whereHandler(), name: { [Op.iLike]: `%${search}%` } },
+    const products = await Product.findAll({
+      where: whereHandler(),
       include: [
         { model: Specification, as: 'info' },
         { model: Brand, as: 'brand' }
       ],
-      limit,
-      page,
-      offset,
-      order: JSON.parse(order)
+      ...(searchParams.limit && { limit: searchParams.limit }),
+      ...(searchParams.page && { page: searchParams.page }),
+      ...(searchParams.limit &&
+        searchParams.page && {
+          offset: `${(searchParams.page - 1) * searchParams.limit}`
+        }),
+      ...(searchParams.orderKey &&
+        searchParams.orderValue && {
+          order: [
+            [searchParams.orderKey || 'id', searchParams.orderValue || 'ASC']
+          ]
+        })
     })
 
     const count = await Product.count({
-      where: { ...whereHandler() }
+      where: whereHandler()
     })
 
     if (count === 0) {

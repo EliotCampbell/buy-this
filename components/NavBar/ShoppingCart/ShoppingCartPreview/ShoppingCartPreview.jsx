@@ -48,13 +48,13 @@ const ProductPreviewCard = ({ cartProduct }) => {
               }
             >
               {`${Number.parseFloat(cartProduct.price).toFixed(2)} €`}
-              {cartProduct.discountPrice && (
+              {cartProduct.salePrice && (
                 <div className={classes.brokenPriceCross}></div>
               )}
             </div>
             {cartProduct.onSale && (
               <p className={classes.salePrice}>
-                {`${Number.parseFloat(cartProduct.discountPrice).toFixed(2)} €`}
+                {`${Number.parseFloat(cartProduct.salePrice).toFixed(2)} €`}
               </p>
             )}
           </div>

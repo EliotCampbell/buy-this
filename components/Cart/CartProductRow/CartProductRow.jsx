@@ -50,20 +50,20 @@ const CartProductRow = ({ product }) => {
         <div className={classes.priceSection}>
           <div className={product.onSale ? classes.brokenPrice : classes.price}>
             {`${Number.parseFloat(product.price).toFixed(2)} €`}
-            {product.discountPrice && (
+            {product.salePrice && (
               <div className={classes.brokenPriceCross}></div>
             )}
           </div>
           {product.onSale && (
             <p className={classes.salePrice}>
-              {`${Number.parseFloat(product.discountPrice).toFixed(2)} €`}
+              {`${Number.parseFloat(product.salePrice).toFixed(2)} €`}
             </p>
           )}
         </div>
         <div className={classes.sumSection}>
           {`${Number.parseFloat(
             product.quantity *
-              (product.onSale ? product.discountPrice : product.price)
+              (product.onSale ? product.salePrice : product.price)
           ).toFixed(2)} €`}
         </div>
       </div>

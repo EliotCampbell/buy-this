@@ -26,7 +26,7 @@ export const POST = async (request) => {
       cart.reduce(
         (acc, el) =>
           el.product.onSale
-            ? el.product.discountPrice * el.quantity + acc
+            ? el.product.salePrice * el.quantity + acc
             : el.product.price * el.quantity + acc,
         shippingCost.dataValues.shippingCost
       )
@@ -51,7 +51,7 @@ export const POST = async (request) => {
     const orderProduct = await OrderProduct.bulkCreate(
       cart.map((cartProduct) => ({
         quantity: cartProduct.quantity,
-        price: cartProduct.product.discountPrice || cartProduct.product.price,
+        price: cartProduct.product.salePrice || cartProduct.product.price,
         productId: cartProduct.productId,
         orderId: order.id
       }))

@@ -18,7 +18,7 @@ const ToCartButton = ({ product, counter }) => {
           addProductToCart(
             product.id,
             counter,
-            product.onSale ? product.discountPrice : product.price
+            product.onSale ? product.salePrice : product.price
           ).then((data) => {
             router.refresh()
             setPopupMessage(data)

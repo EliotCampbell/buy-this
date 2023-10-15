@@ -65,7 +65,7 @@ const ProductCreateForm = () => {
           ></AdminInput>
           <div className={classes.inputContainer}>
             <AdminReactSelect
-              value={newProduct.brand === '' ? null : newProduct.brand}
+              value={newProduct.brand}
               label={'Choose brand'}
               options={brandsList}
               name={'brandId'}
@@ -76,7 +76,7 @@ const ProductCreateForm = () => {
             ></AdminReactSelect>
             <div className={classes.inputContainerVerticalSplitter}></div>
             <AdminReactSelect
-              value={newProduct.category === '' ? null : newProduct.category}
+              value={newProduct.category}
               label={'Choose category'}
               options={categoriesList}
               name={'categoryId'}
@@ -128,7 +128,7 @@ const ProductCreateForm = () => {
             />
             <div className={classes.inputContainerVerticalSplitter}></div>
             <AdminInput
-              value={newProduct.discountPrice}
+              value={newProduct.salePrice}
               placeholder={'29.99...'}
               label={'Input product sale price'}
               name={'salePrice'}
@@ -138,7 +138,7 @@ const ProductCreateForm = () => {
                 if (regExp.test(e.target.value) || e.target.value === '')
                   setNewProduct({
                     ...newProduct,
-                    discountPrice: e.target.value
+                    salePrice: e.target.value
                   })
               }}
             />
@@ -180,6 +180,32 @@ const ProductCreateForm = () => {
               }
               checked={newProduct.hotDeal}
             />
+            <div className={classes.inputContainerVerticalSplitter} />
+            <AdminCheckbox
+              name={'hidden'}
+              label={'Hidden'}
+              onChange={(event) =>
+                setNewProduct({
+                  ...newProduct,
+                  hidden: event.target.checked
+                })
+              }
+              checked={newProduct.hidden}
+            />
+            <div className={classes.inputContainerVerticalSplitter} />
+            <AdminInput
+              value={newProduct.itemCode}
+              placeholder={'Item code...'}
+              label={'Item code'}
+              name={'itemCode'}
+              onChange={(e) => {
+                setMessage(null)
+                setNewProduct({
+                  ...newProduct,
+                  itemCode: e.target.value
+                })
+              }}
+            />
           </div>
           <AdminFileInput
             label={'+ ADD PHOTO'}
@@ -202,11 +228,11 @@ const ProductCreateForm = () => {
           <p className={classes.preview}>Preview</p>
           <ProductPreviewCard
             productId={newProduct.id}
-            brandId={newProduct.brand.value}
+            brandId={newProduct.brand?.value || ''}
             productName={newProduct.name === '' ? 'Name' : newProduct.name}
             productImg={preview}
             productPrice={newProduct.price}
-            discountPrice={newProduct.discountPrice}
+            salePrice={newProduct.salePrice}
             inStock={newProduct.inStock}
             onSale={newProduct.onSale}
           />

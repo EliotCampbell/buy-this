@@ -16,10 +16,10 @@ const User = sequelize.define('user', {
 
 const Product = sequelize.define('product', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  itemCode: { type: DataTypes.STRING, unique: true, allowNull: true },
+  itemCode: { type: DataTypes.STRING, allowNull: true },
   name: { type: DataTypes.STRING, unique: true, allowNull: false },
   price: { type: DataTypes.FLOAT, allowNull: false },
-  discountPrice: { type: DataTypes.FLOAT },
+  salePrice: { type: DataTypes.FLOAT },
   rating: { type: DataTypes.INTEGER, defaultValue: 0 },
   description: { type: DataTypes.TEXT, allowNull: false },
   img: { type: DataTypes.STRING, allowNull: false },

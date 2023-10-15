@@ -8,7 +8,7 @@ const ProductPreviewCard = ({
   productName,
   productImg,
   productPrice,
-  discountPrice,
+  salePrice,
   inStock,
   onSale,
   brand
@@ -42,13 +42,11 @@ const ProductPreviewCard = ({
           <div className={classes.priceWrapper}>
             <div className={onSale ? classes.brokenPrice : classes.price}>
               {`${Number.parseFloat(productPrice).toFixed(2)} €`}
-              {discountPrice && (
-                <div className={classes.brokenPriceCross}></div>
-              )}
+              {salePrice && <div className={classes.brokenPriceCross}></div>}
             </div>
             {onSale && (
               <p className={classes.salePrice}>
-                {`${Number.parseFloat(discountPrice).toFixed(2)} €`}
+                {`${Number.parseFloat(salePrice).toFixed(2)} €`}
               </p>
             )}
           </div>

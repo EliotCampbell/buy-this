@@ -31,5 +31,17 @@ export const useCustomRouter = () => {
     currentParams.set(title, parameter)
     router.push(`${pathname}/?${currentParams}`)
   }
-  return { addSearchParam, setSearchParam, addMultiSearchParam }
+  const removeSearchParam = (title) => {
+    const currentParams = new URLSearchParams(
+      Array.from(searchParams.entries())
+    )
+    currentParams.delete(title)
+    router.push(`${pathname}/?${currentParams}`)
+  }
+  return {
+    addSearchParam,
+    setSearchParam,
+    addMultiSearchParam,
+    removeSearchParam
+  }
 }

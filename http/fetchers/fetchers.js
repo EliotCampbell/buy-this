@@ -11,25 +11,23 @@ export const fetchAllCategories = async () => {
 
 export const fetchAllBrands = async () => {
   try {
-    const res = await fetch(
+    return await fetch(
       process.env.NEXT_PUBLIC_REACT_APP_API_URL + 'api/public_routes/brand'
-    )
-    return await res.json()
-  } catch (e) {
-    console.log(e)
+    ).then((data) => data.json())
+  } catch (error) {
+    console.log(error)
   }
 }
 
 export const fetchAllProducts = async (query) => {
   try {
-    const res = await fetch(
+    return await fetch(
       process.env.NEXT_PUBLIC_REACT_APP_API_URL +
         'api/public_routes/product?' +
         (query && new URLSearchParams(query))
-    )
-    return await res.json()
-  } catch (e) {
-    console.log(e)
+    ).then((data) => data.json())
+  } catch (error) {
+    console.log(error)
   }
 }
 

@@ -1,49 +1,38 @@
 import { NextResponse } from 'next/server'
 import { writeFile } from 'fs/promises'
 import { Product, Specification, Category, Brand } from '@/models/models'
+import { getFormData } from '@/utils'
 const uuid = require('uuid')
 
 export const POST = async (request) => {
   try {
-    const formData = await request.formData()
-    const name = formData.get('name')
-    const price = formData.get('price')
-    const brandId = formData.get('brandId')
-    const categoryId = formData.get('categoryId')
-    const description = formData.get('description')
-    const info = formData.get('info')
-    const highlight = formData.get('highlight')
-    const hotDeal = formData.get('hotDeal')
-    const img = formData.get('img')
-    const onSale = formData.get('onSale')
-    const discountPrice = formData.get('salePrice')
-    const inStock = formData.get('inStock')
-
-    if (!name || !price || !brandId || !categoryId || !description || !img) {
+    const formData = await getFormData(request)
+    console.log(!formData.name)
+    if (
+      !formData.name ||
+      !formData.price ||
+      !formData.brandId ||
+      !formData.categoryId ||
+      !formData.description ||
+      !formData.img
+    )
       return NextResponse.json({
         ok: false,
         message: 'Not all fields provided',
-        dataObject: {
-          name,
-          price,
-          brandId,
-          categoryId,
-          description,
-          img
-        }
+        dataObject: { ...formData }
       })
-    }
     const foundProduct = await Product.findOne({
-      where: { name: name }
+      where: { name: formData.name }
     })
-    const foundBrand = await Brand.findByPk(brandId)
-    const foundCategory = await Category.findByPk(categoryId)
+    const foundBrand = await Brand.findByPk(formData.brandId)
+    const foundCategory = await Category.findByPk(formData.categoryId)
     if (foundProduct !== null) {
       return NextResponse.json({
         ok: false,
-        message: `Product with name "${name}" is already exists`,
+        message: `Product with name "${formData.name}" is already exists`,
         dataObject: {
-          newDevice: { name, price, brandId, categoryId, description }
+          newProduct: { ...formData },
+          foundProduct
         }
       })
     }
@@ -52,7 +41,7 @@ export const POST = async (request) => {
         ok: false,
         message: 'This category not found',
         dataObject: {
-          newDevice: { name, price, brandId, categoryId, description }
+          newDevice: { ...formData }
         }
       })
     }
@@ -61,36 +50,27 @@ export const POST = async (request) => {
         ok: false,
         message: 'This brand not found',
         dataObject: {
-          newDevice: { name, price, brandId, categoryId, description }
+          newDevice: { ...formData }
         }
       })
     }
 
     let fileName = 'noImg.jpg'
-    if (img.size > 0) {
+    if (formData.img.size > 0) {
       fileName = uuid.v4() + '.jpg'
       await writeFile(
         `public/static/${fileName}`,
-        Buffer.from(await img.arrayBuffer())
+        Buffer.from(await formData.img.arrayBuffer())
       )
     }
 
     const newDevice = await Product.create({
-      name,
-      price,
-      brandId,
-      categoryId,
-      description,
-      img: fileName,
-      onSale,
-      discountPrice,
-      highlight,
-      hotDeal,
-      inStock
+      ...formData,
+      img: fileName
     })
 
-    if (info) {
-      JSON.parse(info).forEach((i) => {
+    if (formData.info) {
+      JSON.parse(formData.info).forEach((i) => {
         Specification.create({
           title: i.title,
           description: i.description,
@@ -104,11 +84,11 @@ export const POST = async (request) => {
       message: 'Product created successfully',
       dataObject: { newDevice }
     })
-  } catch (e) {
+  } catch (error) {
     return NextResponse.json({
       ok: false,
       message: 'Error',
-      dataObject: { error: e.message }
+      dataObject: { error: error.message }
     })
   }
 }

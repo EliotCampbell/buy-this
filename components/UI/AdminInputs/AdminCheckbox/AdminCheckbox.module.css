@@ -25,6 +25,10 @@
   border: 1px teal solid;
 }
 
+.labelWide {
+  width: 100%;
+}
+
 .checkbox {
   margin-right: 10px;
 }

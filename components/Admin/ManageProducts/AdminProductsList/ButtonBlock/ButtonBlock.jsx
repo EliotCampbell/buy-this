@@ -66,7 +66,7 @@ const ButtonBlock = ({ element, setShowNewProductForm }) => {
               onSale: element.value.onSale,
               highlight: element.value.highlight,
               hotDeal: element.value.hotDeal,
-              discountPrice: element.value.discountPrice,
+              salePrice: element.value.salePrice,
               inStock: element.value.inStock
             })
             setPreview(

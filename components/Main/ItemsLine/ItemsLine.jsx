@@ -34,7 +34,7 @@ const ItemsLine = ({ title, dark, products }) => {
                   productName={el.name}
                   productImg={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.img}`}
                   productPrice={el.price}
-                  discountPrice={el.discountPrice}
+                  salePrice={el.salePrice}
                   inStock={el.inStock}
                   onSale={el.onSale}
                   key={el.id}

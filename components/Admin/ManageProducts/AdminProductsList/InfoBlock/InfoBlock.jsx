@@ -89,14 +89,14 @@ const InfoBlock = ({ element }) => {
       <div className={classes.priceWrapper}>
         <p
           className={
-            element.value.discountPrice ? classes.brokenPrice : classes.price
+            element.value.salePrice ? classes.brokenPrice : classes.price
           }
         >
           {`${Number.parseFloat(element.value.price).toFixed(2)} €`}
         </p>
-        {element.value.discountPrice && (
+        {element.value.salePrice && (
           <p className={classes.salePrice}>{`${Number.parseFloat(
-            element.value.discountPrice
+            element.value.salePrice
           ).toFixed(2)} €`}</p>
         )}
       </div>

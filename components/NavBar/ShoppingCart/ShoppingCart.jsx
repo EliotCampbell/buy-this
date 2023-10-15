@@ -59,7 +59,7 @@ const ShoppingCart = ({ cartProducts }) => {
                   cartProducts.reduce(
                     (acc, el) =>
                       el.onSale
-                        ? el.discountPrice * el.quantity + acc
+                        ? el.salePrice * el.quantity + acc
                         : el.price * el.quantity + acc,
                     0
                   )
