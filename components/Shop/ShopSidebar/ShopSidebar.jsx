@@ -13,7 +13,7 @@ const ShopSidebar = ({ categories, brands }) => {
   const onSale = searchParams.get('onSale')
   const { setSearchParam, addSearchParam, removeSearchParam } =
     useCustomRouter()
-
+  ;('j')
   return (
     <div className={classes.shopNav}>
       <p className={classes.categories}>CATEGORIES</p>
