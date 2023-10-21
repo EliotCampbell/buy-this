@@ -6,7 +6,7 @@ export const POST = async (request) => {
   try {
     const role = 'USER'
     const formData = await request.formData()
-    const email = formData.get('registration email')
+    const email = formData.get('registration email').toLowerCase()
     const username = formData.get('registration username')
     const password = formData.get('registration password')
     if (!email || !password || !username) {

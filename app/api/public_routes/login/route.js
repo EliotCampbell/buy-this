@@ -6,7 +6,7 @@ import { generateJwt } from '@/utils'
 export const POST = async (request) => {
   try {
     const { email, password } = await request.json()
-    const user = await User.findOne({ where: { email } })
+    const user = await User.findOne({ where: { email: email.toLowerCase() } })
     if (!user)
       return NextResponse.json({
         ok: false,

@@ -107,10 +107,10 @@ const Orders = () => {
                     key={orderProduct.id}
                   >
                     <p className={classes.orderDetailsId}>
-                      {orderProduct.product.id}
+                      {orderProduct.product?.id}
                     </p>
                     <p className={classes.orderDetailsName}>
-                      {orderProduct.product.name}
+                      {orderProduct.product?.name || 'Deleted product'}
                     </p>
                     <p className={classes.orderDetailsQuantity}>
                       {orderProduct.quantity}
