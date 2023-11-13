@@ -32,6 +32,7 @@ const ManageBrands = () => {
       r.ok && (await fetchBrandsList().then())
     })
   }
+  console.log('ee')
 
   return (
     <>
