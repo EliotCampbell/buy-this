@@ -7,7 +7,6 @@ const uuid = require('uuid')
 export const POST = async (request) => {
   try {
     const formData = await getFormData(request)
-    console.log(!formData.name)
     if (
       !formData.name ||
       !formData.price ||
