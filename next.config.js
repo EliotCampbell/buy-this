@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverComponentsExternalPackages: ['sequelize'],
-    serverActions: true
+    serverComponentsExternalPackages: ['sequelize']
   },
   images: {
     remotePatterns: [
@@ -12,7 +11,8 @@ const nextConfig = {
         port: '3000',
         pathname: '/static/**'
       }
-    ]
+    ],
+    domains: ['data.commercelayer.app']
   }
 }
 

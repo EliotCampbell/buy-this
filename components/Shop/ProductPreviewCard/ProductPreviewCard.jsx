@@ -35,13 +35,13 @@ const ProductPreviewCard = ({
               inStock > 5
                 ? classes.inStock
                 : inStock > 0
-                ? classes.runningOut
-                : classes.notInStock
+                  ? classes.runningOut
+                  : classes.notInStock
             }
           >{`${inStock} in stock`}</p>
           <div className={classes.priceWrapper}>
             <div className={onSale ? classes.brokenPrice : classes.price}>
-              {`${Number.parseFloat(productPrice).toFixed(2)} €`}
+              {productPrice}
               {salePrice && <div className={classes.brokenPriceCross}></div>}
             </div>
             {onSale && (

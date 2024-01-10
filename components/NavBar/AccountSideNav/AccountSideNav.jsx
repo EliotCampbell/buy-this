@@ -22,8 +22,6 @@ const AccountSideNav = ({ payload }) => {
     })
   }
 
-  console.log('')
-
   return (
     <>
       <IcoButton>

@@ -32,7 +32,11 @@ const ItemsLine = ({ title, dark, products }) => {
                   productId={el.id}
                   brand={el.brand}
                   productName={el.name}
-                  productImg={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}static/${el.img}`}
+                  productImg={
+                    el.img ||
+                    process.env.NEXT_PUBLIC_REACT_APP_API_URL +
+                      'static/noImg.png'
+                  }
                   productPrice={el.price}
                   salePrice={el.salePrice}
                   inStock={el.inStock}
